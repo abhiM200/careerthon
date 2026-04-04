@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/header :: head}"></head>
 <body class="bg-slate-50 min-h-screen flex flex-col pt-20">
     <header th:replace="~{fragments/header :: header}"></header>
@@ -19,6 +18,7 @@
                 <p class="text-sm text-red-700">Invalid username or password.</p>
             </div>
             
+
             <div th:if="${param.logout}" class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
                 <p class="text-sm text-blue-700">You have been logged out.</p>
             </div>

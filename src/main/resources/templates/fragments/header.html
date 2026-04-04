@@ -46,7 +46,9 @@
         <a href="/review" class="mobile-link">Review Profile</a>
         <a href="/about" class="mobile-link">About</a>
         <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="mobile-link" style="color: #ef4444;">Admin Dashboard</a>
-        <a sec:authorize="isAuthenticated()" href="/logout" class="mobile-link">Logout</a>
+        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="display: block;">
+            <button type="submit" class="mobile-link" style="width: 100%; text-align: left; background: none; border: none; padding: 12px 20px;">Logout</button>
+        </form>
         <a sec:authorize="isAnonymous()" href="/login" class="mobile-link">Login</a>
         <a href="/review" class="mobile-link cta">Try Now — Free</a>
     </div>
