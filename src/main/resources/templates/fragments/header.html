@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -21,10 +21,22 @@
         </a>
         <div class="nav-links">
             <a href="/" class="nav-link">Home</a>
-            <a href="/review" class="nav-link">Review Profile</a>
+            <a href="/review" class="nav-link">Review</a>
             <a href="/about" class="nav-link">About</a>
+            <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="nav-link admin-link" style="color: #ef4444; font-weight: 700;">Admin</a>
         </div>
-        <a href="/review" class="nav-cta-btn">Try Now — Free</a>
+        
+        <div class="auth-links" style="display: flex; align-items: center; gap: 1rem;">
+            <div sec:authorize="isAuthenticated()" class="user-info" style="display: flex; align-items: center; gap: 0.5rem;">
+                <span class="welcome-text" style="font-size: 0.875rem; color: #64748b;">Hi, <span sec:authentication="name">User</span></span>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="nav-cta-btn" style="background: #f1f5f9; color: #0f172a; border: 1px solid #e2e8f0;">Logout</button>
+                </form>
+            </div>
+            <a sec:authorize="isAnonymous()" href="/login" class="nav-link">Login</a>
+            <a sec:authorize="isAnonymous()" href="/review" class="nav-cta-btn">Analyze Now</a>
+        </div>
+
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
             <span></span><span></span><span></span>
         </button>
@@ -33,6 +45,9 @@
         <a href="/" class="mobile-link">Home</a>
         <a href="/review" class="mobile-link">Review Profile</a>
         <a href="/about" class="mobile-link">About</a>
+        <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="mobile-link" style="color: #ef4444;">Admin Dashboard</a>
+        <a sec:authorize="isAuthenticated()" href="/logout" class="mobile-link">Logout</a>
+        <a sec:authorize="isAnonymous()" href="/login" class="mobile-link">Login</a>
         <a href="/review" class="mobile-link cta">Try Now — Free</a>
     </div>
 </header>

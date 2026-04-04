@@ -25,4 +25,15 @@ public class HomeController {
         model.addAttribute("team", userStoryRepository.findAll());
         return "about";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @GetMapping("/user/profile")
+    public String profile() {
+        // For now, redirect to home or show a simple profile
+        return "index";
+    }
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head}"></head>
+<body class="bg-slate-50 min-h-screen flex flex-col pt-20">
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl border border-slate-100">
+            <div>
+                <h2 class="mt-6 text-center text-3xl font-extrabold text-slate-900">
+                    Sign in to your account
+                </h2>
+                <p class="mt-2 text-center text-sm text-slate-600">
+                    Access your profile reports and history
+                </p>
+            </div>
+            
+            <div th:if="${param.error}" class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                <p class="text-sm text-red-700">Invalid username or password.</p>
+            </div>
+            
+            <div th:if="${param.logout}" class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                <p class="text-sm text-blue-700">You have been logged out.</p>
+            </div>
+
+            <form class="mt-8 space-y-6" th:action="@{/login}" method="POST">
+                <input type="hidden" name="remember-me" value="true">
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <div class="mb-4">
+                        <label for="username" class="sr-only">Username</label>
+                        <input id="username" name="username" type="text" required class="appearance-none rounded-lg relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Username">
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Password</label>
+                        <input id="password" name="password" type="password" required class="appearance-none rounded-lg relative block w-full px-3 py-3 border border-slate-300 placeholder-slate-500 text-slate-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password">
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-sm text-slate-900">
+                            Remember me
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                            Forgot your password?
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200">
+                        Sign in
+                    </button>
+                </div>
+            </form>
+            
+            <div class="mt-6 text-center">
+                <p class="text-sm text-slate-600">
+                    Don't have an account? <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</a>
+                </p>
+            </div>
+            
+            <!-- Quick Login Info for Testing -->
+            <div class="mt-8 p-4 bg-slate-50 rounded-lg border border-dashed border-slate-300">
+                <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Test Credentials</p>
+                <div class="text-xs text-slate-600 space-y-1">
+                    <p><strong>Admin:</strong> admin / admin123</p>
+                    <p><strong>User:</strong> user / user123</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
