@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('About Careerthon - Our Team')}"></head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main>
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="section-container">
+            <div class="section-tag">About Us</div>
+            <h1 class="section-title">The Team Behind Careerthon</h1>
+            <p class="section-subtitle">Built with passion to help professionals unlock their full LinkedIn potential</p>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="mission-section">
+        <div class="section-container">
+            <div class="mission-grid">
+                <div class="mission-text" data-animate="fadeInLeft">
+                    <h2>Our Mission</h2>
+                    <p>Careerthon was built to democratize LinkedIn profile optimization. We believe every professional deserves a powerful LinkedIn presence — not just those who can afford expensive career coaches.</p>
+                    <p>Our intelligent analysis engine evaluates 15 key profile dimensions and delivers the same quality insights that top career consultants provide, completely free of charge.</p>
+                    <div class="mission-stats">
+                        <div class="mission-stat"><span class="mission-stat-num">50K+</span><span>Profiles Reviewed</span></div>
+                        <div class="mission-stat"><span class="mission-stat-num">15</span><span>Analysis Points</span></div>
+                        <div class="mission-stat"><span class="mission-stat-num">100%</span><span>Free Always</span></div>
+                    </div>
+                </div>
+                <div class="mission-visual" data-animate="fadeInRight">
+                    <div class="mission-card">
+                        <div class="mission-icon">⚡</div>
+                        <h3>Careerthon</h3>
+                        <p>LinkedIn Profile Review Platform</p>
+                        <div class="mission-tags">
+                            <span>Java Spring Boot</span>
+                            <span>AI Analysis</span>
+                            <span>Free Forever</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Team -->
+    <section class="team-section">
+        <div class="section-container">
+            <div class="section-tag">Core Team</div>
+            <h2 class="section-title">Developed By</h2>
+            <p class="section-subtitle">The talented team that brought Careerthon to life</p>
+
+            <div class="team-grid">
+                <div class="team-card team-card--lead" data-animate="fadeInUp" th:each="member, stat : ${team}" th:if="${stat.index < 3}">
+                    <div class="team-avatar"
+                         th:style="'background: linear-gradient(135deg, ' + ${member.avatarColor} + ', ' + ${member.avatarColor} + '99)'"
+                         th:text="${member.avatarInitials}">AM</div>
+                    <div class="team-info">
+                        <h3 class="team-name" th:text="${member.name}">Name</h3>
+                        <span class="team-role" th:text="${member.role}">Role</span>
+                        <p class="team-story" th:text="${member.story}">Story</p>
+                    </div>
+                    <div class="team-badge" th:if="${stat.index == 0}">👑 Project Lead & Developer</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-section">
+        <div class="section-container">
+            <h2 class="section-title">Built With</h2>
+            <div class="tech-grid">
+                <div class="tech-card"><span class="tech-icon">☕</span><span>Java 25</span></div>
+                <div class="tech-card"><span class="tech-icon">🍃</span><span>Spring Boot 3.4</span></div>
+                <div class="tech-card"><span class="tech-icon">🗄️</span><span>Spring Data JPA</span></div>
+                <div class="tech-card"><span class="tech-icon">💾</span><span>H2 Database</span></div>
+                <div class="tech-card"><span class="tech-icon">🖼️</span><span>Thymeleaf</span></div>
+                <div class="tech-card"><span class="tech-icon">🎨</span><span>Vanilla CSS</span></div>
+                <div class="tech-card"><span class="tech-icon">⚙️</span><span>Vanilla JS</span></div>
+                <div class="tech-card"><span class="tech-icon">🐳</span><span>Docker Ready</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta-section">
+        <div class="section-container">
+            <div class="about-cta-card">
+                <h2>Ready to Transform Your LinkedIn Profile?</h2>
+                <p>Join thousands of professionals who've already optimized their LinkedIn presence with Careerthon.</p>
+                <a href="/review" class="primary-btn" id="about-cta-btn">Get Your Free Profile Analysis →</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: sticky-banner}"></div>
+
+</body>
+</html>

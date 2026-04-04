@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Careerthon - Get expert LinkedIn profile analysis. Score your profile, optimize for ATS, boost visibility to recruiters. Free professional review!">
+    <title th:text="${title}">Careerthon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Header Fragment -->
+<header th:fragment="header" class="site-header" id="site-header">
+    <nav class="nav-container">
+        <a href="/" class="logo">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-text">Careerthon</span>
+        </a>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/review" class="nav-link">Review Profile</a>
+            <a href="/about" class="nav-link">About</a>
+        </div>
+        <a href="/review" class="nav-cta-btn">Try Now — Free</a>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="/" class="mobile-link">Home</a>
+        <a href="/review" class="mobile-link">Review Profile</a>
+        <a href="/about" class="mobile-link">About</a>
+        <a href="/review" class="mobile-link cta">Try Now — Free</a>
+    </div>
+</header>
+
+</body>
+</html>

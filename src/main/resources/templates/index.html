@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Careerthon - LinkedIn Profile Review | Free Expert Analysis')}"></head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-container">
+        <div class="hero-left" data-animate="fadeInLeft">
+            <div class="hero-badge">
+                <span class="badge-icon">👑</span>
+                <span>Best LinkedIn Profile Score Checker</span>
+            </div>
+            <h1 class="hero-title">
+                Check Your LinkedIn<br>
+                <span class="hero-title-gradient">Profile Score</span><br>
+                Get Expert Analysis
+            </h1>
+            <p class="hero-subtitle">Is your LinkedIn Profile a Hit or a Miss? Find Out Your Score Today — <strong>Completely Free!</strong></p>
+
+            <div class="offer-badge">
+                <span class="offer-icon">🎉</span>
+                <span>Limited-time offer — Payment completely bypassed!</span>
+            </div>
+
+            <a href="/review" class="hero-cta-btn" id="hero-cta-btn">
+                <span>Yes, I want a Free Professional Review</span>
+                <span class="btn-arrow">→</span>
+            </a>
+
+            <p class="hero-note">✅ No payment required &nbsp;•&nbsp; ✅ Instant analysis &nbsp;•&nbsp; ✅ Detailed report</p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">50,000+</span>
+                    <span class="stat-label">Profiles Reviewed</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">Analysis Points</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Satisfaction Rate</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-right" data-animate="fadeInRight">
+            <div class="sample-report-card">
+                <div class="report-card-header">
+                    <div class="profile-mini">
+                        <div class="profile-avatar">AM</div>
+                        <div class="profile-info">
+                            <span class="profile-name">Abhishek Mishra</span>
+                            <span class="profile-title">Full Stack Developer</span>
+                            <span class="profile-url">linkedin.com/in/abhishek-mishra</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="score-circle-wrapper">
+                    <div class="score-circle">
+                        <svg viewBox="0 0 120 120" class="score-svg">
+                            <circle cx="60" cy="60" r="50" class="score-track"/>
+                            <circle cx="60" cy="60" r="50" class="score-fill" style="--score-pct: 0.78"/>
+                        </svg>
+                        <div class="score-center">
+                            <span class="score-number">78</span>
+                            <span class="score-label-text">Good</span>
+                        </div>
+                    </div>
+                    <div class="score-note">An ideal profile score should be above 80</div>
+                </div>
+                <div class="score-breakdown-preview">
+                    <div class="score-row"><span>Profile Photo</span><div class="score-bar-wrap"><div class="score-bar green" style="width:90%"></div></div><span>9/10</span></div>
+                    <div class="score-row"><span>Headline</span><div class="score-bar-wrap"><div class="score-bar green" style="width:80%"></div></div><span>8/10</span></div>
+                    <div class="score-row"><span>About</span><div class="score-bar-wrap"><div class="score-bar orange" style="width:70%"></div></div><span>7/10</span></div>
+                    <div class="score-row"><span>Experience</span><div class="score-bar-wrap"><div class="score-bar green" style="width:90%"></div></div><span>9/10</span></div>
+                    <div class="score-row"><span>Skills</span><div class="score-bar-wrap"><div class="score-bar orange" style="width:60%"></div></div><span>6/10</span></div>
+                </div>
+                <div class="report-card-badge">
+                    <span>⭐ Sample Report</span>
+                    <a href="/review" class="report-card-cta">Generate Yours →</a>
+                </div>
+            </div>
+            <div class="hero-decoration dec-1"></div>
+            <div class="hero-decoration dec-2"></div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="how-it-works-section" id="how-it-works">
+    <div class="section-container">
+        <div class="section-tag">How It Works</div>
+        <h2 class="section-title">Personalized, Thorough, and Effective!</h2>
+        <p class="section-subtitle">Three simple steps to transform your LinkedIn presence</p>
+
+        <div class="steps-grid">
+            <div class="step-card" data-animate="fadeInUp" data-delay="0">
+                <div class="step-number">01</div>
+                <div class="step-icon">🔗</div>
+                <h3>Submit Your LinkedIn URL</h3>
+                <p>Paste your LinkedIn profile URL into our analyzer. Ensure your profile is set to public for best results.</p>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-card" data-animate="fadeInUp" data-delay="100">
+                <div class="step-number">02</div>
+                <div class="step-icon">🔍</div>
+                <h3>AI-Powered Analysis Begins</h3>
+                <p>Our intelligent engine analyzes 15 key sections of your profile — from headline to skills and everything in between.</p>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-card" data-animate="fadeInUp" data-delay="200">
+                <div class="step-number">03</div>
+                <div class="step-icon">📊</div>
+                <h3>Get Your Detailed Report</h3>
+                <p>Receive a comprehensive analysis with your profile score, section-by-section breakdown, and actionable recommendations.</p>
+            </div>
+        </div>
+
+        <div class="how-cta-wrapper">
+            <div class="offer-tag">✨ No Payment Required</div>
+            <a href="/review" class="primary-btn" id="how-cta-btn">
+                Yes, I want a Free Professional Review →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Features Grid -->
+<section class="features-section" id="features">
+    <div class="section-container">
+        <div class="section-tag">What's Included</div>
+        <h2 class="section-title">Transform Your LinkedIn Profile with Expert Insights</h2>
+        <p class="section-subtitle">Get a complete 360° analysis across all dimensions of your LinkedIn profile</p>
+
+        <div class="features-grid">
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">🎯</div>
+                <h3>Profile Scoring</h3>
+                <p>Get an overall score out of 100 with a detailed gauge. Know exactly where you stand compared to industry benchmarks.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">🔬</div>
+                <h3>Detailed Analysis</h3>
+                <p>Deep-dive into each profile section with professional assessment and specific improvement suggestions.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">🤖</div>
+                <h3>ATS Optimization</h3>
+                <p>Ensure your profile passes Applicant Tracking Systems used by top recruiters and Fortune 500 companies.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">🔑</div>
+                <h3>Keyword Enhancement</h3>
+                <p>Identify missing keywords from your industry's top job postings and integrate them naturally into your profile.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">💡</div>
+                <h3>Personalized Recommendations</h3>
+                <p>Every recommendation is tailored to your specific profile data, role, and industry for maximum impact.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">✍️</div>
+                <h3>Headline Optimization</h3>
+                <p>Craft a magnetic headline that grabs attention and communicates your unique value proposition instantly.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">📝</div>
+                <h3>About Section Improvement</h3>
+                <p>Transform your about section into a compelling professional story that resonates with hirers and recruiters.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">⚙️</div>
+                <h3>Skills Optimization</h3>
+                <p>Identify skill gaps, add high-demand skills, and strategically position your top competencies for maximum visibility.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">💼</div>
+                <h3>Experience Enhancement</h3>
+                <p>Reframe your experience descriptions with achievement-focused language and quantifiable impact statements.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">🚀</div>
+                <h3>Visibility Boost</h3>
+                <p>Optimize your profile to appear in more recruiter searches and multiply your profile views organically.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">🎯</div>
+                <h3>Recruiter Targeting</h3>
+                <p>Understand how recruiters perceive your profile and optimize it to attract the right opportunities.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">📈</div>
+                <h3>Industry Benchmarking</h3>
+                <p>Compare your profile score against top professionals in your field and understand the gap to close.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">⚡</div>
+                <h3>Actionable Insights</h3>
+                <p>Receive a prioritized list of improvements — from high-impact quick wins to long-term profile strategies.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">📋</div>
+                <h3>Performance Report</h3>
+                <p>Download or share a comprehensive PDF-style report with your full analysis and scoring breakdown.</p>
+            </div>
+            <div class="feature-card" data-animate="fadeInUp">
+                <div class="feature-icon">📧</div>
+                <h3>Email Delivery</h3>
+                <p>Get your complete profile analysis report delivered directly to your inbox for easy reference anytime.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Invest Section -->
+<section class="why-section">
+    <div class="section-container">
+        <h2 class="section-title">Why Optimize Your LinkedIn Profile?</h2>
+        <div class="why-grid">
+            <div class="why-visual" data-animate="fadeInLeft">
+                <div class="why-illustration">
+                    <div class="li-icon">in</div>
+                    <div class="why-rings">
+                        <div class="ring ring-1"></div>
+                        <div class="ring ring-2"></div>
+                        <div class="ring ring-3"></div>
+                    </div>
+                    <div class="why-stat-bubble bubble-1">87% of recruiters use LinkedIn</div>
+                    <div class="why-stat-bubble bubble-2">3x more interviews</div>
+                    <div class="why-stat-bubble bubble-3">21x more views with photo</div>
+                </div>
+            </div>
+            <div class="why-points" data-animate="fadeInRight">
+                <div class="why-point">
+                    <div class="why-point-icon">🏆</div>
+                    <div>
+                        <h3>LinkedIn is the Premier Platform for Recruiters</h3>
+                        <p>In today's job market, 87% of recruiters and hiring managers rely on LinkedIn to discover top talent. Our analysis ensures your profile meets the standards they're seeking.</p>
+                    </div>
+                </div>
+                <div class="why-point">
+                    <div class="why-point-icon">🌟</div>
+                    <div>
+                        <h3>Stand Out Among Millions of Professionals</h3>
+                        <p>With 950M+ active users, distinguishing yourself is crucial. Our thorough, personalized analysis helps your profile shine in a crowded field.</p>
+                    </div>
+                </div>
+                <div class="why-point">
+                    <div class="why-point-icon">🔍</div>
+                    <div>
+                        <h3>Enhance Your Visibility to Recruiters</h3>
+                        <p>A carefully optimized profile ensures you appear in recruiter searches matching their job requirements. Our analysis identifies key areas to boost your discoverability.</p>
+                    </div>
+                </div>
+                <div class="why-point">
+                    <div class="why-point-icon">🚀</div>
+                    <div>
+                        <h3>Maximize Your Career Opportunities</h3>
+                        <p>Most job opportunities now come through LinkedIn. Invest in an expert-reviewed profile to significantly increase your chances of career advancement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Expert Assessment Section -->
+<section class="assessment-section">
+    <div class="section-container">
+        <div class="section-tag">Expert Assessment</div>
+        <h2 class="section-title">See How Our Profile Review Highlights Key Areas</h2>
+        <div class="assessment-grid">
+            <div class="assessment-card" data-animate="fadeInUp">
+                <div class="assessment-num">01</div>
+                <h3>In-Depth Analysis</h3>
+                <p>Your profile is thoroughly examined to assess its effectiveness based on industry standards and recruiter expectations.</p>
+            </div>
+            <div class="assessment-card" data-animate="fadeInUp">
+                <div class="assessment-num">02</div>
+                <h3>Profile Assessment Score</h3>
+                <p>Receive a clear, easy-to-understand evaluation (0-100) reflecting how well your profile meets current best practices.</p>
+            </div>
+            <div class="assessment-card" data-animate="fadeInUp">
+                <div class="assessment-num">03</div>
+                <h3>Key Improvement Areas</h3>
+                <p>We pinpoint specific sections — headline, summary, experience, skills — where enhancements can make significant impact.</p>
+            </div>
+            <div class="assessment-card" data-animate="fadeInUp">
+                <div class="assessment-num">04</div>
+                <h3>Actionable Recommendations</h3>
+                <p>Get tailored, practical steps for each identified area to enhance your profile's visibility and appeal to recruiters.</p>
+            </div>
+        </div>
+        <div class="assessment-cta">
+            <div class="offer-tag">✨ Completely Free — No Credit Card Needed</div>
+            <a href="/review" class="primary-btn" id="assessment-cta-btn">Get My Free Profile Analysis →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section" id="testimonials">
+    <div class="section-container">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">What Our Users Are Saying</h2>
+        <p class="section-subtitle">Real Stories from Real Professionals</p>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card" data-animate="fadeInUp" th:each="story, iterStat : ${testimonials}">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text" th:text="${story.story}">Story text here</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar" th:style="'background:' + ${story.avatarColor}" th:text="${story.avatarInitials}">AM</div>
+                    <div class="author-info">
+                        <span class="author-name" th:text="${story.name}">Name</span>
+                        <span class="author-title" th:text="${story.role}">Role</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="faq-section" id="faq">
+    <div class="section-container">
+        <h2 class="section-title">Got Questions?</h2>
+        <p class="section-subtitle">Everything you need to know about Careerthon</p>
+        <div class="faq-list">
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What is Careerthon and how does it work?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Careerthon is a LinkedIn Profile Review and optimization platform. Simply submit your LinkedIn profile URL, and our analysis engine evaluates 15 key sections of your profile — from your headline and about section to skills and experience. You'll receive a comprehensive score (0-100) along with personalized recommendations for each section.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Is there really no payment required?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! Careerthon is completely free to use. No credit card required, no hidden fees. Simply submit your LinkedIn URL and receive your full profile analysis report instantly.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Why is a LinkedIn Profile Review important for job seekers?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>87% of recruiters use LinkedIn to find and evaluate candidates. An optimized profile can increase your visibility by 3x and significantly improve your chances of being contacted for relevant opportunities. Our review identifies the exact changes that will have the most impact on your career prospects.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    What aspects of my profile are evaluated?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>We evaluate 15 key areas: Profile Photo, Cover Photo, Headline, About Section, Experience, Education, Skills, ATS Score, Keyword Density, Visibility Score, Recruiter Match, Industry Benchmarking, Licenses & Certifications, Recommendations, and Activity & Engagement.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How long does the analysis take?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>The analysis is near-instant — typically under 5 seconds. You'll be automatically redirected to your full report as soon as it's ready.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Can I implement the recommendations myself?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Absolutely! All recommendations are practical, step-by-step actionable items that you can implement yourself directly on your LinkedIn profile. No technical expertise required.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Is Careerthon's review suitable for all professionals?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! Whether you're a fresh graduate, mid-career professional, or senior executive, our analysis provides relevant insights. The recommendations are tailored to make your profile stand out at your specific career level and industry.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Does the review include personalized recommendations?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Yes! Every recommendation is generated based on your specific profile's scores and weaknesses. You won't receive generic advice — instead, you get targeted suggestions for exactly what your profile needs.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    How often should I review my LinkedIn profile?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>We recommend reviewing your profile at least once per quarter, or whenever you change roles, gain new skills, or complete significant projects. Regular optimization keeps your profile competitive and highly discoverable.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    Who built Careerthon?
+                    <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Careerthon was developed by <strong>Abhishek Mishra</strong>, with team contributions from <strong>Priyanshu Shekhar</strong> (UI/UX & Frontend) and <strong>Altamash Mallick</strong> (Backend & Data Analysis). Visit our <a href="/about">About page</a> to learn more about the team.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<div th:replace="~{fragments/footer :: sticky-banner}"></div>
+
+</body>
+</html>

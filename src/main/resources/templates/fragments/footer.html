@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<!-- Footer Fragment -->
+<footer th:fragment="footer" class="site-footer">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <span class="logo-icon">⚡</span>
+                    <span class="logo-text">Careerthon</span>
+                </div>
+                <p class="footer-desc">Careerthon is a premier LinkedIn Profile Review platform. Our expert analysis engine provides thorough, personalized analysis of your LinkedIn profile, ensuring it meets industry standards and captures the attention of recruiters.</p>
+                <div class="footer-team">
+                    <p>Developed by <strong>Abhishek Mishra</strong></p>
+                    <p>Team: Abhishek Mishra • Priyanshu Shekhar • Altamash Mallick</p>
+                </div>
+            </div>
+            <div class="footer-links-group">
+                <h4>Quick Links</h4>
+                <a href="/">Home</a>
+                <a href="/review">Review Profile</a>
+                <a href="/about">About Us</a>
+            </div>
+            <div class="footer-links-group">
+                <h4>Features</h4>
+                <a href="/review">Profile Scoring</a>
+                <a href="/review">ATS Optimization</a>
+                <a href="/review">Keyword Enhancement</a>
+                <a href="/review">Recruiter Targeting</a>
+            </div>
+        </div>
+        <div class="footer-divider"></div>
+        <div class="footer-bottom">
+            <div class="footer-disclaimer">
+                <p>LinkedIn is the registered trademark of LinkedIn Corporation or its affiliates. The use of the LinkedIn trademark in connection with this product does not signify any affiliation with or endorsement by LinkedIn Corporation.</p>
+                <p>Profile scores and review results may vary with each attempt or based on individual profiles. Careerthon does not guarantee job placements or interview opportunities.</p>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 Careerthon. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Sticky Banner Fragment -->
+<div th:fragment="sticky-banner" class="sticky-banner" id="sticky-banner">
+    <div class="sticky-content">
+        <div class="sticky-text">
+            <span class="sticky-headline">Check Your LinkedIn Profile Score — <strong>Absolutely Free!</strong></span>
+            <span class="sticky-badge">✨ No Payment Required</span>
+        </div>
+        <a href="/review" class="sticky-cta">
+            Try Now <span class="chevrons">»»»</span>
+        </a>
+    </div>
+</div>
+
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>
