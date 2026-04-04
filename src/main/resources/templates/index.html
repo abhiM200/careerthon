@@ -1,435 +1,395 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: head('Careerthon - LinkedIn Profile Review | Free Expert Analysis')}"></head>
-<body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Careerthon - LinkedIn Profile Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/outspark.css}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans text-gray-800 bg-white">
 
-<div th:replace="~{fragments/header :: header}"></div>
+<!-- Top Bar -->
+<div class="bg-black text-white text-xs py-2 px-4 text-center">
+    Most recruiters find their job candidates on <strong>LinkedIn</strong> | LinkedIn profiles with complete information are 40% more likely to receive job opportunities in the last week, over <strong>51,798+ users trusted Profile Review</strong>
+</div>
+
+<!-- Header -->
+<header class="border-b border-gray-200 bg-white sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center text-sm font-semibold text-gray-700">
+            The <span class="font-black text-black ml-1">Ultimate Review</span> <span class="ml-1 font-normal">for</span> <br> Your <span class="font-black text-black ml-1">LinkedIn Profile</span>
+        </div>
+        <a href="/" class="flex items-center text-2xl font-black text-indigo-600 tracking-tighter">
+            <span class="mr-1">⚡</span> CAREERTHON
+        </a>
+    </div>
+</header>
 
 <!-- Hero Section -->
-<section class="hero-section">
-    <div class="hero-container">
-        <div class="hero-left" data-animate="fadeInLeft">
-            <div class="hero-badge">
-                <span class="badge-icon">👑</span>
-                <span>Best LinkedIn Profile Score Checker</span>
-            </div>
-            <h1 class="hero-title">
-                Check Your LinkedIn<br>
-                <span class="hero-title-gradient">Profile Score</span><br>
-                Get Expert Analysis
+<section class="relative pt-16 pb-20 bg-gradient-to-r from-[#f4f7f6] to-[#e7eef4] overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center">
+        <!-- Left Content -->
+        <div class="lg:w-1/2 pr-0 lg:pr-12 text-center lg:text-left mb-16 lg:mb-0">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[#111827] leading-tight mb-6">
+                Check Your LinkedIn Profile<br>Score (Get Expert<br>Assessment)
             </h1>
-            <p class="hero-subtitle">Is your LinkedIn Profile a Hit or a Miss? Find Out Your Score Today — <strong>Completely Free!</strong></p>
-
-            <div class="offer-badge">
-                <span class="offer-icon">🎉</span>
-                <span>Limited-time offer — Payment completely bypassed!</span>
+            <p class="text-xl text-gray-600 mb-8">
+                Is your LinkedIn Profile a Hit or a Miss? Find Out Your Score Today!
+            </p>
+            
+            <div class="inline-flex items-center bg-gray-200 rounded-full px-5 py-2 text-sm font-bold text-gray-800 mb-10">
+                <span class="mr-2">⭐</span> Best LinkedIn Profile Score Checker
             </div>
-
-            <a href="/review" class="hero-cta-btn" id="hero-cta-btn">
-                <span>Yes, I want a Free Professional Review</span>
-                <span class="btn-arrow">→</span>
-            </a>
-
-            <p class="hero-note">✅ No payment required &nbsp;•&nbsp; ✅ Instant analysis &nbsp;•&nbsp; ✅ Detailed report</p>
-
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">50,000+</span>
-                    <span class="stat-label">Profiles Reviewed</span>
+            
+            <div class="relative inline-block mt-4">
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider z-10 border border-yellow-400">
+                    Limited-time offer!
                 </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">15</span>
-                    <span class="stat-label">Analysis Points</span>
-                </div>
-                <div class="stat-divider"></div>
-                <div class="stat-item">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">Satisfaction Rate</span>
-                </div>
+                <a href="/review" class="relative block bg-[#0a58ca] hover:bg-blue-800 text-white font-bold text-lg py-4 px-10 rounded-lg shadow-lg transition-transform hover:-translate-y-1">
+                    Yes, I want a Professional Review for ₹199 <span class="ml-2">&rarr;</span>
+                </a>
             </div>
+            
+            <p class="mt-10 text-sm text-gray-500 max-w-sm mx-auto lg:mx-0">
+                Enhance your profile today with tailored insights and stand out when applying for any job.
+            </p>
         </div>
-
-        <div class="hero-right" data-animate="fadeInRight">
-            <div class="sample-report-card">
-                <div class="report-card-header">
-                    <div class="profile-mini">
-                        <div class="profile-avatar">AM</div>
-                        <div class="profile-info">
-                            <span class="profile-name">Abhishek Mishra</span>
-                            <span class="profile-title">Full Stack Developer</span>
-                            <span class="profile-url">linkedin.com/in/abhishek-mishra</span>
+        
+        <!-- Right Content (Images imitating the UI) -->
+        <div class="lg:w-1/2 relative w-full h-[600px] flex justify-center items-center">
+            <!-- Mock Phone -->
+            <div class="relative w-[320px] h-[650px] bg-white rounded-[40px] shadow-2xl border-8 border-gray-900 overflow-hidden z-20 translate-x-10">
+                <!-- Phone Header -->
+                <div class="pt-12 px-6 pb-6 bg-white border-b border-gray-100">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold">AD</div>
+                        <div>
+                            <div class="font-bold text-sm text-gray-900">Ananya Dubey</div>
+                            <div class="text-xs text-gray-500">Senior Product Manager</div>
                         </div>
                     </div>
                 </div>
-                <div class="score-circle-wrapper">
-                    <div class="score-circle">
-                        <svg viewBox="0 0 120 120" class="score-svg">
-                            <circle cx="60" cy="60" r="50" class="score-track"/>
-                            <circle cx="60" cy="60" r="50" class="score-fill" style="--score-pct: 0.78"/>
+                <!-- Phone Content -->
+                <div class="p-6 text-center">
+                    <div class="font-bold text-gray-800 text-lg mb-6">Your LinkedIn Profile Score</div>
+                    
+                    <!-- Gauge -->
+                    <div class="relative w-40 h-40 mx-auto mb-4">
+                        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="8"></circle>
+                            <circle cx="50" cy="50" r="40" fill="none" stroke="#f59e0b" stroke-width="8" stroke-dasharray="251" stroke-dashoffset="75" stroke-linecap="round"></circle>
                         </svg>
-                        <div class="score-center">
-                            <span class="score-number">78</span>
-                            <span class="score-label-text">Good</span>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-4xl font-black text-gray-900 leading-none">70</span>
+                            <span class="text-xs font-bold text-gray-500">Average</span>
                         </div>
                     </div>
-                    <div class="score-note">An ideal profile score should be above 80</div>
-                </div>
-                <div class="score-breakdown-preview">
-                    <div class="score-row"><span>Profile Photo</span><div class="score-bar-wrap"><div class="score-bar green" style="width:90%"></div></div><span>9/10</span></div>
-                    <div class="score-row"><span>Headline</span><div class="score-bar-wrap"><div class="score-bar green" style="width:80%"></div></div><span>8/10</span></div>
-                    <div class="score-row"><span>About</span><div class="score-bar-wrap"><div class="score-bar orange" style="width:70%"></div></div><span>7/10</span></div>
-                    <div class="score-row"><span>Experience</span><div class="score-bar-wrap"><div class="score-bar green" style="width:90%"></div></div><span>9/10</span></div>
-                    <div class="score-row"><span>Skills</span><div class="score-bar-wrap"><div class="score-bar orange" style="width:60%"></div></div><span>6/10</span></div>
-                </div>
-                <div class="report-card-badge">
-                    <span>⭐ Sample Report</span>
-                    <a href="/review" class="report-card-cta">Generate Yours →</a>
+                    <div class="text-[10px] text-gray-400 mb-8">An ideal profile score should be above 80</div>
+                    
+                    <button class="w-full py-3 bg-[#0a58ca] text-white text-sm font-bold rounded-lg mb-6">View Detailed Feedback &darr;</button>
+                    
+                    <div class="text-xs font-bold text-gray-800 mb-4 border-t pt-4">Score Break-up</div>
+                    <div class="text-[10px] text-gray-500">Your Score Is Calculated Based on the Following Key Profile Areas</div>
                 </div>
             </div>
-            <div class="hero-decoration dec-1"></div>
-            <div class="hero-decoration dec-2"></div>
+            
+            <!-- Floating Text Bubble -->
+            <div class="absolute bottom-20 left-0 bg-black text-white font-black text-xl p-4 transform -rotate-6 z-30 shadow-xl rounded-lg">
+                This is sample<br>report<br>
+                <div class="flex items-center text-yellow-300">
+                    Generate yours <span class="ml-2 text-2xl">→</span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- How It Works -->
-<section class="how-it-works-section" id="how-it-works">
-    <div class="section-container">
-        <div class="section-tag">How It Works</div>
-        <h2 class="section-title">Personalized, Thorough, and Effective!</h2>
-        <p class="section-subtitle">Three simple steps to transform your LinkedIn presence</p>
-
-        <div class="steps-grid">
-            <div class="step-card" data-animate="fadeInUp" data-delay="0">
-                <div class="step-number">01</div>
-                <div class="step-icon">🔗</div>
-                <h3>Submit Your LinkedIn URL</h3>
-                <p>Paste your LinkedIn profile URL into our analyzer. Ensure your profile is set to public for best results.</p>
+<!-- How It Works Section -->
+<section class="py-20 bg-[#f9fafb]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-black text-center text-gray-900 mb-4">Personalized, Thorough, and Effective!</h2>
+        <p class="text-center text-gray-600 font-bold mb-16">Here's How It Works</p>
+        
+        <div class="flex flex-col lg:flex-row items-center gap-16">
+            <!-- Left Steps -->
+            <div class="lg:w-1/2 space-y-10">
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 text-3xl">🔗</div>
+                    <div>
+                        <div class="font-bold text-gray-800 mb-1">Step 1:</div>
+                        <p class="text-sm text-gray-600">Submit your LinkedIn URL. (Ensure your profile is public for review.)</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 text-3xl">🤖</div>
+                    <div>
+                        <div class="font-bold text-gray-800 mb-1">Step 2:</div>
+                        <p class="text-sm text-gray-600">Your profile review will begin, and you'll receive personalized suggestions to enhance its appeal and help you stand out.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0 text-3xl">📊</div>
+                    <div>
+                        <div class="font-bold text-gray-800 mb-1">Step 3:</div>
+                        <p class="text-sm text-gray-600">Get detailed report to your Dashboard.<br>Your profile will be thoroughly reviewed, and you will receive a detailed assessment of each section.</p>
+                    </div>
+                </div>
+                
+                <div class="relative inline-block mt-8">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider z-10 border border-yellow-400">
+                        Limited-time offer!
+                    </div>
+                    <a href="/review" class="relative block bg-[#0a58ca] hover:bg-blue-800 text-white font-bold text-lg py-4 px-10 rounded-lg shadow-lg">
+                        Yes, I want a Professional Review for ₹199 <span class="ml-2">&rarr;</span>
+                    </a>
+                </div>
             </div>
-            <div class="step-connector"></div>
-            <div class="step-card" data-animate="fadeInUp" data-delay="100">
-                <div class="step-number">02</div>
-                <div class="step-icon">🔍</div>
-                <h3>AI-Powered Analysis Begins</h3>
-                <p>Our intelligent engine analyzes 15 key sections of your profile — from headline to skills and everything in between.</p>
-            </div>
-            <div class="step-connector"></div>
-            <div class="step-card" data-animate="fadeInUp" data-delay="200">
-                <div class="step-number">03</div>
-                <div class="step-icon">📊</div>
-                <h3>Get Your Detailed Report</h3>
-                <p>Receive a comprehensive analysis with your profile score, section-by-section breakdown, and actionable recommendations.</p>
+            
+            <!-- Right Breakdown Image mock -->
+            <div class="lg:w-1/2 w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 p-8 transform rotate-2">
+                <div class="font-bold text-center text-gray-900 mb-6">Get a Complete Breakdown of Your LinkedIn Profile</div>
+                
+                <div class="flex gap-6 items-center mb-8">
+                    <div class="w-1/3">
+                        <div class="relative w-24 h-24 mx-auto">
+                            <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="10"></circle>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="10" stroke-dasharray="251" stroke-dashoffset="35" stroke-linecap="round"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-2xl font-black text-gray-900 leading-none">85</span>
+                                <span class="text-[10px] font-bold text-green-500 mt-1">Good</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-2/3 space-y-3 relative">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none z-0">
+                            <span class="text-gray-900 font-black text-2xl whitespace-nowrap transform -rotate-12">Sample Report</span>
+                        </div>
+                        
+                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
+                            <span class="text-gray-700">Profile Photo</span><span class="text-gray-900">9/10</span>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
+                            <span class="text-gray-700">Cover Photo</span><span class="text-gray-900">8/10</span>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
+                            <span class="text-gray-700">Headline</span><span class="text-gray-900">8/10</span>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
+                            <span class="text-gray-700">Experience</span><span class="text-gray-900">9/10</span>
+                        </div>
+                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
+                            <span class="text-gray-700">Skills</span><span class="text-gray-900">7/10</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="how-cta-wrapper">
-            <div class="offer-tag">✨ No Payment Required</div>
-            <a href="/review" class="primary-btn" id="how-cta-btn">
-                Yes, I want a Free Professional Review →
+<!-- Transform Section -->
+<section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-gray-100 rounded-3xl p-10 md:p-16 text-center">
+            <h2 class="text-3xl font-black text-gray-900 mb-12">Transform Your LinkedIn Profile with Expert Insights</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-left mb-16">
+                <!-- Point 1 -->
+                <div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mt-1 flex-shrink-0">✓</div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-2">Highlight Your Expertise with Professional Precision</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">You will receive personalized recommendations to highlight your unique achievements and expertise, positioning you as a top candidate among job seekers.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Point 2 -->
+                <div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mt-1 flex-shrink-0">✓</div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-2">Maximize Your Visibility to Attract More Recruiters</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Stand out to hiring managers with a profile optimized for maximum visibility through thorough, expert analysis.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Point 3 -->
+                <div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mt-1 flex-shrink-0">✓</div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-2">Receive Tailored Feedback to Emphasize Your Unique Skills</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Gain customized insights from real professionals that highlight your strengths and help you leave a lasting impression.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Point 4 -->
+                <div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mt-1 flex-shrink-0">✓</div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-2">Elevate Your Profile with Expert Optimization</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Transform your profile into a professional showcase designed by our experts to catch the eye of top recruiters.</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Point 5 -->
+                <div>
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center mt-1 flex-shrink-0">✓</div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-2">Save Time with Personalized Expert Guidance</div>
+                            <p class="text-sm text-gray-600 leading-relaxed">Get immediate, actionable recommendations from our specialists, eliminating guesswork and helping you upgrade your profile efficiently.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="relative inline-block">
+                <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider z-10 border border-yellow-400">
+                    Limited-time offer!
+                </div>
+                <a href="/review" class="relative block bg-[#0a58ca] hover:bg-blue-800 text-white font-bold text-lg py-4 px-10 rounded-lg shadow-lg">
+                    Yes, I want a Professional Review for ₹199 <span class="ml-2">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Invest -->
+<section class="py-20 bg-[#f4f7f6]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-black text-center text-gray-900 mb-16">Why Invest in a Professional LinkedIn Profile Review?</h2>
+        
+        <div class="flex flex-col lg:flex-row items-center gap-16 max-w-5xl mx-auto">
+            <!-- Left Circular Graphic mock -->
+            <div class="lg:w-1/2 relative flex justify-center">
+                <div class="w-80 h-80 rounded-full bg-gradient-to-tr from-blue-300 to-blue-100 flex items-center justify-center border-8 border-white shadow-xl relative z-10 overflow-hidden">
+                    <!-- Fake placeholder for abstract art/guy -->
+                    <div class="absolute inset-0 bg-blue-200 opacity-50"></div>
+                    <div class="text-[100px] font-black text-blue-100 opacity-30 absolute">in</div>
+                    <div class="w-48 h-48 rounded-full bg-white flex items-center justify-center text-6xl shadow-xl z-20 font-black text-gray-300">👤</div>
+                </div>
+                <!-- Decorators -->
+                <div class="absolute top-10 right-10 text-4xl transform rotate-12">⤴</div>
+                <div class="absolute bottom-10 left-10 text-4xl transform -rotate-12">🌊</div>
+                <div class="absolute top-1/2 right-0 w-20 h-20 bg-blue-500 rounded-full text-white flex items-center justify-center font-black text-2xl shadow-lg border-4 border-white transform translate-x-1/2">
+                    in
+                </div>
+            </div>
+            
+            <!-- Right Content -->
+            <div class="lg:w-1/2 space-y-8">
+                <div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-900 block"></span> LinkedIn is the Premier Platform for Recruiters</h3>
+                    <p class="text-sm text-gray-600 pl-4">In today's job market, recruiters and hiring managers heavily rely on LinkedIn to discover top talent. Our expert team ensures your profile meets the standards they're seeking.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-900 block"></span> Stand Out Among Millions of Professionals</h3>
+                    <p class="text-sm text-gray-600 pl-4">With millions of active users and job postings, distinguishing yourself is crucial. Our thorough, personalized analysis helps your profile shine.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-900 block"></span> Enhance Your Visibility to Recruiters</h3>
+                    <p class="text-sm text-gray-600 pl-4">A carefully optimized LinkedIn profile ensures you appear in recruiter searches that match their specific job requirements. Our specialists identify key areas to boost your visibility.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-gray-900 text-lg mb-2 flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-gray-900 block"></span> Maximize Your Career Opportunities</h3>
+                    <p class="text-sm text-gray-600 pl-4">As most job opportunities are now on LinkedIn, investing in an expert-reviewed profile significantly increases your chances of being noticed and advancing your career. We provide actionable recommendations tailored to you.</p>
+                </div>
+                
+                <div class="relative inline-block mt-8 pl-4">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider z-10 border border-yellow-400">
+                        Limited-time offer!
+                    </div>
+                    <a href="/review" class="relative block bg-[#0a58ca] hover:bg-blue-800 text-white font-bold text-lg py-4 px-10 rounded-lg shadow-lg">
+                        Yes, I want a Professional Review for ₹199 <span class="ml-2">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- See How Highlights -->
+<section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl font-black text-gray-900 mb-16 leading-tight">See How Our Profile Review (Expert Assessment) Highlights Key Areas for Improvement</h2>
+        
+        <div class="space-y-10 text-left">
+            <div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">1. In-Depth Profile Analysis by Professionals</h3>
+                <p class="text-gray-600 text-sm">Your profile will be thoroughly examined to assess its effectiveness based on industry standards.</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">2. Personalized Profile Assessment</h3>
+                <p class="text-gray-600 text-sm">Receive a clear, easy-to-understand evaluation that reflects how well your profile meets current best practices and expectations.</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">3. Key Improvement Areas Identified</h3>
+                <p class="text-gray-600 text-sm">We pinpoint specific sections of your profile—such as your headline, summary, experience, and skills—where enhancements can make a significant impact.</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-lg text-gray-900 mb-2">4. Actionable Recommendations from Experts</h3>
+                <p class="text-gray-600 text-sm">Get tailored suggestions for each identified area, offering practical steps to enhance your profile's visibility and appeal to recruiters.</p>
+            </div>
+        </div>
+        
+        <div class="relative inline-block mt-16">
+            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-yellow-300 text-yellow-900 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider z-10 border border-yellow-400">
+                Limited-time offer!
+            </div>
+            <a href="/review" class="relative block bg-[#0a58ca] hover:bg-blue-800 text-white font-bold text-lg py-4 px-10 rounded-lg shadow-lg">
+                Yes, I want a Professional Review for ₹199 <span class="ml-2">&rarr;</span>
             </a>
         </div>
     </div>
 </section>
 
-<!-- Features Grid -->
-<section class="features-section" id="features">
-    <div class="section-container">
-        <div class="section-tag">What's Included</div>
-        <h2 class="section-title">Transform Your LinkedIn Profile with Expert Insights</h2>
-        <p class="section-subtitle">Get a complete 360° analysis across all dimensions of your LinkedIn profile</p>
-
-        <div class="features-grid">
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">🎯</div>
-                <h3>Profile Scoring</h3>
-                <p>Get an overall score out of 100 with a detailed gauge. Know exactly where you stand compared to industry benchmarks.</p>
+<!-- Testimonials -->
+<section class="py-20 bg-[#f4f7f6]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 border border-gray-300 bg-white px-4 py-1.5 rounded-full text-sm font-semibold text-gray-700 mb-6">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"></path></svg>
+                Testimonials
             </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">🔬</div>
-                <h3>Detailed Analysis</h3>
-                <p>Deep-dive into each profile section with professional assessment and specific improvement suggestions.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">🤖</div>
-                <h3>ATS Optimization</h3>
-                <p>Ensure your profile passes Applicant Tracking Systems used by top recruiters and Fortune 500 companies.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">🔑</div>
-                <h3>Keyword Enhancement</h3>
-                <p>Identify missing keywords from your industry's top job postings and integrate them naturally into your profile.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">💡</div>
-                <h3>Personalized Recommendations</h3>
-                <p>Every recommendation is tailored to your specific profile data, role, and industry for maximum impact.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">✍️</div>
-                <h3>Headline Optimization</h3>
-                <p>Craft a magnetic headline that grabs attention and communicates your unique value proposition instantly.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">📝</div>
-                <h3>About Section Improvement</h3>
-                <p>Transform your about section into a compelling professional story that resonates with hirers and recruiters.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">⚙️</div>
-                <h3>Skills Optimization</h3>
-                <p>Identify skill gaps, add high-demand skills, and strategically position your top competencies for maximum visibility.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">💼</div>
-                <h3>Experience Enhancement</h3>
-                <p>Reframe your experience descriptions with achievement-focused language and quantifiable impact statements.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">🚀</div>
-                <h3>Visibility Boost</h3>
-                <p>Optimize your profile to appear in more recruiter searches and multiply your profile views organically.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">🎯</div>
-                <h3>Recruiter Targeting</h3>
-                <p>Understand how recruiters perceive your profile and optimize it to attract the right opportunities.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">📈</div>
-                <h3>Industry Benchmarking</h3>
-                <p>Compare your profile score against top professionals in your field and understand the gap to close.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">⚡</div>
-                <h3>Actionable Insights</h3>
-                <p>Receive a prioritized list of improvements — from high-impact quick wins to long-term profile strategies.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">📋</div>
-                <h3>Performance Report</h3>
-                <p>Download or share a comprehensive PDF-style report with your full analysis and scoring breakdown.</p>
-            </div>
-            <div class="feature-card" data-animate="fadeInUp">
-                <div class="feature-icon">📧</div>
-                <h3>Email Delivery</h3>
-                <p>Get your complete profile analysis report delivered directly to your inbox for easy reference anytime.</p>
+            <h2 class="text-3xl font-black text-gray-900">What Our Users Are Saying</h2>
+            <p class="text-gray-500 mt-2">Real Stories from Real Users</p>
+        </div>
+        
+        <!-- We use the same loop but styled like Outspark cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- OutSpark exact look: white square cards with tiny font -->
+            <div class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col justify-between" th:each="story, iterStat : ${testimonials}" th:if="${iterStat.index < 3}">
+                <p class="text-sm text-gray-600 mb-8 leading-relaxed" th:text="${story.story}">
+                    This tool gave my profile the edge it needed. The comprehensive analysis provided by their expert team was precise and personalized...
+                </p>
+                <div>
+                    <div class="font-bold text-sm text-gray-900" th:text="${story.name}">Pradeep Singh</div>
+                    <div class="text-[10px] text-gray-500" th:text="${story.role}">Manager Delivery & Operations</div>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
-<!-- Why Invest Section -->
-<section class="why-section">
-    <div class="section-container">
-        <h2 class="section-title">Why Optimize Your LinkedIn Profile?</h2>
-        <div class="why-grid">
-            <div class="why-visual" data-animate="fadeInLeft">
-                <div class="why-illustration">
-                    <div class="li-icon">in</div>
-                    <div class="why-rings">
-                        <div class="ring ring-1"></div>
-                        <div class="ring ring-2"></div>
-                        <div class="ring ring-3"></div>
-                    </div>
-                    <div class="why-stat-bubble bubble-1">87% of recruiters use LinkedIn</div>
-                    <div class="why-stat-bubble bubble-2">3x more interviews</div>
-                    <div class="why-stat-bubble bubble-3">21x more views with photo</div>
-                </div>
-            </div>
-            <div class="why-points" data-animate="fadeInRight">
-                <div class="why-point">
-                    <div class="why-point-icon">🏆</div>
-                    <div>
-                        <h3>LinkedIn is the Premier Platform for Recruiters</h3>
-                        <p>In today's job market, 87% of recruiters and hiring managers rely on LinkedIn to discover top talent. Our analysis ensures your profile meets the standards they're seeking.</p>
-                    </div>
-                </div>
-                <div class="why-point">
-                    <div class="why-point-icon">🌟</div>
-                    <div>
-                        <h3>Stand Out Among Millions of Professionals</h3>
-                        <p>With 950M+ active users, distinguishing yourself is crucial. Our thorough, personalized analysis helps your profile shine in a crowded field.</p>
-                    </div>
-                </div>
-                <div class="why-point">
-                    <div class="why-point-icon">🔍</div>
-                    <div>
-                        <h3>Enhance Your Visibility to Recruiters</h3>
-                        <p>A carefully optimized profile ensures you appear in recruiter searches matching their job requirements. Our analysis identifies key areas to boost your discoverability.</p>
-                    </div>
-                </div>
-                <div class="why-point">
-                    <div class="why-point-icon">🚀</div>
-                    <div>
-                        <h3>Maximize Your Career Opportunities</h3>
-                        <p>Most job opportunities now come through LinkedIn. Invest in an expert-reviewed profile to significantly increase your chances of career advancement.</p>
-                    </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col justify-between" th:each="story, iterStat : ${testimonials}" th:if="${iterStat.index >= 3 && iterStat.index < 5}">
+                <p class="text-sm text-gray-600 mb-8 leading-relaxed" th:text="${story.story}">
+                    OutSpark's profile review service impressed me with its attention to detail...
+                </p>
+                <div>
+                    <div class="font-bold text-sm text-gray-900" th:text="${story.name}">Kartik Raja</div>
+                    <div class="text-[10px] text-gray-500" th:text="${story.role}">Senior Product Manager</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Expert Assessment Section -->
-<section class="assessment-section">
-    <div class="section-container">
-        <div class="section-tag">Expert Assessment</div>
-        <h2 class="section-title">See How Our Profile Review Highlights Key Areas</h2>
-        <div class="assessment-grid">
-            <div class="assessment-card" data-animate="fadeInUp">
-                <div class="assessment-num">01</div>
-                <h3>In-Depth Analysis</h3>
-                <p>Your profile is thoroughly examined to assess its effectiveness based on industry standards and recruiter expectations.</p>
-            </div>
-            <div class="assessment-card" data-animate="fadeInUp">
-                <div class="assessment-num">02</div>
-                <h3>Profile Assessment Score</h3>
-                <p>Receive a clear, easy-to-understand evaluation (0-100) reflecting how well your profile meets current best practices.</p>
-            </div>
-            <div class="assessment-card" data-animate="fadeInUp">
-                <div class="assessment-num">03</div>
-                <h3>Key Improvement Areas</h3>
-                <p>We pinpoint specific sections — headline, summary, experience, skills — where enhancements can make significant impact.</p>
-            </div>
-            <div class="assessment-card" data-animate="fadeInUp">
-                <div class="assessment-num">04</div>
-                <h3>Actionable Recommendations</h3>
-                <p>Get tailored, practical steps for each identified area to enhance your profile's visibility and appeal to recruiters.</p>
-            </div>
-        </div>
-        <div class="assessment-cta">
-            <div class="offer-tag">✨ Completely Free — No Credit Card Needed</div>
-            <a href="/review" class="primary-btn" id="assessment-cta-btn">Get My Free Profile Analysis →</a>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials Section -->
-<section class="testimonials-section" id="testimonials">
-    <div class="section-container">
-        <div class="section-tag">Testimonials</div>
-        <h2 class="section-title">What Our Users Are Saying</h2>
-        <p class="section-subtitle">Real Stories from Real Professionals</p>
-
-        <div class="testimonials-grid">
-            <div class="testimonial-card" data-animate="fadeInUp" th:each="story, iterStat : ${testimonials}">
-                <div class="testimonial-stars">★★★★★</div>
-                <p class="testimonial-text" th:text="${story.story}">Story text here</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar" th:style="'background:' + ${story.avatarColor}" th:text="${story.avatarInitials}">AM</div>
-                    <div class="author-info">
-                        <span class="author-name" th:text="${story.name}">Name</span>
-                        <span class="author-title" th:text="${story.role}">Role</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FAQ Section -->
-<section class="faq-section" id="faq">
-    <div class="section-container">
-        <h2 class="section-title">Got Questions?</h2>
-        <p class="section-subtitle">Everything you need to know about Careerthon</p>
-        <div class="faq-list">
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    What is Careerthon and how does it work?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Careerthon is a LinkedIn Profile Review and optimization platform. Simply submit your LinkedIn profile URL, and our analysis engine evaluates 15 key sections of your profile — from your headline and about section to skills and experience. You'll receive a comprehensive score (0-100) along with personalized recommendations for each section.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Is there really no payment required?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Yes! Careerthon is completely free to use. No credit card required, no hidden fees. Simply submit your LinkedIn URL and receive your full profile analysis report instantly.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Why is a LinkedIn Profile Review important for job seekers?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>87% of recruiters use LinkedIn to find and evaluate candidates. An optimized profile can increase your visibility by 3x and significantly improve your chances of being contacted for relevant opportunities. Our review identifies the exact changes that will have the most impact on your career prospects.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    What aspects of my profile are evaluated?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>We evaluate 15 key areas: Profile Photo, Cover Photo, Headline, About Section, Experience, Education, Skills, ATS Score, Keyword Density, Visibility Score, Recruiter Match, Industry Benchmarking, Licenses & Certifications, Recommendations, and Activity & Engagement.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    How long does the analysis take?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>The analysis is near-instant — typically under 5 seconds. You'll be automatically redirected to your full report as soon as it's ready.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Can I implement the recommendations myself?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Absolutely! All recommendations are practical, step-by-step actionable items that you can implement yourself directly on your LinkedIn profile. No technical expertise required.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Is Careerthon's review suitable for all professionals?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Yes! Whether you're a fresh graduate, mid-career professional, or senior executive, our analysis provides relevant insights. The recommendations are tailored to make your profile stand out at your specific career level and industry.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Does the review include personalized recommendations?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Yes! Every recommendation is generated based on your specific profile's scores and weaknesses. You won't receive generic advice — instead, you get targeted suggestions for exactly what your profile needs.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    How often should I review my LinkedIn profile?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>We recommend reviewing your profile at least once per quarter, or whenever you change roles, gain new skills, or complete significant projects. Regular optimization keeps your profile competitive and highly discoverable.</p>
-                </div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-question" onclick="toggleFaq(this)">
-                    Who built Careerthon?
-                    <span class="faq-icon">+</span>
-                </button>
-                <div class="faq-answer">
-                    <p>Careerthon was developed by <strong>Abhishek Mishra</strong>, with team contributions from <strong>Priyanshu Shekhar</strong> (UI/UX & Frontend) and <strong>Altamash Mallick</strong> (Backend & Data Analysis). Visit our <a href="/about">About page</a> to learn more about the team.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<div th:replace="~{fragments/footer :: footer}"></div>
-<div th:replace="~{fragments/footer :: sticky-banner}"></div>
 
 </body>
 </html>
