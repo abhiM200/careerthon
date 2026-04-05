@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/header :: head('Admin Dashboard - Careerthon')}"></head>
 <body class="bg-slate-50 min-h-screen pt-24 pb-12">
@@ -7,9 +8,9 @@
         <div class="mb-10 flex flex-col md:flex-row md:items-center md:justify-between border-b border-slate-200 pb-8">
             <div>
                 <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Admin Dashboard</h1>
-                <p class="mt-2 text-lg text-slate-600">Overview of all LinkedIn profile reviews and performance metrics.</p>
+                <p class="mt-2 text-lg text-slate-600">Overview of all LinkedIn profile reviews and Resume Analysis performance.</p>
             </div>
-            <div class="mt-4 md:mt-0">
+            <div class="mt-4 md:mt-0 flex gap-4">
                 <a href="/" class="inline-flex items-center px-4 py-2 border border-slate-300 rounded-lg text-sm font-medium text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 shadow-sm transition-all duration-200">
                     <svg class="h-4 w-4 mr-2 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -22,18 +23,18 @@
         <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-10">
             <!-- Stats -->
             <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-slate-200">
-                <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Total Reviews</dt>
+                <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Profile Reviews</dt>
                 <dd class="mt-1 text-3xl font-bold text-indigo-600" th:text="${reviews.size()}">0</dd>
             </div>
             
             <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-slate-200">
-                <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Average Score</dt>
-                <dd class="mt-1 text-3xl font-bold text-indigo-600">83.5</dd>
+                <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Resumes Analyzed</dt>
+                <dd class="mt-1 text-3xl font-bold text-indigo-600" th:text="${resumes.size()}">0</dd>
             </div>
 
             <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-slate-200">
-                <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">New Users</dt>
-                <dd class="mt-1 text-3xl font-bold text-indigo-600">42</dd>
+                <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Avg ATS Score</dt>
+                <dd class="mt-1 text-3xl font-bold text-indigo-600">78.5</dd>
             </div>
 
             <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-slate-200">
@@ -42,56 +43,86 @@
             </div>
         </div>
 
-        <!-- Table -->
-        <div class="flex flex-col shadow-xl rounded-2xl overflow-hidden border border-slate-200">
-            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                    <div class="overflow-hidden border-b border-slate-200">
-                        <table class="min-w-full divide-y divide-slate-200">
-                            <thead class="bg-slate-50">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Profile URL</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Score</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
-                                    <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Date</th>
-                                    <th scope="col" class="relative px-6 py-3"><span class="sr-only">View</span></th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-slate-200" id="reviewsTableBody">
-                                <tr th:each="review : ${reviews}">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-slate-900 truncate max-w-xs" th:text="${review.linkedinUrl}">URL</div>
-                                        <div class="text-xs text-slate-500" th:text="${review.email}">Email</div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="flex items-center">
-                                            <span class="text-sm font-semibold text-slate-900" th:text="${review.overallScore}">0</span>
-                                            <div class="ml-2 w-16 h-1.5 bg-slate-100 rounded-full">
-                                                <div class="h-full bg-indigo-500 rounded-full" th:style="'width: ' + ${review.overallScore} + '%'"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Complete</span>
-                                    </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">Just Now</td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                        <a th:href="@{/report/{id}(id=${review.id})}" class="text-indigo-600 hover:text-indigo-900">View Report</a>
-                                    </td>
-                                </tr>
-                                <tr th:if="${reviews.empty}">
-                                    <td colspan="5" class="px-6 py-10 text-center text-slate-500 bg-white italic">
-                                        No profile reviews completed yet.
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <!-- Sections Tabs -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Section 1: LinkedIn Profile Reviews -->
+            <div class="flex flex-col shadow-xl rounded-2xl overflow-hidden border border-slate-200 bg-white">
+                <div class="px-6 py-4 border-b border-slate-200 bg-slate-50">
+                    <h2 class="text-xl font-bold text-slate-800">LinkedIn Profile Reviews</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">User / URL</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Score</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200">
+                            <tr th:each="review : ${reviews}">
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-medium text-slate-900 truncate max-w-[150px]" th:text="${review.linkedinUrl}">URL</div>
+                                    <div class="text-xs text-slate-500" th:text="${review.emailAddress}">Email</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="text-sm font-bold" th:style="'color: ' + ${review.scoreColor}" th:text="${review.overallScore}">0</span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                    <a th:href="@{/report/{id}(id=${review.id})}" class="text-indigo-600 hover:text-indigo-900">View</a>
+                                </td>
+                            </tr>
+                            <tr th:if="${reviews.empty}">
+                                <td colspan="3" class="px-6 py-10 text-center text-slate-500 italic">No LinkedIn reviews yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Section 2: Resume / CV Uploads -->
+            <div class="flex flex-col shadow-xl rounded-2xl overflow-hidden border border-slate-200 bg-white">
+                <div class="px-6 py-4 border-b border-slate-200 bg-slate-50">
+                    <h2 class="text-xl font-bold text-slate-800">Resume / ATS Analysis</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-slate-200">
+                        <thead class="bg-slate-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">CV / User</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">ATS Score</th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">Roles</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-slate-200">
+                            <tr th:each="resume : ${resumes}">
+                                <td class="px-6 py-4">
+                                    <div class="text-sm font-medium text-slate-900 truncate max-w-[150px]" th:text="${resume.fileName}">File</div>
+                                    <div class="text-xs text-slate-500" th:text="${resume.userEmail}">Email</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span class="text-sm font-bold" th:style="'color: ' + ${resume.scoreColor}" th:text="${resume.atsScore}">0</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="text-xs text-slate-500 line-clamp-1" th:text="${resume.suggestedRoles}">Roles</div>
+                                </td>
+                            </tr>
+                            <tr th:if="${resumes.empty}">
+                                <td colspan="3" class="px-6 py-10 text-center text-slate-500 italic">No resume uploads yet.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer th:replace="~{fragments/footer :: footer}"></footer>
+    <footer th:replace="~{fragments/header :: site-footer}"></footer>
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>

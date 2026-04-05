@@ -1,6 +1,7 @@
 package com.careerthon.controller;
 
 import com.careerthon.repository.ProfileReviewRepository;
+import com.careerthon.repository.ResumeReviewRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     private final ProfileReviewRepository profileReviewRepository;
+    private final ResumeReviewRepository resumeReviewRepository;
 
-    public AdminController(ProfileReviewRepository profileReviewRepository) {
+    public AdminController(ProfileReviewRepository profileReviewRepository, ResumeReviewRepository resumeReviewRepository) {
         this.profileReviewRepository = profileReviewRepository;
+        this.resumeReviewRepository = resumeReviewRepository;
     }
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         model.addAttribute("reviews", profileReviewRepository.findAll());
+        model.addAttribute("resumes", resumeReviewRepository.findAllByOrderByUploadedAtDesc());
         return "admin/dashboard";
     }
 }

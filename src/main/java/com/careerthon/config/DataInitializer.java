@@ -50,8 +50,8 @@ public class DataInitializer {
             UserStory s = existing.stream().filter(u -> u.getName().equals(name)).findFirst().get();
             s.setRole(role);
             s.setStory(story);
-            s.setInitials(initials);
-            s.setColor(color);
+            s.setAvatarInitials(initials);
+            s.setAvatarColor(color);
             repo.save(s);
         }
     }

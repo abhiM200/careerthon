@@ -277,6 +277,23 @@
                     <p class="rec-text" th:text="${review.recruiterRecommendation}"></p>
                 </div>
             </div>
+
+            <!-- Role Suggestions Section -->
+            <div class="role-suggestions-card" th:if="${review.suggestedRoles}">
+                <div class="role-card-header">
+                    <span class="role-icon">💼</span>
+                    <h3>Suggested Corporate Roles</h3>
+                </div>
+                <p class="role-sub">Based on your profile strength and identified skills, these roles are a strong fit for you:</p>
+                <div class="role-tags">
+                    <span th:each="role : ${review.suggestedRoles.split(',')}" 
+                          class="role-tag" th:text="${role.trim()}">Role</span>
+                </div>
+                <div class="role-footer">
+                    <p>💡 Tip: Use our <strong>ATS Optimizer</strong> to tailor your resume for these specific roles.</p>
+                    <a href="/resume" class="role-cta">Scan Resume for Roles →</a>
+                </div>
+            </div>
         </div>
     </section>
 

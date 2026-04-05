@@ -62,6 +62,7 @@ public class ProfileAnalyzerService {
         review.setRecruiterRecommendation(generateRecruiterRecommendation(breakdown.getRecruiterMatch()));
         review.setIndustryBenchmark(generateIndustryBenchmark(overall));
         review.setActionableInsights(generateActionableInsights(breakdown));
+        review.setSuggestedRoles(generateSuggestedRoles(overall, review.getUserTitle()));
 
         review.setStatus(ProfileReview.ReviewStatus.COMPLETED);
         review.setCompletedAt(LocalDateTime.now());
@@ -268,5 +269,17 @@ public class ProfileAnalyzerService {
         }
 
         return insights.toString();
+    }
+
+    private String generateSuggestedRoles(int overall, String userTitle) {
+        if (overall >= 85) {
+            return "Senior Product Manager, Solutions Architect, Engineering Lead, Global Operations Director";
+        } else if (overall >= 70) {
+            return "Sr. Software Engineer, Project Manager, Business Analyst, Marketing Specialist";
+        } else if (overall >= 50) {
+            return "Junior Developer, HR Generalist, Sales Executive, Customer Success Associate";
+        } else {
+            return "Internships in Corporate, Junior Analyst Roles, Assistant Project Coordinator";
+        }
     }
 }

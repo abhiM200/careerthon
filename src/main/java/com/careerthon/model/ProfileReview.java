@@ -16,6 +16,7 @@ public class ProfileReview {
 
     private String userName;
     private String userTitle;
+    private String suggestedRoles;
 
     @Column(nullable = false)
     private int overallScore;
@@ -78,6 +79,9 @@ public class ProfileReview {
 
     public String getUserTitle() { return userTitle; }
     public void setUserTitle(String userTitle) { this.userTitle = userTitle; }
+
+    public String getSuggestedRoles() { return suggestedRoles; }
+    public void setSuggestedRoles(String suggestedRoles) { this.suggestedRoles = suggestedRoles; }
 
     public int getOverallScore() { return overallScore; }
     public void setOverallScore(int overallScore) { this.overallScore = overallScore; }

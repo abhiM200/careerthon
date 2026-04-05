@@ -817,3 +817,72 @@ body.report-page { background: var(--bg-light); }
   .assessment-grid { grid-template-columns: 1fr; }
   .breakdown-label { width: 120px; }
 }
+
+/* ============================================
+   RESUME & ROLE SUGGESTIONS
+   ============================================ */
+.role-suggestions-card {
+  background: linear-gradient(135deg, #f8fafc, #eff6ff);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  border: 2px solid #378FE933;
+  margin-top: 32px;
+  box-shadow: var(--shadow-lg);
+}
+.role-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.role-card-header h3 {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+.role-sub {
+  font-size: 15px;
+  color: var(--text-body);
+  margin-bottom: 20px;
+}
+.role-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.role-tag {
+  background: #fff;
+  border: 1.5px solid #378FE933;
+  color: var(--primary);
+  padding: 8px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: var(--transition);
+}
+.role-tag:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.role-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.role-footer p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.role-cta {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: underline;
+}
