@@ -22,14 +22,12 @@ public class ResumeService {
 
     private final ResumeReviewRepository resumeReviewRepository;
     private final EmailService emailService;
-    private final LlmService llmService;
     private final Random random = new Random();
     private final Tika tika = new Tika();
 
-    public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService, LlmService llmService) {
+    public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService) {
         this.resumeReviewRepository = resumeReviewRepository;
         this.emailService = emailService;
-        this.llmService = llmService;
     }
 
     private static final List<String> TECHNICAL_ROLES = List.of(
