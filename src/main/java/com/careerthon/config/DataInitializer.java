@@ -71,6 +71,30 @@ public class DataInitializer {
                     "KR",
                     "#0284c7"
                 ));
+
+                userStoryRepository.save(new UserStory(
+                    "Prashant Kumar",
+                    "Analyst at LTM",
+                    "Careerthon's profile review completely transformed how recruiters see my profile. After 4 years as an Analyst, I wanted to showcase my impact clearly, and this tool gave me the perfect step-by-step guidance.",
+                    "PK",
+                    "#c026d3"
+                ));
+
+                userStoryRepository.save(new UserStory(
+                    "Rishabh Jaiswal",
+                    "Sr Software Developer at Cognizant",
+                    "Having been in the industry for 3 years, my LinkedIn profile was a bit outdated. The detailed feedback and scoring from Careerthon helped me optimize my keywords and headline, leading to a significant increase in relevant connection requests.",
+                    "RJ",
+                    "#0ea5e9"
+                ));
+
+                userStoryRepository.save(new UserStory(
+                    "Binit Mishra",
+                    "Sr Software Developer at Accenture Germany",
+                    "Moving to an international role required my profile to stand out globally. Careerthon's deep analysis and actionable insights were crucial in refining my digital presence for opportunities like Accenture.",
+                    "BM",
+                    "#10b981"
+                ));
             }
         };
     }
