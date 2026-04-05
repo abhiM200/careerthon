@@ -1,33 +1,15 @@
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Careerthon - LinkedIn Profile Review</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="font-sans text-gray-800 bg-white">
+<head th:replace="~{fragments/header :: head('Careerthon - LinkedIn Profile Review')}"></head>
+<body class="bg-white">
 
 <!-- Top Bar -->
-<div class="bg-black text-white text-xs py-2 px-4 text-center">
-    Most recruiters find their job candidates on <strong>LinkedIn</strong> | LinkedIn profiles with complete information are 40% more likely to receive job opportunities in the last week, over <strong>51,798+ users trusted Profile Review</strong>
+<div class="bg-slate-900 text-white text-[10px] sm:text-xs py-2.5 px-4 text-center sticky top-0 z-[1001] font-semibold tracking-wide">
+    <span class="opacity-80">Recruiters prioritize complete LinkedIn profiles. Over</span> 
+    <span class="text-amber-400 font-black">51,798+ users</span> 
+    <span class="opacity-80">trusted Profile Review last week! 🏆</span>
 </div>
 
-<!-- Header -->
-<header class="border-b border-gray-200 bg-white sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center text-2xl font-black text-indigo-600 tracking-tighter">
-            <span class="mr-1">⚡</span> CAREERTHON
-        </a>
-        <div class="hidden md:flex items-center gap-8">
-            <a href="/review" class="text-sm font-bold text-gray-600 hover:text-indigo-600 transition-colors">LinkedIn Review</a>
-            <a href="/resume" class="text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors">Resume Scan 🚀</a>
-            <a href="/about" class="text-sm font-bold text-gray-600 hover:text-indigo-600 transition-colors">About</a>
-        </div>
-    </div>
-</header>
+<header th:replace="~{fragments/header :: header}"></header>
 
 <!-- Hero Section -->
 <section class="relative pt-16 pb-20 bg-gradient-to-r from-[#f4f7f6] to-[#e7eef4] overflow-hidden">

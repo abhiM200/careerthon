@@ -2,11 +2,16 @@ package com.careerthon.service;
 
 import com.careerthon.model.ResumeReview;
 import com.careerthon.repository.ResumeReviewRepository;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.TextAlignment;
 import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +47,12 @@ public class ResumeService {
         String fileName = file.getOriginalFilename() != null ? file.getOriginalFilename() : "unknown_file";
         String content = "";
         
+        String finalFileName = fileName;
         try (InputStream stream = file.getInputStream()) {
             content = tika.parseToString(stream);
         } catch (Exception e) {
             // Fallback if parsing fails
-            content = "User with background in " + fileName.toLowerCase();
+            content = "User with background in " + finalFileName.toLowerCase();
         }
 
         // Logic to simulate ATS analysis
@@ -130,5 +136,48 @@ public class ResumeService {
         
         sb.append("Ideal roles for you include: ").append(String.join(", ", suggested));
         return sb.toString();
+    }
+
+    public byte[] generateTemplatePdf(String type) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PdfWriter writer = new PdfWriter(baos);
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+
+        if ("fresher".equalsIgnoreCase(type)) {
+            document.add(new Paragraph("ABHISHEK MISHRA").setBold().setFontSize(20).setTextAlignment(TextAlignment.CENTER));
+            document.add(new Paragraph("Software Engineer Intern | 884784XXXX").setTextAlignment(TextAlignment.CENTER).setMarginBottom(20));
+            
+            document.add(new Paragraph("EDUCATION").setBold().setFontSize(14));
+            document.add(new Paragraph("B.Tech in Computer Science - Top Tier Institute (Expected 2025)"));
+            document.add(new Paragraph("GPA: 8.9/10.0"));
+            
+            document.add(new Paragraph("\nTECHNICAL SKILLS").setBold().setFontSize(14));
+            document.add(new Paragraph("Languages: Java, Python, SQL, C++"));
+            document.add(new Paragraph("Frameworks: Spring Boot, React.js, Tailwind CSS, Docker"));
+            
+            document.add(new Paragraph("\nPROJECTS").setBold().setFontSize(14));
+            document.add(new Paragraph("1. Careerthon SaaS: Developed an end-to-end LinkedIn profile review engine using Spring Boot."));
+            document.add(new Paragraph("2. AI Content Generator: Built a tool using OpenAI API for personalized cover letters."));
+        } else {
+            document.add(new Paragraph("ABHISHEK MISHRA").setBold().setFontSize(20).setTextAlignment(TextAlignment.CENTER));
+            document.add(new Paragraph("Sr. Full Stack Developer | 5+ Years Exp | mishra@email.com").setTextAlignment(TextAlignment.CENTER).setMarginBottom(20));
+            
+            document.add(new Paragraph("SUMMARY").setBold().setFontSize(14));
+            document.add(new Paragraph("Highly skilled Full Stack Developer with expert-level proficiency in Java/Spring ecosystem and cloud architecture. Proven track record of improving system uptime by 99.9% and reducing API latency across critical microservices."));
+            
+            document.add(new Paragraph("\nPROFESSIONAL EXPERIENCE").setBold().setFontSize(14));
+            document.add(new Paragraph("Software Lead - Global Tech (2021 - Present)"));
+            document.add(new Paragraph("• Redesigned data ingestion pipeline, improving throughput by 250%."));
+            document.add(new Paragraph("• Mentored 15 junior developers and improved sprint velocity by 20%."));
+            document.add(new Paragraph("• Spearheaded migration to Kubernetes, reducing infrastructure costs by 40%."));
+            
+            document.add(new Paragraph("\nSKILLS").setBold().setFontSize(14));
+            document.add(new Paragraph("Cloud: AWS (Solution Architect Certified), GCP, Docker, Kubernetes"));
+            document.add(new Paragraph("Backend: Java 21, Node.js, PostgreSQL, Redis, Kafka"));
+        }
+
+        document.close();
+        return baos.toByteArray();
     }
 }

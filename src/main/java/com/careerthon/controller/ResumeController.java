@@ -3,6 +3,9 @@ package com.careerthon.controller;
 import com.careerthon.model.ResumeReview;
 import com.careerthon.repository.ResumeReviewRepository;
 import com.careerthon.service.ResumeService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +48,7 @@ public class ResumeController {
     }
 
     @GetMapping("/results/{id}")
-    public String results(@PathVariable Long id, Model model) {
+    public String results(@PathVariable("id") Long id, Model model) {
         ResumeReview review = resumeReviewRepository.findById(id).orElse(null);
         if (review == null) return "redirect:/resume";
         model.addAttribute("review", review);
@@ -55,5 +58,16 @@ public class ResumeController {
     @GetMapping("/templates")
     public String templates() {
         return "resume/templates";
+    }
+
+    @GetMapping("/download/{type}")
+    public ResponseEntity<byte[]> downloadTemplate(@PathVariable String type) {
+        byte[] pdfContent = resumeService.generateTemplatePdf(type);
+        String filename = type.equalsIgnoreCase("fresher") ? "Fresher_Template.pdf" : "Corporate_Pro_Template.pdf";
+        
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(pdfContent);
     }
 }
