@@ -55,39 +55,16 @@ public class ResumeService {
             content = "User with background in " + fileName.toLowerCase();
         }
 
-        // Feature 1, 2, 3: AI-Powered Career Recommendation & Resume Enhancer
-        String aiAnalysis = llmService.generateResponse(
-            "You are an expert HR and Career Coach. Analyze this resume text and provide: " +
-            "1. Suitable Job Roles (comma-separated list). " +
-            "2. Skill Gap Analysis. " +
-            "3. 3-5 improved, high-impact bullet points. " +
-            "4. A 30/60/90 Day Learning Roadmap. " +
-            "Keep the response professional and structured.",
-            content
-        );
-
-        // Extract values from AI response (very simple extraction; can be improved)
-        String suggestedRoles = "";
-        String improvementSuggestions = aiAnalysis;
-        
-        if (aiAnalysis.contains("Job Roles:")) {
-             int start = aiAnalysis.indexOf("Job Roles:") + 10;
-             int end = aiAnalysis.indexOf("\n", start);
-             if (end > start) suggestedRoles = aiAnalysis.substring(start, end).trim();
-        }
-
-        // Fallback for roles if LLM extraction fails or LLM is down
-        if (suggestedRoles.isEmpty() || aiAnalysis.startsWith("LLM Error")) {
-            List<String> suggested = new ArrayList<>();
-            suggestRoles(content, suggested);
-            suggestedRoles = String.join(", ", suggested);
-            if (aiAnalysis.startsWith("LLM Error")) {
-                improvementSuggestions = generateSuggestions(calculateSimulatedScore(content), suggested, content) + "\n\n" + aiAnalysis;
-            }
-        }
-
+        // Logic to simulate ATS analysis using high-performance heuristics
         int score = calculateSimulatedScore(content);
-        ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, improvementSuggestions);
+        
+        List<String> suggested = new ArrayList<>();
+        suggestRoles(content, suggested);
+
+        String suggestedRoles = String.join(", ", suggested);
+        String suggestions = generateSuggestions(score, suggested, content);
+
+        ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, suggestions);
         ResumeReview saved = resumeReviewRepository.save(review);
         
         if (userEmail != null && !userEmail.isEmpty()) {

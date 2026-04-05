@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: head('AI LinkedIn Profile Optimizer - Careerthon AI')}"></head>
+<head th:replace="~{fragments/header :: head('Expert LinkedIn Profile Optimizer - Careerthon')}"></head>
 <body class="bg-slate-50 min-h-screen pt-24 pb-12">
     <header th:replace="~{fragments/header :: header}"></header>
 
     <main class="max-w-4xl mx-auto px-4">
         <div class="text-center mb-12">
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">AI LinkedIn Advisor 🚀</h1>
-            <p class="mt-4 text-xl text-slate-600">Optimize your profile with an AI-generated headline, summary, and industry-standard improvements.</p>
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Expert LinkedIn Advisor 🚀</h1>
+            <p class="mt-4 text-xl text-slate-600">Optimize your profile with a professional headline, summary, and industry-standard improvements.</p>
         </div>
 
         <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200">
@@ -27,7 +27,7 @@
             <div th:if="${suggestions != null}" class="space-y-6 animate-fade-in">
                 <div class="p-6 bg-white rounded-2xl border-2 border-blue-500 shadow-xl">
                     <h3 class="text-xl font-black text-slate-900 mb-6 flex items-center gap-3">
-                        <span class="text-3xl">🎯</span> AI Profile Recommendations
+                        <span class="text-3xl">🎯</span> Expert Profile Recommendations
                     </h3>
                     <div class="prose prose-slate max-w-none whitespace-pre-wrap text-slate-700 leading-relaxed font-medium" th:text="${suggestions}">Suggestions</div>
                 </div>

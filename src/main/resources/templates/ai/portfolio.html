@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: head('AI Portfolio Content Generator - Careerthon AI')}"></head>
+<head th:replace="~{fragments/header :: head('Professional Portfolio Content - Careerthon')}"></head>
 <body class="bg-slate-50 min-h-screen pt-24 pb-12">
     <header th:replace="~{fragments/header :: header}"></header>
 
     <main class="max-w-4xl mx-auto px-4">
         <div class="text-center mb-12">
             <div class="inline-flex items-center px-4 py-2 rounded-full bg-amber-100 text-amber-700 text-sm font-bold mb-6">
-                ✨ Content Generation for Portfolio ✨
+                ✨ Smart Content Generation ✨
             </div>
-            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">AI Portfolio Builder 👩‍💻</h1>
+            <h1 class="text-4xl font-extrabold text-slate-900 tracking-tight">Smart Portfolio Builder 👩‍💻</h1>
             <p class="mt-4 text-xl text-slate-600">Transform your technical projects into compelling stories for your personal website or portfolio.</p>
         </div>
 
@@ -37,7 +37,7 @@
             <div th:if="${portfolioContent != null}" class="animate-fade-in space-y-6">
                  <div class="p-8 bg-white border-2 border-amber-500 rounded-3xl shadow-2xl">
                     <h3 class="text-xl font-black text-slate-900 mb-6 flex items-center gap-3">
-                        <span class="text-3xl">📝</span> Your AI-Generated Content
+                        <span class="text-3xl">📝</span> Your Expert-Generated Content
                     </h3>
                     <div class="prose prose-slate max-w-none whitespace-pre-wrap text-slate-700 leading-relaxed font-medium" th:text="${portfolioContent}">Portfolio Content</div>
                  </div>
