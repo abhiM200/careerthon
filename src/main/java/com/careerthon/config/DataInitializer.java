@@ -18,33 +18,30 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // We ensure all 8 stories (7 originals + Shristi) are always correctly persisted.
+        // We ensure exactly the 7 original expert stories are always correctly persisted.
         userStoryRepository.deleteAll();
         
-        List<UserStory> allStories = List.of(
+        List<UserStory> originalStories = List.of(
             new UserStory(
                 "Abhishek Mishra",
                 "Full Stack Developer & Project Lead",
                 "Careerthon results were incredibly detailed and professional. Transforming my LinkedIn was efficient and the feedback was very high-quality.",
-                "AM", "#0A66C2", null
+                "AM", "#0A66C2",
+                "/images/abhishek_mishra.jpg"
             ),
             new UserStory(
                 "Priyanshu Shekhar",
                 "UI/UX Designer & Frontend Developer",
                 "This tool gave my profile the edge it needed. The comprehensive analysis provided by their expert team was precise and personalized.",
-                "PS", "#10b981", null
-            ),
-            new UserStory(
-                "Shristi Jha",
-                "Final Year B.Tech Student, KIIT Bhubaneswar",
-                "As a final year student at KIIT, I was struggling to get noticed by top MNCs. Careerthon’s expert headline and summary recommendations were a game-changer. I secured a top-tier placement!",
-                "SJ", "#ef4444", "/images/testimonials/shristi.jpg"
+                "PS", "#10b981", 
+                "/images/priyanshu_shekhar.jpg"
             ),
             new UserStory(
                 "Altamash Mallick", 
                 "Backend Engineer & Data Analyst",
                 "The ATS score really helped me understand where my resume was failing. A must-have for every serious job seeker today.",
-                "AM", "#f59e0b", null
+                "AM", "#f59e0b",
+                "/images/altamash_mallick.jpg"
             ),
             new UserStory(
                 "Rahul Verma", "Verified Professional",
@@ -64,9 +61,10 @@ public class DataInitializer implements CommandLineRunner {
             new UserStory(
                 "Binit Mishra", "Verified Professional",
                 "Highly professional and effective career suite. The expert mock interview provides great confidence booster.",
-                "BM", "#64748b", null
+                "BM", "#64748b", 
+                "/images/binit_mishra.jpg"
             )
         );
-        userStoryRepository.saveAll(allStories);
+        userStoryRepository.saveAll(originalStories);
     }
 }
