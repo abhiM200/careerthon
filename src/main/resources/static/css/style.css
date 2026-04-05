@@ -108,6 +108,35 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Dropdown Menu */
+.nav-dropdown-wrapper:hover .nav-dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 20px;
+  color: var(--slate-600);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+}
+
+.dropdown-item:hover {
+  background: var(--slate-50);
+  color: var(--primary);
+  padding-left: 24px;
+}
+
+/* Mobile Divider Header */
+.mobile-menu .px-4 {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
 @media (max-width: 991px) {
   .nav-container { gap: 16px; }
   .nav-links, .auth-links { display: none !important; }

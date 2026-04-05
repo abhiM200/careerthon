@@ -22,12 +22,14 @@ public class ResumeService {
 
     private final ResumeReviewRepository resumeReviewRepository;
     private final EmailService emailService;
+    private final LlmService llmService;
     private final Random random = new Random();
     private final Tika tika = new Tika();
 
-    public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService) {
+    public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService, LlmService llmService) {
         this.resumeReviewRepository = resumeReviewRepository;
         this.emailService = emailService;
+        this.llmService = llmService;
     }
 
     private static final List<String> TECHNICAL_ROLES = List.of(
@@ -47,27 +49,47 @@ public class ResumeService {
         String fileName = file.getOriginalFilename() != null ? file.getOriginalFilename() : "unknown_file";
         String content = "";
         
-        String finalFileName = fileName;
         try (InputStream stream = file.getInputStream()) {
             content = tika.parseToString(stream);
         } catch (Exception e) {
-            // Fallback if parsing fails
-            content = "User with background in " + finalFileName.toLowerCase();
+            content = "User with background in " + fileName.toLowerCase();
         }
 
-        // Logic to simulate ATS analysis
-        int score = calculateSimulatedScore(content);
+        // Feature 1, 2, 3: AI-Powered Career Recommendation & Resume Enhancer
+        String aiAnalysis = llmService.generateResponse(
+            "You are an expert HR and Career Coach. Analyze this resume text and provide: " +
+            "1. Suitable Job Roles (comma-separated list). " +
+            "2. Skill Gap Analysis. " +
+            "3. 3-5 improved, high-impact bullet points. " +
+            "4. A 30/60/90 Day Learning Roadmap. " +
+            "Keep the response professional and structured.",
+            content
+        );
+
+        // Extract values from AI response (very simple extraction; can be improved)
+        String suggestedRoles = "";
+        String improvementSuggestions = aiAnalysis;
         
-        List<String> suggested = new ArrayList<>();
-        suggestRoles(content, suggested);
+        if (aiAnalysis.contains("Job Roles:")) {
+             int start = aiAnalysis.indexOf("Job Roles:") + 10;
+             int end = aiAnalysis.indexOf("\n", start);
+             if (end > start) suggestedRoles = aiAnalysis.substring(start, end).trim();
+        }
 
-        String suggestedRoles = String.join(", ", suggested);
-        String suggestions = generateSuggestions(score, suggested, content);
+        // Fallback for roles if LLM extraction fails or LLM is down
+        if (suggestedRoles.isEmpty() || aiAnalysis.startsWith("LLM Error")) {
+            List<String> suggested = new ArrayList<>();
+            suggestRoles(content, suggested);
+            suggestedRoles = String.join(", ", suggested);
+            if (aiAnalysis.startsWith("LLM Error")) {
+                improvementSuggestions = generateSuggestions(calculateSimulatedScore(content), suggested, content) + "\n\n" + aiAnalysis;
+            }
+        }
 
-        ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, suggestions);
+        int score = calculateSimulatedScore(content);
+        ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, improvementSuggestions);
         ResumeReview saved = resumeReviewRepository.save(review);
         
-        // Trigger actual email for resume report
         if (userEmail != null && !userEmail.isEmpty()) {
             String reportUrl = "https://careerthon.onrender.com/resume/results/" + saved.getId();
             emailService.sendReport(userEmail, reportUrl, userName);

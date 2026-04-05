@@ -28,9 +28,23 @@
         
         <div class="nav-links">
             <a href="/" class="nav-link">Home</a>
-            <a href="/review" class="nav-link">Review</a>
+            <a href="/review" class="nav-link">LinkedIn Review</a>
             <a href="/resume" class="nav-link">Resume Scan 🚀</a>
-            <a href="/resume/templates" class="nav-link">CV Builder</a>
+            
+            <div class="nav-dropdown-wrapper" style="position: relative; display: inline-block;">
+                <button class="nav-link dropdown-toggle flex items-center gap-1 group">
+                    AI Career Tools <span class="text-xs opacity-50 transition-transform group-hover:rotate-180">▼</span>
+                </button>
+                <div class="nav-dropdown-content absolute left-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-2xl opacity-0 invisible translate-y-2 transition-all z-[1002]">
+                    <a href="/resume/templates" class="dropdown-item">Templates & CV Builder</a>
+                    <a href="/ai-tools/skill-gap" class="dropdown-item">Skill Gap Analyzer</a>
+                    <a href="/ai-tools/roadmap" class="dropdown-item">AI Learning Roadmap</a>
+                    <a href="/ai-tools/interview" class="dropdown-item">Mock Interview 🕵️‍♂️</a>
+                    <a href="/ai-tools/linkedin" class="dropdown-item">LinkedIn Optimizer</a>
+                    <a href="/ai-tools/portfolio" class="dropdown-item">Portfolio Content</a>
+                </div>
+            </div>
+
             <a href="/about" class="nav-link">About</a>
             <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="nav-link admin-link" style="color: #ef4444; font-weight: 700;">Admin</a>
         </div>
@@ -62,12 +76,18 @@
     </nav>
     <div class="mobile-menu" id="mobile-menu">
         <a href="/" class="mobile-link">Home</a>
-        <a href="/review" class="mobile-link">Review Profile</a>
-        <a href="/resume" class="mobile-link">Resume Scan</a>
+        <a href="/review" class="mobile-link">LinkedIn Review</a>
+        <a href="/resume" class="mobile-link">Resume Scan 🚀</a>
         <a href="/resume/templates" class="mobile-link">CV Builder</a>
-        <a href="/about" class="mobile-link">About</a>
-        <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="mobile-link" style="color: #ef4444;">Admin Dashboard</a>
         <hr class="my-2 border-slate-100">
+        <div class="px-4 py-2 text-xs font-bold text-slate-400 uppercase tracking-widest">AI Expert Tools</div>
+        <a href="/ai-tools/skill-gap" class="mobile-link">Skill Gap Analyzer</a>
+        <a href="/ai-tools/roadmap" class="mobile-link">AI Learning Roadmap</a>
+        <a href="/ai-tools/interview" class="mobile-link">Mock Interview 🕵️‍♂️</a>
+        <a href="/ai-tools/linkedin" class="mobile-link">LinkedIn Optimizer</a>
+        <a href="/ai-tools/portfolio" class="mobile-link">Portfolio Content</a>
+        <hr class="my-2 border-slate-100">
+        <a href="/about" class="mobile-link">About</a>
         <div sec:authorize="isAnonymous()">
             <a href="/login" class="mobile-link">Sign In</a>
             <a href="/signup" class="mobile-link cta">Sign Up 🚀</a>
