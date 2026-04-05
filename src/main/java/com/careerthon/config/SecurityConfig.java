@@ -24,7 +24,7 @@ public class SecurityConfig {
             )
             .formLogin(login -> login
                 .loginPage("/login")
-                .defaultSuccessUrl("/", true)
+                .successHandler(new CustomAuthenticationSuccessHandler())
                 .permitAll()
             )
             .logout(logout -> logout
