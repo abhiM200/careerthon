@@ -34,16 +34,14 @@ public class ResumeController {
             model.addAttribute("error", "Please select a file to upload.");
             return "resume/index";
         }
-        
-        String fileName = file.getOriginalFilename() != null ? file.getOriginalFilename() : "unknown_file";
-        
-        // Simulating text extraction from file for the ATS analysis
-        String simulatedContent = "User with background in " + fileName.toLowerCase();
-        if (fileName.toLowerCase().contains("java")) simulatedContent += " coding java agile scrum stakeholder management";
-        if (fileName.toLowerCase().contains("it")) simulatedContent += " project management p&l client management";
-        
-        ResumeReview review = resumeService.analyzeResume(fileName, userName, userEmail, simulatedContent);
-        return "redirect:/resume/results/" + review.getId();
+
+        try {
+            ResumeReview review = resumeService.analyzeResume(file, userName, userEmail);
+            return "redirect:/resume/results/" + review.getId();
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to analyze resume: " + e.getMessage());
+            return "resume/index";
+        }
     }
 
     @GetMapping("/results/{id}")
