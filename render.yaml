@@ -20,3 +20,15 @@ services:
         fromDatabase:
           name: careerthon-db
           property: password
+      - key: DATABASE_HOST
+        fromDatabase:
+          name: careerthon-db
+          property: host
+      - key: DATABASE_PORT
+        fromDatabase:
+          name: careerthon-db
+          property: port
+      - key: DATABASE_NAME
+        fromDatabase:
+          name: careerthon-db
+          property: database
