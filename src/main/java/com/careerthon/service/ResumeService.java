@@ -12,10 +12,12 @@ import java.util.Random;
 public class ResumeService {
 
     private final ResumeReviewRepository resumeReviewRepository;
+    private final EmailService emailService;
     private final Random random = new Random();
 
-    public ResumeService(ResumeReviewRepository resumeReviewRepository) {
+    public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService) {
         this.resumeReviewRepository = resumeReviewRepository;
+        this.emailService = emailService;
     }
 
     private static final List<String> TECHNICAL_ROLES = List.of(
@@ -42,7 +44,15 @@ public class ResumeService {
         String suggestions = generateSuggestions(score, suggested);
 
         ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, suggestions);
-        return resumeReviewRepository.save(review);
+        ResumeReview saved = resumeReviewRepository.save(review);
+        
+        // Trigger actual email for resume report
+        if (userEmail != null && !userEmail.isEmpty()) {
+            String reportUrl = "https://careerthon.onrender.com/resume/results/" + saved.getId();
+            emailService.sendReport(userEmail, reportUrl, userName);
+        }
+
+        return saved;
     }
 
     private int calculateSimulatedScore(String content) {

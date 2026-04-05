@@ -14,10 +14,12 @@ import java.util.Random;
 public class ProfileAnalyzerService {
 
     private final ProfileReviewRepository reviewRepository;
+    private final EmailService emailService;
     private final Random random = new Random();
 
-    public ProfileAnalyzerService(ProfileReviewRepository reviewRepository) {
+    public ProfileAnalyzerService(ProfileReviewRepository reviewRepository, EmailService emailService) {
         this.reviewRepository = reviewRepository;
+        this.emailService = emailService;
     }
 
     public ProfileReview createReview(String linkedinUrl, String email) {
@@ -66,8 +68,17 @@ public class ProfileAnalyzerService {
 
         review.setStatus(ProfileReview.ReviewStatus.COMPLETED);
         review.setCompletedAt(LocalDateTime.now());
+        ProfileReview saved = reviewRepository.save(review);
+        
+        // Trigger actual email if address is provided
+        if (saved.getEmailAddress() != null && !saved.getEmailAddress().isEmpty()) {
+            String reportUrl = "https://careerthon.onrender.com/report/" + saved.getId();
+            emailService.sendReport(saved.getEmailAddress(), reportUrl, saved.getUserName());
+            saved.setEmailSent(true);
+            reviewRepository.save(saved);
+        }
 
-        return reviewRepository.save(review);
+        return saved;
     }
 
     public Optional<ProfileReview> getReview(Long id) {
