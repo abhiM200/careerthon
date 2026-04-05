@@ -31,15 +31,20 @@ public class ResumeReview {
     @Column(length = 2000)
     private String adminSuggestions;
 
+    @Lob
+    @Column(name = "file_data", length = 10000000) // Up to 10MB
+    private byte[] fileData;
+
     public ResumeReview() {}
 
-    public ResumeReview(String fileName, String userName, String userEmail, int atsScore, String suggestedRoles, String improvementSuggestions) {
+    public ResumeReview(String fileName, String userName, String userEmail, int atsScore, String suggestedRoles, String improvementSuggestions, byte[] fileData) {
         this.fileName = fileName;
         this.userName = userName;
         this.userEmail = userEmail;
         this.atsScore = atsScore;
         this.suggestedRoles = suggestedRoles;
         this.improvementSuggestions = improvementSuggestions;
+        this.fileData = fileData;
     }
 
     // Getters and Setters
@@ -69,6 +74,9 @@ public class ResumeReview {
     
     public String getAdminSuggestions() { return adminSuggestions; }
     public void setAdminSuggestions(String adminSuggestions) { this.adminSuggestions = adminSuggestions; }
+    
+    public byte[] getFileData() { return fileData; }
+    public void setFileData(byte[] fileData) { this.fileData = fileData; }
     
     public String getScoreColor() {
         if (atsScore >= 80) return "#10b981";

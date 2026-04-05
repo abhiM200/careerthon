@@ -62,7 +62,10 @@ public class ResumeService {
         String suggestedRoles = String.join(", ", suggested);
         String suggestions = generateSuggestions(score, suggested, content);
 
-        ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, suggestions);
+        byte[] fileBytes;
+        try { fileBytes = file.getBytes(); } catch (Exception e) { fileBytes = new byte[0]; }
+
+        ResumeReview review = new ResumeReview(fileName, userName, userEmail, score, suggestedRoles, suggestions, fileBytes);
         ResumeReview saved = resumeReviewRepository.save(review);
         
         if (userEmail != null && !userEmail.isEmpty()) {

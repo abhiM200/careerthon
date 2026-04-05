@@ -62,8 +62,8 @@
                         <tbody class="bg-white divide-y divide-slate-200">
                             <tr th:each="review : ${reviews}">
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-medium text-slate-900 truncate max-w-[150px]" th:text="${review.linkedinUrl}">URL</div>
-                                    <div class="text-xs text-slate-500" th:text="${review.emailAddress}">Email</div>
+                                    <a th:href="${review.linkedinUrl}" target="_blank" class="text-sm font-medium text-indigo-600 hover:underline break-all" th:text="${review.linkedinUrl}">URL</a>
+                                    <div class="text-xs text-slate-500 mt-1" th:text="${review.emailAddress}">Email</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="text-sm font-bold" th:style="'color: ' + ${review.scoreColor}" th:text="${review.overallScore}">0</span>
@@ -102,8 +102,12 @@
                         <tbody class="bg-white divide-y divide-slate-200">
                             <tr th:each="resume : ${resumes}">
                                 <td class="px-6 py-4">
-                                    <div class="text-sm font-medium text-slate-900 truncate max-w-[150px]" th:text="${resume.fileName}">File</div>
-                                    <div class="text-xs text-slate-500" th:text="${resume.userEmail}">Email</div>
+                                    <div class="flex items-center gap-2">
+                                        <a th:href="@{'/resume/view/' + ${resume.id}}" target="_blank" class="text-sm font-bold text-indigo-600 hover:underline">
+                                            📄 <span th:text="${resume.fileName}">File</span>
+                                        </a>
+                                    </div>
+                                    <div class="text-xs text-slate-500 mt-1" th:text="${resume.userEmail}">Email</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span class="text-sm font-bold" th:style="'color: ' + ${resume.scoreColor}" th:text="${resume.atsScore}">0</span>

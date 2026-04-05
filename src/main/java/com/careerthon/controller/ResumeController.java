@@ -70,4 +70,22 @@ public class ResumeController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdfContent);
     }
+
+    @GetMapping("/view/{id}")
+    public ResponseEntity<byte[]> viewResume(@PathVariable Long id) {
+        if (id == null) return ResponseEntity.badRequest().build();
+        ResumeReview review = resumeReviewRepository.findById(id).orElse(null);
+        if (review == null || review.getFileData() == null) return ResponseEntity.notFound().build();
+        
+        String fileName = review.getFileName() != null ? review.getFileName() : "resume.pdf";
+        MediaType mediaType = MediaType.APPLICATION_PDF;
+        if (fileName.toLowerCase().endsWith(".docx") || fileName.toLowerCase().endsWith(".doc")) {
+            mediaType = MediaType.APPLICATION_OCTET_STREAM;
+        }
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
+                .contentType(mediaType)
+                .body(review.getFileData());
+    }
 }
