@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Careerthon - LinkedIn Profile Review</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/outspark.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="font-sans text-gray-800 bg-white">
@@ -367,26 +367,21 @@
         
         <!-- We use the same loop but styled like Outspark cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <!-- OutSpark exact look: white square cards with tiny font -->
-            <div class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col justify-between" th:each="story, iterStat : ${testimonials}" th:if="${iterStat.index < 3}">
+            <div class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col justify-between" th:each="story : ${testimonials}">
                 <p class="text-sm text-gray-600 mb-8 leading-relaxed" th:text="${story.story}">
                     This tool gave my profile the edge it needed. The comprehensive analysis provided by their expert team was precise and personalized...
                 </p>
-                <div>
-                    <div class="font-bold text-sm text-gray-900" th:text="${story.name}">Pradeep Singh</div>
-                    <div class="text-[10px] text-gray-500" th:text="${story.role}">Manager Delivery & Operations</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-            <div class="bg-white border border-gray-200 rounded-xl p-6 flex flex-col justify-between" th:each="story, iterStat : ${testimonials}" th:if="${iterStat.index >= 3 && iterStat.index < 5}">
-                <p class="text-sm text-gray-600 mb-8 leading-relaxed" th:text="${story.story}">
-                    OutSpark's profile review service impressed me with its attention to detail...
-                </p>
-                <div>
-                    <div class="font-bold text-sm text-gray-900" th:text="${story.name}">Kartik Raja</div>
-                    <div class="text-[10px] text-gray-500" th:text="${story.role}">Senior Product Manager</div>
+                <div class="flex items-center gap-3">
+                    <div th:if="${story.avatarUrl != null}" class="author-avatar overflow-hidden">
+                        <img th:src="${story.avatarUrl}" th:alt="${story.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div th:if="${story.avatarUrl == null}" class="author-avatar" 
+                         th:style="'background: linear-gradient(135deg, ' + ${story.avatarColor} + ', ' + ${story.avatarColor} + 'dd)'"
+                         th:text="${story.avatarInitials}">PS</div>
+                    <div>
+                        <div class="font-bold text-sm text-gray-900" th:text="${story.name}">Pradeep Singh</div>
+                        <div class="text-[10px] text-gray-500" th:text="${story.role}">Manager Delivery & Operations</div>
+                    </div>
                 </div>
             </div>
         </div>

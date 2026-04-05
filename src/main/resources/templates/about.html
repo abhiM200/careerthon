@@ -54,7 +54,10 @@
 
             <div class="team-grid">
                 <div class="team-card team-card--lead" data-animate="fadeInUp" th:each="member, stat : ${team}" th:if="${stat.index < 3}">
-                    <div class="team-avatar"
+                    <div th:if="${member.avatarUrl != null}" class="team-avatar overflow-hidden">
+                        <img th:src="${member.avatarUrl}" th:alt="${member.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div th:if="${member.avatarUrl == null}" class="team-avatar"
                          th:style="'background: linear-gradient(135deg, ' + ${member.avatarColor} + ', ' + ${member.avatarColor} + '99)'"
                          th:text="${member.avatarInitials}">AM</div>
                     <div class="team-info">

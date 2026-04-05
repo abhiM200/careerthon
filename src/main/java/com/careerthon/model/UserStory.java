@@ -20,15 +20,17 @@ public class UserStory {
 
     private String avatarInitials;
     private String avatarColor;
+    private String avatarUrl;
 
     public UserStory() {}
 
-    public UserStory(String name, String role, String story, String avatarInitials, String avatarColor) {
+    public UserStory(String name, String role, String story, String avatarInitials, String avatarColor, String avatarUrl) {
         this.name = name;
         this.role = role;
         this.story = story;
         this.avatarInitials = avatarInitials;
         this.avatarColor = avatarColor;
+        this.avatarUrl = avatarUrl;
     }
 
     // Getters and Setters
@@ -49,4 +51,7 @@ public class UserStory {
 
     public String getAvatarColor() { return avatarColor; }
     public void setAvatarColor(String avatarColor) { this.avatarColor = avatarColor; }
+
+    public String getAvatarUrl() { return avatarUrl; }
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
 }
