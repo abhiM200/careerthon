@@ -6,9 +6,7 @@ databases:
 services:
   - type: web
     name: careerthon
-    runtime: java
-    buildCommand: "./mvnw clean package -DskipTests"
-    startCommand: "java -jar target/careerthon-1.0.0.jar"
+    env: docker
     envVars:
       - key: DATABASE_URL
         fromDatabase:
