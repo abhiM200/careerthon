@@ -20,8 +20,16 @@ public class DataInitializer {
                               PasswordEncoder passwordEncoder) {
         return args -> {
             // Seed Users
-            if (userRepository.count() == 0) {
-                userRepository.save(new User("admin", passwordEncoder.encode("admin123"), "ROLE_USER,ROLE_ADMIN", "System Administrator"));
+            // Seed/Update Admin User
+            userRepository.findByUsername("admin").ifPresentOrElse(
+                admin -> {
+                    admin.setPassword(passwordEncoder.encode("admin123"));
+                    userRepository.save(admin);
+                },
+                () -> userRepository.save(new User("admin", passwordEncoder.encode("admin123"), "ROLE_USER,ROLE_ADMIN", "System Administrator"))
+            );
+            
+            if (userRepository.findByUsername("user").isEmpty()) {
                 userRepository.save(new User("user", passwordEncoder.encode("user123"), "ROLE_USER", "Test User"));
             }
 
