@@ -14,11 +14,12 @@
 
 <!-- Header Fragment -->
 <header th:fragment="header" class="site-header" id="site-header">
-    <nav class="nav-container">
+    <nav class="nav-container" style="max-width: 1400px;">
         <a href="/" class="logo">
             <span class="logo-icon">⚡</span>
             <span class="logo-text">Careerthon</span>
         </a>
+        
         <div class="nav-links">
             <a href="/" class="nav-link">Home</a>
             <a href="/review" class="nav-link">Review</a>
@@ -28,15 +29,25 @@
             <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="nav-link admin-link" style="color: #ef4444; font-weight: 700;">Admin</a>
         </div>
         
-        <div class="auth-links" style="display: flex; align-items: center; gap: 1rem;">
-            <div sec:authorize="isAuthenticated()" class="user-info" style="display: flex; align-items: center; gap: 0.5rem;">
-                <span class="welcome-text" style="font-size: 0.875rem; color: #64748b;">Hi, <span sec:authentication="name">User</span></span>
-                <form th:action="@{/logout}" method="post">
-                    <button type="submit" class="nav-cta-btn" style="background: #f1f5f9; color: #0f172a; border: 1px solid #e2e8f0;">Logout</button>
+        <div class="auth-links" style="display: flex; align-items: center; gap: 1rem; margin-left: auto;">
+            <!-- Not logged in -->
+            <div sec:authorize="isAnonymous()" style="display: flex; align-items: center; gap: 1rem;">
+                <a href="/login" class="nav-link">Sign In</a>
+                <a href="/signup" class="nav-cta-btn">Sign Up 🚀</a>
+            </div>
+            
+            <!-- Logged in -->
+            <div sec:authorize="isAuthenticated()" class="user-info" style="display: flex; align-items: center; gap: 0.75rem;">
+                <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                    <span style="font-size: 0.75rem; font-weight: 600; color: #64748b; line-height: 1;">Welcome back,</span>
+                    <span sec:authentication="name" style="font-size: 0.9rem; font-weight: 800; color: #0f172a;">User</span>
+                </div>
+                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                    <button type="submit" class="p-2 px-4 rounded-xl bg-slate-100 text-slate-700 text-sm font-bold hover:bg-slate-200 transition-all">
+                        Logout
+                    </button>
                 </form>
             </div>
-            <a sec:authorize="isAnonymous()" href="/login" class="nav-link">Login</a>
-            <a sec:authorize="isAnonymous()" href="/review" class="nav-cta-btn">Analyze Now</a>
         </div>
 
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
@@ -46,13 +57,20 @@
     <div class="mobile-menu" id="mobile-menu">
         <a href="/" class="mobile-link">Home</a>
         <a href="/review" class="mobile-link">Review Profile</a>
+        <a href="/resume" class="mobile-link">Resume Scan</a>
+        <a href="/resume/templates" class="mobile-link">CV Builder</a>
         <a href="/about" class="mobile-link">About</a>
         <a sec:authorize="hasRole('ADMIN')" href="/admin/dashboard" class="mobile-link" style="color: #ef4444;">Admin Dashboard</a>
-        <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" style="display: block;">
-            <button type="submit" class="mobile-link" style="width: 100%; text-align: left; background: none; border: none; padding: 12px 20px;">Logout</button>
-        </form>
-        <a sec:authorize="isAnonymous()" href="/login" class="mobile-link">Login</a>
-        <a href="/review" class="mobile-link cta">Try Now — Free</a>
+        <hr class="my-2 border-slate-100">
+        <div sec:authorize="isAnonymous()">
+            <a href="/login" class="mobile-link">Sign In</a>
+            <a href="/signup" class="mobile-link cta">Sign Up 🚀</a>
+        </div>
+        <div sec:authorize="isAuthenticated()">
+            <form th:action="@{/logout}" method="post">
+                <button type="submit" class="mobile-link" style="width: 100%; text-align: left; background: none; border: none;">Logout</button>
+            </form>
+        </div>
     </div>
 </header>
 

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Create Your Account - Careerthon')}"></head>
+<body class="bg-slate-50 min-h-screen pt-24 pb-12 flex items-center justify-center">
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main class="max-w-md w-full px-6">
+        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
+            <div class="bg-indigo-600 p-8 text-white text-center">
+                <h1 class="text-3xl font-black mb-2">Join Careerthon</h1>
+                <p class="text-indigo-100 opacity-90">Start optimizing your professional presence today.</p>
+            </div>
+            
+            <div class="p-8">
+                <div th:if="${error}" class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-xl text-red-700 text-sm">
+                    <p th:text="${error}">Error message</p>
+                </div>
+
+                <form th:action="@{/signup}" method="POST" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                        <input type="text" name="fullName" required placeholder="Abhishek Mishra"
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Username</label>
+                        <input type="text" name="username" required placeholder="abhishek_m"
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                        <p class="mt-1 text-xs text-slate-400">Choose a unique username for logging in.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
+                        <input type="password" name="password" required placeholder="••••••••"
+                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                    </div>
+
+                    <button type="submit" class="w-full bg-slate-900 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-indigo-600 active:scale-[0.98] transition-all shadow-lg">
+                        Create Account 🚀
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-8 border-t border-slate-100 text-center">
+                    <p class="text-slate-500">Already have an account?</p>
+                    <a href="/login" class="mt-2 inline-block font-bold text-indigo-600 hover:text-indigo-700">
+                        Sign In Instead →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center text-sm text-slate-400">
+            By signing up, you agree to our Terms of Service and Privacy Policy.
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>

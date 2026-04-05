@@ -14,12 +14,16 @@
                 </p>
             </div>
             
-            <div th:if="${param.error}" class="bg-red-50 border-l-4 border-red-500 p-4 rounded">
+            <div th:if="${param.signupSuccess}" class="bg-green-50 border-l-4 border-green-500 p-4 rounded mb-4">
+                <p class="text-sm text-green-700">Account created successfully! Please sign in.</p>
+            </div>
+
+            <div th:if="${param.error}" class="bg-red-50 border-l-4 border-red-500 p-4 rounded mb-4">
                 <p class="text-sm text-red-700">Invalid username or password.</p>
             </div>
             
 
-            <div th:if="${param.logout}" class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+            <div th:if="${param.logout}" class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4">
                 <p class="text-sm text-blue-700">You have been logged out.</p>
             </div>
 
@@ -60,7 +64,7 @@
             
             <div class="mt-6 text-center">
                 <p class="text-sm text-slate-600">
-                    Don't have an account? <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</a>
+                    Don't have an account? <a href="/signup" class="font-medium text-indigo-600 hover:text-indigo-500">Sign up</a>
                 </p>
             </div>
             
