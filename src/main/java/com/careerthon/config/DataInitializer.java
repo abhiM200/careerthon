@@ -74,8 +74,8 @@ public class DataInitializer {
 
                 userStoryRepository.save(new UserStory(
                     "Prashant Kumar",
-                    "Analyst at LTM",
-                    "Careerthon's profile review completely transformed how recruiters see my profile. After 4 years as an Analyst, I wanted to showcase my impact clearly, and this tool gave me the perfect step-by-step guidance.",
+                    "Sr Analyst at LTM",
+                    "Careerthon's profile review completely transformed how recruiters see my profile. After 4 years as an Analyst, I wanted to showcase my impact clearly for senior roles, and this tool gave me the perfect step-by-step guidance.",
                     "PK",
                     "#c026d3"
                 ));
@@ -91,7 +91,7 @@ public class DataInitializer {
                 userStoryRepository.save(new UserStory(
                     "Binit Mishra",
                     "Sr Software Developer at Accenture Germany",
-                    "Moving to an international role required my profile to stand out globally. Careerthon's deep analysis and actionable insights were crucial in refining my digital presence for opportunities like Accenture.",
+                    "As an ex-TCS employee with 8 years of experience, moving to an international role required my profile to stand out globally. Careerthon's deep analysis and actionable insights were crucial in refining my digital presence for opportunities like Accenture.",
                     "BM",
                     "#10b981"
                 ));
