@@ -278,6 +278,15 @@
                 </div>
             </div>
 
+            <!-- Admin Suggestions -->
+            <div th:if="${review.adminSuggestions}" class="mb-10 p-6 bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl shadow-sm">
+                <div class="flex items-center gap-3 mb-3">
+                    <span class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold">!</span>
+                    <h3 class="text-xl font-bold text-amber-900">Expert Admin Advice</h3>
+                </div>
+                <p class="text-amber-800 leading-relaxed font-medium" th:text="${review.adminSuggestions}">Advice goes here...</p>
+            </div>
+
             <!-- Role Suggestions Section -->
             <div class="role-suggestions-card" th:if="${review.suggestedRoles}">
                 <div class="role-card-header">

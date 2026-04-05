@@ -27,4 +27,24 @@ public class AdminController {
         model.addAttribute("resumes", resumeReviewRepository.findAllByOrderByUploadedAtDesc());
         return "admin/dashboard";
     }
+
+    @org.springframework.web.bind.annotation.PostMapping("/profile/suggest")
+    public String suggestProfile(@org.springframework.web.bind.annotation.RequestParam Long id, 
+                                 @org.springframework.web.bind.annotation.RequestParam String suggestions) {
+        profileReviewRepository.findById(id).ifPresent(review -> {
+            review.setAdminSuggestions(suggestions);
+            profileReviewRepository.save(review);
+        });
+        return "redirect:/admin/dashboard?success=true";
+    }
+
+    @org.springframework.web.bind.annotation.PostMapping("/resume/suggest")
+    public String suggestResume(@org.springframework.web.bind.annotation.RequestParam Long id, 
+                                @org.springframework.web.bind.annotation.RequestParam String suggestions) {
+        resumeReviewRepository.findById(id).ifPresent(resume -> {
+            resume.setAdminSuggestions(suggestions);
+            resumeReviewRepository.save(resume);
+        });
+        return "redirect:/admin/dashboard?success=true";
+    }
 }

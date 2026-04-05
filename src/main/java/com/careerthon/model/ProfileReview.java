@@ -62,6 +62,9 @@ public class ProfileReview {
 
     private boolean emailSent = false;
     private String emailAddress;
+    
+    @Column(length = 2000)
+    private String adminSuggestions;
 
     public enum ReviewStatus {
         PENDING, ANALYZING, COMPLETED, FAILED
@@ -133,6 +136,9 @@ public class ProfileReview {
 
     public String getEmailAddress() { return emailAddress; }
     public void setEmailAddress(String emailAddress) { this.emailAddress = emailAddress; }
+
+    public String getAdminSuggestions() { return adminSuggestions; }
+    public void setAdminSuggestions(String adminSuggestions) { this.adminSuggestions = adminSuggestions; }
 
     public String getScoreLabel() {
         if (overallScore >= 80) return "Excellent";

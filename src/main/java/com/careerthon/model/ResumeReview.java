@@ -27,6 +27,9 @@ public class ResumeReview {
     private String improvementSuggestions;
 
     private LocalDateTime uploadedAt = LocalDateTime.now();
+    
+    @Column(length = 2000)
+    private String adminSuggestions;
 
     public ResumeReview() {}
 
@@ -63,6 +66,9 @@ public class ResumeReview {
 
     public LocalDateTime getUploadedAt() { return uploadedAt; }
     public void setUploadedAt(LocalDateTime uploadedAt) { this.uploadedAt = uploadedAt; }
+    
+    public String getAdminSuggestions() { return adminSuggestions; }
+    public void setAdminSuggestions(String adminSuggestions) { this.adminSuggestions = adminSuggestions; }
     
     public String getScoreColor() {
         if (atsScore >= 80) return "#10b981";
