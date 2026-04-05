@@ -33,7 +33,8 @@ public class DataInitializer {
                 userRepository.save(new User("user", passwordEncoder.encode("user123"), "ROLE_USER", "Test User"));
             }
 
-            // Upsert User Stories (Ensures they exist or are completely up to date)
+            // Clear existing stories to ensure only the specified clean set exists in the final deployment
+            userStoryRepository.deleteAll();
             List<UserStory> currentStories = userStoryRepository.findAll();
             
             ensureStoryExists("Abhishek Mishra", "Full Stack Developer & Project Lead",
