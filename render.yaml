@@ -1,0 +1,24 @@
+databases:
+  - name: careerthon-db
+    databaseName: careerthon
+    user: careerthon_user
+
+services:
+  - type: web
+    name: careerthon
+    runtime: java
+    buildCommand: "./mvnw clean package -DskipTests"
+    startCommand: "java -jar target/careerthon-1.0.0.jar"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: careerthon-db
+          property: connectionString
+      - key: DATABASE_USERNAME
+        fromDatabase:
+          name: careerthon-db
+          property: user
+      - key: DATABASE_PASSWORD
+        fromDatabase:
+          name: careerthon-db
+          property: password
