@@ -18,7 +18,7 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // We ensure all 7 original expert stories are restored with 100% historical accuracy.
+        // We ensure all 6 original expert stories are restored with 100% historical accuracy from Commit 06a4feed.
         userStoryRepository.deleteAll();
         
         List<UserStory> originalStories = List.of(
@@ -41,22 +41,22 @@ public class DataInitializer implements CommandLineRunner {
                 "AM", "#059669", "/images/altamash_mallick.jpg"
             ),
             new UserStory(
-                "Prashant Kumar",
-                "Sr Analyst at LTM",
-                "Careerthon's profile review completely transformed how recruiters see my profile. After 4 years as an Analyst, I wanted to showcase my impact clearly for senior roles, and this tool gave me the perfect step-by-step guidance.",
-                "PK", "#c026d3", null
+                "Pradeep Singh",
+                "Manager Delivery & Operations",
+                "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations. I've seen a clear increase in profile engagement since the updates.",
+                "PS", "#dc2626", null
             ),
             new UserStory(
-                "Rishabh Jaiswal",
-                "Sr Software Developer at Cognizant",
-                "Having been in the industry for 3 years, my LinkedIn profile was a bit outdated. The detailed feedback and scoring from Careerthon helped me optimize my keywords and headline, leading to a significant increase in relevant connection requests.",
-                "RJ", "#0ea5e9", null
+                "Harshit Gulati",
+                "Data Analyst, Delhi",
+                "They provided clear and practical advice to make my profile stand out. The expert analysis was thorough and tailored to my needs. I've seen more views and connections from people in my field after implementing the suggested changes.",
+                "HG", "#ea580c", null
             ),
             new UserStory(
-                "Binit Mishra",
-                "Sr Software Developer at Accenture Germany",
-                "As an ex-TCS employee with 8 years of experience, moving to an international role required my profile to stand out globally. Careerthon's deep analysis and actionable insights were crucial in refining my digital presence for opportunities like Accenture.",
-                "BM", "#10b981", "/images/binit_mishra.jpg"
+                "Kartik Raja",
+                "Senior Product Manager",
+                "I'm receiving job opportunities from top-quality companies. The tailored feedback made all the difference in highlighting my strengths as a Senior Product Manager. Highly recommended for anyone looking to level up their LinkedIn presence.",
+                "KR", "#0284c7", null
             )
         );
         userStoryRepository.saveAll(originalStories);
