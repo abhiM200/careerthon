@@ -22,6 +22,7 @@ public class AdminController {
     }
 
     @GetMapping("/dashboard")
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public String dashboard(Model model) {
         model.addAttribute("reviews", profileReviewRepository.findAll());
         model.addAttribute("resumes", resumeReviewRepository.findAllByOrderByUploadedAtDesc());
