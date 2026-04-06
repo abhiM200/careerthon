@@ -1,8 +1,11 @@
 package com.careerthon.config;
 
+import com.careerthon.model.User;
 import com.careerthon.model.UserStory;
+import com.careerthon.repository.UserRepository;
 import com.careerthon.repository.UserStoryRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,9 +14,13 @@ import java.util.List;
 public class DataInitializer implements CommandLineRunner {
 
     private final UserStoryRepository userStoryRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(UserStoryRepository userStoryRepository) {
+    public DataInitializer(UserStoryRepository userStoryRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userStoryRepository = userStoryRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -60,5 +67,11 @@ public class DataInitializer implements CommandLineRunner {
             )
         );
         userStoryRepository.saveAll(originalStories);
+        
+        // Ensure Admin user exists
+        if (userRepository.findByUsername("admin").isEmpty()) {
+            User admin = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN", "Administrator");
+            userRepository.save(admin);
+        }
     }
 }
