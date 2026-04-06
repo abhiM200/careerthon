@@ -66,12 +66,17 @@ public class DataInitializer implements CommandLineRunner {
                 "KR", "#0284c7", null
             )
         );
-        userStoryRepository.saveAll(originalStories);
-        
-        // Ensure Admin user exists
-        if (userRepository.findByUsername("admin").isEmpty()) {
-            User admin = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN", "Administrator");
-            userRepository.save(admin);
-        }
+        // Ensure Admin user exists and always has correct credentials
+        userRepository.findByUsername("admin").ifPresentOrElse(
+            adminUser -> {
+                adminUser.setRoles("ROLE_ADMIN");
+                adminUser.setPassword(passwordEncoder.encode("admin"));
+                userRepository.save(adminUser);
+            },
+            () -> {
+                User admin = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN", "Administrator");
+                userRepository.save(admin);
+            }
+        );
     }
 }
