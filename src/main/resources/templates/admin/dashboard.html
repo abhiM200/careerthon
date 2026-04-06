@@ -77,7 +77,7 @@
                                     </form>
                                 </td>
                             </tr>
-                            <tr th:if="${reviews.empty}">
+                            <tr th:if="${#lists.isEmpty(reviews)}">
                                 <td colspan="3" class="px-6 py-10 text-center text-slate-500 italic">No LinkedIn reviews yet.</td>
                             </tr>
                         </tbody>
@@ -121,7 +121,7 @@
                                     </form>
                                 </td>
                             </tr>
-                            <tr th:if="${resumes.empty}">
+                            <tr th:if="${#lists.isEmpty(resumes)}">
                                 <td colspan="3" class="px-6 py-10 text-center text-slate-500 italic">No resume uploads yet.</td>
                             </tr>
                         </tbody>
