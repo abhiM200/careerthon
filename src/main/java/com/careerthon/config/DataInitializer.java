@@ -66,6 +66,8 @@ public class DataInitializer implements CommandLineRunner {
                 "KR", "#0284c7", null
             )
         );
+        userStoryRepository.saveAll(originalStories);
+        
         // Ensure Admin user exists and always has correct credentials
         userRepository.findByUsername("admin").ifPresentOrElse(
             adminUser -> {
