@@ -16,14 +16,25 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("testimonials", userStoryRepository.findAll());
+        List<UserStory> allStories = userStoryRepository.findAll();
+        model.addAttribute("testimonials", allStories.stream().filter(this::isTestimonial).collect(Collectors.toList()));
         return "index";
     }
 
     @GetMapping("/about")
     public String about(Model model) {
-        model.addAttribute("team", userStoryRepository.findAll());
+        List<UserStory> allStories = userStoryRepository.findAll();
+        model.addAttribute("team", allStories.stream().filter(this::isTeamMember).collect(Collectors.toList()));
         return "about";
+    }
+
+    private boolean isTeamMember(UserStory story) {
+        String name = story.getName();
+        return "Abhishek Mishra".equals(name) || "Priyanshu Shekhar".equals(name) || "Altamash Mallick".equals(name);
+    }
+
+    private boolean isTestimonial(UserStory story) {
+        return !isTeamMember(story);
     }
 
     @GetMapping("/login")
