@@ -15,7 +15,10 @@
                 <div>
                     <h1 class="report-username" th:text="${review.userName ?: 'LinkedIn User'}">User</h1>
                     <p class="report-url" th:text="${review.linkedinUrl}">linkedin.com/in/user</p>
-                    <p class="report-date">Report generated: <span th:text="${#temporals.format(review.completedAt, 'dd MMM yyyy, HH:mm')}">now</span></p>
+                    <p class="report-date">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        Report generated: <span th:text="${#temporals.format(review.completedAt, 'dd MMM yyyy, HH:mm')}">now</span>
+                    </p>
                 </div>
             </div>
 

@@ -12,6 +12,7 @@
                 <div>
                     <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight" th:text="${review.userName}">Name</h1>
                     <p class="mt-2 text-lg text-slate-600">Your ATS Review for <span class="font-bold text-indigo-700" th:text="${review.fileName}">filename.pdf</span></p>
+                    <p class="mt-1 text-sm text-slate-400 font-medium">Analysis completed: <span th:text="${#temporals.format(review.uploadedAt, 'dd MMM yyyy, HH:mm')}">Time</span></p>
                 </div>
             </div>
             <div class="mt-4 md:mt-0">
