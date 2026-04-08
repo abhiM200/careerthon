@@ -12,9 +12,17 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
+
+# Docker health check — retries for up to 3 minutes (Render uses its own check too)
+HEALTHCHECK --interval=30s --timeout=15s --start-period=90s --retries=6 \
+  CMD wget --quiet --tries=1 --spider http://localhost:8080/actuator/health || exit 1
+
 ENTRYPOINT ["java", \
-  "-Xms32m", "-Xmx256m", \
+  "-Xms48m", "-Xmx280m", \
   "-XX:+UseSerialGC", \
   "-XX:MaxMetaspaceSize=128m", \
+  "-XX:TieredStopAtLevel=1", \
   "-Djava.security.egd=file:/dev/./urandom", \
+  "-Dspring.jmx.enabled=false", \
   "-jar", "app.jar"]
+
