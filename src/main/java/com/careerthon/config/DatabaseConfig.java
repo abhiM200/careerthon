@@ -58,7 +58,8 @@ public class DatabaseConfig {
         }
         
         config.setDriverClassName("org.postgresql.Driver");
-        config.setMaximumPoolSize(10); // Standard config
+        config.setMaximumPoolSize(3); // Consistent small pool for free tier
+        config.setConnectionTimeout(20000);
         return new HikariDataSource(config);
     }
 }
