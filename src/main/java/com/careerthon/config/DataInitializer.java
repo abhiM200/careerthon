@@ -30,22 +30,22 @@ public class DataInitializer implements CommandLineRunner {
         
         List<UserStory> originalStories = List.of(
             new UserStory(
-                "Binit Mishra",
-                "Accenture Germany (ex-TCS)",
+                "Abhishek Mishra",
+                "Full Stack Developer & Project Lead",
                 "As the developer and architect of Careerthon, I built this platform to democratize LinkedIn profile optimization. Using Spring Boot and modern web technologies, I created an end-to-end SaaS solution that provides actionable insights to job seekers. The profile scoring algorithm analyzes 15 key dimensions to give users a comprehensive view of their LinkedIn presence.",
-                "BM", "#0A66C2", "/images/abhishek_mishra.jpg"
+                "AM", "#0A66C2", "/images/abhishek_mishra.jpg"
             ),
             new UserStory(
-                "Prashant Kumar",
-                "LTM",
+                "Priyanshu Shekhar",
+                "UI/UX Designer & Frontend Developer",
                 "I focused on crafting an intuitive and visually stunning user experience for Careerthon. From the animated landing page to the interactive report dashboard, every element was designed to make profile analysis accessible and engaging. The responsive design ensures a seamless experience across all devices.",
-                "PK", "#7c3aed", "/images/priyanshu_shekhar.jpg"
+                "PS", "#7c3aed", "/images/priyanshu_shekhar.jpg"
             ),
             new UserStory(
-                "Risabh Jaishwal",
-                "Cognizant",
+                "Altamash Mallick",
+                "Backend Engineer & Data Analyst",
                 "I contributed to the profile analysis engine and data modeling for Careerthon. The scoring algorithm uses weighted analysis across 15 profile dimensions, benchmarked against industry standards. I also worked on the API layer and database design to ensure scalability and performance.",
-                "RJ", "#059669", "/images/altamash_mallick.jpg"
+                "AM", "#059669", "/images/altamash_mallick.jpg"
             ),
             new UserStory(
                 "Binit Mishra",
