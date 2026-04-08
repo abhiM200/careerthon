@@ -22,7 +22,6 @@ public class ResumeService {
 
     private final ResumeReviewRepository resumeReviewRepository;
     private final EmailService emailService;
-    private final Random random = new Random();
     private final Tika tika = new Tika();
 
     public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService) {
@@ -53,11 +52,15 @@ public class ResumeService {
             content = "User with background in " + fileName.toLowerCase();
         }
 
-        // Logic to simulate ATS analysis using high-performance heuristics
-        int score = calculateSimulatedScore(content);
+        // --- Deterministic Realistic Scores ---
+        // We use content hash so same resume always gets same score
+        long seed = (content.length() > 100 ? content.substring(0, 50) + content.substring(content.length()-50) : content).hashCode();
+        Random contentRandom = new Random(seed);
+
+        int score = calculateDeterministicScore(content, contentRandom);
         
         List<String> suggested = new ArrayList<>();
-        suggestRoles(content, suggested);
+        suggestDeterministicRoles(content, suggested, contentRandom);
 
         String suggestedRoles = String.join(", ", suggested);
         String suggestions = generateSuggestions(score, suggested, content);
@@ -76,9 +79,9 @@ public class ResumeService {
         return saved;
     }
 
-    private int calculateSimulatedScore(String content) {
+    private int calculateDeterministicScore(String content, Random r) {
         String lowerContent = content.toLowerCase();
-        int score = 60 + random.nextInt(20);
+        int score = 60 + r.nextInt(20);
         
         // Bonus for length
         if (content.length() > 1000) score += 5;
@@ -93,7 +96,7 @@ public class ResumeService {
         return Math.min(score, 99);
     }
 
-    private void suggestRoles(String content, List<String> suggested) {
+    private void suggestDeterministicRoles(String content, List<String> suggested, Random r) {
         String lowerContent = content.toLowerCase();
         
         // Suggest tech roles
@@ -116,8 +119,8 @@ public class ResumeService {
 
         // Add 2 random appropriate roles to satisfy requirement of "all positions"
         if (suggested.isEmpty()) {
-            suggested.add(TECHNICAL_ROLES.get(random.nextInt(TECHNICAL_ROLES.size())));
-            suggested.add(NON_TECHNICAL_ROLES.get(random.nextInt(NON_TECHNICAL_ROLES.size())));
+            suggested.add(TECHNICAL_ROLES.get(r.nextInt(TECHNICAL_ROLES.size())));
+            suggested.add(NON_TECHNICAL_ROLES.get(r.nextInt(NON_TECHNICAL_ROLES.size())));
         }
     }
 

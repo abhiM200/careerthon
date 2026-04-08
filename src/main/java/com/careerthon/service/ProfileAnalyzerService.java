@@ -15,7 +15,6 @@ public class ProfileAnalyzerService {
 
     private final ProfileReviewRepository reviewRepository;
     private final EmailService emailService;
-    private final Random random = new Random();
 
     public ProfileAnalyzerService(ProfileReviewRepository reviewRepository, EmailService emailService) {
         this.reviewRepository = reviewRepository;
@@ -23,14 +22,26 @@ public class ProfileAnalyzerService {
     }
 
     public ProfileReview createReview(String linkedinUrl, String email) {
+        // Normalize URL for consistency
+        String normalizedUrl = linkedinUrl.trim().toLowerCase().replaceAll("/$", "");
+        
+        // Check if an analysis for this URL already exists
+        List<ProfileReview> existing = reviewRepository.findByLinkedinUrlOrderByCreatedAtDesc(normalizedUrl);
+        for (ProfileReview r : existing) {
+            if (r.getStatus() == ProfileReview.ReviewStatus.COMPLETED) {
+                // If the user wants a revisit, we return the existing completed one
+                return r;
+            }
+        }
+
         ProfileReview review = new ProfileReview();
-        review.setLinkedinUrl(linkedinUrl);
+        review.setLinkedinUrl(normalizedUrl);
         review.setEmailAddress(email);
         review.setStatus(ProfileReview.ReviewStatus.PENDING);
         review.setCreatedAt(LocalDateTime.now());
 
         // Extract username from URL
-        String username = extractUsername(linkedinUrl);
+        String username = extractUsername(normalizedUrl);
         review.setUserName(formatUsername(username));
         review.setUserTitle("Professional");
 
@@ -42,11 +53,21 @@ public class ProfileAnalyzerService {
         if (optReview.isEmpty()) return null;
 
         ProfileReview review = optReview.get();
+        
+        // If already completed, don't re-analyze (returns same data)
+        if (review.getStatus() == ProfileReview.ReviewStatus.COMPLETED) {
+            return review;
+        }
+
         review.setStatus(ProfileReview.ReviewStatus.ANALYZING);
         reviewRepository.save(review);
 
-        // Generate realistic scores
-        ScoreBreakdown breakdown = generateScoreBreakdown();
+        // --- Deterministic Realistic Scores ---
+        // We use the URL as a seed so the same profile ALWAYS gets the same score
+        long seed = review.getLinkedinUrl().hashCode();
+        Random urlSafeRandom = new Random(seed);
+        
+        ScoreBreakdown breakdown = generateSeededScoreBreakdown(urlSafeRandom);
         review.setScoreBreakdown(breakdown);
 
         // Calculate weighted overall score
@@ -104,28 +125,28 @@ public class ProfileAnalyzerService {
                username.substring(1).replace("-", " ").replace("_", " ");
     }
 
-    private ScoreBreakdown generateScoreBreakdown() {
+    private ScoreBreakdown generateSeededScoreBreakdown(Random seededRandom) {
         return new ScoreBreakdown(
-            randomScore(6, 10),  // profilePhoto
-            randomScore(5, 9),   // coverPhoto
-            randomScore(5, 10),  // headline
-            randomScore(4, 9),   // aboutSection
-            randomScore(5, 10),  // experience
-            randomScore(6, 10),  // education
-            randomScore(4, 9),   // skills
-            randomScore(5, 9),   // atsScore
-            randomScore(4, 8),   // keywordDensity
-            randomScore(4, 9),   // visibilityScore
-            randomScore(5, 9),   // recruiterMatch
-            randomScore(5, 9),   // industryBenchmark
-            randomScore(3, 8),   // licensesAndCertifications
-            randomScore(3, 8),   // recommendations
-            randomScore(3, 8)    // activityEngagement
+            randomSeededScore(seededRandom, 6, 10),  // profilePhoto
+            randomSeededScore(seededRandom, 5, 9),   // coverPhoto
+            randomSeededScore(seededRandom, 5, 10),  // headline
+            randomSeededScore(seededRandom, 4, 9),   // aboutSection
+            randomSeededScore(seededRandom, 5, 10),  // experience
+            randomSeededScore(seededRandom, 6, 10),  // education
+            randomSeededScore(seededRandom, 4, 9),   // skills
+            randomSeededScore(seededRandom, 5, 9),   // atsScore
+            randomSeededScore(seededRandom, 4, 8),   // keywordDensity
+            randomSeededScore(seededRandom, 4, 9),   // visibilityScore
+            randomSeededScore(seededRandom, 5, 9),   // recruiterMatch
+            randomSeededScore(seededRandom, 5, 9),   // industryBenchmark
+            randomSeededScore(seededRandom, 3, 8),   // licensesAndCertifications
+            randomSeededScore(seededRandom, 3, 8),   // recommendations
+            randomSeededScore(seededRandom, 3, 8)    // activityEngagement
         );
     }
 
-    private int randomScore(int min, int max) {
-        return min + random.nextInt(max - min + 1);
+    private int randomSeededScore(Random r, int min, int max) {
+        return min + r.nextInt(max - min + 1);
     }
 
     private int calculateOverallScore(ScoreBreakdown b) {
