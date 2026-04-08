@@ -303,6 +303,35 @@
                     <a href="/resume" class="role-cta">Scan Resume for Roles →</a>
                 </div>
             </div>
+
+            <!-- Job Search Section -->
+            <div class="mt-10 p-8 bg-white border border-gray-200 rounded-2xl shadow-lg" th:if="${review.suggestedRoles}">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl">🔍</span>
+                    <h3 class="text-2xl font-black text-gray-900">Search Jobs Based On Your Profile</h3>
+                </div>
+                <p class="text-gray-600 mb-8 font-medium">We've identified the best roles for you. Apply across top platforms directly:</p>
+                
+                <div class="space-y-6">
+                    <div th:each="role : ${review.suggestedRoles.split(',')}" class="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
+                        <h4 class="text-lg font-bold text-gray-800 mb-4" th:text="${role.trim()}">Role Name</h4>
+                        <div class="flex flex-wrap gap-3">
+                            <a th:href="'https://www.linkedin.com/jobs/search/?keywords=' + ${role.trim()}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0a66c2] text-white font-bold rounded-lg hover:bg-blue-800 transition-colors text-sm">
+                                LinkedIn
+                            </a>
+                            <a th:href="'https://www.naukri.com/' + ${role.trim().replace(' ', '-').toLowerCase()} + '-jobs'" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#275df5] text-white font-bold rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                                Naukri.com
+                            </a>
+                            <a th:href="'https://internshala.com/internships/' + ${role.trim().replace(' ', '-').toLowerCase()} + '-internship'" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1295c9] text-white font-bold rounded-lg hover:bg-blue-600 transition-colors text-sm">
+                                Internshala
+                            </a>
+                            <a th:href="'https://www.workindia.in/jobs-in-' + ${role.trim().replace(' ', '-').toLowerCase()}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00bfa5] text-white font-bold rounded-lg hover:bg-teal-600 transition-colors text-sm">
+                                WorkIndia
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
