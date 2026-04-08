@@ -1,5 +1,6 @@
 package com.careerthon.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -9,11 +10,16 @@ public class EmailService {
 
     private final JavaMailSender mailSender;
 
-    public EmailService(JavaMailSender mailSender) {
+    @Autowired
+    public EmailService(@Autowired(required = false) JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
     public boolean sendReport(String toEmail, String reportUrl, String userName) {
+        if (mailSender == null) {
+            System.err.println("⚠️ Email sending skipped — JavaMailSender not configured (MAIL_PASSWORD env var missing).");
+            return false;
+        }
         try {
             SimpleMailMessage m = new SimpleMailMessage();
             m.setFrom("Careerthon <no-reply@careerthon.onrender.com>");
