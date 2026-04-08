@@ -28,14 +28,14 @@ public class KeepAliveScheduler {
     private final RestTemplate restTemplate = new RestTemplate();
 
     /**
-     * Pings /actuator/health every 10 minutes to prevent Render from sleeping.
-     * fixedDelay ensures we wait 10 min AFTER the previous call finishes.
+     * Pings /health every 10 minutes to prevent Render from sleeping.
+     * initialDelay=180s ensures the app is fully up before first ping.
      */
-    @Scheduled(fixedDelay = 600_000, initialDelay = 60_000)
+    @Scheduled(fixedDelay = 600_000, initialDelay = 180_000)
     public void keepAlive() {
         String url = keepAliveUrl.isEmpty()
-                ? "http://localhost:" + port + "/actuator/health"
-                : keepAliveUrl + "/actuator/health";
+                ? "http://localhost:" + port + "/health"
+                : keepAliveUrl + "/health";
         try {
             restTemplate.getForObject(url, String.class);
             System.out.println("✅ Keep-alive ping successful: " + url);
