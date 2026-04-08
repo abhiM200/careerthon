@@ -60,11 +60,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.tika</groupId>
-			<artifactId>tika-core</artifactId>
-			<version>2.9.2</version>
-		</dependency>
+		<!-- Tika removed to save memory — used lightweight custom extractor instead -->
 		<dependency>
 			<groupId>com.itextpdf</groupId>
 			<artifactId>kernel</artifactId>

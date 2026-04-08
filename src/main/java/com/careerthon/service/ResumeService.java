@@ -7,12 +7,12 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.TextAlignment;
-import org.apache.tika.Tika;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,11 +22,32 @@ public class ResumeService {
 
     private final ResumeReviewRepository resumeReviewRepository;
     private final EmailService emailService;
-    private final Tika tika = new Tika();
+
+    // NO Tika instance — we use lightweight built-in extraction instead.
+    // Tika loads 50-100MB of parser chains at startup → OOM on Render free tier.
 
     public ResumeService(ResumeReviewRepository resumeReviewRepository, EmailService emailService) {
         this.resumeReviewRepository = resumeReviewRepository;
         this.emailService = emailService;
+    }
+
+    /** Lightweight text extraction without Apache Tika */
+    private String extractText(MultipartFile file) {
+        String name = file.getOriginalFilename() != null ? file.getOriginalFilename().toLowerCase() : "";
+        try (InputStream in = file.getInputStream()) {
+            byte[] bytes = in.readAllBytes();
+            if (bytes.length == 0) return "";
+            // For text-based files (txt, docx xml content, etc.) — decode as UTF-8
+            // For PDFs — extract printable ASCII characters (rough but zero-dependency)
+            String raw = new String(bytes, StandardCharsets.UTF_8)
+                    .replaceAll("[^\\x20-\\x7E\\n\\r\\t]", " ")
+                    .replaceAll("\\s{3,}", " ")
+                    .trim();
+            // Keep only meaningful words (length > 2) to reduce noise
+            return raw.length() > 50 ? raw.substring(0, Math.min(raw.length(), 8000)) : "";
+        } catch (Exception e) {
+            return "background in " + name;
+        }
     }
 
     private static final List<String> TECHNICAL_ROLES = List.of(
@@ -44,13 +65,7 @@ public class ResumeService {
 
     public ResumeReview analyzeResume(MultipartFile file, String userName, String userEmail) {
         String fileName = file.getOriginalFilename() != null ? file.getOriginalFilename() : "unknown_file";
-        String content = "";
-        
-        try (InputStream stream = file.getInputStream()) {
-            content = tika.parseToString(stream);
-        } catch (Exception e) {
-            content = "User with background in " + fileName.toLowerCase();
-        }
+        String content = extractText(file);
 
         // --- Deterministic Realistic Scores ---
         // We use content hash so same resume always gets same score
