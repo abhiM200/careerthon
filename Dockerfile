@@ -18,10 +18,11 @@ HEALTHCHECK --interval=30s --timeout=15s --start-period=90s --retries=6 \
   CMD wget --quiet --tries=1 --spider http://localhost:8080/actuator/health || exit 1
 
 ENTRYPOINT ["java", \
-  "-Xms48m", "-Xmx280m", \
+  "-Xms32m", "-Xmx200m", \
   "-XX:+UseSerialGC", \
-  "-XX:MaxMetaspaceSize=128m", \
+  "-XX:MaxMetaspaceSize=96m", \
   "-XX:TieredStopAtLevel=1", \
+  "-XX:+UseStringDeduplication", \
   "-Djava.security.egd=file:/dev/./urandom", \
   "-Dspring.jmx.enabled=false", \
   "-jar", "app.jar"]
