@@ -50,6 +50,12 @@
         </div>
         
         <div class="auth-links" style="display: flex; align-items: center; gap: 1rem; margin-left: auto;">
+            <!-- Not logged in -->
+            <div sec:authorize="isAnonymous()" style="display: flex; align-items: center; gap: 0.75rem;">
+                <a href="/login" class="px-4 py-2 text-sm font-bold text-slate-700 hover:text-indigo-600 transition-colors">Login</a>
+                <a href="/signup" class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 shadow-lg shadow-indigo-100 transition-all">Get Started Free</a>
+            </div>
+
             <!-- Logged in -->
             <div sec:authorize="isAuthenticated()" class="user-info" style="display: flex; align-items: center; gap: 0.75rem;">
                 <div style="display: flex; flex-direction: column; align-items: flex-end;">
@@ -82,6 +88,10 @@
         <a href="/ai-tools/portfolio" class="mobile-link">Portfolio Content</a>
         <hr class="my-2 border-slate-100">
         <a href="/about" class="mobile-link">About</a>
+        <div sec:authorize="isAnonymous()">
+            <a href="/login" class="mobile-link">Login</a>
+            <a href="/signup" class="mobile-link" style="color: #4f46e5; font-weight: 700;">Get Started Free</a>
+        </div>
         <div sec:authorize="isAuthenticated()">
             <form th:action="@{/logout}" method="post">
                 <button type="submit" class="mobile-link" style="width: 100%; text-align: left; background: none; border: none;">Logout</button>

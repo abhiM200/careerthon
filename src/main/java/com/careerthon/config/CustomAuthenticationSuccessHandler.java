@@ -9,7 +9,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Set;
 
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
+import org.springframework.security.web.savedrequest.SavedRequest;
+import jakarta.servlet.http.HttpSession;
+
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
+    private HttpSessionRequestCache requestCache = new HttpSessionRequestCache();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -18,8 +24,15 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         if (roles.contains("ROLE_ADMIN")) {
             response.sendRedirect("/admin/dashboard");
+            return;
+        }
+
+        SavedRequest savedRequest = requestCache.getRequest(request, response);
+        if (savedRequest != null) {
+            String targetUrl = savedRequest.getRedirectUrl();
+            response.sendRedirect(targetUrl);
         } else {
-            response.sendRedirect("/");
+            response.sendRedirect("/review");
         }
     }
 }
