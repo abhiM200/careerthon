@@ -48,22 +48,22 @@ public class DataInitializer implements CommandLineRunner {
                 "AM", "#059669", "/images/altamash_mallick.jpg"
             ),
             new UserStory(
-                "Pradeep Singh",
+                "Abhishek Mishra",
                 "Manager Delivery & Operations",
                 "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations. I've seen a clear increase in profile engagement since the updates.",
-                "PS", "#dc2626", null
+                "AM", "#dc2626", null
             ),
             new UserStory(
-                "Harshit Gulati",
+                "Priyanshu Shekhar",
                 "Data Analyst, Delhi",
                 "They provided clear and practical advice to make my profile stand out. The expert analysis was thorough and tailored to my needs. I've seen more views and connections from people in my field after implementing the suggested changes.",
-                "HG", "#ea580c", null
+                "PS", "#ea580c", null
             ),
             new UserStory(
-                "Kartik Raja",
+                "Altamash Mallick",
                 "Senior Product Manager",
                 "I'm receiving job opportunities from top-quality companies. The tailored feedback made all the difference in highlighting my strengths as a Senior Product Manager. Highly recommended for anyone looking to level up their LinkedIn presence.",
-                "KR", "#0284c7", null
+                "AM", "#0284c7", null
             )
         );
         userStoryRepository.saveAll(originalStories);

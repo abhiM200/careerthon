@@ -33,12 +33,11 @@ public class HomeController {
     }
 
     private boolean isTeamMember(UserStory story) {
-        String name = story.getName();
-        return "Abhishek Mishra".equals(name) || "Priyanshu Shekhar".equals(name) || "Altamash Mallick".equals(name);
+        return story.getAvatarUrl() != null && !story.getAvatarUrl().isEmpty();
     }
 
     private boolean isTestimonial(UserStory story) {
-        return !isTeamMember(story);
+        return story.getAvatarUrl() == null || story.getAvatarUrl().isEmpty();
     }
 
     @GetMapping("/login")
