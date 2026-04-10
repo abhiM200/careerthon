@@ -64,14 +64,42 @@ public class AiAdvisorController {
     }
 
     @PostMapping("/portfolio/generate")
-    public String generatePortfolio(@RequestParam("projects") String projects, 
+    public String generatePortfolio(@RequestParam("name") String name,
+                                   @RequestParam("title") String title,
+                                   @RequestParam("projects") String projects, 
                                    @RequestParam("experience") String experience, 
                                    Model model) {
-        String content = "Professional Portfolio Content:\n\n" +
-            "About Me Bio: Highly driven professional with experience in " + experience + ". Specialized in building " + projects + ".\n\n" +
-            "Project Highlight 1: A deep-dive into scalable architecture and user-centric design.\n" +
-            "Project Highlight 2: Implementation of automated workflows and robust data structures.";
+        String content = "Professional Bio for " + name + ":\n" +
+            "Highly driven " + title + " with experience in " + experience + ". Specialized in building " + projects + ".\n\n" +
+            "Expert Advice: Your portfolio should lead with the " + projects.split(",")[0] + " project as it showcases your most relevant skills.";
+            
+        // Generate a simple, premium HTML template
+        String htmlCode = "<!DOCTYPE html>\n<html>\n<head>\n" +
+            "<title>" + name + " | Portfolio</title>\n" +
+            "<script src=\"https://cdn.tailwindcss.com\"></script>\n" +
+            "</head>\n<body class=\"bg-slate-50 text-slate-900\">\n" +
+            "  <nav class=\"p-6 flex justify-between items-center max-w-5xl mx-auto\">\n" +
+            "    <h1 class=\"text-2xl font-black\">" + name.split(" ")[0].toUpperCase() + "</h1>\n" +
+            "    <div class=\"space-x-4 font-bold text-sm uppercase\"><a>About</a> <a>Projects</a> <a>Contact</a></div>\n" +
+            "  </nav>\n" +
+            "  <header class=\"py-24 text-center max-w-3xl mx-auto px-6\">\n" +
+            "    <h2 class=\"text-6xl font-black mb-6 tracking-tighter\">" + title + "</h2>\n" +
+            "    <p class=\"text-xl text-slate-500 leading-relaxed\">Building meaningful solutions through " + experience + " and specialized in " + projects + ".</p>\n" +
+            "  </header>\n" +
+            "  <section class=\"max-w-5xl mx-auto px-6 py-20 bg-white rounded-[40px] shadow-xl mb-24\">\n" +
+            "    <h3 class=\"text-3xl font-black mb-12\">Featured Projects</h3>\n" +
+            "    <div class=\"grid md:grid-cols-2 gap-8\">\n" +
+            "      <div class=\"p-8 bg-slate-50 rounded-3xl border border-slate-100\">\n" +
+            "        <div class=\"text-4xl mb-4\">🚀</div>\n" +
+            "        <h4 class=\"text-xl font-bold\">" + projects.split(",")[0] + "</h4>\n" +
+            "        <p class=\"text-slate-500 mt-2\">A deep-dive into scalable architecture and user-centric design.</p>\n" +
+            "      </div>\n" +
+            "    </div>\n" +
+            "  </section>\n" +
+            "</body>\n</html>";
+
         model.addAttribute("portfolioContent", content);
+        model.addAttribute("portfolioHtml", htmlCode);
         return "ai/portfolio";
     }
 
