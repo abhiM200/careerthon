@@ -25,53 +25,70 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Only seed stories on first boot (table empty). Skipping deleteAll saves ~10s startup time.
+        // Only seed stories if empty, but ALWAYS ensure our key team members are present
         if (userStoryRepository.count() == 0) {
             List<UserStory> originalStories = List.of(
                 new UserStory(
+                    "Ayushi Mishra",
+                    "Senior Associate - Talent Acquisition",
+                    "Ayushi is a results-driven Talent Acquisition professional with 4.6+ years of experience in hiring across Cloud, SaaS, Fintech, and Insurtech domains. She has strong expertise in end-to-end recruitment, stakeholder management, and building high-performing teams through innovative sourcing strategies, referrals, and vendor optimization.",
+                    "AM", "#db2777", "/images/ayushi_mishra.png"
+                ),
+                new UserStory(
+                    "Head HR",
+                    "Head - Human Resources & CV Review",
+                    "As our Head of HR, I oversee the final review of CV details to ensure they meet the highest standards of corporate excellence. With deep expertise in recruitment strategy and talent alignment, I guide candidates in presenting their professional journey effectively to top-tier employers.",
+                    "HR", "#1e3a8a", "/images/head_hr.png"
+                ),
+                new UserStory(
                     "Abhishek Mishra",
                     "Full Stack Developer & Project Lead",
-                    "As the developer and architect of Careerthon, I built this platform to democratize LinkedIn profile optimization. Using Spring Boot and modern web technologies, I created an end-to-end SaaS solution that provides actionable insights to job seekers. The profile scoring algorithm analyzes 15 key dimensions to give users a comprehensive view of their LinkedIn presence.",
+                    "As the developer and architect of Careerthon, I built this platform to democratize LinkedIn profile optimization. Using Spring Boot and modern web technologies, I created an end-to-end SaaS solution that provides actionable insights to job seekers.",
                     "AM", "#0A66C2", "/images/abhishek_mishra.jpg"
                 ),
                 new UserStory(
                     "Priyanshu Shekhar",
                     "UI/UX Designer & Frontend Developer",
-                    "I focused on crafting an intuitive and visually stunning user experience for Careerthon. From the animated landing page to the interactive report dashboard, every element was designed to make profile analysis accessible and engaging. The responsive design ensures a seamless experience across all devices.",
+                    "I focused on crafting an intuitive and visually stunning user experience for Careerthon. From the animated landing page to the interactive report dashboard, every element was designed to make profile analysis accessible and engaging.",
                     "PS", "#7c3aed", "/images/priyanshu_shekhar.jpg"
                 ),
                 new UserStory(
                     "Altamash Mallick",
                     "Backend Engineer & Data Analyst",
-                    "I contributed to the profile analysis engine and data modeling for Careerthon. The scoring algorithm uses weighted analysis across 15 profile dimensions, benchmarked against industry standards. I also worked on the API layer and database design to ensure scalability and performance.",
+                    "I contributed to the profile analysis engine and data modeling for Careerthon. The scoring algorithm uses weighted analysis across 15 profile dimensions, benchmarked against industry standards.",
                     "AM", "#059669", "/images/altamash_mallick.jpg"
                 ),
                 new UserStory(
                     "Binit Mishra",
                     "Accenture Germany (ex-TCS)",
-                    "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations. I've seen a clear increase in profile engagement since the updates.",
+                    "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations.",
                     "BM", "#dc2626", null
-                ),
-                new UserStory(
-                    "Prashant Kumar",
-                    "LTM",
-                    "They provided clear and practical advice to make my profile stand out. The expert analysis was thorough and tailored to my needs. I've seen more views and connections from people in my field after implementing the suggested changes.",
-                    "PK", "#ea580c", null
-                ),
-                new UserStory(
-                    "Risabh Jaishwal",
-                    "Cognizant",
-                    "I'm receiving job opportunities from top-quality companies. The tailored feedback made all the difference in highlighting my strengths as a Senior Product Manager. Highly recommended for anyone looking to level up their LinkedIn presence.",
-                    "RJ", "#0284c7", null
                 )
             );
             userStoryRepository.saveAll(originalStories);
-            System.out.println("✅ Seeded " + originalStories.size() + " user stories.");
+            System.out.println("✅ Seeded initial user stories.");
         } else {
-            System.out.println("ℹ️ User stories already exist, skipping seed.");
+            // Ensure Ayushi and Head HR exist even if others do
+            List<UserStory> existing = userStoryRepository.findAll();
+            if (existing.stream().noneMatch(s -> "Ayushi Mishra".equals(s.getName()))) {
+                userStoryRepository.save(new UserStory(
+                    "Ayushi Mishra",
+                    "Senior Associate - Talent Acquisition",
+                    "Ayushi is a results-driven Talent Acquisition professional with 4.6+ years of experience in hiring across Cloud, SaaS, Fintech, and Insurtech domains.",
+                    "AM", "#db2777", "/images/ayushi_mishra.png"
+                ));
+            }
+            if (existing.stream().noneMatch(s -> "Head HR".equals(s.getName()))) {
+                userStoryRepository.save(new UserStory(
+                    "Head HR",
+                    "Head - Human Resources & CV Review",
+                    "As our Head of HR, I oversee the final review of CV details to ensure they meet the highest standards of corporate excellence.",
+                    "HR", "#1e3a8a", "/images/head_hr.png"
+                ));
+            }
         }
 
-        // Ensure Admin user exists and always has correct credentials
+        // Ensure Admin user exists
         userRepository.findByUsername("admin").ifPresentOrElse(
             adminUser -> {
                 adminUser.setRoles("ROLE_ADMIN");

@@ -87,7 +87,7 @@
             <p class="section-subtitle">The talented team that brought Careerthon to life</p>
 
             <div class="team-grid">
-                <div class="team-card team-card--lead" data-animate="fadeInUp" th:each="member, stat : ${team}" th:if="${stat.index < 3}">
+                <div class="team-card team-card--lead" data-animate="fadeInUp" th:each="member, stat : ${team}">
                     <div th:if="${member.avatarUrl != null}" class="team-avatar overflow-hidden">
                         <img th:src="${member.avatarUrl}" th:alt="${member.name}" class="w-full h-full object-cover">
                     </div>
