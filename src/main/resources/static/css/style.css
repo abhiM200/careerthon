@@ -46,6 +46,19 @@
 }
 .animate-float { animation: float 6s ease-in-out infinite; }
 
+.tilt-effect {
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+.tilt-effect:hover {
+  transform: rotateX(5deg) rotateY(5deg) scale(1.02);
+}
+
+.avatar-pro {
+  width: 100%; height: 100%; object-fit: cover;
+  image-rendering: -webkit-optimize-contrast;
+}
+
 /* Reset */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
