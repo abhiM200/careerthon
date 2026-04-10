@@ -42,6 +42,11 @@
                     <div class="legend-item"><span class="dot orange"></span> 40-59: Average</div>
                     <div class="legend-item"><span class="dot red"></span> 0-39: Needs Work</div>
                 </div>
+                
+                <button onclick="generateScorecard()" class="mt-8 w-full py-4 bg-white text-indigo-900 font-black rounded-xl shadow-lg border-2 border-transparent hover:border-amber-400 transition-all flex items-center justify-center gap-3 active:scale-95 group">
+                    <span class="text-xl group-hover:rotate-12 transition-transform">🏆</span>
+                    <span>Download Social Card</span>
+                </button>
             </div>
         </div>
     </section>
@@ -404,6 +409,49 @@
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 <input type="hidden" id="report-review-id" th:value="${review.id}">
+
+<!-- Shareable Scorecard Template (Hidden from view) -->
+<div id="scorecard-capture-wrap" style="position: absolute; left: -9999px; top: -9999px;">
+    <div id="scorecard-template" style="width: 800px; height: 800px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 60px; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; border: 20px solid rgba(255,255,255,0.05); font-family: 'Inter', sans-serif;">
+        <!-- Background Decoration -->
+        <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(79,70,229,0.2) 0%, transparent 70%);"></div>
+        <div style="position: absolute; bottom: -100px; left: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);"></div>
+
+        <!-- Logo -->
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 60px;">
+            <span style="font-size: 50px;">⚡</span>
+            <span style="font-size: 40px; font-weight: 900; letter-spacing: -1px;">Careerthon</span>
+        </div>
+
+        <!-- Main Content -->
+        <div style="text-align: center; margin-bottom: 60px;">
+            <p style="font-size: 24px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 20px;">LinkedIn Profile Strength</p>
+            <h1 th:text="${review.userName}" style="font-size: 60px; font-weight: 900; margin-bottom: 40px; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">User Name</h1>
+        </div>
+
+        <!-- Score Circle -->
+        <div style="position: relative; width: 300px; height: 300px; display: flex; align-items: center; justify-content: center; margin-bottom: 60px;">
+            <svg viewBox="0 0 200 200" style="width: 100%; height: 100%; transform: rotate(-90deg);">
+                <circle cx="100" cy="100" r="85" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="15"></circle>
+                <circle cx="100" cy="100" r="85" fill="none" stroke="#4f46e5" stroke-width="15" stroke-linecap="round" th:style="'stroke-dasharray: ' + (534 * review.overallScore / 100) + ' 534'"></circle>
+            </svg>
+            <div style="position: absolute; text-align: center;">
+                <span th:text="${review.overallScore}" style="font-size: 100px; font-weight: 900; display: block; line-height: 1;">85</span>
+                <span th:text="${review.scoreLabel}" style="font-size: 24px; font-weight: 800; color: #10b981; text-transform: uppercase;">EXCELLENT</span>
+            </div>
+        </div>
+
+        <!-- Tags -->
+        <div style="display: flex; gap: 20px; margin-bottom: 60px;">
+            <div style="background: rgba(255,255,255,0.1); padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 18px;">🎯 Top 10% Profile</div>
+            <div style="background: rgba(255,255,255,0.1); padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 18px;">🔥 Hiring Priority</div>
+        </div>
+
+        <!-- Footer -->
+        <p style="font-size: 18px; color: #64748b; font-weight: 500;">Score your profile at <span style="color: #4f46e5; font-weight: 700;">careerthon.onrender.com</span></p>
+    </div>
+</div>
+
 <script th:src="@{/js/app.js}"></script>
 </body>
 </html>

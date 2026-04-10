@@ -197,6 +197,41 @@ function sendReportEmail() {
   });
 }
 
+// ─── Shareable Scorecard ─────────────────────
+function generateScorecard() {
+  const element = document.getElementById('scorecard-template');
+  const btn = event.currentTarget;
+  if (!element || !window.html2canvas) return;
+
+  const originalBtnText = btn.innerHTML;
+  btn.innerHTML = '<span>⏳ Generating...</span>';
+  btn.disabled = true;
+
+  // Use a slight timeout to ensure styles are ready
+  setTimeout(() => {
+    html2canvas(element, {
+      scale: 2, // High quality
+      useCORS: true,
+      backgroundColor: '#0f172a'
+    }).then(canvas => {
+      const link = document.createElement('a');
+      link.download = 'Careerthon_LinkedIn_Score.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      
+      btn.innerHTML = '<span>✅ Downloaded!</span>';
+      setTimeout(() => {
+        btn.innerHTML = originalBtnText;
+        btn.disabled = false;
+      }, 3000);
+    }).catch(err => {
+      console.error('Scorecard error:', err);
+      btn.innerHTML = originalBtnText;
+      btn.disabled = false;
+    });
+  }, 100);
+}
+
 // ─── Header Scroll Effect ────────────────────
 function initHeaderScroll() {
   const header = document.getElementById('site-header');
