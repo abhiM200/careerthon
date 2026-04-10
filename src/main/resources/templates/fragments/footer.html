@@ -48,6 +48,33 @@
         </div>
     </div>
 
+    <!-- Feedback Button -->
+    <div id="feedback-widget" style="position: fixed; bottom: 85px; left: 20px; z-index: 9999;">
+        <button onclick="openFeedback()" class="glass" style="width: 50px; height: 50px; border-radius: 16px; display: flex; items-center justify-center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.4); transition: var(--transition); background: white;">
+            <span style="font-size: 24px;">💬</span>
+        </button>
+        <div id="feedback-tooltip" style="position: absolute; left: 65px; top: 10px; background: #0f172a; color: white; padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; white-space: nowrap; opacity: 0; pointer-events: none; transition: var(--transition); transform: translateX(-10px);">
+            Give Feedback
+        </div>
+    </div>
+
+    <script>
+        function openFeedback() {
+            // Placeholder: Open a mailto or a simple alert for now
+            const email = "support@careerthon.com";
+            const subject = "Careerthon Feedback";
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+        }
+        
+        // Show tooltip on hover
+        const fbBtn = document.querySelector('#feedback-widget button');
+        const fbTooltip = document.querySelector('#feedback-tooltip');
+        if (fbBtn && fbTooltip) {
+            fbBtn.onmouseenter = () => { fbTooltip.style.opacity = '1'; fbTooltip.style.transform = 'translateX(0)'; };
+            fbBtn.onmouseleave = () => { fbTooltip.style.opacity = '0'; fbTooltip.style.transform = 'translateX(-10px)'; };
+        }
+    </script>
+
     <!-- MIKE Assistant Widget -->
     <div id="mike-widget" style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; font-family: sans-serif;">
         <div id="mike-message" style="display: none; background: #ffffff; color: #0f172a; border-left: 4px solid #275df5; padding: 15px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-width: 300px; font-size: 14px; line-height: 1.5; text-align: left; position: relative;">
