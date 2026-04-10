@@ -245,12 +245,45 @@ function initHeaderScroll() {
   });
 }
 
+// ─── Popup Logic ─────────────────────────────
+function showPopup() {
+  const popup = document.getElementById('promo-popup');
+  const card = document.getElementById('promo-card');
+  if (!popup || localStorage.getItem('careerthon_popup_shown')) return;
+
+  popup.classList.remove('opacity-0', 'pointer-events-none');
+  card.classList.remove('scale-90');
+  card.classList.add('scale-100');
+  localStorage.setItem('careerthon_popup_shown', 'true');
+}
+
+function closePopup() {
+  const popup = document.getElementById('promo-popup');
+  const card = document.getElementById('promo-card');
+  if (popup) {
+    popup.classList.add('opacity-0', 'pointer-events-none');
+    card.classList.remove('scale-100');
+    card.classList.add('scale-90');
+  }
+}
+
+function initPopupLogic() {
+  // Show after 8 seconds
+  setTimeout(showPopup, 8000);
+
+  // Exit intent
+  document.addEventListener('mouseleave', (e) => {
+    if (e.clientY < 0) showPopup();
+  });
+}
+
 // ─── Init ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initStickyBanner();
   initFormValidation();
   initHeaderScroll();
+  initPopupLogic();
 
   // Animate score counters on report page
   if (document.querySelector('.gauge-number')) {
