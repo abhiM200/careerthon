@@ -1,460 +1,178 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header :: head('Your LinkedIn Profile Report - Careerthon')}"></head>
-<body class="report-page">
+<body class="bg-soft">
 
-<div th:replace="~{fragments/header :: header}"></div>
+<header th:replace="~{fragments/header :: header}"></header>
 
-<main class="report-main">
-
+<main class="min-h-screen pb-24">
     <!-- Report Hero -->
-    <section class="report-hero">
-        <div class="report-hero-container">
-            <div class="report-profile-info">
-                <div class="report-avatar" th:text="${review.userName != null ? review.userName.substring(0,1) : 'U'}">U</div>
-                <div>
-                    <h1 class="report-username" th:text="${review.userName ?: 'LinkedIn User'}">User</h1>
-                    <p class="report-url" th:text="${review.linkedinUrl}">linkedin.com/in/user</p>
-                    <p class="report-date">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        Report generated: <span th:text="${#temporals.format(review.completedAt, 'dd MMM yyyy, HH:mm')}">now</span>
-                    </p>
+    <section class="section-padding mesh-bg-light relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-100/30 rounded-full blur-[120px] -z-10"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-16 items-center">
+            
+            <!-- Profile Info -->
+            <div class="lg:w-1/2" data-animate="fadeInLeft">
+                <div class="hero-tag">Intelligence Report Generated ✨</div>
+                <div class="flex items-center gap-6 mb-8 mt-4">
+                    <div class="w-24 h-24 rounded-3xl bg-indigo-600 text-white flex items-center justify-center text-4xl font-black shadow-2xl ring-4 ring-white" 
+                         th:text="${review.userName != null ? review.userName.substring(0,1) : 'U'}">U</div>
+                    <div>
+                        <h1 class="text-4xl font-black text-slate-900 mb-2" th:text="${review.userName ?: 'LinkedIn User'}">User</h1>
+                        <p class="text-indigo-600 font-bold mb-2 flex items-center gap-2">
+                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                             <span th:text="${review.linkedinUrl}">linkedin.com/in/user</span>
+                        </p>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                            Verified on <span th:text="${#temporals.format(review.completedAt, 'dd MMM yyyy')}">date</span>
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Overall Score -->
-            <div class="overall-score-card">
-                <div class="score-gauge-wrapper">
-                    <svg viewBox="0 0 200 200" class="score-gauge-svg">
-                        <circle cx="100" cy="100" r="80" class="gauge-track"/>
-                        <circle cx="100" cy="100" r="80" class="gauge-fill"
-                                th:style="'--score-pct: ' + ${review.overallScore / 100.0}"/>
-                    </svg>
-                    <div class="gauge-center">
-                        <span class="gauge-number" th:text="${review.overallScore}">0</span>
-                        <span class="gauge-label" th:text="${review.scoreLabel}">Score</span>
-                        <span class="gauge-sub">out of 100</span>
+            <!-- Score Visual -->
+            <div class="lg:w-1/2 flex justify-center" data-animate="fadeInRight">
+                <div class="premium-card p-10 glass border-white max-w-sm w-full text-center group translate-y-0 hover:-translate-y-2 transition-transform shadow-3xl">
+                    <div class="relative w-48 h-48 mx-auto mb-8">
+                        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" stroke-width="8"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#score-grad)" stroke-width="10" 
+                                    th:attr="stroke-dasharray=${(282.7 * review.overallScore / 100) + ' 282.7'}"
+                                    stroke-linecap="round"></circle>
+                            <defs>
+                                <linearGradient id="score-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#4f46e5" />
+                                    <stop offset="100%" stop-color="#0ea5e9" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span class="text-7xl font-black text-slate-900 leading-none" th:text="${review.overallScore}">82</span>
+                            <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mt-2" th:text="${review.scoreLabel}">Excellent</span>
+                        </div>
                     </div>
+                    
+                    <button onclick="generateScorecard()" class="btn-premium w-full justify-center">
+                        Share Social Card 🏆
+                    </button>
                 </div>
-                <div class="score-legend">
-                    <div class="legend-item"><span class="dot green"></span> 80-100: Excellent</div>
-                    <div class="legend-item"><span class="dot blue"></span> 60-79: Good</div>
-                    <div class="legend-item"><span class="dot orange"></span> 40-59: Average</div>
-                    <div class="legend-item"><span class="dot red"></span> 0-39: Needs Work</div>
-                </div>
-                
-                <button onclick="generateScorecard()" class="mt-8 w-full py-4 bg-white text-indigo-900 font-black rounded-xl shadow-lg border-2 border-transparent hover:border-amber-400 transition-all flex items-center justify-center gap-3 active:scale-95 group">
-                    <span class="text-xl group-hover:rotate-12 transition-transform">🏆</span>
-                    <span>Download Social Card</span>
-                </button>
             </div>
         </div>
     </section>
 
     <!-- Score Breakdown -->
-    <section class="score-breakdown-section">
-        <div class="report-container">
-            <h2 class="report-section-title">📊 Score Breakdown</h2>
-            <p class="report-section-sub">Your profile scores across all 15 key dimensions</p>
-
-            <div class="breakdown-grid" th:if="${breakdown != null}">
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Profile Photo</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.profilePhoto >= 8 ? 'green' : (breakdown.profilePhoto >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.profilePhoto * 10} + '%'"></div>
+    <section class="section-padding bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-black text-slate-900 mb-12 text-center">Section Breakdown</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" th:if="${breakdown != null}">
+                <!-- Profile Photo -->
+                <div class="premium-card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-black text-slate-400 uppercase tracking-widest">Profile Photo</span>
+                        <span class="text-xl font-black text-indigo-600" th:text="${breakdown.profilePhoto} + '/10'">0/10</span>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.profilePhoto} + '/10'">0/10</div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" th:style="'width:' + ${breakdown.profilePhoto * 10} + '%'"></div>
+                    </div>
                 </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Cover Photo</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.coverPhoto >= 8 ? 'green' : (breakdown.coverPhoto >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.coverPhoto * 10} + '%'"></div>
+                <!-- Headline -->
+                <div class="premium-card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-black text-slate-400 uppercase tracking-widest">Headline</span>
+                        <span class="text-xl font-black text-indigo-600" th:text="${breakdown.headline} + '/10'">0/10</span>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.coverPhoto} + '/10'">0/10</div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" th:style="'width:' + ${breakdown.headline * 10} + '%'"></div>
+                    </div>
                 </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Headline</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.headline >= 8 ? 'green' : (breakdown.headline >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.headline * 10} + '%'"></div>
+                <!-- About -->
+                <div class="premium-card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-black text-slate-400 uppercase tracking-widest">About Section</span>
+                        <span class="text-xl font-black text-indigo-600" th:text="${breakdown.aboutSection} + '/10'">0/10</span>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.headline} + '/10'">0/10</div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" th:style="'width:' + ${breakdown.aboutSection * 10} + '%'"></div>
+                    </div>
                 </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">About Section</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.aboutSection >= 8 ? 'green' : (breakdown.aboutSection >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.aboutSection * 10} + '%'"></div>
+                <!-- Experience -->
+                <div class="premium-card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-black text-slate-400 uppercase tracking-widest">Experience</span>
+                        <span class="text-xl font-black text-indigo-600" th:text="${breakdown.experience} + '/10'">0/10</span>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.aboutSection} + '/10'">0/10</div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" th:style="'width:' + ${breakdown.experience * 10} + '%'"></div>
+                    </div>
                 </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Experience</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.experience >= 8 ? 'green' : (breakdown.experience >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.experience * 10} + '%'"></div>
+                <!-- Skills -->
+                <div class="premium-card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-black text-slate-400 uppercase tracking-widest">Skills</span>
+                        <span class="text-xl font-black text-indigo-600" th:text="${breakdown.skills} + '/10'">0/10</span>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.experience} + '/10'">0/10</div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" th:style="'width:' + ${breakdown.skills * 10} + '%'"></div>
+                    </div>
                 </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Education</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.education >= 8 ? 'green' : (breakdown.education >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.education * 10} + '%'"></div>
+                <!-- ATS Match -->
+                <div class="premium-card p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-sm font-black text-slate-400 uppercase tracking-widest">ATS Compatibility</span>
+                        <span class="text-xl font-black text-indigo-600" th:text="${breakdown.atsScore} + '/10'">0/10</span>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.education} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Skills</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.skills >= 8 ? 'green' : (breakdown.skills >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.skills * 10} + '%'"></div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-600 rounded-full" th:style="'width:' + ${breakdown.atsScore * 10} + '%'"></div>
                     </div>
-                    <div class="breakdown-score" th:text="${breakdown.skills} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">ATS Score</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.atsScore >= 8 ? 'green' : (breakdown.atsScore >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.atsScore * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.atsScore} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Keyword Density</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.keywordDensity >= 8 ? 'green' : (breakdown.keywordDensity >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.keywordDensity * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.keywordDensity} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Visibility Score</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.visibilityScore >= 8 ? 'green' : (breakdown.visibilityScore >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.visibilityScore * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.visibilityScore} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Recruiter Match</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.recruiterMatch >= 8 ? 'green' : (breakdown.recruiterMatch >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.recruiterMatch * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.recruiterMatch} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Industry Benchmark</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.industryBenchmark >= 8 ? 'green' : (breakdown.industryBenchmark >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.industryBenchmark * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.industryBenchmark} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Certifications</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.licensesAndCertifications >= 8 ? 'green' : (breakdown.licensesAndCertifications >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.licensesAndCertifications * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.licensesAndCertifications} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Recommendations</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.recommendations >= 8 ? 'green' : (breakdown.recommendations >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.recommendations * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.recommendations} + '/10'">0/10</div>
-                </div>
-                <div class="breakdown-item">
-                    <div class="breakdown-label">Activity & Engagement</div>
-                    <div class="breakdown-bar-wrap">
-                        <div class="breakdown-bar"
-                             th:classappend="${breakdown.activityEngagement >= 8 ? 'green' : (breakdown.activityEngagement >= 5 ? 'orange' : 'red')}"
-                             th:style="'width:' + ${breakdown.activityEngagement * 10} + '%'"></div>
-                    </div>
-                    <div class="breakdown-score" th:text="${breakdown.activityEngagement} + '/10'">0/10</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Detailed Recommendations -->
-    <section class="recommendations-section">
-        <div class="report-container">
-            <h2 class="report-section-title">💡 Personalized Recommendations</h2>
-            <p class="report-section-sub">Expert-crafted advice tailored specifically to your profile</p>
-
-            <div class="rec-cards-grid">
-                <div class="rec-card" th:if="${review.headlineRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">✍️</span>
-                        <h3>Headline Optimization</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.headline} + '/10'"
-                              th:classappend="${breakdown.headline >= 8 ? 'score-green' : (breakdown.headline >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
+    <!-- Expert Recommendations -->
+    <section class="section-padding mesh-bg-light">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-black text-slate-900 mb-12">Expert Recommendations</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div th:if="${review.headlineRecommendation}" class="premium-card glass">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl">✍️</div>
+                        <h3 class="text-xl font-black">Headline Strategy</h3>
                     </div>
-                    <p class="rec-text" th:text="${review.headlineRecommendation}"></p>
+                    <p class="text-slate-600 leading-relaxed" th:text="${review.headlineRecommendation}"></p>
                 </div>
-                <div class="rec-card" th:if="${review.aboutRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">📝</span>
-                        <h3>About Section Improvement</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.aboutSection} + '/10'"
-                              th:classappend="${breakdown.aboutSection >= 8 ? 'score-green' : (breakdown.aboutSection >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
+                <div th:if="${review.aboutRecommendation}" class="premium-card glass">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center text-xl">📝</div>
+                        <h3 class="text-xl font-black">About Section Polish</h3>
                     </div>
-                    <p class="rec-text" th:text="${review.aboutRecommendation}"></p>
+                    <p class="text-slate-600 leading-relaxed" th:text="${review.aboutRecommendation}"></p>
                 </div>
-                <div class="rec-card" th:if="${review.skillsRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">⚙️</span>
-                        <h3>Skills Optimization</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.skills} + '/10'"
-                              th:classappend="${breakdown.skills >= 8 ? 'score-green' : (breakdown.skills >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
-                    </div>
-                    <p class="rec-text" th:text="${review.skillsRecommendation}"></p>
-                </div>
-                <div class="rec-card" th:if="${review.experienceRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">💼</span>
-                        <h3>Experience Enhancement</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.experience} + '/10'"
-                              th:classappend="${breakdown.experience >= 8 ? 'score-green' : (breakdown.experience >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
-                    </div>
-                    <p class="rec-text" th:text="${review.experienceRecommendation}"></p>
-                </div>
-                <div class="rec-card" th:if="${review.atsRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">🤖</span>
-                        <h3>ATS Optimization</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.atsScore} + '/10'"
-                              th:classappend="${breakdown.atsScore >= 8 ? 'score-green' : (breakdown.atsScore >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
-                    </div>
-                    <p class="rec-text" th:text="${review.atsRecommendation}"></p>
-                </div>
-                <div class="rec-card" th:if="${review.keywordRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">🔑</span>
-                        <h3>Keyword Enhancement</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.keywordDensity} + '/10'"
-                              th:classappend="${breakdown.keywordDensity >= 8 ? 'score-green' : (breakdown.keywordDensity >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
-                    </div>
-                    <p class="rec-text" th:text="${review.keywordRecommendation}"></p>
-                </div>
-                <div class="rec-card" th:if="${review.visibilityRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">🚀</span>
-                        <h3>Visibility Boost</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.visibilityScore} + '/10'"
-                              th:classappend="${breakdown.visibilityScore >= 8 ? 'score-green' : (breakdown.visibilityScore >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
-                    </div>
-                    <p class="rec-text" th:text="${review.visibilityRecommendation}"></p>
-                </div>
-                <div class="rec-card" th:if="${review.recruiterRecommendation}">
-                    <div class="rec-card-header">
-                        <span class="rec-icon">🎯</span>
-                        <h3>Recruiter Targeting</h3>
-                        <span class="rec-score" th:if="${breakdown != null}"
-                              th:text="${breakdown.recruiterMatch} + '/10'"
-                              th:classappend="${breakdown.recruiterMatch >= 8 ? 'score-green' : (breakdown.recruiterMatch >= 5 ? 'score-orange' : 'score-red')}">0/10</span>
-                    </div>
-                    <p class="rec-text" th:text="${review.recruiterRecommendation}"></p>
-                </div>
-            </div>
-
-            <!-- Admin Suggestions -->
-            <div th:if="${review.adminSuggestions}" class="mb-10 p-6 bg-amber-50 border-l-4 border-amber-500 rounded-r-2xl shadow-sm">
-                <div class="flex items-center gap-3 mb-3">
-                    <span class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold">!</span>
-                    <h3 class="text-xl font-bold text-amber-900">Expert Admin Advice</h3>
-                </div>
-                <p class="text-amber-800 leading-relaxed font-medium" th:text="${review.adminSuggestions}">Advice goes here...</p>
-            </div>
-
-            <!-- Role Suggestions Section -->
-            <div class="role-suggestions-card" th:if="${review.suggestedRoles}">
-                <div class="role-card-header">
-                    <span class="role-icon">💼</span>
-                    <h3>Suggested Corporate Roles</h3>
-                </div>
-                <p class="role-sub">Based on your profile strength and identified skills, these roles are a strong fit for you:</p>
-                <div class="role-tags">
-                    <span th:each="role : ${review.suggestedRoles.split(',')}" 
-                          class="role-tag" th:text="${role.trim()}">Role</span>
-                </div>
-                <div class="role-footer">
-                    <p>💡 Tip: Use our <strong>ATS Optimizer</strong> to tailor your resume for these specific roles.</p>
-                    <a href="/resume" class="role-cta">Scan Resume for Roles →</a>
-                </div>
-            </div>
-
-            <!-- Job Search Section -->
-            <div class="mt-10 p-8 bg-white border border-gray-200 rounded-2xl shadow-lg" th:if="${review.suggestedRoles}">
-                <div class="flex items-center gap-3 mb-6">
-                    <span class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xl">🔍</span>
-                    <h3 class="text-2xl font-black text-gray-900">Search Jobs Based On Your Profile</h3>
-                </div>
-                <p class="text-gray-600 mb-8 font-medium">We've identified the best roles for you. Apply across top platforms directly:</p>
-                
-                <div class="space-y-6">
-                    <div th:each="role : ${review.suggestedRoles.split(',')}" class="border-b border-gray-100 pb-6 last:border-b-0 last:pb-0">
-                        <h4 class="text-lg font-bold text-gray-800 mb-4" th:text="${role.trim()}">Role Name</h4>
-                        <div class="flex flex-wrap gap-3">
-                            <a th:href="'https://www.linkedin.com/jobs/search/?keywords=' + ${role.trim()}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0a66c2] text-white font-bold rounded-lg hover:bg-blue-800 transition-colors text-sm">
-                                LinkedIn
-                            </a>
-                            <a th:href="'https://www.naukri.com/' + ${role.trim().replace(' ', '-').toLowerCase()} + '-jobs'" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#275df5] text-white font-bold rounded-lg hover:bg-blue-700 transition-colors text-sm">
-                                Naukri.com
-                            </a>
-                            <a th:href="'https://internshala.com/internships/' + ${role.trim().replace(' ', '-').toLowerCase()} + '-internship'" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1295c9] text-white font-bold rounded-lg hover:bg-blue-600 transition-colors text-sm">
-                                Internshala
-                            </a>
-                            <a th:href="'https://www.workindia.in/jobs-in-' + ${role.trim().replace(' ', '-').toLowerCase()}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00bfa5] text-white font-bold rounded-lg hover:bg-teal-600 transition-colors text-sm">
-                                WorkIndia
-                            </a>
+                <!-- Actionable Roadmap -->
+                <div class="lg:col-span-2 p-10 rounded-[40px] bg-slate-900 text-white relative overflow-hidden mt-12 shadow-3xl">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px]"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-600 flex items-center justify-center text-2xl">⚡</div>
+                            <h2 class="text-3xl font-black">Your Actionable Career Roadmap</h2>
                         </div>
+                        <pre class="whitespace-pre-wrap font-sans text-lg leading-relaxed text-slate-400" th:text="${review.actionableInsights}"></pre>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Industry Benchmark -->
-    <section class="benchmark-section">
-        <div class="report-container">
-            <div class="benchmark-card">
-                <h2>📈 Industry Benchmarking</h2>
-                <p th:text="${review.industryBenchmark}"></p>
-                <div class="benchmark-bar-wrapper">
-                    <div class="benchmark-label-row">
-                        <span>You</span>
-                        <span>Industry Average</span>
-                        <span>Top 10%</span>
-                    </div>
-                    <div class="benchmark-track">
-                        <div class="benchmark-fill" th:style="'width:' + ${review.overallScore} + '%'">
-                            <span class="benchmark-you-label" th:text="${review.overallScore} + '/100'">0</span>
-                        </div>
-                        <div class="benchmark-avg-marker" style="left:65%"><span>65</span></div>
-                        <div class="benchmark-top-marker" style="left:85%"><span>85</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Actionable Insights -->
-    <section class="insights-section">
-        <div class="report-container">
-            <h2 class="report-section-title">⚡ Actionable Insights</h2>
-            <p class="report-section-sub">Your prioritized improvement roadmap</p>
-            <div class="insights-card">
-                <pre class="insights-text" th:text="${review.actionableInsights}"></pre>
-            </div>
-        </div>
-    </section>
-
-    <!-- Email Report -->
-    <section class="email-section">
-        <div class="report-container">
-            <div class="email-card">
-                <div class="email-card-icon">📧</div>
-                <h2>Get This Report in Your Inbox</h2>
-                <p>Receive your complete LinkedIn profile analysis report via email for easy reference.</p>
-                <div class="email-form-row" id="email-form-row">
-                    <input type="email" id="email-input" class="email-input" placeholder="Enter your email address">
-                    <button class="email-send-btn" onclick="sendReportEmail()" id="email-send-btn">Send Report</button>
-                </div>
-                <div id="email-success" class="email-success" style="display:none">
-                    ✅ Report sent! Check your inbox.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Share / New Analysis -->
-    <section class="report-footer-actions">
-        <div class="report-container">
-            <a href="/review" class="action-btn primary-action">🔄 Analyze Another Profile</a>
-            <button onclick="window.print()" class="action-btn secondary-action">🖨️ Print / Download Report</button>
-            <a href="/" class="action-btn ghost-action">← Back to Home</a>
-        </div>
-    </section>
-
+    <!-- Bottom Actions -->
+    <div class="max-w-7xl mx-auto px-4 mt-20 flex flex-wrap justify-center gap-6">
+        <a href="/review" class="btn-premium py-5 px-12 text-lg">🔄 Re-Analyze Profile</a>
+        <button onclick="window.print()" class="btn-premium py-5 px-12 text-lg bg-white text-slate-900 border-slate-200">🖨️ Save as PDF</button>
+    </div>
 </main>
 
-<div th:replace="~{fragments/footer :: footer}"></div>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
 <input type="hidden" id="report-review-id" th:value="${review.id}">
-
-<!-- Shareable Scorecard Template (Hidden from view) -->
-<div id="scorecard-capture-wrap" style="position: absolute; left: -9999px; top: 0; pointer-events: none;">
-    <div id="scorecard-template" style="width: 800px; height: 800px; background: #0f172a; padding: 60px; color: white; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; border: 20px solid #1e293b; font-family: 'Inter', sans-serif; box-sizing: border-box;">
-        <!-- Background Decoration Shadows (Simplified for canvas) -->
-        <div style="position: absolute; top: 0; right: 0; width: 400px; height: 400px; background: #1e3a8a; filter: blur(100px); opacity: 0.3; border-radius: 50%;"></div>
-        <div style="position: absolute; bottom: 0; left: 0; width: 400px; height: 400px; background: #312e81; filter: blur(100px); opacity: 0.3; border-radius: 50%;"></div>
-
-        <!-- Logo -->
-        <div style="display: flex; align-items: center; gap: 15px; margin-top: 40px; margin-bottom: 50px; z-index: 10;">
-            <span style="font-size: 50px;">⚡</span>
-            <span style="font-size: 40px; font-weight: 900; letter-spacing: -1px; color: #ffffff;">Careerthon</span>
-        </div>
-
-        <!-- Main Content -->
-        <div style="text-align: center; margin-bottom: 40px; z-index: 10;">
-            <p style="font-size: 18px; font-weight: 700; color: #6366f1; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 15px;">LinkedIn Profile Strength</p>
-            <h1 th:text="${review.userName}" style="font-size: 64px; font-weight: 900; margin-bottom: 0; color: #ffffff; line-height: 1.1;">User Name</h1>
-        </div>
-
-        <!-- Score Circle -->
-        <div style="position: relative; width: 320px; height: 320px; display: flex; align-items: center; justify-content: center; margin-bottom: 50px; z-index: 10;">
-            <svg viewBox="0 0 200 200" style="width: 100%; height: 100%; transform: rotate(-90deg);">
-                <circle cx="100" cy="100" r="80" fill="none" stroke="#1e293b" stroke-width="16"></circle>
-                <circle cx="100" cy="100" r="80" fill="none" stroke="#4f46e5" stroke-width="16" stroke-linecap="round"
-                        th:attr="stroke-dasharray=${(502 * review.overallScore / 100) + ' 502'}"></circle>
-            </svg>
-            <div style="position: absolute; text-align: center; transform: rotate(0deg);">
-                <span th:text="${review.overallScore}" style="font-size: 110px; font-weight: 900; display: block; line-height: 1; color: #ffffff;">85</span>
-                <span th:text="${review.scoreLabel}" style="font-size: 24px; font-weight: 800; color: #10b981; text-transform: uppercase; margin-top: 10px; display: block;">EXCELLENT</span>
-            </div>
-        </div>
-
-        <!-- Tags -->
-        <div style="display: flex; gap: 20px; margin-bottom: auto; z-index: 10;">
-            <div style="background: rgba(79,70,229,0.2); border: 1px solid rgba(79,70,229,0.4); color: #818cf8; padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 18px;">🎯 Top 10% Profile</div>
-            <div style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #34d399; padding: 12px 24px; border-radius: 50px; font-weight: 700; font-size: 18px;">🔥 Hiring Priority</div>
-        </div>
-
-        <!-- Footer -->
-        <div style="padding-bottom: 30px; z-index: 10;">
-            <p style="font-size: 20px; color: #94a3b8; font-weight: 500;">Score your profile at <span style="color: #6366f1; font-weight: 700;">careerthon.onrender.com</span></p>
-        </div>
-    </div>
-</div>
-
 <script th:src="@{/js/app.js}"></script>
 </body>
 </html>

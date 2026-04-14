@@ -237,10 +237,10 @@ function initHeaderScroll() {
   const header = document.getElementById('site-header');
   if (!header) return;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      header.style.boxShadow = '0 4px 20px rgba(0,0,0,.1)';
+    if (window.scrollY > 50) {
+      header.classList.add('scrolled');
     } else {
-      header.style.boxShadow = '';
+      header.classList.remove('scrolled');
     }
   });
 }

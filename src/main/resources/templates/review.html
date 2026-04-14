@@ -15,65 +15,22 @@
             <form action="/review/submit" method="post" class="review-form" id="review-form">
                 <div class="form-group">
                     <label for="linkedinUrl" class="form-label">Your LinkedIn Profile URL</label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">🔗</span>
-                        <input
-                            type="url"
-                            id="linkedinUrl"
-                            name="linkedinUrl"
-                            class="form-input"
-                            placeholder="https://www.linkedin.com/in/yourname"
-                            required
-                            pattern="https?://(www\.)?linkedin\.com/in/.+"
-                        >
-                    </div>
-                    <div class="input-hint">💡 Make sure your LinkedIn profile is set to <strong>Public</strong></div>
-                </div>
+<body class="bg-soft">
 
-                <div class="form-group">
-                    <label for="email" class="form-label">Email Address <span class="optional">(Optional — to receive report by email)</span></label>
-                    <div class="input-wrapper">
-                        <span class="input-icon">📧</span>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            class="form-input"
-                            placeholder="you@example.com"
-                        >
-                    </div>
-                </div>
+<header th:replace="~{fragments/header :: header}"></header>
 
-                <button type="submit" class="review-submit-btn" id="review-submit-btn">
-                    <span class="btn-text">Analyze My Profile — It's Free</span>
-                    <span class="btn-icon">⚡</span>
-                </button>
-
-                <p class="form-disclaimer">
-                    🔒 Your data is secure and never shared. Profile analysis is performed on public data only.
+<main class="section-padding mesh-bg-light min-h-screen">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-16 items-start">
+            <!-- Left: Form Section -->
+            <div class="lg:w-7/12" data-animate="fadeInLeft">
+                <div class="hero-tag">Step 1: Intelligence Scan</div>
+                <h1 class="text-5xl font-black text-slate-900 mb-6 leading-tight">
+                    Analyze Your <span class="text-gradient">LinkedIn</span> Impact
+                </h1>
+                <p class="text-xl text-slate-500 mb-12">
+                    Enter your profile URL below. Our AI will perform a deep-scan of your presence, keywords, and recruiter visibility markers.
                 </p>
-            </form>
-        </div>
-
-        <div class="review-right" data-animate="fadeInRight">
-            <div class="review-info-card">
-                <h3>What You'll Get</h3>
-                <ul class="review-features-list">
-                    <li><span class="check-icon">✅</span> Overall profile score (0-100)</li>
-                    <li><span class="check-icon">✅</span> Section-by-section breakdown</li>
-                    <li><span class="check-icon">✅</span> ATS compatibility check</li>
-                    <li><span class="check-icon">✅</span> Keyword optimization tips</li>
-                    <li><span class="check-icon">✅</span> Headline rewrite suggestions</li>
-                    <li><span class="check-icon">✅</span> About section improvements</li>
-                    <li><span class="check-icon">✅</span> Skills gap analysis</li>
-                    <li><span class="check-icon">✅</span> Experience optimization</li>
-                    <li><span class="check-icon">✅</span> Visibility boost strategies</li>
-                    <li><span class="check-icon">✅</span> Recruiter targeting insights</li>
-                    <li><span class="check-icon">✅</span> Industry benchmarking</li>
-                    <li><span class="check-icon">✅</span> Actionable priority list</li>
-                    <li><span class="check-icon">✅</span> Downloadable report</li>
-                    <li><span class="check-icon">✅</span> Email delivery</li>
-                </ul>
             </div>
 
             <div class="review-trust">

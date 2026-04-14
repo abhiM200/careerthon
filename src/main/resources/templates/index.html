@@ -5,331 +5,158 @@
 <header th:replace="~{fragments/header :: header}"></header>
 
 <!-- Hero Section -->
-<section class="relative pt-32 pb-24 mesh-bg overflow-hidden">
-    <!-- Abstract Blobs -->
-    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[120px] -z-10 animate-float" style="animation-delay: 1s;"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-50/80 rounded-full blur-[100px] -z-10 animate-float"></div>
+<section class="hero-section mesh-bg-light relative">
+    <!-- Abstract Blobs for visual depth -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-100/30 rounded-full blur-[120px] -z-10 animate-float"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px] -z-10 animate-float" style="animation-delay: 2s;"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col lg:flex-row items-center gap-16">
+    <div class="hero-content">
         <!-- Left Content -->
-        <div class="lg:w-1/2 text-center lg:text-left" data-animate="fadeInLeft">
-            <div class="inline-flex items-center gap-2 bg-indigo-50 border border-indigo-100 rounded-full px-4 py-1.5 text-sm font-bold text-indigo-600 mb-8">
+        <div data-animate="fadeInLeft">
+            <div class="hero-tag">
                 <span class="flex h-2 w-2 rounded-full bg-indigo-600 animate-pulse"></span>
-                Top-Rated Profile Analyzer 🏆
+                World's #1 Profile Intelligence Tool 🏆
             </div>
             
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-slate-900 leading-[1.1] mb-8 tracking-tight">
-                Get Recruiter<br>
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">Attention</span>
-                Instantly
+            <h1 class="hero-title">
+                Get more <span class="text-gradient">Interviews</span><br>
+                with AI Insights
             </h1>
             
-            <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
-                Is your LinkedIn Profile a Hit or a Miss? Get an expert AI assessment and boost your visibility to top companies today.
+            <p class="hero-desc">
+                Don't let your LinkedIn profile be a missed opportunity. Get an expert-level AI assessment and transform your digital presence today.
             </p>
             
-            <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                <a href="/review" class="group relative flex items-center justify-center bg-indigo-600 hover:bg-slate-900 text-white font-bold text-lg py-5 px-10 rounded-2xl shadow-2xl shadow-indigo-200 transition-all hover:-translate-y-1 active:scale-95">
-                    Start Free Review
-                    <svg class="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <a href="/review" class="btn-premium">
+                    Start Free Analysis
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                 </a>
-                <div class="flex -space-x-3 overflow-hidden p-2">
-                    <div class="inline-block h-10 w-10 rounded-full ring-4 ring-white bg-slate-200 shadow-sm overflow-hidden"><img src="/images/avatars/avatar1.png" class="avatar-pro"></div>
-                    <div class="inline-block h-10 w-10 rounded-full ring-4 ring-white bg-indigo-100 shadow-sm overflow-hidden"><img src="/images/avatars/avatar2.png" class="avatar-pro"></div>
-                    <div class="inline-block h-10 w-10 rounded-full ring-4 ring-white bg-blue-100 shadow-sm overflow-hidden"><img src="/images/avatars/avatar3.png" class="avatar-pro"></div>
-                    <div class="flex items-center ml-2 pl-4 text-sm font-bold text-slate-500">
-                        Joined by 50k+ specialists
+                
+                <div class="flex items-center -space-x-3">
+                    <div class="w-12 h-12 rounded-full ring-4 ring-white shadow-lg overflow-hidden border-2 border-indigo-50">
+                        <img src="/images/avatars/avatar1.png" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-12 h-12 rounded-full ring-4 ring-white shadow-lg overflow-hidden border-2 border-indigo-50">
+                        <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-12 h-12 rounded-full ring-4 ring-white shadow-lg overflow-hidden border-2 border-indigo-50">
+                        <img src="/images/avatars/avatar3.png" class="w-full h-full object-cover">
+                    </div>
+                    <div class="pl-6 text-sm font-bold text-slate-500">
+                        <span class="text-indigo-600">50,000+</span> professionals analyzed
                     </div>
                 </div>
             </div>
         </div>
         
-        <!-- Right Content (Mockup) -->
-        <div class="lg:w-1/2 relative flex justify-center perspective-1000" data-animate="fadeInRight" data-delay="200">
-            <div class="relative w-full max-w-[420px] animate-float tilt-effect">
-                <!-- Main Glass Card -->
-                <div class="glass p-8 rounded-[40px] shadow-2xl border-white/50 relative z-20">
-                    <div class="flex items-center justify-between mb-10">
-                        <div class="flex items-center gap-4">
-                            <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center font-black text-xl shadow-lg ring-4 ring-indigo-50 overflow-hidden">
-                                <img src="/images/avatars/avatar2.png" alt="Profile" class="avatar-pro">
-                            </div>
-                            <div>
-                                <div class="font-extrabold text-slate-900">Ananya Dubey</div>
-                                <div class="text-xs font-bold text-slate-500 uppercase tracking-wider">Product Manager @ Google</div>
-                            </div>
+        <!-- Right Content: Live Mockup -->
+        <div class="relative" data-animate="fadeInRight" data-delay="200">
+            <div class="premium-card p-0 overflow-hidden glass animate-float border-white/60">
+                <div class="p-8 border-b border-indigo-50 bg-indigo-50/30">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-lg ring-4 ring-white overflow-hidden">
+                            <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover">
                         </div>
-                        <div class="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400">•••</div>
+                        <div>
+                            <div class="text-xl font-black text-slate-900">Ananya Dubey</div>
+                            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Product Strategy @ Google</div>
+                        </div>
                     </div>
-                    
-                    <!-- Gauge -->
-                    <div class="relative w-56 h-56 mx-auto mb-8">
+                </div>
+                
+                <div class="p-10 text-center">
+                    <div class="relative w-48 h-48 mx-auto mb-8">
                         <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" stroke-width="10"></circle>
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="70" stroke-linecap="round"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" stroke-width="8"></circle>
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#card-grad)" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="60" stroke-linecap="round"></circle>
                             <defs>
-                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="0%">
                                     <stop offset="0%" stop-color="#4f46e5" />
-                                    <stop offset="100%" stop-color="#3b82f6" />
+                                    <stop offset="100%" stop-color="#0ea5e9" />
                                 </linearGradient>
                             </defs>
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span class="text-6xl font-black text-slate-900 leading-none">78</span>
-                            <span class="text-xs font-black text-emerald-500 uppercase tracking-tighter mt-1">Good Score</span>
+                            <span class="text-6xl font-black text-slate-900 leading-none">82</span>
+                            <span class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mt-2">Excellent</span>
                         </div>
                     </div>
-
-                    <div class="bg-indigo-600 text-white p-4 rounded-2xl text-center font-bold text-sm shadow-xl shadow-indigo-100">
-                        View Detailed Insights &darr;
+                    
+                    <div class="inline-block py-3 px-8 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-xl shadow-indigo-100 animate-pulse-soft">
+                        Priority Analysis Complete ✨
                     </div>
                 </div>
-
-                <!-- Floating Badges -->
-                <div class="absolute -top-6 -right-6 glass p-4 rounded-2xl shadow-xl z-30 border-white/80 animate-bounce" style="animation-duration: 3s;">
-                    <span class="text-2xl">⚡</span>
-                    <div class="text-[10px] font-black text-slate-400 uppercase">Speed</div>
-                    <div class="text-xs font-bold text-slate-900">Scan Complete</div>
-                </div>
-                
-                <div class="absolute -bottom-10 -left-10 glass-dark p-6 rounded-3xl shadow-2xl z-30 border-white/10 text-white max-w-[200px]">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-[10px] uppercase font-black tracking-widest text-slate-400">Live Feedback</span>
-                    </div>
-                    <p class="text-sm font-bold leading-snug">"Your headline is in the top 5% for your industry!"</p>
-                </div>
+            </div>
+            
+            <!-- Floating Badge -->
+            <div class="absolute -top-10 -right-4 glass p-6 rounded-[24px] shadow-2xl z-30 border-white animate-bounce" style="animation-duration: 4s;">
+                <div class="text-3xl mb-1">🚀</div>
+                <div class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Visibility</div>
+                <div class="text-sm font-bold text-indigo-600">+42% Boost</div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- How It Works Section -->
-<section class="py-24 bg-slate-50 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-20" data-animate="fadeInUp">
-            <h2 class="text-4xl font-black text-slate-900 mb-4 tracking-tight">Personalized, Thorough, and Effective!</h2>
-            <p class="text-lg text-slate-500 font-medium">Your path to a top-tier LinkedIn profile in 3 simple steps</p>
-        </div>
-        
-        <div class="flex flex-col lg:flex-row items-center gap-16">
-            <!-- Left Steps -->
-            <div class="lg:w-1/2 space-y-12" data-animate="fadeInLeft">
-                <div class="flex gap-6 group">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-white shadow-xl flex items-center justify-center text-3xl group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">🔗</div>
-                    <div>
-                        <div class="font-black text-slate-900 text-xl mb-2">Step 1: Submit Profile</div>
-                        <p class="text-slate-600 leading-relaxed">Submit your LinkedIn URL. Our system scans your public profile data to identify optimization opportunities.</p>
-                    </div>
-                </div>
-                <div class="flex gap-6 group">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-white shadow-xl flex items-center justify-center text-3xl group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">🤖</div>
-                    <div>
-                        <div class="font-black text-slate-900 text-xl mb-2">Step 2: AI-Powered Analysis</div>
-                        <p class="text-slate-600 leading-relaxed">Our expert-trained AI analyzes every section of your profile against industry standards and recruiter preferences.</p>
-                    </div>
-                </div>
-                <div class="flex gap-6 group">
-                    <div class="flex-shrink-0 w-16 h-16 rounded-2xl bg-white shadow-xl flex items-center justify-center text-3xl group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">📊</div>
-                    <div>
-                        <div class="font-black text-slate-900 text-xl mb-2">Step 3: Get Your Roadmap</div>
-                        <p class="text-slate-600 leading-relaxed">Receive a detailed report with a score breakdown and actionable steps to reach the "Hireable" status.</p>
-                    </div>
-                </div>
-                
-                <div class="pt-6">
-                    <a href="/review" class="inline-flex items-center bg-indigo-600 hover:bg-slate-900 text-white font-bold text-lg py-4 px-10 rounded-2xl shadow-xl transition-all hover:-translate-y-1">
-                        Get Your Free Review <span class="ml-2 font-light">→</span>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Right Breakdown Image mock -->
-            <div class="lg:w-1/2 w-full max-w-md mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 p-8 transform rotate-2">
-                <div class="font-bold text-center text-gray-900 mb-6">Get a Complete Breakdown of Your LinkedIn Profile</div>
-                
-                <div class="flex gap-6 items-center mb-8">
-                    <div class="w-1/3">
-                        <div class="relative w-24 h-24 mx-auto">
-                            <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f3f4f6" stroke-width="10"></circle>
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="#10b981" stroke-width="10" stroke-dasharray="251" stroke-dashoffset="35" stroke-linecap="round"></circle>
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span class="text-2xl font-black text-gray-900 leading-none">85</span>
-                                <span class="text-[10px] font-bold text-green-500 mt-1">Good</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-2/3 space-y-3 relative">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none z-0">
-                            <span class="text-gray-900 font-black text-2xl whitespace-nowrap transform -rotate-12">Sample Report</span>
-                        </div>
-                        
-                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
-                            <span class="text-gray-700">Profile Photo</span><span class="text-gray-900">9/10</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
-                            <span class="text-gray-700">Cover Photo</span><span class="text-gray-900">8/10</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
-                            <span class="text-gray-700">Headline</span><span class="text-gray-900">8/10</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
-                            <span class="text-gray-700">Experience</span><span class="text-gray-900">9/10</span>
-                        </div>
-                        <div class="flex justify-between items-center text-[10px] font-bold border-b pb-1 relative z-10">
-                            <span class="text-gray-700">Skills</span><span class="text-gray-900">7/10</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- Transform Section -->
-<section class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-slate-900 rounded-[48px] p-8 md:p-20 text-center relative overflow-hidden" data-animate="zoomIn">
-            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[radial-gradient(circle_at_50%_50%,#4f46e5,transparent_70%)]"></div>
-            
-            <h2 class="text-4xl md:text-5xl font-black text-white mb-16 tracking-tight relative z-10">Transform Your LinkedIn Profile</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 text-left mb-20 relative z-10">
-                <!-- Point 1 -->
-                <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold mb-6">✓</div>
-                    <div class="font-bold text-white text-lg mb-3">Professional Precision</div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Personalized recommendations to highlight your unique achievements and position you as a top candidate.</p>
-                </div>
-                <!-- Point 2 -->
-                <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold mb-6">✓</div>
-                    <div class="font-bold text-white text-lg mb-3">Maximize Visibility</div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Stand out with a profile optimized for maximum reach and recruiter visibility through thorough analysis.</p>
-                </div>
-                <!-- Point 3 -->
-                <div class="p-8 bg-white/5 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center font-bold mb-6">✓</div>
-                    <div class="font-bold text-white text-lg mb-3">Tailored Feedback</div>
-                    <p class="text-slate-400 text-sm leading-relaxed">Gain customized insights from real professionals that highlight your strengths and leave a lasting impression.</p>
-                </div>
-            </div>
-            
-            <div class="relative z-10">
-                <a href="/review" class="inline-flex items-center bg-white text-slate-900 font-black text-xl py-5 px-12 rounded-2xl shadow-2xl hover:bg-indigo-50 transition-all hover:-translate-y-1">
-                    Analyze My Profile Now
-                    <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
- </div>
-    </div>
-</section>
-
-<!-- Why Invest -->
-<section class="py-20 bg-[#f4f7f6]">
-<!-- Why Invest Section -->
-<section class="py-24 bg-slate-50 relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row items-center gap-16 max-w-6xl mx-auto">
-            <!-- Left Circular Graphic mock -->
-            <div class="lg:w-1/2 relative flex justify-center" data-animate="fadeInLeft">
-                <div class="w-96 h-96 rounded-full bg-white shadow-2xl flex items-center justify-center relative z-10 p-4 border border-slate-100">
-                    <div class="w-full h-full rounded-full bg-indigo-50 flex items-center justify-center relative overflow-hidden">
-                         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_30%,#4f46e5,transparent_50%)]"></div>
-                         <div class="text-[120px] font-black text-indigo-100 absolute select-none">in</div>
-                         <div class="w-56 h-56 rounded-full bg-white shadow-xl flex items-center justify-center text-8xl z-20 animate-float">👤</div>
-                    </div>
-                </div>
-                <!-- Decorators -->
-                <div class="absolute -top-4 -right-4 w-24 h-24 bg-indigo-600 rounded-full flex items-center justify-center text-white font-black text-3xl shadow-xl border-4 border-white animate-bounce">in</div>
-                <div class="absolute bottom-10 -left-6 bg-white p-4 rounded-2xl shadow-xl font-bold text-sm text-slate-800 border border-slate-100">🚀 Profile Boosted!</div>
-            </div>
-            
-            <!-- Right Content -->
-            <div class="lg:w-1/2 space-y-8" data-animate="fadeInRight">
-                <h2 class="text-4xl font-black text-slate-900 mb-8 tracking-tight">Why Professional Review?</h2>
-                <div class="space-y-6">
-                    <div class="group p-6 rounded-2xl border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-300">
-                        <div class="flex items-center gap-4 mb-3">
-                            <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">01</span>
-                            <h3 class="font-bold text-slate-900 text-xl">Recruiter's First Choice</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed ml-12">Recruiters spend only 6 seconds on a profile. We ensure yours makes an immediate positive impact.</p>
-                    </div>
-                    <div class="group p-6 rounded-2xl border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-300">
-                        <div class="flex items-center gap-4 mb-3">
-                            <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">02</span>
-                            <h3 class="font-bold text-slate-900 text-xl">Stand Out from Millions</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed ml-12">With 1B+ members, blending in is failing. Our strategy makes you a "Must-Hire" candidate.</p>
-                    </div>
-                    <div class="group p-6 rounded-2xl border border-transparent hover:border-indigo-100 hover:bg-white hover:shadow-xl transition-all duration-300">
-                        <div class="flex items-center gap-4 mb-3">
-                            <span class="w-8 h-8 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-xs">03</span>
-                            <h3 class="font-bold text-slate-900 text-xl">Master the Algorithm</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed ml-12">SEO matters. We optimize your profile so you appear at the top of recruiter search results.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Highlights Section -->
-<section class="py-24 bg-white">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-        <h2 class="text-4xl font-black text-slate-900 mb-16 tracking-tight">How We Upgrade Your Career Journey</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100">
-                <div class="text-2xl mb-4">🔍</div>
-                <h3 class="font-bold text-xl text-slate-900 mb-3">In-Depth Analysis</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">A line-by-line examination of your headline, experience, and skills against industry benchmarks.</p>
-            </div>
-            <div class="p-8 rounded-3xl bg-slate-50 border border-slate-100">
-                <div class="text-2xl mb-4">⚡</div>
-                <h3 class="font-bold text-xl text-slate-900 mb-3">Instant Action Plan</h3>
-                <p class="text-slate-500 text-sm leading-relaxed">No fluff. Just clear, numbered steps to improve your profile score within the next 24 hours.</p>
-            </div>
-        </div>
-        
-        <div class="mt-16">
-            <a href="/review" class="inline-flex items-center bg-indigo-600 text-white font-bold text-lg py-4 px-12 rounded-2xl shadow-xl hover:bg-slate-900 transition-all">
-                Get Your Roadmap <span class="ml-2">→</span>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Testimonials -->
-<section class="py-24 bg-slate-50">
+<!-- Features Grid -->
+<section class="section-padding bg-slate-50">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-black text-slate-900 mb-4 tracking-tight">Success Stories</h2>
-            <p class="text-lg text-slate-500">Trusted by professionals at top corporate firms</p>
+        <div class="section-header">
+            <h2 class="section-title">Why Professionals Choose Careerthon</h2>
+            <p class="section-desc">Join the elite circle of recruiters and candidates who use our technology to dominate the job market.</p>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div th:each="story : ${testimonials}" class="glass p-8 rounded-3xl shadow-xl flex flex-col justify-between border-indigo-100/50 hover:border-indigo-600 transition-colors duration-500 group">
+            <div class="premium-card" data-animate="fadeInUp">
+                <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow-lg mb-8">🔍</div>
+                <h3 class="text-xl font-bold mb-4">Line-by-Line Analysis</h3>
+                <p class="text-slate-500">Every word matters. We analyze your headline, summary, and experience to ensure maximum recruiter impact.</p>
+            </div>
+            
+            <div class="premium-card" data-animate="fadeInUp" data-delay="100">
+                <div class="w-14 h-14 rounded-2xl bg-blue-500 text-white flex items-center justify-center text-2xl shadow-lg mb-8">⚡</div>
+                <h3 class="text-xl font-bold mb-4">ATS Optimization</h3>
+                <p class="text-slate-500">Master the algorithm. Our tool identifies key missing skills and keywords that prevent recruiters from finding you.</p>
+            </div>
+            
+            <div class="premium-card" data-animate="fadeInUp" data-delay="200">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-lg mb-8">📊</div>
+                <h3 class="text-xl font-bold mb-4">Actionable Roadmap</h3>
+                <p class="text-slate-500">No fluff. Just a clear, prioritized list of steps to take your profile from "Visible" to "Must-Hire".</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Expert Testimonials -->
+<section class="section-padding mesh-bg-light">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="section-header">
+            <h2 class="section-title">Success Stories</h2>
+            <p class="section-desc">Real transformations from real professionals who accelerated their careers with us.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div th:each="story : ${testimonials}" class="premium-card flex flex-col justify-between group">
                 <div>
-                   <div class="flex text-amber-400 mb-6 font-bold text-xl">⭐⭐⭐⭐⭐</div>
-                    <p class="text-slate-600 mb-8 leading-relaxed italic" th:text="${story.story}">
-                        The analysis was incredibly precise. It helped me land 3 interviews within a week...
+                   <div class="flex text-amber-400 mb-6 gap-1">
+                       <span th:each="i : ${#numbers.sequence(1, 5)}">★</span>
+                   </div>
+                    <p class="text-slate-600 mb-8 leading-relaxed italic text-lg" th:text="${story.story}">
+                        The analysis was incredibly precise...
                     </p>
                 </div>
                 <div class="flex items-center gap-4">
-                    <div th:if="${story.avatarUrl != null}" class="author-avatar w-12 h-12 rounded-xl overflow-hidden shadow-lg border-2 border-white">
-                        <img th:src="${story.avatarUrl}" th:alt="${story.name}" class="w-full h-full object-cover">
+                    <div class="w-14 h-14 rounded-2xl overflow-hidden shadow-xl ring-4 ring-white border border-slate-100">
+                        <img th:if="${story.avatarUrl != null}" th:src="${story.avatarUrl}" class="w-full h-full object-cover">
+                        <div th:if="${story.avatarUrl == null}" class="w-full h-full flex items-center justify-center text-white font-black" 
+                             th:style="'background:' + ${story.avatarColor}"
+                             th:text="${story.avatarInitials}">PS</div>
                     </div>
-                    <div th:if="${story.avatarUrl == null}" class="author-avatar w-12 h-12 rounded-xl flex items-center justify-center text-white font-black shadow-lg border-2 border-white" 
-                         th:style="'background:' + ${story.avatarColor}"
-                         th:text="${story.avatarInitials}">PS</div>
                     <div>
-                        <div class="font-bold text-slate-900 text-sm" th:text="${story.name}">Careerthon User</div>
-                        <div class="text-[10px] font-black uppercase text-indigo-500 tracking-widest" th:text="${story.role}">Senior Engineer</div>
+                        <div class="font-extrabold text-slate-900" th:text="${story.name}">Careerthon User</div>
+                        <div class="text-xs font-bold text-indigo-600 uppercase tracking-widest" th:text="${story.role}">Senior Engineer</div>
                     </div>
                 </div>
             </div>
@@ -337,26 +164,26 @@
     </div>
 </section>
 
-<!-- Intent Exit / Promo Popup -->
-<div id="promo-popup" class="fixed inset-0 z-[10000] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-500">
-    <div class="glass max-w-lg w-full p-10 rounded-[40px] shadow-2xl border-white/40 relative transform scale-90 transition-all duration-500" id="promo-card">
-        <button onclick="closePopup()" class="absolute top-6 right-6 w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-indigo-600 hover:text-white transition-all active:scale-95">✕</button>
-        
-        <div class="text-center">
-            <div class="w-20 h-20 bg-indigo-600 rounded-3xl mx-auto flex items-center justify-center text-4xl shadow-2xl shadow-indigo-200 mb-8 animate-bounce">🎁</div>
-            <h2 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Wait! Your Career Roadmap is Ready</h2>
-            <p class="text-slate-600 mb-8 leading-relaxed">Don't leave without your personalized 90-day job search strategy. It takes only 2 minutes!</p>
+<!-- Call to Action -->
+<section class="section-padding">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="bg-slate-900 rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden shadow-3xl" data-animate="zoomIn">
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_0%,#4f46e5,transparent_70%)]"></div>
             
-            <div class="space-y-4">
-                <a href="/ai-tools/roadmap" class="block w-full bg-indigo-600 hover:bg-slate-900 text-white font-black py-4 rounded-2xl shadow-xl transition-all hover:-translate-y-1">
-                    Get Free Roadmap Now
+            <h2 class="text-4xl md:text-6xl font-black text-white mb-8 relative z-10">Ready to transform your career?</h2>
+            <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto relative z-10">Get your professional LinkedIn report in less than 2 minutes. Start your journey for free today.</p>
+            
+            <div class="relative z-10">
+                <a href="/review" class="btn-premium py-6 px-16 text-xl rounded-2xl">
+                    Analyze My Profile Now
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                 </a>
-                <button onclick="closePopup()" class="text-sm font-bold text-slate-400 hover:text-indigo-600 transition-all">Maybe later, I'll keep browsing</button>
             </div>
         </div>
     </div>
-</div>
+</section>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
+
 </html>
