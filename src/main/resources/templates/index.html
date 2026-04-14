@@ -51,49 +51,77 @@
         </div>
         
         <!-- Right Content: Live Mockup -->
-        <div class="relative" data-animate="fadeInRight" data-delay="200">
-            <div class="premium-card p-0 overflow-hidden glass animate-float border-white/60">
-                <div class="p-8 border-b border-indigo-50 bg-indigo-50/30">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 rounded-2xl bg-indigo-600 text-white flex items-center justify-center shadow-lg ring-4 ring-white overflow-hidden">
-                            <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover">
+        <div class="relative group perspective-1000" data-animate="fadeInRight" data-delay="200">
+            <!-- Large Glow Base -->
+            <div class="absolute -inset-20 bg-indigo-500/10 rounded-full blur-[120px] group-hover:bg-indigo-500/20 transition-all duration-1000"></div>
+            
+            <div class="relative transform-gpu group-hover:rotate-y-[-5deg] group-hover:rotate-x-[5deg] transition-all duration-700 ease-out">
+                <!-- Avatar 'Holding' the card -->
+                <div class="absolute -left-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-500 group-hover:-translate-x-4">
+                    <div class="relative p-1 bg-white rounded-[32px] shadow-2xl border border-indigo-50">
+                        <div class="w-32 h-32 rounded-[28px] overflow-hidden bg-indigo-600 ring-4 ring-indigo-50">
+                            <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         </div>
-                        <div>
-                            <div class="text-xl font-black text-slate-900">Ananya Dubey</div>
-                            <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Product Strategy @ Google</div>
+                        <!-- Floating Badge on Avatar -->
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-2xl shadow-xl flex items-center justify-center text-2xl animate-bounce" style="animation-duration: 3s;">👑</div>
+                    </div>
+                </div>
+
+                <!-- Main Report Card -->
+                <div class="premium-card p-0 overflow-hidden glass-dark border-white/20 relative z-20 shadow-[0_40px_100px_-20px_rgba(15,23,42,0.5)] glow-indigo ml-12">
+                    <div class="premium-aura"></div>
+                    
+                    <div class="p-8 border-b border-white/10 bg-white/5 backdrop-blur-md">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-1">Executive Report</div>
+                                <div class="text-2xl font-black text-white tracking-tight">Abhishek</div>
+                                <div class="text-[10px] font-bold text-slate-400">VP of Engineering @ GlobalTech</div>
+                            </div>
+                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white/40">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-12 text-center relative">
+                        <div class="relative w-48 h-48 mx-auto mb-10 group-hover:scale-110 transition-transform duration-700">
+                            <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="url(#hero-mock-grad)" stroke-width="10" 
+                                        stroke-dasharray="282.7" stroke-dashoffset="40" stroke-linecap="round" class="animate-dash"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-6xl font-black text-white leading-none">94</span>
+                                <span class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mt-2">Perfect Score</span>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="text-indigo-400 font-bold text-xl mb-1">99%</div>
+                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">ATS Rank</div>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
+                                <div class="text-rose-400 font-bold text-xl mb-1">Top 1</div>
+                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">Visibility</div>
+                            </div>
+                        </div>
+
+                        <div class="inline-flex items-center gap-2 py-3 px-8 rounded-xl bg-indigo-600 text-white font-black text-xs shadow-xl group-hover:bg-indigo-500 transition-colors">
+                            VIEW LIVE ANALYTICS
                         </div>
                     </div>
                 </div>
                 
-                <div class="p-10 text-center">
-                    <div class="relative w-48 h-48 mx-auto mb-8">
-                        <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="#f1f5f9" stroke-width="8"></circle>
-                            <circle cx="50" cy="50" r="45" fill="none" stroke="url(#card-grad)" stroke-width="10" stroke-dasharray="282.7" stroke-dashoffset="60" stroke-linecap="round"></circle>
-                            <defs>
-                                <linearGradient id="card-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#4f46e5" />
-                                    <stop offset="100%" stop-color="#0ea5e9" />
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span class="text-6xl font-black text-slate-900 leading-none">82</span>
-                            <span class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mt-2">Excellent</span>
-                        </div>
+                <!-- Secondary Floating Card -->
+                <div class="absolute -bottom-10 -right-6 glass p-6 rounded-[28px] shadow-3xl z-30 border-white animate-float backdrop-blur-xl max-w-[200px]" style="animation-duration: 8s;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white">⚡</div>
+                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Live Activity</div>
                     </div>
-                    
-                    <div class="inline-block py-3 px-8 rounded-2xl bg-indigo-600 text-white font-bold text-sm shadow-xl shadow-indigo-100 animate-pulse-soft">
-                        Priority Analysis Complete ✨
-                    </div>
+                    <p class="text-[11px] font-bold text-slate-700 leading-snug">Abhishek just received <span class="text-indigo-600">3 connection requests</span> of senior recruiters!</p>
                 </div>
-            </div>
-            
-            <!-- Floating Badge -->
-            <div class="absolute -top-10 -right-4 glass p-6 rounded-[24px] shadow-2xl z-30 border-white animate-bounce" style="animation-duration: 4s;">
-                <div class="text-3xl mb-1">🚀</div>
-                <div class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Visibility</div>
-                <div class="text-sm font-bold text-indigo-600">+42% Boost</div>
             </div>
         </div>
     </div>
