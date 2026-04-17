@@ -5,186 +5,270 @@
 <header th:replace="~{fragments/header :: header}"></header>
 
 <!-- Hero Section -->
-<section class="hero-section mesh-bg-light relative">
-    <!-- Abstract Blobs for visual depth -->
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-100/30 rounded-full blur-[120px] -z-10 animate-float"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-50/50 rounded-full blur-[100px] -z-10 animate-float" style="animation-delay: 2s;"></div>
-
-    <div class="hero-content">
+<section class="hero-section bg-mesh-animated relative">
+    <div class="absolute inset-0 bg-grid opacity-[0.03]"></div>
+    
+    <div class="hero-content relative z-10">
         <!-- Left Content -->
-        <div data-animate="fadeInLeft">
+        <div data-reveal class="active">
             <div class="hero-tag">
                 <span class="flex h-2 w-2 rounded-full bg-indigo-600 animate-pulse"></span>
                 World's #1 Profile Intelligence Tool 🏆
             </div>
             
             <h1 class="hero-title">
-                Get more <span class="text-gradient">Interviews</span><br>
-                with AI Insights
+                Master the <span class="text-gradient">LinkedIn</span><br>
+                Algorithm with AI
             </h1>
             
             <p class="hero-desc">
-                Don't let your LinkedIn profile be a missed opportunity. Get an expert-level AI assessment and transform your digital presence today.
+                Transform your digital presence from invisible to irresistible. Our elite AI engine decodes recruiter behavior to give you the ultimate professional edge.
             </p>
             
             <div class="flex flex-col sm:flex-row items-center gap-6">
-                <a href="/review" class="btn-premium">
-                    Start Free Analysis
+                <a href="/review" class="btn-premium group">
+                    Analyze My Profile Free
                     <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                 </a>
                 
-                <div class="flex items-center -space-x-3">
-                    <div class="w-12 h-12 rounded-full ring-4 ring-white shadow-lg overflow-hidden border-2 border-indigo-50">
-                        <img src="/images/avatars/avatar1.png" class="w-full h-full object-cover">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center -space-x-3">
+                        <img src="/images/avatars/avatar1.png" class="w-10 h-10 rounded-full ring-4 ring-white shadow-lg border-2 border-indigo-50">
+                        <img src="/images/avatars/avatar2.png" class="w-10 h-10 rounded-full ring-4 ring-white shadow-lg border-2 border-indigo-50">
+                        <img src="/images/avatars/avatar3.png" class="w-10 h-10 rounded-full ring-4 ring-white shadow-lg border-2 border-indigo-50">
                     </div>
-                    <div class="w-12 h-12 rounded-full ring-4 ring-white shadow-lg overflow-hidden border-2 border-indigo-50">
-                        <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-12 h-12 rounded-full ring-4 ring-white shadow-lg overflow-hidden border-2 border-indigo-50">
-                        <img src="/images/avatars/avatar3.png" class="w-full h-full object-cover">
-                    </div>
-                    <div class="pl-6 text-sm font-bold text-slate-500">
-                        <span class="text-indigo-600">50,000+</span> professionals analyzed
+                    <div class="text-xs font-bold text-slate-500">
+                        <span class="text-indigo-600 block text-sm">50,000+</span> Professionals Joined
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- Right Content: Live Mockup -->
-        <div class="relative group perspective-1000" data-animate="fadeInRight" data-delay="200">
+        <div class="relative group perspective-1000" data-reveal data-delay="200">
             <!-- Large Glow Base -->
             <div class="absolute -inset-20 bg-indigo-500/10 rounded-full blur-[120px] group-hover:bg-indigo-500/20 transition-all duration-1000"></div>
             
-            <div class="relative transform-gpu group-hover:rotate-y-[-5deg] group-hover:rotate-x-[5deg] transition-all duration-700 ease-out">
+            <div class="relative transform-gpu group-hover:rotate-y-[-8deg] group-hover:rotate-x-[8deg] transition-all duration-1000 ease-out">
                 <!-- Avatar 'Holding' the card -->
-                <div class="absolute -left-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-500 group-hover:-translate-x-4">
+                <div class="absolute -left-16 top-1/2 -translate-y-1/2 z-30 transition-all duration-700 group-hover:-translate-x-8">
                     <div class="relative p-1 bg-white rounded-[32px] shadow-2xl border border-indigo-50">
                         <div class="w-32 h-32 rounded-[28px] overflow-hidden bg-indigo-600 ring-4 ring-indigo-50">
-                            <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <img src="/images/avatars/avatar2.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         </div>
-                        <!-- Floating Badge on Avatar -->
-                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-2xl shadow-xl flex items-center justify-center text-2xl animate-bounce" style="animation-duration: 3s;">👑</div>
+                        <div class="absolute -top-4 -right-4 w-12 h-12 bg-white rounded-2xl shadow-xl flex items-center justify-center text-2xl animate-bounce">💎</div>
                     </div>
                 </div>
 
                 <!-- Main Report Card -->
-                <div class="premium-card p-0 overflow-hidden glass-dark border-white/20 relative z-20 shadow-[0_40px_100px_-20px_rgba(15,23,42,0.5)] glow-indigo ml-12">
-                    <div class="premium-aura"></div>
-                    
+                <div class="premium-card p-0 overflow-hidden glass-dark border-white/20 relative z-20 shadow-[0_40px_100px_-20px_rgba(15,23,42,0.6)] ml-12">
                     <div class="p-8 border-b border-white/10 bg-white/5 backdrop-blur-md">
                         <div class="flex items-center justify-between">
                             <div>
-                                <div class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-1">Executive Report</div>
-                                <div class="text-2xl font-black text-white tracking-tight">Abhishek</div>
-                                <div class="text-[10px] font-bold text-slate-400">VP of Engineering @ GlobalTech</div>
+                                <div class="text-[10px] font-black text-indigo-400 uppercase tracking-[0.2em] mb-1">Impact Analysis</div>
+                                <div class="text-2xl font-black text-white tracking-tight">Executive Profile</div>
+                                <div class="text-[10px] font-bold text-slate-400">Optimized for Tier-1 Companies</div>
                             </div>
-                            <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white/40">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
+                            <div class="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="p-12 text-center relative">
-                        <div class="relative w-48 h-48 mx-auto mb-10 group-hover:scale-110 transition-transform duration-700">
+                    <div class="p-10 text-center relative">
+                        <div class="relative w-40 h-40 mx-auto mb-8">
                             <svg viewBox="0 0 100 100" class="w-full h-full transform -rotate-90">
-                                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="6"></circle>
-                                <circle cx="50" cy="50" r="45" fill="none" stroke="url(#hero-mock-grad)" stroke-width="10" 
-                                        stroke-dasharray="282.7" stroke-dashoffset="40" stroke-linecap="round" class="animate-dash"></circle>
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"></circle>
+                                <circle cx="50" cy="50" r="45" fill="none" stroke="url(#hero-grad)" stroke-width="12" 
+                                        stroke-dasharray="282.7" stroke-dashoffset="28" stroke-linecap="round" class="animate-dash"></circle>
+                                <defs>
+                                    <linearGradient id="hero-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#818CF8" />
+                                        <stop offset="100%" style="stop-color:#C084FC" />
+                                    </linearGradient>
+                                </defs>
                             </svg>
                             <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                <span class="text-6xl font-black text-white leading-none">94</span>
-                                <span class="text-[10px] font-black text-indigo-400 uppercase tracking-widest mt-2">Perfect Score</span>
+                                <span class="text-5xl font-black text-white tracking-tighter">98</span>
+                                <span class="text-[9px] font-black text-indigo-300 uppercase tracking-widest mt-1">Score</span>
                             </div>
                         </div>
                         
-                        <div class="grid grid-cols-2 gap-4 mb-8">
-                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                                <div class="text-indigo-400 font-bold text-xl mb-1">99%</div>
-                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">ATS Rank</div>
-                            </div>
-                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
-                                <div class="text-rose-400 font-bold text-xl mb-1">Top 1</div>
-                                <div class="text-[9px] font-black text-slate-500 uppercase tracking-tighter">Visibility</div>
-                            </div>
+                        <div class="flex justify-center gap-3 mb-8">
+                            <div class="py-2 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[10px] font-black">HEADLINE ✅</div>
+                            <div class="py-2 px-4 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-black">SKILLS ✅</div>
                         </div>
 
-                        <div class="inline-flex items-center gap-2 py-3 px-8 rounded-xl bg-indigo-600 text-white font-black text-xs shadow-xl group-hover:bg-indigo-500 transition-colors">
-                            VIEW LIVE ANALYTICS
+                        <div class="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-indigo-500 to-purple-500 w-[90%] rounded-full animate-pulse"></div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Secondary Floating Card -->
-                <div class="absolute -bottom-10 -right-6 glass p-6 rounded-[28px] shadow-3xl z-30 border-white animate-float backdrop-blur-xl max-w-[200px]" style="animation-duration: 8s;">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-8 h-8 rounded-lg bg-emerald-500 flex items-center justify-center text-white">⚡</div>
-                        <div class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Live Activity</div>
+                <!-- Floating Insight -->
+                <div class="absolute -bottom-6 -right-10 glass p-5 rounded-3xl shadow-3xl z-30 border-white/50 backdrop-blur-2xl max-w-[180px] animate-float">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div class="w-6 h-6 rounded-lg bg-amber-500 flex items-center justify-center text-[10px]">🔥</div>
+                        <div class="text-[9px] font-black text-slate-400 uppercase tracking-tighter">Market Trend</div>
                     </div>
-                    <p class="text-[11px] font-bold text-slate-700 leading-snug">Abhishek just received <span class="text-indigo-600">3 connection requests</span> of senior recruiters!</p>
+                    <p class="text-[10px] font-bold text-slate-700 leading-tight">Your profile matches <span class="text-indigo-600">84%</span> of FAANG requirements.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Features Grid -->
-<section class="section-padding bg-slate-50">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="section-header">
-            <h2 class="section-title">Why Professionals Choose Careerthon</h2>
-            <p class="section-desc">Join the elite circle of recruiters and candidates who use our technology to dominate the job market.</p>
+<!-- Stats Section -->
+<section class="py-24 bg-slate-900 overflow-hidden relative">
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent"></div>
+    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="stat-card" data-reveal>
+            <div class="stat-number">51k+</div>
+            <div class="text-xs font-black text-slate-400 uppercase tracking-widest">Profiles Scanned</div>
         </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="premium-card" data-animate="fadeInUp">
-                <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow-lg mb-8">🔍</div>
-                <h3 class="text-xl font-bold mb-4">Line-by-Line Analysis</h3>
-                <p class="text-slate-500">Every word matters. We analyze your headline, summary, and experience to ensure maximum recruiter impact.</p>
-            </div>
-            
-            <div class="premium-card" data-animate="fadeInUp" data-delay="100">
-                <div class="w-14 h-14 rounded-2xl bg-blue-500 text-white flex items-center justify-center text-2xl shadow-lg mb-8">⚡</div>
-                <h3 class="text-xl font-bold mb-4">ATS Optimization</h3>
-                <p class="text-slate-500">Master the algorithm. Our tool identifies key missing skills and keywords that prevent recruiters from finding you.</p>
-            </div>
-            
-            <div class="premium-card" data-animate="fadeInUp" data-delay="200">
-                <div class="w-14 h-14 rounded-2xl bg-emerald-500 text-white flex items-center justify-center text-2xl shadow-lg mb-8">📊</div>
-                <h3 class="text-xl font-bold mb-4">Actionable Roadmap</h3>
-                <p class="text-slate-500">No fluff. Just a clear, prioritized list of steps to take your profile from "Visible" to "Must-Hire".</p>
-            </div>
+        <div class="stat-card" data-reveal data-delay="100">
+            <div class="stat-number">85%</div>
+            <div class="text-xs font-black text-slate-400 uppercase tracking-widest">Interview Lift</div>
+        </div>
+        <div class="stat-card" data-reveal data-delay="200">
+            <div class="stat-number">200+</div>
+            <div class="text-xs font-black text-slate-400 uppercase tracking-widest">Expert Models</div>
+        </div>
+        <div class="stat-card" data-reveal data-delay="300">
+            <div class="stat-number">4.9/5</div>
+            <div class="text-xs font-black text-slate-400 uppercase tracking-widest">User Rating</div>
         </div>
     </div>
 </section>
 
-<!-- Expert Testimonials -->
-<section class="section-padding mesh-bg-light">
+<!-- Advanced Features (Bento Grid) -->
+<section class="section-padding bg-slate-50 relative">
     <div class="max-w-7xl mx-auto px-4">
         <div class="section-header">
-            <h2 class="section-title">Success Stories</h2>
-            <p class="section-desc">Real transformations from real professionals who accelerated their careers with us.</p>
+            <h2 class="section-title">Everything you need to <span class="text-gradient">Stand Out</span></h2>
+            <p class="section-desc">We've built a comprehensive suite of AI tools to handle every aspect of your professional brand.</p>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div th:each="story : ${testimonials}" class="premium-card flex flex-col justify-between group">
+        <div class="bento-grid">
+            <div class="bento-item large flex flex-col justify-between group" data-reveal>
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-50 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
                 <div>
-                   <div class="flex text-amber-400 mb-6 gap-1">
-                       <span th:each="i : ${#numbers.sequence(1, 5)}">★</span>
-                   </div>
-                    <p class="text-slate-600 mb-8 leading-relaxed italic text-lg" th:text="${story.story}">
-                        The analysis was incredibly precise...
-                    </p>
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow-lg mb-6 relative z-10">🤖</div>
+                    <h3 class="text-2xl font-black mb-4 relative z-10">AI Deep Scan</h3>
+                    <p class="text-slate-500 relative z-10">Our neural network analyzes your profile against 10M+ successful career paths to find your unique value proposition.</p>
                 </div>
+            </div>
+            
+            <div class="bento-item wide bg-indigo-600 text-white" data-reveal data-delay="100">
+                <div class="flex items-center gap-6 h-full">
+                    <div class="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center text-3xl">🚀</div>
+                    <div>
+                        <h3 class="text-xl font-black mb-2">ATS Optimization</h3>
+                        <p class="text-indigo-100 text-sm">Beat the bots. We identify the exact keywords recruiters use to filter candidates.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bento-item tall group" data-reveal data-delay="200">
+                <div class="flex flex-col h-full justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-6">📈</div>
+                        <h3 class="text-lg font-black mb-3">Growth Roadmap</h3>
+                        <p class="text-slate-500 text-sm">A step-by-step guide to increasing your profile views by up to 300% in 30 days.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bento-item tall group" data-reveal data-delay="300">
+                <div class="flex flex-col h-full justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-6">👔</div>
+                        <h3 class="text-lg font-black mb-3">Recruiter POV</h3>
+                        <p class="text-slate-500 text-sm">See your profile exactly how a hiring manager sees it. No more guesswork.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bento-item wide group" data-reveal data-delay="400">
+                <div class="flex items-center gap-6 h-full">
+                    <div class="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center text-3xl">🎯</div>
+                    <div>
+                        <h3 class="text-xl font-black mb-2">Skill Gap Analysis</h3>
+                        <p class="text-slate-500 text-sm">Discover which skills are missing for your dream role and how to bridge the gap.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How it Works -->
+<section class="section-padding bg-white relative overflow-hidden">
+    <div class="absolute -right-20 top-20 w-80 h-80 bg-indigo-50 rounded-full blur-[100px] opacity-50"></div>
+    <div class="absolute -left-20 bottom-20 w-80 h-80 bg-blue-50 rounded-full blur-[100px] opacity-50"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="section-header">
+            <h2 class="section-title">3 Steps to <span class="text-gradient">Career Excellence</span></h2>
+            <p class="section-desc">The fastest way to professional optimization. No complicated forms, just results.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-16">
+            <div class="text-center group" data-reveal>
+                <div class="w-24 h-24 rounded-[32px] bg-slate-50 border border-slate-100 flex items-center justify-center text-4xl mx-auto mb-8 relative group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-indigo-600 text-white text-sm font-black flex items-center justify-center shadow-lg">1</span>
+                    🔗
+                </div>
+                <h3 class="text-xl font-black mb-4">Paste Your URL</h3>
+                <p class="text-slate-500">Simply copy and paste your LinkedIn profile link. Our engine takes care of the rest.</p>
+            </div>
+            
+            <div class="text-center group" data-reveal data-delay="100">
+                <div class="w-24 h-24 rounded-[32px] bg-slate-50 border border-slate-100 flex items-center justify-center text-4xl mx-auto mb-8 relative group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-indigo-600 text-white text-sm font-black flex items-center justify-center shadow-lg">2</span>
+                    ⚡
+                </div>
+                <h3 class="text-xl font-black mb-4">AI Scan</h3>
+                <p class="text-slate-500">Our neural network performs a multi-layer analysis of your entire professional presence.</p>
+            </div>
+            
+            <div class="text-center group" data-reveal data-delay="200">
+                <div class="w-24 h-24 rounded-[32px] bg-slate-50 border border-slate-100 flex items-center justify-center text-4xl mx-auto mb-8 relative group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-indigo-600 text-white text-sm font-black flex items-center justify-center shadow-lg">3</span>
+                    🏆
+                </div>
+                <h3 class="text-xl font-black mb-4">Get the Report</h3>
+                <p class="text-slate-500">Receive a detailed breakdown with actionable steps to maximize your visibility and hireability.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section-padding bg-slate-900 text-white overflow-hidden relative">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,#312e81,gradient)]"></div>
+    <div class="max-w-7xl mx-auto px-4 relative z-10">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+            <div class="max-w-2xl">
+                <h2 class="text-4xl md:text-5xl font-black mb-6">Global Professionals <span class="text-indigo-400">Trust Us</span></h2>
+                <p class="text-slate-400 text-lg">Join thousands of software engineers, product managers, and executives who have transformed their careers.</p>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div th:each="story : ${testimonials}" class="glass-dark p-8 rounded-[32px] border-white/5 hover:border-indigo-500/50 transition-colors group" data-reveal>
+                <div class="flex text-amber-400 mb-6 text-sm">★★★★★</div>
+                <p class="text-slate-300 mb-8 italic leading-relaxed" th:text="${story.story}">"The best career investment I've made..."</p>
                 <div class="flex items-center gap-4">
-                    <div class="w-14 h-14 rounded-2xl overflow-hidden shadow-xl ring-4 ring-white border border-slate-100">
+                    <div class="w-12 h-12 rounded-xl overflow-hidden shadow-2xl grayscale group-hover:grayscale-0 transition-all duration-500">
                         <img th:if="${story.avatarUrl != null}" th:src="${story.avatarUrl}" class="w-full h-full object-cover">
-                        <div th:if="${story.avatarUrl == null}" class="w-full h-full flex items-center justify-center text-white font-black" 
+                        <div th:if="${story.avatarUrl == null}" class="w-full h-full flex items-center justify-center text-sm font-black" 
                              th:style="'background:' + ${story.avatarColor}"
                              th:text="${story.avatarInitials}">PS</div>
                     </div>
                     <div>
-                        <div class="font-extrabold text-slate-900" th:text="${story.name}">Careerthon User</div>
-                        <div class="text-xs font-bold text-indigo-600 uppercase tracking-widest" th:text="${story.role}">Senior Engineer</div>
+                        <div class="font-bold text-white text-sm" th:text="${story.name}">User Name</div>
+                        <div class="text-[10px] font-black text-indigo-400 uppercase tracking-widest" th:text="${story.role}">Role</div>
                     </div>
                 </div>
             </div>
@@ -192,24 +276,75 @@
     </div>
 </section>
 
-<!-- Call to Action -->
-<section class="section-padding">
-    <div class="max-w-7xl mx-auto px-4">
-        <div class="bg-slate-900 rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden shadow-3xl" data-animate="zoomIn">
-            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_0%,#4f46e5,transparent_70%)]"></div>
-            
-            <h2 class="text-4xl md:text-6xl font-black text-white mb-8 relative z-10">Ready to transform your career?</h2>
-            <p class="text-xl text-slate-400 mb-12 max-w-2xl mx-auto relative z-10">Get your professional LinkedIn report in less than 2 minutes. Start your journey for free today.</p>
-            
-            <div class="relative z-10">
-                <a href="/review" class="btn-premium py-6 px-16 text-xl rounded-2xl">
-                    Analyze My Profile Now
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                </a>
+<!-- FAQ Section -->
+<section class="section-padding bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="section-header">
+            <h2 class="section-title">Common Questions</h2>
+            <p class="section-desc">Everything you need to know about our LinkedIn intelligence engine.</p>
+        </div>
+        
+        <div class="space-y-4">
+            <div class="border border-slate-100 rounded-3xl p-6 hover:bg-slate-50 transition-colors cursor-pointer group" data-reveal>
+                <div class="flex justify-between items-center">
+                    <h3 class="font-black text-slate-900">Is this service really free?</h3>
+                    <span class="text-2xl text-slate-300 group-hover:text-indigo-600 transition-colors">+</span>
+                </div>
+            </div>
+            <div class="border border-slate-100 rounded-3xl p-6 hover:bg-slate-50 transition-colors cursor-pointer group" data-reveal data-delay="100">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-black text-slate-900">How long does the analysis take?</h3>
+                    <span class="text-2xl text-slate-300 group-hover:text-indigo-600 transition-colors">+</span>
+                </div>
+            </div>
+            <div class="border border-slate-100 rounded-3xl p-6 hover:bg-slate-50 transition-colors cursor-pointer group" data-reveal data-delay="200">
+                <div class="flex justify-between items-center">
+                    <h3 class="font-black text-slate-900">Is my data secure?</h3>
+                    <span class="text-2xl text-slate-300 group-hover:text-indigo-600 transition-colors">+</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<!-- CTA Section -->
+<section class="py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4">
+        <div class="bg-indigo-600 rounded-[64px] p-12 md:p-32 text-center relative overflow-hidden shadow-[0_40px_100px_-20px_rgba(79,102,241,0.5)]" data-reveal>
+            <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_50%_0%,#fff,transparent_70%)]"></div>
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-white/10 rounded-full blur-[100px]"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-400/20 rounded-full blur-[100px]"></div>
+            
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-7xl font-black text-white mb-8 tracking-tighter">Your Dream Job is <br><span class="text-indigo-200">one scan away.</span></h2>
+                <p class="text-xl text-indigo-100 mb-12 max-w-2xl mx-auto font-medium">Join 50,000+ professionals who stopped guessing and started growing.</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="/review" class="bg-white text-indigo-600 py-6 px-16 text-xl rounded-2xl font-black shadow-2xl hover:scale-105 transition-transform">
+                        Start Free Analysis
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Reveal on scroll logic
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>

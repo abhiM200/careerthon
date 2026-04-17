@@ -1,68 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/header :: head('Submit Your LinkedIn Profile - Careerthon')}"></head>
-<body class="review-page">
-
-<div th:replace="~{fragments/header :: header}"></div>
-
-<main class="review-main">
-    <div class="review-container">
-        <div class="review-left" data-animate="fadeInLeft">
-            <div class="review-badge">🔍 Premium Profile Analysis</div>
-            <h1 class="review-title">Analyze Your LinkedIn Profile</h1>
-            <p class="review-subtitle">Paste your LinkedIn URL below and get an instant, comprehensive analysis of your profile for <strong>Free</strong>.</p>
-
-            <form action="/review/submit" method="post" class="review-form" id="review-form">
-                <div class="form-group">
-                    <label for="linkedinUrl" class="form-label">Your LinkedIn Profile URL</label>
+<head th:replace="~{fragments/header :: head('Analyze Your Profile - Careerthon')}"></head>
 <body class="bg-soft">
 
 <header th:replace="~{fragments/header :: header}"></header>
 
-<main class="section-padding mesh-bg-light min-h-screen">
+<main class="section-padding bg-mesh-animated min-h-screen pt-32">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex flex-col lg:flex-row gap-16 items-start">
-            <!-- Left: Form Section -->
-            <div class="lg:w-7/12" data-animate="fadeInLeft">
-                <div class="hero-tag">Step 1: Intelligence Scan</div>
-                <h1 class="text-5xl font-black text-slate-900 mb-6 leading-tight">
+        <div class="flex flex-col lg:flex-row gap-20 items-center">
+            <!-- Left: Content Section -->
+            <div class="lg:w-1/2" data-reveal>
+                <div class="hero-tag mb-6">Phase 1: Intelligence Scan</div>
+                <h1 class="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-tight tracking-tighter">
                     Analyze Your <span class="text-gradient">LinkedIn</span> Impact
                 </h1>
-                <p class="text-xl text-slate-500 mb-12">
-                    Enter your profile URL below. Our AI will perform a deep-scan of your presence, keywords, and recruiter visibility markers.
+                <p class="text-xl text-slate-500 mb-12 font-medium">
+                    Our AI engine performs a deep-scan of 15+ visibility markers to see how recruiters view your brand.
                 </p>
-            </div>
 
-            <div class="review-trust">
-                <div class="trust-item">⚡ <span>Instant results in seconds</span></div>
-                <div class="trust-item">💳 <span>No Payment Required</span></div>
-                <div class="trust-item">🔒 <span>Secure & private analysis</span></div>
-            </div>
-    </div>
-    
-    <div class="review-team-section" style="margin-top: 5rem; padding-top: 3rem; border-top: 1px solid #e2e8f0;">
-        <h2 style="text-align: center; font-size: 2rem; font-weight: 800; color: #0f172a; margin-bottom: 3rem;">Profiles Reviewed by Industry Experts</h2>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
-            <div style="background: white; padding: 2.5rem; border-radius: 2.5rem; box-shadow: 0 15px 40px rgba(0,0,0,0.08); border: 1px solid #f1f5f9; max-width: 600px; transition: transform 0.3s ease;">
-                <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
-                    <img src="/images/ayushi_mishra.png" style="width: 80px; height: 80px; border-radius: 1.5rem; object-fit: cover; box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);">
-                    <div>
-                        <div style="font-weight: 900; font-size: 1.5rem; color: #0f172a; line-height: 1.2;">Ayushi Mishra</div>
-                        <div style="font-size: 0.85rem; font-weight: 800; color: #6366f1; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.25rem;">Senior Associate - Talent Acquisition</div>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-white">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-600 flex items-center justify-center text-xl shadow-lg">⚡</div>
+                        <div>
+                            <div class="font-black text-slate-900">Instant Processing</div>
+                            <div class="text-xs text-slate-500">Get your detailed report in less than 30 seconds.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-white">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500 flex items-center justify-center text-xl shadow-lg">🔒</div>
+                        <div>
+                            <div class="font-black text-slate-900">Secure Analysis</div>
+                            <div class="text-xs text-slate-500">We don't store your personal credentials. Safe & Private.</div>
+                        </div>
                     </div>
                 </div>
-                <p style="font-size: 1rem; color: #475569; line-height: 1.8; margin-bottom: 1.5rem;">Ayushi brings 4.6+ years of specialized experience in talent acquisition across Cloud, SaaS, Fintech, and Insurtech domains. Her expertise in identifying top-tier tech talent and building high-performing teams ensures your profile is optimized to catch the eye of the most selective recruiters.</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
-                    <span style="padding: 0.5rem 1rem; background: #eef2ff; color: #6366f1; border-radius: 1rem; font-size: 0.75rem; font-weight: 700;">Expert CV Reviewer</span>
-                    <span style="padding: 0.5rem 1rem; background: #f0fdf4; color: #16a34a; border-radius: 1rem; font-size: 0.75rem; font-weight: 700;">Recruitment Strategy</span>
-                    <span style="padding: 0.5rem 1rem; background: #fef2f2; color: #dc2626; border-radius: 1rem; font-size: 0.75rem; font-weight: 700;">Stakeholder Management</span>
+            </div>
+
+            <!-- Right: Form Card -->
+            <div class="lg:w-1/2 w-full" data-reveal data-delay="200">
+                <div class="premium-card !p-8 md:!p-12 glass border-white/60 shadow-3xl">
+                    <form th:action="@{/review/submit}" method="POST" class="space-y-8">
+                        <div>
+                            <label class="block text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Paste Your Profile URL</label>
+                            <div class="relative group">
+                                <div class="absolute inset-0 bg-indigo-500/10 rounded-2xl blur-xl group-focus-within:bg-indigo-500/20 transition-all"></div>
+                                <input type="url" name="linkedinUrl" required 
+                                       placeholder="https://www.linkedin.com/in/yourname"
+                                       class="relative w-full py-6 px-8 bg-white rounded-2xl border-2 border-slate-100 focus:border-indigo-600 outline-none transition-all text-lg font-bold text-slate-900">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full btn-premium py-6 rounded-2xl text-xl flex justify-center group">
+                            Generate Executive Report
+                            <svg class="w-6 h-6 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </button>
+                    </form>
+
+                    <div class="mt-8 pt-8 border-t border-slate-100">
+                        <div class="flex items-center justify-center gap-4">
+                            <div class="flex -space-x-2">
+                                <div class="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
+                                <div class="w-8 h-8 rounded-full bg-slate-300 border-2 border-white"></div>
+                                <div class="w-8 h-8 rounded-full bg-slate-400 border-2 border-white"></div>
+                            </div>
+                            <div class="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                                4.9/5 from 4,000+ professionals
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expert Endorsement -->
+        <div class="mt-32" data-reveal>
+            <h2 class="text-center text-sm font-black text-slate-400 uppercase tracking-[0.3em] mb-12">Engineered by Industry Experts</h2>
+            <div class="flex justify-center">
+                <div class="max-w-3xl w-full p-10 bg-white rounded-[40px] shadow-xl border border-slate-100 flex flex-col md:flex-row items-center gap-10 hover:shadow-2xl transition-all">
+                    <img src="/images/ayushi_mishra.png" class="w-32 h-32 rounded-3xl object-cover shadow-2xl shrink-0">
+                    <div>
+                        <div class="flex text-amber-400 mb-2 text-xs">★★★★★</div>
+                        <p class="text-slate-600 italic leading-relaxed mb-6 font-medium">"We designed Careerthon to reflect exactly how high-end corporate recruiters filter talent. It's the ultimate insider's advantage."</p>
+                        <div>
+                            <div class="font-black text-slate-900">Ayushi Mishra</div>
+                            <div class="text-[10px] font-black text-indigo-600 uppercase tracking-widest">Senior Associate - Talent Acquisition</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-<div th:replace="~{fragments/footer :: footer}"></div>
-<script th:src="@{/js/app.js}"></script>
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+<script>
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, observerOptions);
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>

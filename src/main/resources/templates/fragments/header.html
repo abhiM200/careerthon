@@ -6,7 +6,7 @@
     <title th:text="${title}">Careerthon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -16,78 +16,41 @@
 
 <!-- Header Fragment -->
 <header th:fragment="header" class="site-header" id="site-header">
-    <!-- Top Alert Bar -->
-    <div class="bg-indigo-600 text-white text-[10px] sm:text-xs py-2 px-4 text-center font-bold tracking-widest uppercase">
-        <span class="opacity-90">Unlock Your Professional Potential. over</span> 
-        <span class="bg-white text-indigo-600 px-2 py-0.5 rounded ml-1">51,798+</span> 
-        <span class="opacity-90 ml-1">Reports Generated This week! ⚡</span>
-    </div>
-
-    <nav class="nav-container py-4">
-        <a href="/" class="logo">
-            <div class="logo-icon">C</div>
-            <span class="logo-text">Careerthon</span>
+    <nav class="nav-container py-4 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group">
+            <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-black text-xl shadow-glow group-hover:scale-110 transition-transform">C</div>
+            <span class="text-2xl font-black text-slate-900 tracking-tighter">Careerthon</span>
         </a>
         
-        <div class="nav-links ml-auto">
-            <a href="/" class="nav-link">Home</a>
-            <a href="/review" class="nav-link">LinkedIn Review</a>
-            <a href="/resume" class="nav-link">Resume Scan</a>
-            
-            <div class="nav-dropdown-wrapper relative group">
-                <button class="nav-link flex items-center gap-1">
-                    AI Tools <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7" /></svg>
-                </button>
-                <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-slate-100 opacity-0 invisible translate-y-2 transition-all group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 p-2 z-[1000]">
-                    <a href="/resume/templates" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                        <span class="text-xl">📄</span>
-                        <div>
-                            <div class="font-bold text-slate-900 text-sm">Resume Builder</div>
-                            <div class="text-[10px] text-slate-400 font-bold uppercase">Templates included</div>
-                        </div>
-                    </a>
-                    <a href="/ai-tools/skill-gap" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                        <span class="text-xl">🎯</span>
-                        <div>
-                            <div class="font-bold text-slate-900 text-sm">Skill Gap Analyzer</div>
-                            <div class="text-[10px] text-slate-400 font-bold uppercase">Deep Insights</div>
-                        </div>
-                    </a>
-                    <a href="/ai-tools/roadmap" class="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors">
-                        <span class="text-xl">🗺️</span>
-                        <div>
-                            <div class="font-bold text-slate-900 text-sm">Career Roadmap</div>
-                            <div class="text-[10px] text-slate-400 font-bold uppercase">Step-by-step</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <a href="/about" class="nav-link">About</a>
+        <div class="nav-links hidden lg:flex items-center bg-slate-100/50 backdrop-blur-md p-1.5 rounded-2xl border border-slate-200/50">
+            <a href="/" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-white transition-all">Home</a>
+            <a href="/review" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-white transition-all">Analysis</a>
+            <a href="/resume" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-white transition-all">Resume Scan</a>
+            <a href="/about" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-indigo-600 hover:bg-white transition-all">About</a>
         </div>
         
-        <div class="auth-links">
-            <div sec:authorize="isAnonymous()" class="flex items-center gap-4">
-                <a href="/login" class="text-sm font-bold text-slate-600 hover:text-indigo-600">Login</a>
-                <a href="/signup" class="btn-premium py-2.5 px-6 rounded-xl text-sm">Join Free</a>
+        <div class="auth-links flex items-center gap-4">
+            <div sec:authorize="isAnonymous()" class="flex items-center gap-2">
+                <a href="/login" class="text-sm font-black text-slate-500 hover:text-indigo-600 px-4">Login</a>
+                <a href="/signup" class="btn-premium !py-3 !px-8 !rounded-xl text-sm shadow-xl">Get Started</a>
             </div>
 
             <div sec:authorize="isAuthenticated()" class="flex items-center gap-4">
                 <div class="text-right hidden sm:block">
-                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Welcome back</div>
+                    <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Authenticated</div>
                     <div sec:authentication="name" class="text-sm font-black text-slate-900 leading-none">User</div>
                 </div>
                 <form th:action="@{/logout}" method="post" class="m-0">
-                    <button type="submit" class="p-2.5 px-5 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition-all">
+                    <button type="submit" class="p-3 rounded-xl bg-slate-100 text-slate-700 text-[10px] font-black uppercase tracking-widest hover:bg-slate-200 transition-all">
                         Logout
                     </button>
                 </form>
             </div>
-        </div>
 
-        <button class="mobile-menu-btn lg:hidden" onclick="toggleMobileMenu()">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-        </button>
+            <button class="mobile-menu-btn lg:hidden p-2 rounded-xl bg-slate-100 text-slate-600" onclick="toggleMobileMenu()">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </div>
     </nav>
 </header>
 
@@ -95,9 +58,9 @@
     window.addEventListener('scroll', () => {
         const header = document.getElementById('site-header');
         if (window.scrollY > 50) {
-            header.classList.add('scrolled');
+            header.classList.add('scrolled', 'shadow-xl', 'bg-white/80', 'backdrop-blur-xl', 'border-b', 'border-slate-100');
         } else {
-            header.classList.remove('scrolled');
+            header.classList.remove('scrolled', 'shadow-xl', 'bg-white/80', 'backdrop-blur-xl', 'border-b', 'border-slate-100');
         }
     });
 </script>
