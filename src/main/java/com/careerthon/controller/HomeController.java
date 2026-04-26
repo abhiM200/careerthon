@@ -32,6 +32,11 @@ public class HomeController {
         return "about";
     }
 
+    @GetMapping("/features")
+    public String features() {
+        return "features";
+    }
+
     private boolean isTeamMember(UserStory story) {
         return story.getAvatarUrl() != null && !story.getAvatarUrl().isEmpty();
     }

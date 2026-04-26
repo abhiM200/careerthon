@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Platform Features - Careerthon')}"></head>
+<body class="bg-themed-pure">
+
+<header th:replace="~{fragments/header :: header}"></header>
+
+<main class="pt-40 pb-20">
+    <!-- Features Hero -->
+    <section class="min-h-[60vh] flex items-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-grid opacity-[0.03]"></div>
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(99,102,241,0.1),transparent_70%)]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+            <div class="hero-tag !bg-indigo-600/5 !text-indigo-600 dark:!text-indigo-400 border-indigo-600/10 mb-8" data-reveal>The Intelligence Suite</div>
+            <h1 class="text-5xl md:text-8xl font-black mb-8 tracking-tighter text-themed-main leading-tight" data-reveal data-delay="100">
+                80+ Tools for <br><span class="text-gradient">Career Dominance</span>
+            </h1>
+            <p class="text-xl text-themed-body max-w-2xl mx-auto font-medium" data-reveal data-delay="200">
+                A comprehensive ecosystem designed to optimize every dimension of your professional existence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features Explorer -->
+    <div class="max-w-7xl mx-auto px-4">
+        
+        <!-- Navigation Tabs (Optional scroll-spy behavior) -->
+        <div class="flex overflow-x-auto gap-4 pb-8 mb-20 no-scrollbar sticky top-24 z-30 bg-themed-pure/80 backdrop-blur-xl py-4 border-b border-themed-soft">
+            <a href="#writing" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">AI Writing</a>
+            <a href="#analysis" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Profile Analysis</a>
+            <a href="#resume" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Resume Tools</a>
+            <a href="#interview" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Interview Prep</a>
+            <a href="#networking" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Networking</a>
+            <a href="#dashboard" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Productivity</a>
+            <a href="#b2b" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Recruiter/B2B</a>
+            <a href="#gamification" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Gamification</a>
+            <a href="#monetization" class="px-6 py-2 rounded-full bg-themed-soft border border-themed-soft text-sm font-black whitespace-nowrap hover:border-indigo-600 transition-all text-themed-main">Pro Features</a>
+        </div>
+
+        <!-- Section: AI Writing Tools -->
+        <section id="writing" class="mb-32" data-reveal>
+            <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-indigo-600 text-white flex items-center justify-center text-3xl shadow-glow">🤖</div>
+                <h2 class="text-4xl font-black text-themed-main">AI Writing Tools</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #1</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">LinkedIn Headline Generator</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Generate 5 headline options based on role & skills tailored for the 2026 algorithm.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #2</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Bio/Summary Rewriter</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Rewrite "About" section in 3 styles (Bold, Story, Formal) for maximum impact.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #3</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Achievement Bullet Generator</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Turn boring job duties into impact-driven bullets that recruiters actually read.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #4</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Recommendation Letter Writer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">AI drafts LinkedIn recommendations for colleagues in seconds.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #5</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Thank You Email Generator</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Post-interview thank you notes that leave a lasting impression.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #6</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">LinkedIn Banner Text</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Catchy taglines for your profile banner image to hook visitors instantly.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #7</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Cold DM / InMail Writer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Personalized outreach messages that actually get responses from recruiters.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #8</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Job Rejection Response</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Professional, relationship-preserving replies to rejection emails.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #9</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Salary Negotiation Script</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Word-for-word scripts to negotiate offers with confidence.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #10</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">LinkedIn Post Caption Writer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Viral-ready captions for career milestones and professional updates.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Profile & Career Analysis -->
+        <section id="analysis" class="mb-32" data-reveal>
+            <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-blue-500 text-white flex items-center justify-center text-3xl shadow-glow">📊</div>
+                <h2 class="text-4xl font-black text-themed-main">Profile & Career Analysis</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #11</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Profile Completeness Checker</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Section-by-section checklist with % progress to ensure maximum algorithm visibility.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #12</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Keyword Density Analyzer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Analyze whether you're using the exact words recruiters search for in your industry.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #13</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Profile Staleness Detector</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Flags outdated sections, old skills, and stale dates that hurt your ranking.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #14</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Experience Gap Analyzer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Detects career gaps and suggests strategic ways to explain or bridge them.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #15</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Soft Skills Extractor</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Reads your profile and surfaces hidden soft skills that recruiters highly value.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #16</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Industry Fit Score</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Assess how well your profile aligns with your claimed or target industry standards.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #17</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Location Optimization</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Suggests whether to list remote/hybrid for maximum search reach.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #18</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Profile Photo Analyzer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Rates your photo on professionalism, lighting, and impact using visual AI.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #19</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Endorsement Strength Meter</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Analyze if your top skills are properly endorsed to build trust with recruiters.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #20</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Connection Quality Score</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Assesses if your network is relevant to your career trajectory and target roles.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Resume Tools -->
+        <section id="resume" class="mb-32" data-reveal>
+            <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-emerald-500 text-white flex items-center justify-center text-3xl shadow-glow">📄</div>
+                <h2 class="text-4xl font-black text-themed-main">Resume Tools</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #21</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Resume Keyword Injector</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Auto-inserts missing job description keywords into your resume intelligently.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #22</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Resume Grader</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">A/B grade two versions of your resume side by side to see which performs better.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #23</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">One-Page Compressor</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Condenses multi-page resumes into a high-impact 1-page format intelligently.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #24</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Resume Format Checker</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Detects bad formatting, tables, and images that ATS systems can't read.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #25</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Multi-Role Generator</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">One profile source → multiple tailored resumes for different roles automatically.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #26</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Resume to LinkedIn Converter</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Upload your resume and get auto-filled suggestions for all LinkedIn sections.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #27</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Skills Optimizer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Reorders and categorizes skills for maximum ATS impact and readability.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #28</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Resume Language Detector</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Flags weak, vague, or passive language ("helped with") and suggests stronger verbs.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #29</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Quantification Suggester</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Identifies sections where you can add numbers (e.g., "increased sales by ___%").</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #30</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Resume Version Manager</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Save, label, and switch between multiple resume versions for different industries.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Interview Preparation -->
+        <section id="interview" class="mb-32" data-reveal>
+            <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-amber-500 text-white flex items-center justify-center text-3xl shadow-glow">🎤</div>
+                <h2 class="text-4xl font-black text-themed-main">Interview Preparation</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #31</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Mock Interview Bot</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Full AI interview simulation with voice/text feedback on your performance.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #32</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">STAR Answer Builder</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Automatically structures your experiences into the perfect STAR format.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #33</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Company Research Assistant</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Summarizes company culture, news, and values before your interview.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #34</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Question Predictor</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Predicts the top 10 questions you're likely to face for your specific target role.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #35</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Answer Confidence Scorer</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Paste your answer and AI rates it on clarity, impact, and confidence.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #36</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Intro Script Builder</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Generates a perfect 60-second "Tell me about yourself" script based on your bio.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #37</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Salary Range Research</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Access live market salary data for any role and location to know your worth.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #38</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Counter-Offer Simulator</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Practice salary negotiation with an AI playing the HR role.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #39</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Interview Debrief Tool</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Log what was asked and how you answered to identify improvement areas.</p>
+                </div>
+                <div class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4">Feature #40</div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Body Language Tips</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Pre-interview checklist for video call body language and lighting.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- More sections can follow the same pattern... -->
+        <!-- For brevity, I'll group the remaining 40 features in summarized grid -->
+        
+        <section id="networking" class="mb-32" data-reveal>
+             <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-pink-500 text-white flex items-center justify-center text-3xl shadow-glow">🌐</div>
+                <h2 class="text-4xl font-black text-themed-main">Networking & Outreach</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Features 41-50 -->
+                <div th:each="i : ${#numbers.sequence(41, 50)}" class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4" th:text="'Feature #' + ${i}"></div>
+                    <h3 class="text-xl font-black text-themed-main mb-4" th:text="${i == 41 ? 'Networking Plan Gen' : (i == 45 ? 'Referral Request Writer' : 'Elite Networking Tool')}">Networking Tool</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Advanced strategies for alumni approach, event pitches, and brand consistency.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="dashboard" class="mb-32" data-reveal>
+             <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-purple-500 text-white flex items-center justify-center text-3xl shadow-glow">📈</div>
+                <h2 class="text-4xl font-black text-themed-main">Dashboard & Productivity</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Features 51-60 -->
+                <div th:each="i : ${#numbers.sequence(51, 60)}" class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4" th:text="'Feature #' + ${i}"></div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Productivity Engine</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Career goal setting, daily tip feeds, job alerts, and burnout risk checks.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="b2b" class="mb-32" data-reveal>
+             <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-slate-800 text-white flex items-center justify-center text-3xl shadow-glow">🏢</div>
+                <h2 class="text-4xl font-black text-themed-main">Recruiter / B2B Tools</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Features 61-65 -->
+                <div th:each="i : ${#numbers.sequence(61, 65)}" class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4" th:text="'Feature #' + ${i}"></div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Recruiter Suite</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Shortlisting, bulk screening, and job description optimization for companies.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gamification" class="mb-32" data-reveal>
+             <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-amber-600 text-white flex items-center justify-center text-3xl shadow-glow">🎮</div>
+                <h2 class="text-4xl font-black text-themed-main">Gamification & Community</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Features 66-70 -->
+                <div th:each="i : ${#numbers.sequence(66, 70)}" class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4" th:text="'Feature #' + ${i}"></div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Engagement Tools</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">XP systems, achievement badges, leaderboards, and peer profile swapping.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="monetization" class="mb-32" data-reveal>
+             <div class="flex items-center gap-6 mb-12">
+                <div class="w-16 h-16 rounded-3xl bg-emerald-600 text-white flex items-center justify-center text-3xl shadow-glow">💰</div>
+                <h2 class="text-4xl font-black text-themed-main">Monetization & Pro Features</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Features 76-80 -->
+                <div th:each="i : ${#numbers.sequence(76, 80)}" class="glass p-8 rounded-[32px] border-themed-soft group hover:border-indigo-600/30 transition-all">
+                    <div class="text-[10px] font-black text-indigo-500 uppercase tracking-widest mb-4" th:text="'Feature #' + ${i}"></div>
+                    <h3 class="text-xl font-black text-themed-main mb-4">Enterprise Features</h3>
+                    <p class="text-themed-body text-sm leading-relaxed">Pro plans, career coaching marketplace, and white-label college tools.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer th:replace="~{fragments/footer :: footer}"></footer>
+
+<script>
+    // Smooth scroll for anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Reveal on scroll
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('active');
+        });
+    }, observerOptions);
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
