@@ -29,12 +29,6 @@ public class DataInitializer implements CommandLineRunner {
         if (userStoryRepository.count() == 0) {
             List<UserStory> originalStories = List.of(
                 new UserStory(
-                    "Ayushi Mishra",
-                    "Senior Associate - Talent Acquisition",
-                    "Ayushi Mishra is a results-driven Talent Acquisition professional with 4.6+ years of experience in hiring across Cloud, SaaS, Fintech, and Insurtech domains. She has strong expertise in end-to-end recruitment, stakeholder management, and building high-performing teams through innovative sourcing strategies, referrals, and vendor optimization. She has successfully delivered niche and lateral hiring for top-tier tech roles, improved hiring quality through structured processes, and enhanced employer branding initiatives. With proven success in fast-paced environments, she excels at driving recruitment efficiency, diversity hiring, and creating scalable hiring frameworks like recruitment playbooks and offer guides.",
-                    "AM", "#db2777", "/images/ayushi_mishra.png"
-                ),
-                new UserStory(
                     "Abhishek Mishra",
                     "Full Stack Developer & Project Lead",
                     "As the developer and architect of Careerthon, I built this platform to democratize LinkedIn profile optimization. Using Spring Boot and modern web technologies, I created an end-to-end SaaS solution that provides actionable insights to job seekers.",
@@ -70,26 +64,13 @@ public class DataInitializer implements CommandLineRunner {
                 .findFirst()
                 .ifPresent(userStoryRepository::delete);
 
-            // Update or Create Ayushi Mishra
-            String fullBio = "Ayushi Mishra is a results-driven Talent Acquisition professional with 4.6+ years of experience in hiring across Cloud, SaaS, Fintech, and Insurtech domains. She has strong expertise in end-to-end recruitment, stakeholder management, and building high-performing teams through innovative sourcing strategies, referrals, and vendor optimization. She has successfully delivered niche and lateral hiring for top-tier tech roles, improved hiring quality through structured processes, and enhanced employer branding initiatives. With proven success in fast-paced environments, she excels at driving recruitment efficiency, diversity hiring, and creating scalable hiring frameworks like recruitment playbooks and offer guides.";
-            
+            // Explicitly remove Ayushi Mishra if exists in DB
             existing.stream()
                 .filter(s -> "Ayushi Mishra".equals(s.getName()))
                 .findFirst()
-                .ifPresentOrElse(
-                    ayushi -> {
-                        ayushi.setStory(fullBio);
-                        ayushi.setRole("Senior Associate - Talent Acquisition");
-                        userStoryRepository.save(ayushi);
-                    },
-                    () -> userStoryRepository.save(new UserStory(
-                        "Ayushi Mishra",
-                        "Senior Associate - Talent Acquisition",
-                        fullBio,
-                        "AM", "#db2777", "/images/ayushi_mishra.png"
-                    ))
-                );
+                .ifPresent(userStoryRepository::delete);
         }
+}
 
         // Ensure Admin user exists
         userRepository.findByUsername("admin").ifPresentOrElse(
