@@ -70,7 +70,6 @@ public class DataInitializer implements CommandLineRunner {
                 .findFirst()
                 .ifPresent(userStoryRepository::delete);
         }
-}
 
         // Ensure Admin user exists
         userRepository.findByUsername("admin").ifPresentOrElse(
