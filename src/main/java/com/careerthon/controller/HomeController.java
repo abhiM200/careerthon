@@ -1,11 +1,12 @@
-package com.careerthon.controller;
-
-import com.careerthon.model.UserStory;
-import com.careerthon.repository.UserStoryRepository;
+import com.careerthon.service.SpecExportService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,9 +14,11 @@ import java.util.stream.Collectors;
 public class HomeController {
 
     private final UserStoryRepository userStoryRepository;
+    private final SpecExportService specExportService;
 
-    public HomeController(UserStoryRepository userStoryRepository) {
+    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService) {
         this.userStoryRepository = userStoryRepository;
+        this.specExportService = specExportService;
     }
 
     @GetMapping("/")
@@ -35,6 +38,15 @@ public class HomeController {
     @GetMapping("/features")
     public String features() {
         return "features";
+    }
+
+    @GetMapping("/developer/export-spec")
+    public ResponseEntity<byte[]> exportSpec() throws IOException {
+        byte[] docx = specExportService.generateMasterSpec();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=careerthon_master_spec.docx")
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(docx);
     }
 
     private boolean isTeamMember(UserStory story) {
