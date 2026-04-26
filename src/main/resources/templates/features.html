@@ -413,21 +413,67 @@
 <!-- Tool Launch Modal -->
 <div id="toolModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4">
     <div class="absolute inset-0 bg-themed-pure/80 backdrop-blur-xl" onclick="closeModal()"></div>
-    <div class="glass p-12 rounded-[64px] border-themed-soft max-w-lg w-full text-center relative z-10 shadow-premium animate-fade-in">
-        <div class="w-24 h-24 rounded-[32px] bg-indigo-600 text-white flex items-center justify-center text-5xl mx-auto mb-8 shadow-glow animate-pulse-soft">🚀</div>
-        <h2 id="modalTitle" class="text-3xl font-black text-themed-main mb-4">Initializing AI...</h2>
-        <p class="text-themed-body mb-8">This advanced module is currently being calibrated for your profile. Full access will be available in the next release.</p>
-        <button onclick="closeModal()" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-black shadow-glow">NOTIFY ME ON LAUNCH</button>
+    <div class="glass p-12 rounded-[64px] border-themed-soft max-w-2xl w-full relative z-10 shadow-premium animate-fade-in overflow-y-auto max-h-[90vh]">
+        <div id="modalLoading" class="text-center py-12">
+            <div class="w-24 h-24 rounded-[32px] bg-indigo-600 text-white flex items-center justify-center text-5xl mx-auto mb-8 shadow-glow animate-pulse-soft">🚀</div>
+            <h2 class="text-3xl font-black text-themed-main mb-4">Analyzing with Careerthon AI...</h2>
+            <p class="text-themed-body">Our 2026 intelligence engine is processing your professional DNA.</p>
+        </div>
+        
+        <div id="modalContent" class="hidden">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow-glow">✨</div>
+                <h2 id="modalTitle" class="text-2xl font-black text-themed-main">AI Results</h2>
+            </div>
+            
+            <div class="bg-themed-soft/50 p-8 rounded-3xl border border-themed-soft mb-8">
+                <pre id="modalResult" class="text-themed-main font-medium whitespace-pre-wrap leading-relaxed font-sans text-lg"></pre>
+            </div>
+            
+            <div class="flex flex-col gap-4">
+                <button onclick="closeModal()" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-black shadow-glow hover:scale-[1.02] transition-transform">APPLY TO PROFILE</button>
+                <button onclick="closeModal()" class="w-full py-4 rounded-2xl border border-themed-soft text-themed-main font-black hover:bg-themed-soft transition-all">CLOSE EXPLORER</button>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-    function launchTool(name) {
+    async function launchTool(name) {
         const modal = document.getElementById('toolModal');
+        const loading = document.getElementById('modalLoading');
+        const content = document.getElementById('modalContent');
         const title = document.getElementById('modalTitle');
-        title.innerText = name + '...';
+        const result = document.getElementById('modalResult');
+        
+        // Reset and Show
         modal.classList.remove('hidden');
+        loading.classList.remove('hidden');
+        content.classList.add('hidden');
         document.body.style.overflow = 'hidden';
+
+        try {
+            const response = await fetch('/api/ai/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ tool: name, input: "User profile data" })
+            });
+            const data = await response.json();
+            
+            // Show Results
+            title.innerText = name + " Engine";
+            result.innerText = data.result;
+            
+            setTimeout(() => {
+                loading.classList.add('hidden');
+                content.classList.remove('hidden');
+            }, 800); // Aesthetic delay
+
+        } catch (error) {
+            result.innerText = "Connection lost to AI engine. Please check your network.";
+            loading.classList.add('hidden');
+            content.classList.remove('hidden');
+        }
     }
 
     function closeModal() {
