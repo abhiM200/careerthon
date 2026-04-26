@@ -1,3 +1,7 @@
+package com.careerthon.controller;
+
+import com.careerthon.model.UserStory;
+import com.careerthon.repository.UserStoryRepository;
 import com.careerthon.service.SpecExportService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
