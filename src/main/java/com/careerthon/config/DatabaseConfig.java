@@ -30,25 +30,37 @@ public class DatabaseConfig {
         HikariConfig config = new HikariConfig();
         
         // If Render DATABASE_URL is provided, safely parse it
-        if (databaseUrl != null && !databaseUrl.trim().isEmpty() && databaseUrl.startsWith("postgres")) {
-            URI dbUri = new URI(databaseUrl);
-            
-            String username = "postgres";
-            String password = "";
-            if (dbUri.getUserInfo() != null) {
-                String[] userInfo = dbUri.getUserInfo().split(":");
-                username = userInfo[0];
-                if (userInfo.length > 1) {
-                    password = userInfo[1];
+        if (databaseUrl != null && !databaseUrl.trim().isEmpty()) {
+            if (databaseUrl.startsWith("jdbc:")) {
+                config.setJdbcUrl(databaseUrl);
+                // The username and password must be supplied in spring.datasource.username/password or parsed from the URL,
+                // but let's assume they are either in the URL or provided via other environment variables
+                config.setUsername(springUsername);
+                config.setPassword(springPassword);
+            } else if (databaseUrl.startsWith("postgres")) {
+                URI dbUri = new URI(databaseUrl);
+                
+                String username = "postgres";
+                String password = "";
+                if (dbUri.getUserInfo() != null) {
+                    String[] userInfo = dbUri.getUserInfo().split(":");
+                    username = userInfo[0];
+                    if (userInfo.length > 1) {
+                        password = userInfo[1];
+                    }
                 }
-            }
-            
-            String port = dbUri.getPort() != -1 ? ":" + dbUri.getPort() : "";
-            String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + port + dbUri.getPath();
+                
+                String port = dbUri.getPort() != -1 ? ":" + dbUri.getPort() : "";
+                String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + port + dbUri.getPath();
 
-            config.setJdbcUrl(dbUrl);
-            config.setUsername(username);
-            config.setPassword(password);
+                config.setJdbcUrl(dbUrl);
+                config.setUsername(username);
+                config.setPassword(password);
+            } else {
+                config.setJdbcUrl(springDatasourceUrl);
+                config.setUsername(springUsername);
+                config.setPassword(springPassword);
+            }
         } else {
             // Fallback to local properties if no Render URL
             String fallbackUrl = springDatasourceUrl.isEmpty() ? "jdbc:postgresql://localhost:5432/careerthon" : springDatasourceUrl;
