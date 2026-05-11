@@ -59,21 +59,79 @@
 
     <!-- Value Proposition -->
     <section class="py-24 bg-themed-soft">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div data-reveal>
-                <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">⚡</div>
-                <h3 class="text-xl font-bold mb-3">No Registration Required</h3>
-                <p class="text-themed-body text-sm font-medium">Get your score instantly without giving away your personal details.</p>
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div data-reveal class="active">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">⚡</div>
+                    <h3 class="text-xl font-bold mb-3">No Registration Required</h3>
+                    <p class="text-themed-body text-sm font-medium">Get your score instantly without giving away your personal details. We value your time and privacy.</p>
+                </div>
+                <div data-reveal class="active" data-delay="100">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🧠</div>
+                    <h3 class="text-xl font-bold mb-3">AI Powered Optimization</h3>
+                    <p class="text-themed-body text-sm font-medium">Using the same neural networks top recruiters use to find and rank candidates in the 2026 market.</p>
+                </div>
+                <div data-reveal class="active" data-delay="200">
+                    <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🎁</div>
+                    <h3 class="text-xl font-bold mb-3">100% Free Forever</h3>
+                    <p class="text-themed-body text-sm font-medium">Our core intelligence tools are free forever. We believe everyone deserves a professional edge.</p>
+                </div>
             </div>
-            <div data-reveal data-delay="100">
-                <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🧠</div>
-                <h3 class="text-xl font-bold mb-3">AI Powered Optimization</h3>
-                <p class="text-themed-body text-sm font-medium">Using the same algorithms top recruiters use to find and rank candidates.</p>
+        </div>
+    </section>
+
+    <!-- Detailed Features Bento -->
+    <section class="py-32 bg-themed-pure">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="section-header !mb-16 text-center">
+                <h2 class="text-4xl font-black mb-4">Elite <span class="text-gradient">Intelligence Tools</span></h2>
+                <p class="text-themed-body max-w-2xl mx-auto font-medium">Everything you need to transform your professional narrative and dominate your industry.</p>
             </div>
-            <div data-reveal data-delay="200">
-                <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl">🎁</div>
-                <h3 class="text-xl font-bold mb-3">100% Free Forever</h3>
-                <p class="text-themed-body text-sm font-medium">Our core intelligence tools are free forever to support your career growth.</p>
+            
+            <div class="bento-grid">
+                <div class="bento-item large group" data-reveal>
+                    <div class="flex flex-col h-full justify-between relative z-10">
+                        <div>
+                            <div class="w-16 h-16 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-3xl shadow-glow-emerald mb-8">🤖</div>
+                            <h3 class="text-3xl font-black mb-6 text-themed-main">Deep Profile Scan</h3>
+                            <p class="text-themed-body text-lg leading-relaxed max-w-md">Our AI analyzes your profile against 15M+ successful career trajectories to find your unique value proposition.</p>
+                        </div>
+                        <div class="mt-8 pt-8 border-t border-themed-soft flex items-center gap-4 text-sm font-black text-emerald-600">
+                            CORE ENGINE ACTIVE <span class="animate-pulse">●</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bento-item wide bg-slate-900 text-white border-none group overflow-hidden" data-reveal data-delay="100">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-600/20 to-transparent opacity-50"></div>
+                    <div class="flex items-center gap-8 h-full relative z-10">
+                        <div class="w-20 h-20 rounded-3xl bg-white/10 backdrop-blur-md flex items-center justify-center text-4xl group-hover:scale-110 transition-transform">🚀</div>
+                        <div>
+                            <h3 class="text-2xl font-black mb-2">ATS Optimization</h3>
+                            <p class="text-slate-400 leading-relaxed">Beat the applicant tracking bots with algorithmically targeted keyword placement.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bento-item tall group" data-reveal data-delay="200">
+                    <div class="flex flex-col h-full justify-between relative z-10">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-8">📈</div>
+                            <h3 class="text-xl font-black mb-4 text-themed-main">Market Benchmarking</h3>
+                            <p class="text-themed-body leading-relaxed">See how you stack up against the top 1% in your specific field and role.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bento-item tall group" data-reveal data-delay="300">
+                    <div class="flex flex-col h-full justify-between relative z-10">
+                        <div>
+                            <div class="w-14 h-14 rounded-2xl bg-violet-100 text-violet-600 flex items-center justify-center text-2xl mb-8">👔</div>
+                            <h3 class="text-xl font-black mb-4 text-themed-main">Recruiter Insights</h3>
+                            <p class="text-themed-body leading-relaxed">Understand exactly what hiring managers see when they visit your profile.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
