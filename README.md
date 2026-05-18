@@ -1,7 +1,7 @@
 # Careerthon — LinkedIn Profile Review SaaS
 
 > A full-stack LinkedIn Profile Review platform built with Java Spring Boot.  
-> **Developed by Abhishek Mishra** | Team: Priyanshu Shekhar, Altamash Mallick
+> **Developed by Abhishek Mishra** | Team: Priyanshu Shekhar, Altamash Mallick, Pratikssha Kumari, Anubha Shankar
 
 ## Features
 - 🎯 Profile Scoring (0-100)

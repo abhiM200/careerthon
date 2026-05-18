@@ -47,6 +47,18 @@ public class DataInitializer implements CommandLineRunner {
                     "AM", "#059669", "/images/altamash_mallick.jpg"
                 ),
                 new UserStory(
+                    "Pratikssha Kumari",
+                    "Frontend Developer",
+                    "I focused on developing a seamless and highly responsive user interface for Careerthon. By leveraging modern frontend design principles, subtle micro-interactions, and optimized assets, I ensured that every user has an exceptionally polished and premium experience while navigating their profile insights.",
+                    "PK", "#ec4899", "/images/pratikssha_kumari.png"
+                ),
+                new UserStory(
+                    "Anubha Shankar",
+                    "Marketing Manager",
+                    "I led the growth and branding strategies for Careerthon. By leveraging data-driven marketing campaigns, social media outreach, and user acquisition models, I succeeded in establishing Careerthon as a premium standard in LinkedIn profile intelligence, exponentially scaling our user base.",
+                    "AS", "#ea580c", "/images/anubha_shankar.jpg"
+                ),
+                new UserStory(
                     "Binit Mishra",
                     "Accenture Germany (ex-TCS)",
                     "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations.",
@@ -69,6 +81,32 @@ public class DataInitializer implements CommandLineRunner {
                 .filter(s -> "Ayushi Mishra".equals(s.getName()))
                 .findFirst()
                 .ifPresent(userStoryRepository::delete);
+
+            // Ensure Pratikssha Kumari is added to the database
+            boolean hasPratikssha = existing.stream()
+                .anyMatch(s -> "Pratikssha Kumari".equals(s.getName()));
+            if (!hasPratikssha) {
+                userStoryRepository.save(new UserStory(
+                    "Pratikssha Kumari",
+                    "Frontend Developer",
+                    "I focused on developing a seamless and highly responsive user interface for Careerthon. By leveraging modern frontend design principles, subtle micro-interactions, and optimized assets, I ensured that every user has an exceptionally polished and premium experience while navigating their profile insights.",
+                    "PK", "#ec4899", "/images/pratikssha_kumari.png"
+                ));
+                System.out.println("✅ Seeded Pratikssha Kumari to the team.");
+            }
+
+            // Ensure Anubha Shankar is added to the database
+            boolean hasAnubha = existing.stream()
+                .anyMatch(s -> "Anubha Shankar".equals(s.getName()));
+            if (!hasAnubha) {
+                userStoryRepository.save(new UserStory(
+                    "Anubha Shankar",
+                    "Marketing Manager",
+                    "I led the growth and branding strategies for Careerthon. By leveraging data-driven marketing campaigns, social media outreach, and user acquisition models, I succeeded in establishing Careerthon as a premium standard in LinkedIn profile intelligence, exponentially scaling our user base.",
+                    "AS", "#ea580c", "/images/anubha_shankar.jpg"
+                ));
+                System.out.println("✅ Seeded Anubha Shankar to the team.");
+            }
         }
 
         // Ensure Admin user exists
