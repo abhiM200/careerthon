@@ -46,10 +46,10 @@ public class DataInitializer implements CommandLineRunner {
                             "I contributed to the profile analysis engine and data modeling for Careerthon. The scoring algorithm uses weighted analysis across 15 profile dimensions, benchmarked against industry standards.",
                             "AM", "#059669", "/images/altamash_mallick.jpg"),
                     new UserStory(
-                            "Pratikssha Kumari",
+                            "Pratiksha Kumari",
                             "Frontend Developer",
                             "I focused on developing a seamless and highly responsive user interface for Careerthon. By leveraging modern frontend design principles, subtle micro-interactions, and optimized assets, I ensured that every user has an exceptionally polished and premium experience while navigating their profile insights.",
-                            "PK", "#ec4899", "/images/pratikssha_kumari.png"),
+                            "PK", "#ec4899", "/images/pratiksha_kumari.png"),
                     new UserStory(
                             "Anubha Shankar",
                             "Marketing Manager",
