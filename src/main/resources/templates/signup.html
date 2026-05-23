@@ -1,57 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/header :: head('Create Your Account - Careerthon')}"></head>
-<body class="bg-slate-50 min-h-screen pt-24 pb-12 flex items-center justify-center">
+<body class="bg-themed-pure min-h-screen flex flex-col relative overflow-hidden">
+    <!-- Background Effects -->
+    <div class="absolute inset-0 bg-grid opacity-[0.03]"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl bg-[radial-gradient(circle_at_50%_50%,rgba(16,185,129,0.1),transparent_60%)] animate-pulse-soft"></div>
+
     <header th:replace="~{fragments/header :: header}"></header>
 
-    <main class="max-w-md w-full px-6">
-        <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
-            <div class="bg-indigo-600 p-8 text-white text-center">
-                <h1 class="text-3xl font-black mb-2">Join Careerthon</h1>
-                <p class="text-indigo-100 opacity-90">Start optimizing your professional presence today.</p>
-            </div>
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative z-10 pt-32">
+        <div class="max-w-md w-full" data-reveal class="active">
             
-            <div class="p-8">
-                <div th:if="${error}" class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded-r-xl text-red-700 text-sm">
-                    <p th:text="${error}">Error message</p>
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center text-white font-black text-3xl shadow-glow-emerald mx-auto mb-6 transform hover:-rotate-12 transition-transform">🚀</div>
+                <h2 class="text-4xl font-black text-themed-main mb-2">Join Elite</h2>
+                <p class="text-themed-body font-medium">Create your secure intelligence profile.</p>
+            </div>
+
+            <div class="premium-card !p-10 glass border-white/20 shadow-[0_40px_100px_-20px_rgba(15,23,42,0.3)]">
+                
+                <div th:if="${error}" class="bg-rose-500/10 border border-rose-500/50 p-4 rounded-xl mb-6 flex items-center gap-3">
+                    <div class="text-rose-500">⚠</div>
+                    <p class="text-sm font-bold text-rose-600 dark:text-rose-400" th:text="${error}">Error message</p>
                 </div>
 
                 <form th:action="@{/signup}" method="POST" class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
-                        <input type="text" name="fullName" required placeholder="Abhishek Mishra"
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                    </div>
                     
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Username</label>
-                        <input type="text" name="username" required placeholder="abhishek_m"
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-                        <p class="mt-1 text-xs text-slate-400">Choose a unique username for logging in.</p>
+                        <label class="block text-[10px] font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-[0.2em] mb-2">Full Name</label>
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-emerald-500/10 rounded-xl blur-md group-focus-within:bg-emerald-500/20 transition-all"></div>
+                            <input type="text" name="fullName" required 
+                                   class="relative w-full py-4 px-5 bg-themed-pure rounded-xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all text-sm font-bold text-themed-main placeholder:text-slate-400" 
+                                   placeholder="Abhishek Mishra">
+                        </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Password</label>
-                        <input type="password" name="password" required placeholder="••••••••"
-                               class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
+                        <label class="block text-[10px] font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-[0.2em] mb-2">Username</label>
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-emerald-500/10 rounded-xl blur-md group-focus-within:bg-emerald-500/20 transition-all"></div>
+                            <input type="text" name="username" required 
+                                   class="relative w-full py-4 px-5 bg-themed-pure rounded-xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all text-sm font-bold text-themed-main placeholder:text-slate-400" 
+                                   placeholder="abhishek_m">
+                        </div>
+                        <p class="mt-2 text-[11px] font-medium text-themed-body">Unique identifier for system access.</p>
                     </div>
 
-                    <button type="submit" class="w-full bg-slate-900 text-white py-4 px-6 rounded-2xl font-bold text-lg hover:bg-indigo-600 active:scale-[0.98] transition-all shadow-lg">
-                        Create Account 🚀
-                    </button>
-                </form>
+                    <div>
+                        <label class="block text-[10px] font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-[0.2em] mb-2">Password</label>
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-emerald-500/10 rounded-xl blur-md group-focus-within:bg-emerald-500/20 transition-all"></div>
+                            <input type="password" name="password" required 
+                                   class="relative w-full py-4 px-5 bg-themed-pure rounded-xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all text-sm font-bold text-themed-main placeholder:text-slate-400" 
+                                   placeholder="••••••••">
+                        </div>
+                    </div>
 
-                <div class="mt-8 pt-8 border-t border-slate-100 text-center">
-                    <p class="text-slate-500">Already have an account?</p>
-                    <a href="/login" class="mt-2 inline-block font-bold text-indigo-600 hover:text-indigo-700">
-                        Sign In Instead →
-                    </a>
+                    <div class="pt-4">
+                        <button type="submit" class="w-full btn-premium py-4 rounded-xl text-lg flex justify-center items-center group shadow-glow-emerald">
+                            Initialize Account
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="mt-8 pt-8 border-t border-themed-soft text-center">
+                    <p class="text-sm font-medium text-themed-body">
+                        Already have access? <br>
+                        <a href="/login" class="mt-2 inline-block font-black text-emerald-600 hover:text-emerald-500 transition-colors uppercase tracking-wider text-xs">Authenticate Instead →</a>
+                    </p>
                 </div>
             </div>
-        </div>
-
-        <div class="mt-8 text-center text-sm text-slate-400">
-            By signing up, you agree to our Terms of Service and Privacy Policy.
+            
+            <div class="mt-8 text-center text-xs font-medium text-themed-body opacity-60">
+                By initializing, you accept the security protocols and privacy policy.
+            </div>
         </div>
     </main>
 

@@ -19,10 +19,12 @@ public class HomeController {
 
     private final UserStoryRepository userStoryRepository;
     private final SpecExportService specExportService;
+    private final com.careerthon.repository.ProfileReviewRepository profileReviewRepository;
 
-    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService) {
+    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService, com.careerthon.repository.ProfileReviewRepository profileReviewRepository) {
         this.userStoryRepository = userStoryRepository;
         this.specExportService = specExportService;
+        this.profileReviewRepository = profileReviewRepository;
     }
 
     @GetMapping("/")
@@ -67,8 +69,8 @@ public class HomeController {
     }
 
     @GetMapping("/user/profile")
-    public String profile() {
-        // For now, redirect to home or show a simple profile
-        return "index";
+    public String profile(Model model) {
+        model.addAttribute("recentScans", profileReviewRepository.findAllByOrderByCreatedAtDesc());
+        return "dashboard";
     }
 }

@@ -165,14 +165,102 @@
     </section>
 
     <!-- Bottom Actions -->
-    <div class="max-w-7xl mx-auto px-4 mt-20 flex flex-wrap justify-center gap-6">
-        <a href="/review" class="btn-premium py-5 px-12 text-lg">🔄 Re-Analyze Profile</a>
-        <button onclick="window.print()" class="btn-premium py-5 px-12 text-lg bg-white text-slate-900 border-slate-200">🖨️ Save as PDF</button>
+    <div class="max-w-7xl mx-auto px-4 mt-20 flex flex-wrap justify-center gap-6 relative z-10">
+        <a href="/review" class="btn-premium py-5 px-12 text-lg group">
+            <span class="mr-2">🔄</span> Re-Analyze Profile
+        </a>
+        <button onclick="window.print()" class="btn-premium py-5 px-12 text-lg bg-white text-slate-900 border-slate-200 hover:bg-slate-50">
+            <span class="mr-2">🖨️</span> Save as PDF
+        </button>
+        <button onclick="toggleEmailModal()" class="btn-premium py-5 px-12 text-lg bg-indigo-600 text-white border-indigo-600 shadow-glow group">
+            <span class="mr-2">✉️</span> Send to Email
+        </button>
+    </div>
+
+    <!-- Email Modal (Hidden by default) -->
+    <div id="email-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm transition-opacity duration-300 opacity-0">
+        <div class="bg-themed-pure p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 border border-themed-soft transform scale-95 transition-transform duration-300 relative">
+            <button onclick="toggleEmailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-xl mb-6 shadow-sm">✉️</div>
+            <h3 class="text-2xl font-black text-themed-main mb-2">Send Report via Email</h3>
+            <p class="text-themed-body text-sm mb-6 font-medium">Enter your email address to receive a secure link to this analysis report.</p>
+            
+            <form id="email-form" onsubmit="sendEmailReport(event)" class="space-y-4">
+                <input type="email" id="recipient-email" required placeholder="name@company.com"
+                       class="w-full px-4 py-3 bg-themed-soft rounded-xl border border-themed-soft focus:border-indigo-500 outline-none transition-all text-sm font-bold text-themed-main placeholder:text-slate-400">
+                
+                <div id="email-status" class="hidden text-sm font-bold p-3 rounded-xl text-center"></div>
+
+                <button type="submit" id="email-submit-btn" class="w-full btn-premium py-3 rounded-xl flex justify-center items-center group shadow-glow">
+                    <span>Send Secure Link</span>
+                    <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                </button>
+            </form>
+        </div>
     </div>
 </main>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>
 <input type="hidden" id="report-review-id" th:value="${review.id}">
 <script th:src="@{/js/app.js}"></script>
+<script>
+    const emailModal = document.getElementById('email-modal');
+    
+    function toggleEmailModal() {
+        if (emailModal.classList.contains('hidden')) {
+            emailModal.classList.remove('hidden');
+            setTimeout(() => {
+                emailModal.classList.remove('opacity-0');
+                emailModal.firstElementChild.classList.remove('scale-95');
+            }, 10);
+        } else {
+            emailModal.classList.add('opacity-0');
+            emailModal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => emailModal.classList.add('hidden'), 300);
+        }
+    }
+
+    async function sendEmailReport(e) {
+        e.preventDefault();
+        const btn = document.getElementById('email-submit-btn');
+        const status = document.getElementById('email-status');
+        const email = document.getElementById('recipient-email').value;
+        const reviewId = document.getElementById('report-review-id').value;
+        
+        btn.innerHTML = '<span class="animate-pulse">Sending...</span>';
+        btn.disabled = true;
+        status.classList.add('hidden');
+        
+        try {
+            const response = await fetch(`/report/${reviewId}/email`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ email: email })
+            });
+            const data = await response.json();
+            
+            status.classList.remove('hidden', 'bg-rose-50', 'text-rose-600');
+            status.classList.add('bg-emerald-50', 'text-emerald-600');
+            status.innerText = '✅ ' + data.message;
+            
+            setTimeout(() => {
+                toggleEmailModal();
+                btn.innerHTML = '<span>Send Secure Link</span><svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>';
+                btn.disabled = false;
+                status.classList.add('hidden');
+            }, 2500);
+            
+        } catch (error) {
+            status.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-600');
+            status.classList.add('bg-rose-50', 'text-rose-600');
+            status.innerText = '❌ Failed to send email. Please try again.';
+            
+            btn.innerHTML = '<span>Send Secure Link</span><svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>';
+            btn.disabled = false;
+        }
+    }
+</script>
 </body>
 </html>

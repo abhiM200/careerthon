@@ -37,6 +37,7 @@
             <a href="/review" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-emerald-600 hover:bg-white transition-all">Analysis</a>
             <a href="/resume" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-emerald-600 hover:bg-white transition-all">Resume Scan</a>
             <a href="/about" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-slate-600 hover:text-emerald-600 hover:bg-white transition-all">About</a>
+            <a href="/user/profile" sec:authorize="isAuthenticated()" class="nav-link py-2 px-6 rounded-xl text-sm font-bold text-emerald-600 bg-white shadow-sm transition-all">Dashboard</a>
         </div>
         
         <div class="auth-links flex items-center gap-4">
@@ -111,6 +112,10 @@
         }
     });
 </script>
+
+<div sec:authorize="isAuthenticated()">
+    <div th:replace="~{fragments/chatbot :: chatbot}"></div>
+</div>
 
 </body>
 </html>
