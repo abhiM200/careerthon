@@ -277,6 +277,112 @@ function initPopupLogic() {
   });
 }
 
+// ─── Live Profile Score Estimator ────────────
+function initProfileEstimator() {
+  const container = document.getElementById('interactive-estimator');
+  if (!container) return;
+
+  const slider = document.getElementById('est-connections');
+  const sliderVal = document.getElementById('est-connections-val');
+  const checklistItems = document.querySelectorAll('.checklist-item');
+  const scoreVal = document.getElementById('est-score-val');
+  const scoreProgress = document.getElementById('est-circle-progress');
+  const scoreLabel = document.getElementById('est-score-label');
+  const tipsContainer = document.getElementById('est-tips-container');
+
+  // Industry tips dataset
+  const industryTips = [
+    { text: "💡 Add 5+ core skills to boost recruiter visibility by 17x.", color: "text-emerald-600 dark:text-emerald-400" },
+    { text: "💡 Quantifying your achievements (e.g., 'saved $50k') increases response rates by 40%.", color: "text-indigo-600 dark:text-indigo-400" },
+    { text: "💡 A custom LinkedIn URL makes it 3x easier for recruiters to find your profile directly.", color: "text-violet-600 dark:text-violet-400" },
+    { text: "💡 An expert headline with key job terms attracts 2.5x more search results.", color: "text-amber-600 dark:text-amber-400" }
+  ];
+
+  function updateEstimator() {
+    let baseScore = 30; // Minimum score
+
+    // Connection weight (slider)
+    const connections = parseInt(slider.value) || 0;
+    sliderVal.textContent = connections >= 500 ? "500+" : connections;
+    baseScore += Math.floor((connections / 500) * 15); // max 15 points
+
+    // Checklist items weights
+    checklistItems.forEach(item => {
+      const isChecked = item.classList.contains('checked');
+      if (isChecked) {
+        const weight = parseInt(item.dataset.weight) || 0;
+        baseScore += weight;
+      }
+    });
+
+    // Limit score between 0 and 100
+    const finalScore = Math.min(Math.max(baseScore, 0), 100);
+
+    // Set score immediately or animate
+    scoreVal.textContent = finalScore;
+
+    // Animate circular gauge
+    const radius = 80;
+    const circumference = 2 * Math.PI * radius; // ~502
+    const offset = circumference - (finalScore / 100) * circumference;
+    if (scoreProgress) {
+      scoreProgress.style.strokeDashoffset = offset;
+      
+      // Dynamic gauge color
+      if (finalScore >= 85) {
+        scoreProgress.style.stroke = "var(--primary)";
+        scoreLabel.textContent = "Elite Profile";
+        scoreLabel.style.color = "var(--primary)";
+      } else if (finalScore >= 65) {
+        scoreProgress.style.stroke = "var(--secondary)";
+        scoreLabel.textContent = "Good Progress";
+        scoreLabel.style.color = "var(--secondary)";
+      } else {
+        scoreProgress.style.stroke = "var(--accent)";
+        scoreLabel.textContent = "Needs Work";
+        scoreLabel.style.color = "var(--accent)";
+      }
+    }
+
+    // Render active tips dynamically based on checked items
+    if (tipsContainer) {
+      tipsContainer.innerHTML = '';
+      let tipsShown = 0;
+      checklistItems.forEach((item, index) => {
+        if (!item.classList.contains('checked') && tipsShown < 2) {
+          const tip = industryTips[index % industryTips.length];
+          const div = document.createElement('div');
+          div.className = `p-4 rounded-xl border border-themed-soft bg-themed-soft text-xs font-semibold ${tip.color} flex items-start gap-2.5`;
+          div.innerHTML = tip.text;
+          tipsContainer.appendChild(div);
+          tipsShown++;
+        }
+      });
+
+      if (tipsShown === 0) {
+        const div = document.createElement('div');
+        div.className = "p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-xs font-black text-emerald-600 dark:text-emerald-400 text-center";
+        div.innerHTML = "🏆 Perfect Score achieved! Your profile is algorithmically ready for elite corporate headhunting.";
+        tipsContainer.appendChild(div);
+      }
+    }
+  }
+
+  // Bind Slider
+  slider.addEventListener('input', updateEstimator);
+
+  // Bind Checklist click
+  checklistItems.forEach(item => {
+    item.addEventListener('click', () => {
+      item.classList.toggle('checked');
+      updateEstimator();
+    });
+  });
+
+  // Init call
+  updateEstimator();
+}
+
 // ─── Init ────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
@@ -284,6 +390,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFormValidation();
   initHeaderScroll();
   initPopupLogic();
+  initProfileEstimator();
 
   // Animate score counters on report page
   if (document.querySelector('.gauge-number')) {
