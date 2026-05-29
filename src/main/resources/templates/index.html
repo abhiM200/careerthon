@@ -28,11 +28,14 @@
                     Transform your digital presence from invisible to irresistible. Our AI engine scans 50+ data points to give you the exact roadmap to a 6-figure career.
                 </p>
                 
-                <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex flex-col sm:flex-row items-center gap-6 flex-wrap">
                     <a href="/review" class="btn-premium group shadow-glow-emerald">
                         Analyze My Profile Free
                         <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
                     </a>
+                    <button onclick="openVideoModal()" class="py-4 px-8 rounded-2xl bg-themed-soft hover:bg-emerald-500/10 text-themed-main hover:text-emerald-500 border-2 border-themed-soft hover:border-emerald-500/20 text-sm font-black uppercase tracking-wider transition-all flex items-center gap-2.5 hover:scale-105 active:scale-95">
+                        Watch Intro 🎬
+                    </button>
                     <div class="flex items-center gap-4">
                         <div class="flex items-center -space-x-3">
                             <div class="w-10 h-10 rounded-full border-2 border-white bg-emerald-500 flex items-center justify-center text-xs font-black text-white">AM</div>
@@ -413,6 +416,32 @@
     </section>
 </main>
 
+<!-- SaaS Intro Video Modal -->
+<div id="video-modal" class="fixed inset-0 z-[1100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 invisible transition-all duration-300" onclick="closeVideoModalOnBackdrop(event)">
+    <div id="video-card" class="relative w-full max-w-4xl bg-themed-pure rounded-[32px] border border-themed-soft shadow-3xl p-6 md:p-8 transform scale-95 transition-all duration-300">
+        
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🎬</span>
+                <div>
+                    <h3 class="text-2xl font-black text-themed-main">Careerthon Platform Tour</h3>
+                    <p class="text-xs text-themed-body font-semibold mt-0.5">Learn how we optimize profiles and beat recruiter systems</p>
+                </div>
+            </div>
+            <button onclick="closeVideoModal()" class="p-2.5 rounded-xl bg-themed-soft hover:bg-red-500/15 text-themed-main hover:text-red-500 transition-colors text-sm font-black">✕</button>
+        </div>
+
+        <!-- Video Container -->
+        <div class="relative aspect-video w-full rounded-2xl overflow-hidden border border-themed-soft bg-black shadow-inner">
+            <video id="intro-player" class="w-full h-full object-cover" 
+                   src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34287-large.mp4" 
+                   controls playsinline loop></video>
+        </div>
+
+    </div>
+</div>
+
 <script>
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -423,6 +452,50 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    function openVideoModal() {
+        const modal = document.getElementById('video-modal');
+        const player = document.getElementById('intro-player');
+        const card = document.getElementById('video-card');
+
+        if (modal && player && card) {
+            modal.classList.remove('opacity-0', 'invisible');
+            card.classList.remove('scale-95');
+            card.classList.add('scale-100');
+            player.play().catch(error => {
+                console.log("Autoplay blocked, user interaction required: ", error);
+            });
+        }
+    }
+
+    function closeVideoModal() {
+        const modal = document.getElementById('video-modal');
+        const player = document.getElementById('intro-player');
+        const card = document.getElementById('video-card');
+
+        if (modal && player && card) {
+            modal.classList.add('opacity-0', 'invisible');
+            card.classList.add('scale-95');
+            card.classList.remove('scale-100');
+            player.pause();
+            player.currentTime = 0;
+        }
+    }
+
+    function closeVideoModalOnBackdrop(event) {
+        if (event.target === event.currentTarget) {
+            closeVideoModal();
+        }
+    }
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modal = document.getElementById('video-modal');
+            if (modal && !modal.classList.contains('invisible')) {
+                closeVideoModal();
+            }
+        }
+    });
 </script>
 
 <footer th:replace="~{fragments/footer :: footer}"></footer>
