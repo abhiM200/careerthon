@@ -41,6 +41,11 @@ public class HomeController {
         return "about";
     }
 
+    @GetMapping("/careers")
+    public String careers() {
+        return "careers";
+    }
+
     @GetMapping("/features")
     public String features() {
         return "features";
