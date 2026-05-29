@@ -3,6 +3,7 @@ package com.careerthon.controller;
 import com.careerthon.model.ResumeReview;
 import com.careerthon.repository.ResumeReviewRepository;
 import com.careerthon.service.ResumeService;
+import com.careerthon.service.EmailService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +20,12 @@ public class ResumeController {
 
     private final ResumeService resumeService;
     private final ResumeReviewRepository resumeReviewRepository;
+    private final EmailService emailService;
 
-    public ResumeController(ResumeService resumeService, ResumeReviewRepository resumeReviewRepository) {
+    public ResumeController(ResumeService resumeService, ResumeReviewRepository resumeReviewRepository, EmailService emailService) {
         this.resumeService = resumeService;
         this.resumeReviewRepository = resumeReviewRepository;
+        this.emailService = emailService;
     }
 
     @GetMapping
@@ -127,5 +130,43 @@ public class ResumeController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
                 .contentType(mediaType)
                 .body(review.getFileData());
+    }
+
+    @PostMapping("/bulk/contact")
+    @ResponseBody
+    public ResponseEntity<String> sendBulkOutreach(@RequestBody BulkContactRequest request) {
+        if (request == null || request.emails == null || request.emails.isEmpty()) {
+            return ResponseEntity.badRequest().body("{\"success\":false,\"message\":\"No candidates selected.\"}");
+        }
+
+        int successCount = 0;
+        for (int i = 0; i < request.emails.size(); i++) {
+            String email = request.emails.get(i);
+            String candidateName = (request.names != null && request.names.size() > i) ? request.names.get(i) : "Candidate";
+            
+            // Personalize the generic message with the candidate's actual name!
+            String customizedMessage = request.message.replace("[Candidate Name]", candidateName).replace("[Candidate]", candidateName);
+
+            boolean sent = emailService.sendRecruiterInvite(
+                email, 
+                candidateName, 
+                request.recruiterName, 
+                request.recruiterEmail, 
+                request.subject, 
+                customizedMessage
+            );
+            if (sent) successCount++;
+        }
+
+        return ResponseEntity.ok("{\"success\":true,\"message\":\"Successfully dispatched " + successCount + " recruiter outreach invites!\"}");
+    }
+
+    public static class BulkContactRequest {
+        public List<String> emails;
+        public List<String> names;
+        public String recruiterName;
+        public String recruiterEmail;
+        public String subject;
+        public String message;
     }
 }

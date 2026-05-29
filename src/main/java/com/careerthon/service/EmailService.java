@@ -41,4 +41,34 @@ public class EmailService {
             return false;
         }
     }
+
+    public boolean sendRecruiterInvite(String toEmail, String candidateName, String recruiterName, String recruiterEmail, String subject, String messageText) {
+        if (mailSender == null) {
+            System.err.println("⚠️ Recruiter invite skipped — JavaMailSender not configured (Simulating Success to console).");
+            System.out.println("   [Simulated Send] To: " + toEmail + " (" + candidateName + ")");
+            System.out.println("   [Simulated Send] ReplyTo: " + recruiterEmail);
+            System.out.println("   [Simulated Send] Subject: " + subject);
+            System.out.println("   [Simulated Send] Message: " + messageText);
+            return true;
+        }
+        try {
+            SimpleMailMessage m = new SimpleMailMessage();
+            m.setFrom("Careerthon Outreach <no-reply@careerthon.onrender.com>");
+            m.setReplyTo(recruiterEmail);
+            m.setTo(toEmail);
+            m.setSubject(subject);
+            m.setText("Dear " + candidateName + ",\n\n" +
+                      messageText + "\n\n" +
+                      "Feel free to reply directly to this email to coordinate next steps.\n\n" +
+                      "Best regards,\n" +
+                      recruiterName + " via Careerthon ⚡\n" +
+                      recruiterEmail);
+            mailSender.send(m);
+            System.out.println("✅ Recruiter email successfully sent to: " + toEmail);
+            return true;
+        } catch (Exception e) {
+            System.err.println("❌ Failed to send recruiter email to " + toEmail + ": " + e.getMessage());
+            return false;
+        }
+    }
 }
