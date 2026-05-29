@@ -1,12 +1,13 @@
 package com.careerthon.controller;
 
+import com.careerthon.model.Job;
 import com.careerthon.repository.ProfileReviewRepository;
 import com.careerthon.repository.ResumeReviewRepository;
+import com.careerthon.repository.JobRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -15,10 +16,14 @@ public class AdminController {
 
     private final ProfileReviewRepository profileReviewRepository;
     private final ResumeReviewRepository resumeReviewRepository;
+    private final JobRepository jobRepository;
 
-    public AdminController(ProfileReviewRepository profileReviewRepository, ResumeReviewRepository resumeReviewRepository) {
+    public AdminController(ProfileReviewRepository profileReviewRepository, 
+                           ResumeReviewRepository resumeReviewRepository,
+                           JobRepository jobRepository) {
         this.profileReviewRepository = profileReviewRepository;
         this.resumeReviewRepository = resumeReviewRepository;
+        this.jobRepository = jobRepository;
     }
 
     @GetMapping("/dashboard")
@@ -26,12 +31,12 @@ public class AdminController {
     public String dashboard(Model model) {
         model.addAttribute("reviews", profileReviewRepository.findAll());
         model.addAttribute("resumes", resumeReviewRepository.findAllByOrderByUploadedAtDesc());
+        model.addAttribute("jobs", jobRepository.findAllByOrderByCreatedAtDesc());
         return "admin/dashboard";
     }
 
-    @org.springframework.web.bind.annotation.PostMapping("/profile/suggest")
-    public String suggestProfile(@org.springframework.web.bind.annotation.RequestParam Long id, 
-                                 @org.springframework.web.bind.annotation.RequestParam String suggestions) {
+    @PostMapping("/profile/suggest")
+    public String suggestProfile(@RequestParam Long id, @RequestParam String suggestions) {
         profileReviewRepository.findById(id).ifPresent(review -> {
             review.setAdminSuggestions(suggestions);
             profileReviewRepository.save(review);
@@ -39,13 +44,28 @@ public class AdminController {
         return "redirect:/admin/dashboard?success=true";
     }
 
-    @org.springframework.web.bind.annotation.PostMapping("/resume/suggest")
-    public String suggestResume(@org.springframework.web.bind.annotation.RequestParam Long id, 
-                                @org.springframework.web.bind.annotation.RequestParam String suggestions) {
+    @PostMapping("/resume/suggest")
+    public String suggestResume(@RequestParam Long id, @RequestParam String suggestions) {
         resumeReviewRepository.findById(id).ifPresent(resume -> {
             resume.setAdminSuggestions(suggestions);
             resumeReviewRepository.save(resume);
         });
+        return "redirect:/admin/dashboard?success=true";
+    }
+
+    @PostMapping("/job/add")
+    public String addJob(@RequestParam String title,
+                         @RequestParam String commitment,
+                         @RequestParam String location,
+                         @RequestParam String description) {
+        Job job = new Job(title, commitment, location, description);
+        jobRepository.save(job);
+        return "redirect:/admin/dashboard?success=true";
+    }
+
+    @PostMapping("/job/delete")
+    public String deleteJob(@RequestParam Long id) {
+        jobRepository.deleteById(id);
         return "redirect:/admin/dashboard?success=true";
     }
 }

@@ -2,8 +2,10 @@ package com.careerthon.config;
 
 import com.careerthon.model.User;
 import com.careerthon.model.UserStory;
+import com.careerthon.model.Job;
 import com.careerthon.repository.UserRepository;
 import com.careerthon.repository.UserStoryRepository;
+import com.careerthon.repository.JobRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -16,12 +18,14 @@ public class DataInitializer implements CommandLineRunner {
     private final UserStoryRepository userStoryRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JobRepository jobRepository;
 
     public DataInitializer(UserStoryRepository userStoryRepository, UserRepository userRepository,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder, JobRepository jobRepository) {
         this.userStoryRepository = userStoryRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jobRepository = jobRepository;
     }
 
     @Override
@@ -113,6 +117,19 @@ public class DataInitializer implements CommandLineRunner {
                     User admin = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN", "Administrator");
                     userRepository.save(admin);
                 });
+
+        // Ensure initial Job Openings are seeded
+        if (jobRepository.count() == 0) {
+            jobRepository.saveAll(List.of(
+                new Job("AI NLP Architect", "Full-Time", "Engineering | Fully Remote", 
+                    "Architect next-generation deep learning parsing algorithms capable of extracting intelligence from complex executive resumes."),
+                new Job("Senior Profile Advisor", "Part-Time / Contract", "Customer Success | Remote / Hybrid", 
+                    "Direct executive clients in identifying digital gaps, providing strategic keyword alignment roadmaps, and hosting private consultations."),
+                new Job("Spring Boot Platform Engineer", "Full-Time", "Engineering | Fully Remote", 
+                    "Scale high-performance enterprise REST API frameworks, secure H2/PostgreSQL database instances, and maintain Thymeleaf UI pipelines.")
+            ));
+            System.out.println("✅ Seeded initial job openings.");
+        }
     }
 
 }

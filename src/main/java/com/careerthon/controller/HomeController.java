@@ -20,11 +20,13 @@ public class HomeController {
     private final UserStoryRepository userStoryRepository;
     private final SpecExportService specExportService;
     private final com.careerthon.repository.ProfileReviewRepository profileReviewRepository;
+    private final com.careerthon.repository.JobRepository jobRepository;
 
-    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService, com.careerthon.repository.ProfileReviewRepository profileReviewRepository) {
+    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService, com.careerthon.repository.ProfileReviewRepository profileReviewRepository, com.careerthon.repository.JobRepository jobRepository) {
         this.userStoryRepository = userStoryRepository;
         this.specExportService = specExportService;
         this.profileReviewRepository = profileReviewRepository;
+        this.jobRepository = jobRepository;
     }
 
     @GetMapping("/")
@@ -42,7 +44,8 @@ public class HomeController {
     }
 
     @GetMapping("/careers")
-    public String careers() {
+    public String careers(Model model) {
+        model.addAttribute("jobs", jobRepository.findAllByOrderByCreatedAtDesc());
         return "careers";
     }
 

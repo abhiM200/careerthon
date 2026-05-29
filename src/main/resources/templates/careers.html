@@ -51,58 +51,30 @@
 
             <!-- Right Side: Active Openings List -->
             <div class="lg:col-span-2 space-y-6">
-                <!-- Job 1 -->
-                <div class="p-6 md:p-8 bg-themed-pure rounded-[32px] border border-themed-soft hover:border-emerald-500/30 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
+                <!-- Job Loop from DB -->
+                <div th:each="job : ${jobs}" class="p-6 md:p-8 bg-themed-pure rounded-[32px] border border-themed-soft hover:border-emerald-500/30 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm animate-float">
                     <div>
                         <div class="flex items-center gap-3 mb-2">
-                            <h3 class="text-lg font-black text-themed-main">AI NLP Architect</h3>
-                            <span class="py-0.5 px-2 bg-emerald-500/10 text-emerald-500 rounded-md text-[10px] font-black uppercase tracking-widest leading-none border border-emerald-500/20">Full-Time</span>
+                            <h3 class="text-lg font-black text-themed-main" th:text="${job.title}">AI NLP Architect</h3>
+                            <span class="py-0.5 px-2 bg-emerald-500/10 text-emerald-500 rounded-md text-[10px] font-black uppercase tracking-widest leading-none border border-emerald-500/20"
+                                  th:text="${job.commitment}">Full-Time</span>
                         </div>
-                        <p class="text-xs text-themed-body font-bold mb-4">Engineering | Fully Remote</p>
-                        <p class="text-sm text-themed-body leading-relaxed max-w-xl font-medium">
-                            Architect next-generation deep learning parsing algorithms capable of extracting intelligence from complex executive resumes.
+                        <p class="text-xs text-themed-body font-bold mb-4" th:text="${job.location}">Engineering | Fully Remote</p>
+                        <p class="text-sm text-themed-body leading-relaxed max-w-xl font-medium" th:text="${job.description}">
+                            Architect next-generation deep learning parsing...
                         </p>
                     </div>
-                    <button onclick="openApplyModal('AI NLP Architect')" 
+                    <button th:onclick="'openApplyModal(\'' + ${job.title} + '\')'" 
                             class="py-3 px-6 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap self-stretch md:self-auto">
                         Apply Now
                     </button>
                 </div>
 
-                <!-- Job 2 -->
-                <div class="p-6 md:p-8 bg-themed-pure rounded-[32px] border border-themed-soft hover:border-emerald-500/30 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
-                    <div>
-                        <div class="flex items-center gap-3 mb-2">
-                            <h3 class="text-lg font-black text-themed-main">Senior profile advisor</h3>
-                            <span class="py-0.5 px-2 bg-indigo-500/10 text-indigo-500 rounded-md text-[10px] font-black uppercase tracking-widest leading-none border border-indigo-500/20">Part-Time / Contract</span>
-                        </div>
-                        <p class="text-xs text-themed-body font-bold mb-4">Customer Success | Remote / Hybrid</p>
-                        <p class="text-sm text-themed-body leading-relaxed max-w-xl font-medium">
-                            Direct executive clients in identifying digital gaps, providing strategic keyword alignment roadmaps, and hosting private consultations.
-                        </p>
-                    </div>
-                    <button onclick="openApplyModal('Senior Profile Advisor')" 
-                            class="py-3 px-6 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap self-stretch md:self-auto">
-                        Apply Now
-                    </button>
-                </div>
-
-                <!-- Job 3 -->
-                <div class="p-6 md:p-8 bg-themed-pure rounded-[32px] border border-themed-soft hover:border-emerald-500/30 transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6 shadow-sm">
-                    <div>
-                        <div class="flex items-center gap-3 mb-2">
-                            <h3 class="text-lg font-black text-themed-main">Spring Boot Platform Engineer</h3>
-                            <span class="py-0.5 px-2 bg-emerald-500/10 text-emerald-500 rounded-md text-[10px] font-black uppercase tracking-widest leading-none border border-emerald-500/20">Full-Time</span>
-                        </div>
-                        <p class="text-xs text-themed-body font-bold mb-4">Engineering | Fully Remote</p>
-                        <p class="text-sm text-themed-body leading-relaxed max-w-xl font-medium">
-                            Scale high-performance enterprise REST API frameworks, secure H2/PostgreSQL database instances, and maintain Thymeleaf UI pipelines.
-                        </p>
-                    </div>
-                    <button onclick="openApplyModal('Spring Boot Platform Engineer')" 
-                            class="py-3 px-6 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap self-stretch md:self-auto">
-                        Apply Now
-                    </button>
+                <!-- Empty State Fallback -->
+                <div th:if="${#lists.isEmpty(jobs)}" class="text-center py-16 bg-themed-soft rounded-[32px] border border-themed-soft">
+                    <span class="text-5xl">📭</span>
+                    <h3 class="text-xl font-black text-themed-main mt-4">No active openings</h3>
+                    <p class="text-xs text-themed-body mt-1.5 font-semibold">We are not hiring at this moment. Check back soon!</p>
                 </div>
             </div>
         </div>
