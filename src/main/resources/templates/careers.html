@@ -40,112 +40,70 @@
 
         <!-- Candidate Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <!-- Candidate 1 -->
-            <div class="premium-card glass border-white/20 shadow-glow-emerald flex flex-col justify-between">
+            <!-- Candidate Loop from DB/About Team members -->
+            <div th:each="candidate : ${candidates}" class="premium-card glass border-white/20 shadow-glow-emerald flex flex-col justify-between animate-float">
                 <div>
                     <!-- Card Top Header -->
                     <div class="flex justify-between items-start mb-6">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-black text-emerald-500 text-lg">AM</div>
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-white text-lg shadow-sm border border-white/10"
+                                 th:style="'background:' + ${candidate.avatarColor}"
+                                 th:text="${candidate.avatarInitials}">AM</div>
                             <div>
-                                <h3 class="text-lg font-black text-themed-main">Aarav Mehta</h3>
-                                <p class="text-xs text-themed-body font-bold mt-0.5">San Francisco, CA</p>
+                                <h3 class="text-lg font-black text-themed-main" th:text="${candidate.name}">Candidate Name</h3>
+                                <p class="text-xs text-themed-body font-bold mt-0.5">Verified Profile</p>
                             </div>
                         </div>
                         <div class="py-1 px-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-black">
-                            98.4% ATS
+                            <span th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mishra')}">98.4% ATS</span>
+                            <span th:if="${candidate.avatarInitials == 'PS'}">96.8% ATS</span>
+                            <span th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mallick')}">95.2% ATS</span>
+                            <span th:if="${candidate.avatarInitials == 'PK'}">94.8% ATS</span>
+                            <span th:if="${candidate.avatarInitials == 'AS'}">93.6% ATS</span>
                         </div>
                     </div>
 
-                    <div class="text-sm font-extrabold text-indigo-500 uppercase tracking-wider mb-2">Senior Full Stack Engineer</div>
-                    <p class="text-xs text-themed-body leading-relaxed mb-6 font-semibold">
-                        Pioneering high-throughput REST APIs and containerized platforms with deep expertise in cloud architectures.
+                    <div class="text-sm font-extrabold text-indigo-500 uppercase tracking-wider mb-2" th:text="${candidate.role}">Role</div>
+                    <p class="text-xs text-themed-body leading-relaxed mb-6 font-semibold" th:text="${candidate.story}">
+                        Candidate bio description...
                     </p>
 
                     <!-- Tech Skill Tags -->
                     <div class="flex flex-wrap gap-1.5 mb-6">
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Java</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Spring Boot</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">React</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Kubernetes</span>
+                        <th:block th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mishra')}">
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Java</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Spring Boot</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">React</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Kubernetes</span>
+                        </th:block>
+                        <th:block th:if="${candidate.avatarInitials == 'PS'}">
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Figma</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Tailwind CSS</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Vue.js</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Design Systems</span>
+                        </th:block>
+                        <th:block th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mallick')}">
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Python</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">TensorFlow</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Apache Spark</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">MLOps</span>
+                        </th:block>
+                        <th:block th:if="${candidate.avatarInitials == 'PK'}">
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">HTML5</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Tailwind CSS</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">JavaScript</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">CSS3</span>
+                        </th:block>
+                        <th:block th:if="${candidate.avatarInitials == 'AS'}">
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">SEO</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Growth Hacker</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Strategy</span>
+                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Branding</span>
+                        </th:block>
                     </div>
                 </div>
 
-                <button onclick="openHireModal('Aarav Mehta', 'Senior Full Stack Engineer')" 
-                        class="w-full py-3.5 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 border border-themed-soft text-xs font-black uppercase tracking-wider transition-all">
-                    Initiate Contact ✉️
-                </button>
-            </div>
-
-            <!-- Candidate 2 -->
-            <div class="premium-card glass border-white/20 shadow-glow-emerald flex flex-col justify-between">
-                <div>
-                    <!-- Card Top Header -->
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center font-black text-indigo-500 text-lg">JS</div>
-                            <div>
-                                <h3 class="text-lg font-black text-themed-main">Jane Smith</h3>
-                                <p class="text-xs text-themed-body font-bold mt-0.5">New York, NY</p>
-                            </div>
-                        </div>
-                        <div class="py-1 px-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-black">
-                            96.8% ATS
-                        </div>
-                    </div>
-
-                    <div class="text-sm font-extrabold text-indigo-500 uppercase tracking-wider mb-2">Senior UI/UX Architect</div>
-                    <p class="text-xs text-themed-body leading-relaxed mb-6 font-semibold">
-                        Crafting high-fidelity, polished interactive designs and design systems for enterprise SaaS applications.
-                    </p>
-
-                    <!-- Tech Skill Tags -->
-                    <div class="flex flex-wrap gap-1.5 mb-6">
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Figma</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Tailwind CSS</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Vue.js</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Design Systems</span>
-                    </div>
-                </div>
-
-                <button onclick="openHireModal('Jane Smith', 'Senior UI/UX Architect')" 
-                        class="w-full py-3.5 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 border border-themed-soft text-xs font-black uppercase tracking-wider transition-all">
-                    Initiate Contact ✉️
-                </button>
-            </div>
-
-            <!-- Candidate 3 -->
-            <div class="premium-card glass border-white/20 shadow-glow-emerald flex flex-col justify-between">
-                <div>
-                    <!-- Card Top Header -->
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center font-black text-violet-500 text-lg">PS</div>
-                            <div>
-                                <h3 class="text-lg font-black text-themed-main">Pranav Sharma</h3>
-                                <p class="text-xs text-themed-body font-bold mt-0.5">Bangalore, IN</p>
-                            </div>
-                        </div>
-                        <div class="py-1 px-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-black">
-                            95.2% ATS
-                        </div>
-                    </div>
-
-                    <div class="text-sm font-extrabold text-indigo-500 uppercase tracking-wider mb-2">Principal Data Scientist</div>
-                    <p class="text-xs text-themed-body leading-relaxed mb-6 font-semibold">
-                        Building advanced semantic search engines, parser frameworks, and state-of-the-art predictive architectures.
-                    </p>
-
-                    <!-- Tech Skill Tags -->
-                    <div class="flex flex-wrap gap-1.5 mb-6">
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Python</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">TensorFlow</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Apache Spark</span>
-                        <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">MLOps</span>
-                    </div>
-                </div>
-
-                <button onclick="openHireModal('Pranav Sharma', 'Principal Data Scientist')" 
+                <button th:onclick="'openHireModal(\'' + ${candidate.name} + '\', \'' + ${candidate.role} + '\')'" 
                         class="w-full py-3.5 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 border border-themed-soft text-xs font-black uppercase tracking-wider transition-all">
                     Initiate Contact ✉️
                 </button>
