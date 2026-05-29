@@ -42,9 +42,7 @@ public class HomeController {
     }
 
     @GetMapping("/careers")
-    public String careers(Model model) {
-        List<UserStory> allStories = userStoryRepository.findAll();
-        model.addAttribute("candidates", allStories.stream().filter(this::isTeamMember).collect(Collectors.toList()));
+    public String careers() {
         return "careers";
     }
 

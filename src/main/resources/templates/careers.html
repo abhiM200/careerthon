@@ -18,116 +18,10 @@
             Pioneering a frictionless recruitment ecosystem where elite, AI-scoring candidates meet elite hiring managers.
         </p>
 
-        <!-- Toggle Selector Tabs -->
-        <div class="inline-flex bg-slate-100 dark:bg-slate-800 p-1.5 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 max-w-md w-full shadow-inner">
-            <button id="tab-btn-recruiter" onclick="switchTab('recruiter')" 
-                    class="flex-1 py-3 px-6 rounded-xl text-sm font-black uppercase tracking-wider transition-all bg-white text-emerald-600 shadow-sm">
-                💼 Hire Talent
-            </button>
-            <button id="tab-btn-candidate" onclick="switchTab('candidate')" 
-                    class="flex-1 py-3 px-6 rounded-xl text-sm font-black uppercase tracking-wider transition-all text-slate-600 hover:text-emerald-500 dark:text-slate-400">
-                🚀 Join Team
-            </button>
-        </div>
-    </section>
-
-    <!-- SECTION A: HIRE TALENT (RECRUITER WORKSPACE) -->
-    <section id="panel-recruiter" class="max-w-7xl mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-black text-themed-main">Explore Our Top-Scoring Candidates</h2>
-            <p class="text-themed-body mt-2 font-medium">Instantly connect with verified professionals who cleared our elite ATS score thresholds.</p>
-        </div>
-
-        <!-- Candidate Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <!-- Candidate Loop from DB/About Team members -->
-            <div th:each="candidate : ${candidates}" class="premium-card glass border-white/20 shadow-glow-emerald flex flex-col justify-between animate-float">
-                <div>
-                    <!-- Card Top Header -->
-                    <div class="flex justify-between items-start mb-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-xl flex items-center justify-center font-black text-white text-lg shadow-sm border border-white/10"
-                                 th:style="'background:' + ${candidate.avatarColor}"
-                                 th:text="${candidate.avatarInitials}">AM</div>
-                            <div>
-                                <h3 class="text-lg font-black text-themed-main" th:text="${candidate.name}">Candidate Name</h3>
-                                <p class="text-xs text-themed-body font-bold mt-0.5">Verified Profile</p>
-                            </div>
-                        </div>
-                        <div class="py-1 px-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-black">
-                            <span th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mishra')}">98.4% ATS</span>
-                            <span th:if="${candidate.avatarInitials == 'PS'}">96.8% ATS</span>
-                            <span th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mallick')}">95.2% ATS</span>
-                            <span th:if="${candidate.avatarInitials == 'PK'}">94.8% ATS</span>
-                            <span th:if="${candidate.avatarInitials == 'AS'}">93.6% ATS</span>
-                        </div>
-                    </div>
-
-                    <div class="text-sm font-extrabold text-indigo-500 uppercase tracking-wider mb-2" th:text="${candidate.role}">Role</div>
-                    <p class="text-xs text-themed-body leading-relaxed mb-6 font-semibold" th:text="${candidate.story}">
-                        Candidate bio description...
-                    </p>
-
-                    <!-- Tech Skill Tags -->
-                    <div class="flex flex-wrap gap-1.5 mb-6">
-                        <th:block th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mishra')}">
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Java</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Spring Boot</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">React</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Kubernetes</span>
-                        </th:block>
-                        <th:block th:if="${candidate.avatarInitials == 'PS'}">
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Figma</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Tailwind CSS</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Vue.js</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Design Systems</span>
-                        </th:block>
-                        <th:block th:if="${candidate.avatarInitials == 'AM' && candidate.name.contains('Mallick')}">
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Python</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">TensorFlow</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Apache Spark</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">MLOps</span>
-                        </th:block>
-                        <th:block th:if="${candidate.avatarInitials == 'PK'}">
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">HTML5</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Tailwind CSS</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">JavaScript</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">CSS3</span>
-                        </th:block>
-                        <th:block th:if="${candidate.avatarInitials == 'AS'}">
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">SEO</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Growth Hacker</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Strategy</span>
-                            <span class="px-2 py-0.5 text-[9px] font-black rounded bg-themed-soft text-themed-main border border-themed-soft">Branding</span>
-                        </th:block>
-                    </div>
-                </div>
-
-                <button th:onclick="'openHireModal(\'' + ${candidate.name} + '\', \'' + ${candidate.role} + '\')'" 
-                        class="w-full py-3.5 rounded-xl bg-themed-soft hover:bg-emerald-500/15 text-themed-main hover:text-emerald-500 border border-themed-soft text-xs font-black uppercase tracking-wider transition-all">
-                    Initiate Contact ✉️
-                </button>
-            </div>
-        </div>
-
-        <!-- Custom Recruitment Banner -->
-        <div class="bg-gradient-to-r from-emerald-600 to-indigo-600 rounded-[32px] p-8 md:p-12 text-center text-white shadow-xl relative overflow-hidden">
-            <div class="absolute inset-0 bg-white/5 backdrop-blur-sm pointer-events-none"></div>
-            <div class="relative z-10 max-w-2xl mx-auto">
-                <h3 class="text-2xl md:text-3xl font-black mb-4">Need Custom Matching Recommendations?</h3>
-                <p class="text-emerald-100 text-sm md:text-base font-semibold mb-8">
-                    Submit your active target roles and ATS criteria, and our recruitment team will compile custom portfolios matching your benchmarks.
-                </p>
-                <button onclick="openHireModal('Global Recommendations', 'Custom Talent Pool')" 
-                        class="bg-white text-emerald-600 py-4 px-8 rounded-xl text-xs font-black shadow-lg hover:scale-105 transition-transform uppercase tracking-wider">
-                    Request Talent Match Recommendations 🚀
-                </button>
-            </div>
-        </div>
     </section>
 
     <!-- SECTION B: JOIN THE TEAM (CANDIDATE WORKSPACE) -->
-    <section id="panel-candidate" class="max-w-7xl mx-auto px-4 hidden">
+    <section id="panel-candidate" class="max-w-7xl mx-auto px-4">
         <div class="text-center mb-12">
             <h2 class="text-3xl font-black text-themed-main">Join the Career Intelligence Revolution</h2>
             <p class="text-themed-body mt-2 font-medium">Work alongside elite developers and technical strategists scaling state-of-the-art AI parsers.</p>
@@ -215,81 +109,6 @@
     </section>
 </main>
 
-<!-- MODAL 1: RECRUITER CONTACT MATCH CALLBACK -->
-<div id="hire-modal" class="fixed inset-0 z-[1100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 invisible transition-all duration-300" onclick="closeHireModalOnBackdrop(event)">
-    <div id="hire-card" class="relative w-full max-w-2xl bg-themed-pure rounded-[32px] border border-themed-soft shadow-3xl p-8 md:p-10 transform scale-95 transition-all duration-300">
-        
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-8">
-            <div class="flex items-center gap-3">
-                <span class="text-3xl">🤝</span>
-                <div>
-                    <h3 class="text-2xl font-black text-themed-main">Hire Elite Candidate</h3>
-                    <p class="text-xs text-themed-body font-semibold mt-0.5">Send recruitment proposal or request custom CV shortlists</p>
-                </div>
-            </div>
-            <button onclick="closeHireModal()" class="p-2.5 rounded-xl bg-themed-soft hover:bg-red-500/15 text-themed-main hover:text-red-500 transition-colors text-sm font-black">✕</button>
-        </div>
-
-        <div id="hire-form-section">
-            <form onsubmit="submitHireForm(event)" class="space-y-6">
-                <!-- Target Detail Info (Pre-filled via JS) -->
-                <div class="py-3 px-5 bg-themed-soft rounded-2xl border border-themed-soft flex items-center justify-between">
-                    <div>
-                        <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Candidate Target</div>
-                        <div id="hire-target-candidate" class="text-sm font-black text-themed-main">Global Recommendations</div>
-                    </div>
-                    <div class="text-right">
-                        <div class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Role Vector</div>
-                        <div id="hire-target-role" class="text-xs font-bold text-emerald-500">Custom Talent Pool</div>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.25em] mb-2">Your Name</label>
-                        <input type="text" required id="recruiter-name"
-                               class="w-full py-3.5 px-5 bg-themed-soft rounded-2xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all font-bold text-themed-main text-sm">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.25em] mb-2">Corporate Email</label>
-                        <input type="email" required id="recruiter-email"
-                               class="w-full py-3.5 px-5 bg-themed-soft rounded-2xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all font-bold text-themed-main text-sm">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-[10px] font-black text-emerald-500 uppercase tracking-[0.25em] mb-2">Message or Project Description</label>
-                    <textarea rows="4" required id="recruiter-message"
-                              class="w-full py-4 px-5 bg-themed-soft rounded-2xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all font-semibold text-themed-main text-sm resize-none"
-                              placeholder="Tell us about the open role, compensation bounds, or target skills..."></textarea>
-                </div>
-
-                <!-- Action Button & Status -->
-                <div class="pt-6 border-t border-themed-soft flex items-center justify-end gap-3">
-                    <button type="button" onclick="closeHireModal()" class="py-3.5 px-6 rounded-xl bg-themed-soft hover:bg-themed-soft/80 text-themed-main text-xs font-black uppercase tracking-wider transition-all">Cancel</button>
-                    <button type="submit" id="btn-hire-submit" class="btn-premium !py-3.5 !px-8 !rounded-xl text-xs flex items-center gap-2 shadow-md">
-                        <span>🚀</span> Send Inquiries
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Success Panel (Hidden by default) -->
-        <div id="hire-success-section" class="hidden text-center py-10">
-            <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center text-3xl mx-auto mb-6 shadow-glow">✓</div>
-            <h3 class="text-2xl font-black text-themed-main mb-2">Request Dispatched!</h3>
-            <p class="text-sm font-semibold text-themed-body max-w-md mx-auto leading-relaxed">
-                Thank you! Our recruitment division has received your inquiry. We will contact you at your corporate email within 24 hours to schedule matching profiles selection.
-            </p>
-            <button onclick="closeHireModal()" class="mt-8 py-3 px-8 rounded-xl bg-themed-soft hover:bg-themed-soft/80 text-themed-main text-xs font-black uppercase tracking-wider transition-all">
-                Close Panel
-            </button>
-        </div>
-
-    </div>
-</div>
-
 <!-- MODAL 2: CANDIDATE JOB APPLICATION FORM -->
 <div id="apply-modal" class="fixed inset-0 z-[1100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md opacity-0 invisible transition-all duration-300" onclick="closeApplyModalOnBackdrop(event)">
     <div id="apply-card" class="relative w-full max-w-2xl bg-themed-pure rounded-[32px] border border-themed-soft shadow-3xl p-8 md:p-10 transform scale-95 transition-all duration-300">
@@ -376,87 +195,7 @@
 </div>
 
 <script>
-    // Tab switching controls
-    function switchTab(tabName) {
-        const tabRecruiter = document.getElementById('tab-btn-recruiter');
-        const tabCandidate = document.getElementById('tab-btn-candidate');
-        
-        const panelRecruiter = document.getElementById('panel-recruiter');
-        const panelCandidate = document.getElementById('panel-candidate');
-
-        if (tabName === 'recruiter') {
-            tabRecruiter.classList.add('bg-white', 'text-emerald-600', 'shadow-sm');
-            tabRecruiter.classList.remove('text-slate-600', 'dark:text-slate-400');
-            tabCandidate.classList.remove('bg-white', 'text-emerald-600', 'shadow-sm');
-            tabCandidate.classList.add('text-slate-600', 'dark:text-slate-400');
-
-            panelRecruiter.classList.remove('hidden');
-            panelCandidate.classList.add('hidden');
-        } else {
-            tabCandidate.classList.add('bg-white', 'text-emerald-600', 'shadow-sm');
-            tabCandidate.classList.remove('text-slate-600', 'dark:text-slate-400');
-            tabRecruiter.classList.remove('bg-white', 'text-emerald-600', 'shadow-sm');
-            tabRecruiter.classList.add('text-slate-600', 'dark:text-slate-400');
-
-            panelCandidate.classList.remove('hidden');
-            panelRecruiter.classList.add('hidden');
-        }
-    }
-
-    // Modal 1: Hire Recruiter Callbacks
-    function openHireModal(candidateName, candidateRole) {
-        const modal = document.getElementById('hire-modal');
-        const card = document.getElementById('hire-card');
-        const targetCandidate = document.getElementById('hire-target-candidate');
-        const targetRole = document.getElementById('hire-target-role');
-
-        targetCandidate.innerText = candidateName;
-        targetRole.innerText = candidateRole;
-
-        // Reset form views
-        document.getElementById('hire-form-section').classList.remove('hidden');
-        document.getElementById('hire-success-section').classList.add('hidden');
-
-        modal.classList.remove('opacity-0', 'invisible');
-        card.classList.remove('scale-95');
-        card.classList.add('scale-100');
-    }
-
-    function closeHireModal() {
-        const modal = document.getElementById('hire-modal');
-        const card = document.getElementById('hire-card');
-
-        modal.classList.add('opacity-0', 'invisible');
-        card.classList.add('scale-95');
-        card.classList.remove('scale-100');
-    }
-
-    function closeHireModalOnBackdrop(event) {
-        if (event.target === event.currentTarget) {
-            closeHireModal();
-        }
-    }
-
-    function submitHireForm(event) {
-        event.preventDefault();
-        
-        // Show loading state simulation
-        const btn = document.getElementById('btn-hire-submit');
-        const originalText = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = '<span>⏳</span> Sending Inquiries...';
-
-        setTimeout(() => {
-            btn.disabled = false;
-            btn.innerHTML = originalText;
-            
-            // Switch panels
-            document.getElementById('hire-form-section').classList.add('hidden');
-            document.getElementById('hire-success-section').classList.remove('hidden');
-        }, 1200);
-    }
-
-    // Modal 2: Candidate Applications
+    // Candidate Applications Modals
     function openApplyModal(positionName) {
         const modal = document.getElementById('apply-modal');
         const card = document.getElementById('apply-card');
@@ -508,11 +247,7 @@
     // Support Escape key to close modals
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            const hireModal = document.getElementById('hire-modal');
             const applyModal = document.getElementById('apply-modal');
-            if (hireModal && !hireModal.classList.contains('invisible')) {
-                closeHireModal();
-            }
             if (applyModal && !applyModal.classList.contains('invisible')) {
                 closeApplyModal();
             }
