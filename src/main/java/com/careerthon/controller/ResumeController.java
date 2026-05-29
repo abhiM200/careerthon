@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/resume")
@@ -28,6 +30,11 @@ public class ResumeController {
         return "resume/index";
     }
 
+    @GetMapping("/bulk")
+    public String bulkResumeHome() {
+        return "resume/bulk";
+    }
+
     @PostMapping("/upload")
     public String uploadResume(@RequestParam("resume") MultipartFile file, 
                               @RequestParam("userName") String userName,
@@ -44,6 +51,39 @@ public class ResumeController {
         } catch (Exception e) {
             model.addAttribute("error", "Failed to analyze resume: " + e.getMessage());
             return "resume/index";
+        }
+    }
+
+    @PostMapping("/bulk/upload")
+    public String uploadBulkResumes(@RequestParam("resumes") List<MultipartFile> files, 
+                                    @RequestParam("userName") String userName,
+                                    @RequestParam("userEmail") String userEmail,
+                                    Model model) {
+        if (files == null || files.isEmpty() || files.stream().allMatch(MultipartFile::isEmpty)) {
+            model.addAttribute("error", "Please select at least one file to upload.");
+            return "resume/bulk";
+        }
+
+        if (files.size() > 20) {
+            model.addAttribute("error", "Bulk scanner capacity exceeded. You can upload up to 20 CVs at one time.");
+            return "resume/bulk";
+        }
+
+        List<ResumeReview> reviews = new ArrayList<>();
+        try {
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    ResumeReview review = resumeService.analyzeResume(file, userName, userEmail);
+                    reviews.add(review);
+                }
+            }
+            model.addAttribute("reviews", reviews);
+            model.addAttribute("recruiterName", userName);
+            model.addAttribute("recruiterEmail", userEmail);
+            return "resume/bulk-results";
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to process bulk upload: " + e.getMessage());
+            return "resume/bulk";
         }
     }
 
