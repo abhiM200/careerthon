@@ -40,8 +40,8 @@ public class ReportController {
         if (optReview.isPresent()) {
             ProfileReview review = optReview.get();
             String reportUrl = "/report/" + id;
-            emailService.sendReport(email, reportUrl, review.getUserName());
-            return "{\"success\":true,\"message\":\"Report sent to " + email + "\"}";
+            emailService.sendReportWithPdf(email, review);
+            return "{\"success\":true,\"message\":\"Report sent with PDF to " + email + "\"}";
         }
         return "{\"success\":false,\"message\":\"Review not found\"}";
     }

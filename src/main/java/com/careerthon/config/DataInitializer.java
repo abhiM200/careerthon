@@ -63,9 +63,24 @@ public class DataInitializer implements CommandLineRunner {
                             "Binit Mishra",
                             "Accenture Germany (ex-TCS)",
                             "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations.",
-                            "BM", "#dc2626", null));
+                            "BM", "#dc2626", "/images/binit_mishra.jpg"),
+                    new UserStory(
+                            "Samantha Rogers",
+                            "Senior Technical Recruiter at Amazon",
+                            "As a recruiter, I see hundreds of profiles daily. Careerthon helps candidates format their profiles so they align perfectly with our search criteria. An absolute game-changer!",
+                            "SR", "#eab308", "/images/samantha.jpg"),
+                    new UserStory(
+                            "Devon Chen",
+                            "Software Engineer II at Google",
+                            "After applying the keyword optimizations recommended by Careerthon's deep scan, my weekly profile views tripled, and I landed multiple interview requests within two weeks.",
+                            "DC", "#10b981", "/images/devon.jpg"),
+                    new UserStory(
+                            "Aarav Sharma",
+                            "Product Manager at Microsoft",
+                            "The ATS optimization features are stellar. The system accurately identified several critical gaps in my experience summaries, making my profile immensely recruiter-friendly.",
+                            "AS", "#3b82f6", "/images/aarav.jpg"));
             userStoryRepository.saveAll(originalStories);
-            System.out.println("✅ Seeded initial user stories.");
+            System.out.println("✅ Seeded initial user stories and testimonials.");
         } else {
             List<UserStory> existing = userStoryRepository.findAll();
 

@@ -1033,3 +1033,116 @@ h1, h2, h3, h4, h5, h6 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(20px, -20px) scale(1.1); }
 }
+
+/* ============================================
+   TESTIMONIALS CSS CAROUSEL
+   ============================================ */
+.testimonial-carousel {
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.testimonial-carousel::-webkit-scrollbar {
+  display: none; /* Hide scrollbar completely */
+}
+
+.testimonial-slide {
+  scroll-snap-align: start;
+}
+
+/* ============================================
+   JOB MATCH & BLOG ANIMATIONS & UTILS
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Custom slider thumb color override for active connections range */
+.premium-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  border: none;
+}
+
+
+/* ============================================
+   MOTIVATIONAL UI/UX ENHANCEMENTS
+   ============================================ */
+
+/* ── Typewriter Caret ── */
+.typewriter-caret {
+  display: inline-block;
+  color: #10b981;
+  font-weight: 900;
+  margin-left: 2px;
+  transition: opacity 0.1s;
+}
+
+/* ── Social Proof Banner Stat Underline Expansion ── */
+.social-proof-underline {
+  width: 4rem;
+  height: 3px;
+  border-radius: 9999px;
+  margin: 0 auto;
+  transition: width 0.5s ease;
+}
+.social-proof-underline:hover {
+  width: 6rem;
+}
+
+/* ── Success Story Cards ── */
+.success-story-card {
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s, box-shadow 0.4s;
+}
+.success-story-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Quote Carousel fade ── */
+#quote-text, #quote-author {
+  transition: opacity 0.35s ease;
+}
+
+/* ── Achievement Badge Pop Animation ── */
+@keyframes badge-pop {
+  0%   { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+  60%  { transform: scale(1.15) rotate(3deg);  opacity: 1; }
+  100% { transform: scale(1) rotate(0deg);     opacity: 1; }
+}
+.badge-unlocked .text-4xl {
+  animation: badge-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* ── Progress Bar Glow ── */
+#progress-bar-fill {
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.5), 0 0 24px rgba(16, 185, 129, 0.2);
+}
+
+/* ── Urgency Pulse Dot ── */
+@keyframes urgency-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.6); }
+  50%       { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+}
+.urgency-dot {
+  animation: urgency-pulse 1.8s ease-in-out infinite;
+}
+
+/* ── Quote Dot Navigation ── */
+#quote-dots button {
+  min-width: 8px;
+  height: 8px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
