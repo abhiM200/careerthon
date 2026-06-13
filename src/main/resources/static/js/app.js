@@ -5,7 +5,15 @@
 // ─── Mobile Menu ────────────────────────────
 function toggleMobileMenu() {
   const menu = document.getElementById('mobile-menu');
-  if (menu) menu.classList.toggle('open');
+  if (!menu) return;
+  const isOpen = menu.classList.contains('open');
+  if (isOpen) {
+    menu.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    menu.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 // ─── Scroll Animations (Intersection Observer) ──
