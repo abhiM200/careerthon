@@ -4,7 +4,29 @@
 <body class="bg-themed-pure min-h-screen">
     <header th:replace="~{fragments/header :: header}"></header>
 
-    <main class="pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <!-- Dashboard Persistent Mobile Sidebar -->
+    <aside class="dashboard-sidebar">
+        <nav class="dashboard-sidebar-nav">
+            <a href="/user/profile" class="dashboard-sidebar-link active" title="Dashboard">
+                <span class="dashboard-sidebar-icon">📊</span>
+                <span class="dashboard-sidebar-label">Overview</span>
+            </a>
+            <a href="/review" class="dashboard-sidebar-link" title="New Profile Scan">
+                <span class="dashboard-sidebar-icon">🚀</span>
+                <span class="dashboard-sidebar-label">New Scan</span>
+            </a>
+            <a href="/resume" class="dashboard-sidebar-link" title="Resume Match">
+                <span class="dashboard-sidebar-icon">📄</span>
+                <span class="dashboard-sidebar-label">Resume</span>
+            </a>
+            <a href="/job-match" class="dashboard-sidebar-link" title="Job Match">
+                <span class="dashboard-sidebar-icon">🎯</span>
+                <span class="dashboard-sidebar-label">Jobs</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="dashboard-main pt-32 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <!-- Dashboard Header -->
         <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 active" data-reveal>
             <div>
