@@ -27,11 +27,14 @@ public class StudentController {
     private final LectureRepository lectureRepository;
     private final CertificateRepository certificateRepository;
     private final CertificateService certificateService;
+    private final LmsAssignmentRepository assignmentRepository;
+    private final InternshipRepository internshipRepository;
 
     public StudentController(UserRepository userRepository, StudentProfileRepository studentProfileRepository,
                              EnrollmentRepository enrollmentRepository, CourseProgressRepository courseProgressRepository,
                              CourseRepository courseRepository, LectureRepository lectureRepository,
-                             CertificateRepository certificateRepository, CertificateService certificateService) {
+                             CertificateRepository certificateRepository, CertificateService certificateService,
+                             LmsAssignmentRepository assignmentRepository, InternshipRepository internshipRepository) {
         this.userRepository = userRepository;
         this.studentProfileRepository = studentProfileRepository;
         this.enrollmentRepository = enrollmentRepository;
@@ -40,6 +43,8 @@ public class StudentController {
         this.lectureRepository = lectureRepository;
         this.certificateRepository = certificateRepository;
         this.certificateService = certificateService;
+        this.assignmentRepository = assignmentRepository;
+        this.internshipRepository = internshipRepository;
     }
 
     private User getAuthenticatedUser(UserDetails userDetails) {
@@ -136,5 +141,35 @@ public class StudentController {
         model.addAttribute("certificates", certificates);
 
         return "student/certificates";
+    }
+
+    @GetMapping("/assignments")
+    public String assignments(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User user = getAuthenticatedUser(userDetails);
+        if (user == null) return "redirect:/login";
+
+        List<Enrollment> enrollments = enrollmentRepository.findByStudentId(user.getId());
+        List<Long> courseIds = enrollments.stream().map(e -> e.getCourse().getId()).collect(Collectors.toList());
+        List<LmsAssignment> assignments = assignmentRepository.findAll().stream()
+                .filter(a -> courseIds.contains(a.getCourse().getId()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("assignments", assignments);
+        return "student/assignments";
+    }
+
+    @GetMapping("/internships")
+    public String internships(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User user = getAuthenticatedUser(userDetails);
+        if (user == null) return "redirect:/login";
+
+        List<Enrollment> enrollments = enrollmentRepository.findByStudentId(user.getId());
+        List<Long> courseIds = enrollments.stream().map(e -> e.getCourse().getId()).collect(Collectors.toList());
+        List<Internship> internships = internshipRepository.findAll().stream()
+                .filter(i -> courseIds.contains(i.getCourse().getId()))
+                .collect(Collectors.toList());
+
+        model.addAttribute("internships", internships);
+        return "student/internships";
     }
 }

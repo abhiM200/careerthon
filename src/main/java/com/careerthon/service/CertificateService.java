@@ -75,6 +75,39 @@ public class CertificateService {
         return certificateRepository.save(cert);
     }
 
+    public Certificate generateOfferLetter(User student, Internship internship) {
+        String certId = UUID.randomUUID().toString();
+        Certificate cert = new Certificate();
+        cert.setStudent(student);
+        cert.setCertificateNumber(certId);
+        cert.setCertificateType("OFFER_LETTER");
+        cert.setInternshipName(internship.getTitle());
+        cert.setQrDataUrl("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=careerthon-cert-" + certId);
+
+        String fileName = certId + ".pdf";
+        cert.setPdfUrl("/certificates/" + fileName);
+
+        generatePdf(cert, student.getFullName(), "is officially offered the role for internship program", internship.getTitle(), fileName);
+
+        return certificateRepository.save(cert);
+    }
+
+    public Certificate generateLetterOfRecommendation(User student, Internship internship) {
+        String certId = UUID.randomUUID().toString();
+        Certificate cert = new Certificate();
+        cert.setStudent(student);
+        cert.setCertificateNumber(certId);
+        cert.setCertificateType("LOR");
+        cert.setInternshipName(internship.getTitle());
+        cert.setQrDataUrl("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=careerthon-cert-" + certId);
+
+        String fileName = certId + ".pdf";
+        cert.setPdfUrl("/certificates/" + fileName);
+
+        generatePdf(cert, student.getFullName(), "is highly recommended for their exceptional work in", internship.getTitle(), fileName);
+
+        return certificateRepository.save(cert);
+    }
     private void generatePdf(Certificate cert, String studentName, String actionText, String itemName, String fileName) {
         try {
             PdfWriter writer = new PdfWriter(new FileOutputStream(PDF_DIR + fileName));

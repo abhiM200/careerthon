@@ -22,13 +22,17 @@ public class AdminLmsController {
     private final InternshipRepository internshipRepository;
     private final YoutubeImportService youtubeImportService;
     private final PasswordEncoder passwordEncoder;
+    private final LmsAssignmentRepository lmsAssignmentRepository;
+    private final QuizRepository quizRepository;
 
     public AdminLmsController(CourseRepository courseRepository, UserRepository userRepository,
                               StudentProfileRepository studentProfileRepository,
                               EnrollmentRepository enrollmentRepository,
                               InternshipRepository internshipRepository,
                               YoutubeImportService youtubeImportService,
-                              PasswordEncoder passwordEncoder) {
+                              PasswordEncoder passwordEncoder,
+                              LmsAssignmentRepository lmsAssignmentRepository,
+                              QuizRepository quizRepository) {
         this.courseRepository = courseRepository;
         this.userRepository = userRepository;
         this.studentProfileRepository = studentProfileRepository;
@@ -36,6 +40,8 @@ public class AdminLmsController {
         this.internshipRepository = internshipRepository;
         this.youtubeImportService = youtubeImportService;
         this.passwordEncoder = passwordEncoder;
+        this.lmsAssignmentRepository = lmsAssignmentRepository;
+        this.quizRepository = quizRepository;
     }
 
     @GetMapping("/dashboard")
@@ -43,6 +49,9 @@ public class AdminLmsController {
         model.addAttribute("totalCourses", courseRepository.count());
         model.addAttribute("totalStudents", studentProfileRepository.count());
         model.addAttribute("totalInternships", internshipRepository.count());
+        model.addAttribute("totalEnrollments", enrollmentRepository.count());
+        model.addAttribute("totalAssignments", lmsAssignmentRepository.count());
+        model.addAttribute("totalQuizzes", quizRepository.count());
         return "admin/lms/dashboard";
     }
 
@@ -118,6 +127,23 @@ public class AdminLmsController {
             } else {
                 redirectAttributes.addFlashAttribute("error", "Student is already enrolled in this course.");
             }
+        }
+        return "redirect:/admin/lms/students";
+    }
+
+    @PostMapping("/students/enroll/bulk")
+    public String bulkEnrollStudents(@RequestParam List<Long> studentIds, @RequestParam Long courseId, RedirectAttributes redirectAttributes) {
+        Course course = courseRepository.findById(courseId).orElse(null);
+        if (course != null && studentIds != null) {
+            int count = 0;
+            for (Long studentId : studentIds) {
+                User student = userRepository.findById(studentId).orElse(null);
+                if (student != null && !enrollmentRepository.existsByStudentIdAndCourseId(student.getId(), course.getId())) {
+                    enrollmentRepository.save(new Enrollment(student, course));
+                    count++;
+                }
+            }
+            redirectAttributes.addFlashAttribute("message", count + " students successfully enrolled in " + course.getTitle());
         }
         return "redirect:/admin/lms/students";
     }

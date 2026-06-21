@@ -34,6 +34,12 @@ public class Course {
 
     private int totalLectures;
 
+    @Column(length = 2000)
+    private String prerequisites;
+
+    @Column(length = 2000)
+    private String learningOutcomes;
+
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
@@ -53,6 +59,21 @@ public class Course {
         this.category = category;
         this.totalDuration = totalDuration;
         this.totalLectures = totalLectures;
+    }
+
+    public Course(String title, String description, String instructor, String thumbnailUrl,
+                  String difficulty, String category, String totalDuration, int totalLectures,
+                  String prerequisites, String learningOutcomes) {
+        this.title = title;
+        this.description = description;
+        this.instructor = instructor;
+        this.thumbnailUrl = thumbnailUrl;
+        this.difficulty = difficulty;
+        this.category = category;
+        this.totalDuration = totalDuration;
+        this.totalLectures = totalLectures;
+        this.prerequisites = prerequisites;
+        this.learningOutcomes = learningOutcomes;
     }
 
     // Getters and Setters
@@ -85,6 +106,12 @@ public class Course {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public String getPrerequisites() { return prerequisites; }
+    public void setPrerequisites(String prerequisites) { this.prerequisites = prerequisites; }
+
+    public String getLearningOutcomes() { return learningOutcomes; }
+    public void setLearningOutcomes(String learningOutcomes) { this.learningOutcomes = learningOutcomes; }
 
     public List<Lecture> getLectures() { return lectures; }
     public void setLectures(List<Lecture> lectures) { this.lectures = lectures; }
