@@ -39,7 +39,9 @@
                         </td>
                         <td class="px-6 py-4 text-sm text-slate-700" th:text="${course.instructor}">Instructor</td>
                         <td class="px-6 py-4 text-sm font-bold text-indigo-600" th:text="${course.totalLectures}">0</td>
-                        <td class="px-6 py-4 text-right">
+                        <td class="px-6 py-4 text-right flex justify-end gap-3 items-center">
+                            <a th:href="@{'/admin/lms/course/' + ${course.id} + '/manage'}" class="text-indigo-600 hover:text-indigo-900 text-sm font-bold bg-indigo-50 px-3 py-1 rounded">Curriculum</a>
+                            <a th:href="@{'/admin/lms/course/edit/' + ${course.id}}" class="text-blue-600 hover:text-blue-900 text-sm font-bold bg-blue-50 px-3 py-1 rounded">Edit</a>
                             <form th:action="@{/admin/lms/courses/delete/{id}(id=${course.id})}" method="POST" onsubmit="return confirm('Delete this course?')">
                                 <button type="submit" class="text-red-600 hover:text-red-900 text-sm font-bold">Delete</button>
                             </form>

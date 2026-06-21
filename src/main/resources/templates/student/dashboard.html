@@ -66,6 +66,34 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mt-12">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6">Available Courses</h2>
+                    
+                    <div th:if="${#lists.isEmpty(availableCourses)}" class="text-center py-12 bg-slate-50 rounded-xl border border-slate-200">
+                        <p class="text-slate-500 font-medium">No other courses available at the moment.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div th:each="course : ${availableCourses}" class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow flex flex-col opacity-90 hover:opacity-100">
+                            <img th:if="${course.thumbnailUrl != null}" th:src="${course.thumbnailUrl}" class="w-full h-40 object-cover filter grayscale hover:grayscale-0 transition-all" alt="Course Thumbnail">
+                            <div th:unless="${course.thumbnailUrl != null}" class="w-full h-40 bg-gradient-to-r from-slate-400 to-slate-500 flex items-center justify-center">
+                                <span class="text-white text-4xl font-bold" th:text="${#strings.substring(course.title,0,1)}">C</span>
+                            </div>
+                            <div class="p-6 flex-1 flex flex-col">
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2" th:text="${course.category}">Category</span>
+                                <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight" th:text="${course.title}">Course Title</h3>
+                                <p class="text-slate-500 text-sm mb-6 flex-1 line-clamp-2" th:text="${course.description}">Description</p>
+                                
+                                <form th:action="@{'/student/enroll/' + ${course.id}}" method="post">
+                                    <button type="submit" class="w-full text-center bg-white hover:bg-indigo-50 text-indigo-600 border border-indigo-200 font-bold py-2 px-4 rounded-lg transition-colors">
+                                        Enroll Now
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

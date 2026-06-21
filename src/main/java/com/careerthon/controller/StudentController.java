@@ -58,12 +58,31 @@ public class StudentController {
 
         StudentProfile profile = studentProfileRepository.findByUserId(user.getId()).orElse(null);
         List<Enrollment> enrollments = enrollmentRepository.findByStudentId(user.getId());
+        List<Course> allCourses = courseRepository.findAll();
+        List<Course> enrolledCourses = enrollments.stream().map(Enrollment::getCourse).collect(Collectors.toList());
+        List<Course> availableCourses = allCourses.stream()
+                .filter(c -> !enrolledCourses.contains(c))
+                .collect(Collectors.toList());
 
         model.addAttribute("user", user);
         model.addAttribute("profile", profile);
         model.addAttribute("enrollments", enrollments);
+        model.addAttribute("availableCourses", availableCourses);
 
         return "student/dashboard";
+    }
+
+    @PostMapping("/enroll/{courseId}")
+    public String selfEnroll(@PathVariable Long courseId, @AuthenticationPrincipal UserDetails userDetails, RedirectAttributes redirectAttributes) {
+        User user = getAuthenticatedUser(userDetails);
+        if (user == null) return "redirect:/login";
+        
+        Course course = courseRepository.findById(courseId).orElse(null);
+        if (course != null && !enrollmentRepository.existsByStudentIdAndCourseId(user.getId(), courseId)) {
+            enrollmentRepository.save(new Enrollment(user, course));
+            redirectAttributes.addFlashAttribute("message", "Successfully enrolled in " + course.getTitle());
+        }
+        return "redirect:/student/dashboard";
     }
 
     @GetMapping("/course/{id}")
