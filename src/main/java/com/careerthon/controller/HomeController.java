@@ -77,8 +77,7 @@ public class HomeController {
     }
 
     @GetMapping("/user/profile")
-    public String profile(Model model) {
-        model.addAttribute("recentScans", profileReviewRepository.findAllByOrderByCreatedAtDesc());
-        return "dashboard";
+    public String profile() {
+        return "redirect:/student/dashboard";
     }
 }

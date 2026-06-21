@@ -35,7 +35,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             String targetUrl = savedRequest.getRedirectUrl();
             response.sendRedirect(targetUrl);
         } else {
-            response.sendRedirect("/review");
+            response.sendRedirect("/student/dashboard");
         }
     }
 }
