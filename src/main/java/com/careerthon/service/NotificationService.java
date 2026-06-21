@@ -22,7 +22,7 @@ public class NotificationService {
 
     public void sendNotification(User user, String title, String message, boolean sendEmail, String userEmail) {
         // Save to DB
-        LmsNotification notification = new LmsNotification(user, title, message);
+        LmsNotification notification = new LmsNotification(user, title, message, "COURSE_UPDATE");
         notificationRepository.save(notification);
 
         // Send Email
@@ -40,14 +40,14 @@ public class NotificationService {
     }
 
     public List<LmsNotification> getUnreadNotifications(Long userId) {
-        return notificationRepository.findByUserIdOrderByCreatedAtDesc(userId).stream()
-                .filter(n -> !n.isReadStatus())
+        return notificationRepository.findByTargetUserIdOrTargetUserIsNullOrderByCreatedAtDesc(userId).stream()
+                .filter(n -> !n.isRead())
                 .toList();
     }
     
     public void markAsRead(Long notificationId) {
         notificationRepository.findById(notificationId).ifPresent(n -> {
-            n.setReadStatus(true);
+            n.setRead(true);
             notificationRepository.save(n);
         });
     }
