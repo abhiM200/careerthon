@@ -16,15 +16,18 @@ public class CourseSeeder implements CommandLineRunner {
     private final InternshipRepository internshipRepository;
     private final QuizRepository quizRepository;
     private final LmsAssignmentRepository lmsAssignmentRepository;
+    private final LectureRepository lectureRepository;
 
     public CourseSeeder(CourseRepository courseRepository,
                         InternshipRepository internshipRepository,
                         QuizRepository quizRepository,
-                        LmsAssignmentRepository lmsAssignmentRepository) {
+                        LmsAssignmentRepository lmsAssignmentRepository,
+                        LectureRepository lectureRepository) {
         this.courseRepository = courseRepository;
         this.internshipRepository = internshipRepository;
         this.quizRepository = quizRepository;
         this.lmsAssignmentRepository = lmsAssignmentRepository;
+        this.lectureRepository = lectureRepository;
     }
 
     @Override
@@ -60,10 +63,19 @@ public class CourseSeeder implements CommandLineRunner {
 
             for (Course course : coursesToSeed) {
                 if (courseRepository.findByCategoryIgnoreCase(course.getCategory()).isEmpty()) {
-                    courseRepository.save(course);
+                    Course savedCourse = courseRepository.save(course);
+                    seedLecturesForCourse(savedCourse);
                 }
             }
-            System.out.println("✅ Successfully seeded 24 new technology courses into the LMS database.");
+            System.out.println("✅ Successfully seeded 24 new technology courses and their video lectures into the LMS database.");
+        }
+
+        // Make sure all existing courses also have lectures if they are empty
+        List<Course> allCourses = courseRepository.findAll();
+        for (Course course : allCourses) {
+            if (lectureRepository.countByCourseId(course.getId()) == 0) {
+                seedLecturesForCourse(course);
+            }
         }
 
         // Try to get the main Java course to attach features to
@@ -111,6 +123,26 @@ public class CourseSeeder implements CommandLineRunner {
             
             lmsAssignmentRepository.save(assignment);
             System.out.println("✅ Successfully seeded sample Assignment.");
+        }
+    }
+
+    private void seedLecturesForCourse(Course course) {
+        // High quality open-source YouTube video IDs
+        String[] videoIds = {"PkZNo7MFNFg", "eIrMbAQSU34", "G3e-cpL7ofc", "pTB0EiLXUC8", "HXV3zeQKqGY", "_uQrJ0TkZlc", "rfscVS0vtbw", "F5mRW0jo-U4", "Z1RJmh_OqeA", "t25hL98R6gA", "0B_0gBal3OA", "EnT-ZTrvjZI", "SccSCuHhOw0", "bMknfKXIFA8", "k5E2AVpwsko"};
+        
+        // Add 3 modules
+        for (int m = 1; m <= 3; m++) {
+            String moduleName = "Module " + m + ": " + (m == 1 ? "Fundamentals of " : (m == 2 ? "Advanced Concepts in " : "Building Projects with ")) + course.getCategory();
+            
+            // Add 3-4 lectures per module
+            for (int l = 1; l <= 4; l++) {
+                String title = course.getCategory() + " Tutorial Part " + ((m-1)*4 + l);
+                String videoId = videoIds[(int)(Math.random() * videoIds.length)];
+                
+                Lecture lecture = new Lecture(title, "Comprehensive tutorial covering core aspects of " + course.getCategory() + ".", videoId, moduleName, m, l, "45:00");
+                lecture.setCourse(course);
+                lectureRepository.save(lecture);
+            }
         }
     }
 }
