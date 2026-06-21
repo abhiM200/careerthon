@@ -25,6 +25,11 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             return;
         }
 
+        if (roles.contains("ROLE_STUDENT")) {
+            response.sendRedirect("/student/dashboard");
+            return;
+        }
+
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         if (savedRequest != null) {
             String targetUrl = savedRequest.getRedirectUrl();

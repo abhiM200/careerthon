@@ -93,7 +93,8 @@
             <a href="/about" class="nav-link py-2 px-4 rounded-xl text-sm font-bold text-slate-600 hover:text-emerald-600 hover:bg-white transition-all">About</a>
             <a href="/careers" class="nav-link py-2 px-4 rounded-xl text-sm font-bold text-slate-600 hover:text-emerald-600 hover:bg-white transition-all">Careers 💼</a>
             <a href="/lms" class="nav-link py-2 px-4 rounded-xl text-sm font-bold text-violet-600 hover:text-violet-700 hover:bg-violet-50 transition-all">Academy 🎓</a>
-            <a href="/user/profile" sec:authorize="isAuthenticated()" class="nav-link py-2 px-4 rounded-xl text-sm font-bold text-emerald-600 bg-white shadow-sm transition-all">Dashboard</a>
+            <a href="/student/dashboard" sec:authorize="hasRole('STUDENT')" class="nav-link py-2 px-4 rounded-xl text-sm font-bold text-emerald-600 bg-white shadow-sm transition-all">LMS Dashboard</a>
+            <a href="/user/profile" sec:authorize="isAuthenticated() and !hasRole('STUDENT')" class="nav-link py-2 px-4 rounded-xl text-sm font-bold text-emerald-600 bg-white shadow-sm transition-all">Dashboard</a>
         </div>
         
         <div class="auth-links flex items-center gap-4">
@@ -177,7 +178,10 @@
                 <a href="/lms" class="mobile-menu-link !text-violet-600" onclick="toggleMobileMenu()">
                     <span class="mobile-menu-link-icon">🎓</span> Academy
                 </a>
-                <a href="/user/profile" sec:authorize="isAuthenticated()" class="mobile-menu-link mobile-menu-link--active" onclick="toggleMobileMenu()">
+                <a href="/student/dashboard" sec:authorize="hasRole('STUDENT')" class="mobile-menu-link mobile-menu-link--active" onclick="toggleMobileMenu()">
+                    <span class="mobile-menu-link-icon">📊</span> LMS Dashboard
+                </a>
+                <a href="/user/profile" sec:authorize="isAuthenticated() and !hasRole('STUDENT')" class="mobile-menu-link mobile-menu-link--active" onclick="toggleMobileMenu()">
                     <span class="mobile-menu-link-icon">📊</span> Dashboard
                 </a>
             </nav>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: head('Student Dashboard - Careerthon')}"></head>
+<body class="bg-slate-50 min-h-screen pt-24 pb-12">
+    <header th:replace="~{fragments/header :: header}"></header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Profile Banner -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl shadow-xl overflow-hidden mb-10 text-white p-8">
+            <h1 class="text-3xl font-black mb-2" th:text="'Welcome back, ' + ${user.fullName} + '!'">Welcome!</h1>
+            <p class="text-indigo-200" th:if="${profile != null}" th:text="${profile.collegeName} + ' | ' + ${profile.branch}"></p>
+            <div class="mt-6 flex gap-4">
+                <a href="/student/certificates" class="bg-white/20 hover:bg-white/30 backdrop-blur-md px-4 py-2 rounded-lg text-sm font-bold transition">My Certificates</a>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-slate-900 mb-6">My Enrolled Courses</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div th:each="enrollment : ${enrollments}" class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden hover:shadow-lg transition-shadow flex flex-col">
+                <div class="h-40 bg-slate-200 w-full bg-cover bg-center" th:style="'background-image: url(' + (${enrollment.course.thumbnailUrl != null ? enrollment.course.thumbnailUrl : '/images/default-course.jpg'}) + ')'"></div>
+                <div class="p-5 flex-1 flex flex-col">
+                    <h3 class="text-lg font-bold text-slate-900 line-clamp-2 mb-1" th:text="${enrollment.course.title}">Course Title</h3>
+                    <p class="text-sm text-slate-500 mb-4" th:text="${enrollment.course.instructor}">Instructor</p>
+                    
+                    <div class="mt-auto">
+                        <div th:if="${enrollment.completed}" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800 mb-4">
+                            ✓ Completed
+                        </div>
+                        <a th:href="@{/student/course/{id}(id=${enrollment.course.id})}" class="block w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 rounded-lg transition-colors">
+                            <span th:text="${enrollment.completed ? 'Review Course' : 'Resume Learning'}"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${#lists.isEmpty(enrollments)}" class="col-span-full py-12 text-center bg-white rounded-xl border border-slate-200">
+                <p class="text-slate-500 font-medium">You are not enrolled in any courses yet.</p>
+                <p class="text-sm text-slate-400 mt-1">Please contact your administrator to get assigned to a course.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+</body>
+</html>
