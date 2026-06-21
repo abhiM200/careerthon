@@ -79,9 +79,9 @@ public class CourseSeeder implements CommandLineRunner {
                     "Work on a real-world enterprise application building backend APIs with Spring Boot and an interactive frontend with React/HTML.", 
                     "https://careerthon.app/docs/internship-guidelines.pdf");
             
-            InternshipTask task1 = new InternshipTask(internship, "Task 1: API Design", "Design the REST API endpoints and create Swagger documentation.");
-            InternshipTask task2 = new InternshipTask(internship, "Task 2: Database Schema", "Design the database schema using MySQL and create JPA entities.");
-            InternshipTask task3 = new InternshipTask(internship, "Task 3: Integration", "Integrate the backend with a React frontend to build a complete dashboard.");
+            InternshipTask task1 = new InternshipTask(internship, "Task 1: API Design", "Design the REST API endpoints and create Swagger documentation.", LocalDateTime.now().plusDays(7));
+            InternshipTask task2 = new InternshipTask(internship, "Task 2: Database Schema", "Design the database schema using MySQL and create JPA entities.", LocalDateTime.now().plusDays(14));
+            InternshipTask task3 = new InternshipTask(internship, "Task 3: Integration", "Integrate the backend with a React frontend to build a complete dashboard.", LocalDateTime.now().plusDays(21));
             
             internship.getTasks().addAll(Arrays.asList(task1, task2, task3));
             internshipRepository.save(internship);
@@ -92,9 +92,9 @@ public class CourseSeeder implements CommandLineRunner {
         if (quizRepository.count() == 0 && mainCourse != null) {
             Quiz quiz = new Quiz(mainCourse, "Java & Spring Boot Core Concepts Quiz");
             
-            QuizQuestion q1 = new QuizQuestion(quiz, "Which of the following is true about Spring Boot?", "It requires XML configuration", "It provides auto-configuration", "It does not support embedded servers", "It is only used for frontend", 2);
-            QuizQuestion q2 = new QuizQuestion(quiz, "What is the primary purpose of the @RestController annotation?", "To map HTML views", "To handle REST API requests and bind responses directly to the body", "To configure database connections", "To declare security rules", 2);
-            QuizQuestion q3 = new QuizQuestion(quiz, "In Java, which keyword is used to inherit a class?", "implement", "extend", "extends", "inherits", 3);
+            QuizQuestion q1 = new QuizQuestion(quiz, "Which of the following is true about Spring Boot?", "It requires XML configuration", "It provides auto-configuration", "It does not support embedded servers", "It is only used for frontend", "B");
+            QuizQuestion q2 = new QuizQuestion(quiz, "What is the primary purpose of the @RestController annotation?", "To map HTML views", "To handle REST API requests and bind responses directly to the body", "To configure database connections", "To declare security rules", "B");
+            QuizQuestion q3 = new QuizQuestion(quiz, "In Java, which keyword is used to inherit a class?", "implement", "extend", "extends", "inherits", "C");
             
             quiz.getQuestions().addAll(Arrays.asList(q1, q2, q3));
             quizRepository.save(quiz);
