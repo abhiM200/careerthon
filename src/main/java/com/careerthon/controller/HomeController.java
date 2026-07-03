@@ -15,17 +15,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@SuppressWarnings("null")
 public class HomeController {
 
     private final UserStoryRepository userStoryRepository;
     private final SpecExportService specExportService;
-    private final com.careerthon.repository.ProfileReviewRepository profileReviewRepository;
     private final com.careerthon.repository.JobRepository jobRepository;
 
-    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService, com.careerthon.repository.ProfileReviewRepository profileReviewRepository, com.careerthon.repository.JobRepository jobRepository) {
+    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService, com.careerthon.repository.JobRepository jobRepository) {
         this.userStoryRepository = userStoryRepository;
         this.specExportService = specExportService;
-        this.profileReviewRepository = profileReviewRepository;
         this.jobRepository = jobRepository;
     }
 

@@ -164,7 +164,7 @@ public class CertificateService {
 
             // Add QR Code
             try {
-                ImageData data = ImageDataFactory.create(new URL(cert.getQrDataUrl()));
+                ImageData data = ImageDataFactory.create(java.net.URI.create(cert.getQrDataUrl()).toURL());
                 Image qrImage = new Image(data);
                 qrImage.setWidth(100);
                 qrImage.setHeight(100);

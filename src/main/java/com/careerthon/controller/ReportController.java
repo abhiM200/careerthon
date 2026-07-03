@@ -39,7 +39,6 @@ public class ReportController {
         Optional<ProfileReview> optReview = analyzerService.getReview(id);
         if (optReview.isPresent()) {
             ProfileReview review = optReview.get();
-            String reportUrl = "/report/" + id;
             emailService.sendReportWithPdf(email, review);
             return "{\"success\":true,\"message\":\"Report sent with PDF to " + email + "\"}";
         }

@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/student")
+@SuppressWarnings("null")
 public class StudentController {
 
     private final UserRepository userRepository;

@@ -2,7 +2,6 @@ package com.careerthon.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -47,7 +46,6 @@ public class JobMatchController {
 
         // Clean and tokenize job description to extract target keywords
         Set<String> targetKeywords = extractKeywords(jobDescription);
-        Set<String> resumeKeywords = extractKeywords(resumeText);
 
         List<String> matched = new ArrayList<>();
         List<String> missing = new ArrayList<>();

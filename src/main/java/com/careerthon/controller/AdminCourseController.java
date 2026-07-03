@@ -9,16 +9,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/admin/lms/course")
+@SuppressWarnings("null")
 public class AdminCourseController {
 
     private final CourseRepository courseRepository;
-    private final LectureRepository lectureRepository;
-    private final QuizRepository quizRepository;
-
-    public AdminCourseController(CourseRepository courseRepository, LectureRepository lectureRepository, QuizRepository quizRepository) {
+    public AdminCourseController(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
-        this.lectureRepository = lectureRepository;
-        this.quizRepository = quizRepository;
     }
 
     @GetMapping("/create")

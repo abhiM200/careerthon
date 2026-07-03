@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/resume")
+@SuppressWarnings("null")
 public class ResumeController {
 
     private final ResumeService resumeService;

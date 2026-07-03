@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.Random;
 
 @Service
+@SuppressWarnings("null")
 public class ProfileAnalyzerService {
 
     private final ProfileReviewRepository reviewRepository;

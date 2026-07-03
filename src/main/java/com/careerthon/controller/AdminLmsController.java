@@ -13,6 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/lms")
+@SuppressWarnings("null")
 public class AdminLmsController {
 
     private final CourseRepository courseRepository;

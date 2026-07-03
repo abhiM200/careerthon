@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasRole('ADMIN')")
+@SuppressWarnings("null")
 public class AdminController {
 
     private static final int PAGE_SIZE = 50;

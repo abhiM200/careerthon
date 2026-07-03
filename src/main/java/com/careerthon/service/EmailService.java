@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 
 @Service
+@SuppressWarnings("null")
 public class EmailService {
 
     private final JavaMailSender mailSender;

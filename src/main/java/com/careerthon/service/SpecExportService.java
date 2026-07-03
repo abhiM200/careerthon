@@ -1,8 +1,6 @@
 package com.careerthon.service;
 
 import org.apache.poi.xwpf.usermodel.*;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTSimpleField;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;

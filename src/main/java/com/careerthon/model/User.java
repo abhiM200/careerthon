@@ -1,7 +1,6 @@
 package com.careerthon.model;
 
 import jakarta.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "app_users")
@@ -20,6 +19,9 @@ public class User {
     private String roles; // Store as comma-separated: ROLE_USER, ROLE_ADMIN
 
     private String fullName;
+
+    @Column(nullable = false)
+    private boolean enabled = true;
 
     public User() {}
 
@@ -45,4 +47,7 @@ public class User {
 
     public String getFullName() { return fullName; }
     public void setFullName(String fullName) { this.fullName = fullName; }
+
+    public boolean isEnabled() { return enabled; }
+    public void setEnabled(boolean enabled) { this.enabled = enabled; }
 }

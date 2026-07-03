@@ -6,6 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import org.springframework.lang.NonNull;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -161,8 +162,7 @@ public class DemoDataSeeder implements CommandLineRunner {
 
             jdbcTemplate.batchUpdate(sql, new org.springframework.jdbc.core.BatchPreparedStatementSetter() {
                 @Override
-                public void setValues(PreparedStatement ps, int i) throws java.sql.SQLException {
-                    int idx = batchStart + i;
+                public void setValues(@NonNull PreparedStatement ps, int i) throws java.sql.SQLException {
                     String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
                     String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
                     String fullName = firstName + " " + lastName;
@@ -206,14 +206,13 @@ public class DemoDataSeeder implements CommandLineRunner {
             ") VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         for (int batch = 0; batch < RESUME_COUNT; batch += BATCH_SIZE) {
-            int end = Math.min(batch + RESUME_COUNT, RESUME_COUNT);
             // Fix: ensure we don't exceed RESUME_COUNT
             int actualEnd = Math.min(batch + BATCH_SIZE, RESUME_COUNT);
             int batchStart = batch;
 
             jdbcTemplate.batchUpdate(sql, new org.springframework.jdbc.core.BatchPreparedStatementSetter() {
                 @Override
-                public void setValues(PreparedStatement ps, int i) throws java.sql.SQLException {
+                public void setValues(@NonNull PreparedStatement ps, int i) throws java.sql.SQLException {
                     String firstName = FIRST_NAMES[random.nextInt(FIRST_NAMES.length)];
                     String lastName = LAST_NAMES[random.nextInt(LAST_NAMES.length)];
                     String fullName = firstName + " " + lastName;

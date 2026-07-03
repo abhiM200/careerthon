@@ -57,6 +57,19 @@
                         </div>
                     </div>
 
+                    <div>
+                        <label class="block text-[10px] font-black text-emerald-500 dark:text-emerald-400 uppercase tracking-[0.2em] mb-2">Human Verification</label>
+                        <div class="relative group">
+                            <div class="absolute -inset-1 bg-emerald-500/10 rounded-xl blur-md group-focus-within:bg-emerald-500/20 transition-all"></div>
+                            <div class="flex items-center gap-3 relative">
+                                <div class="bg-themed-soft px-4 py-4 rounded-xl border-2 border-themed-soft text-sm font-black text-themed-main flex-shrink-0" th:text="${captchaQuestion}">5 + 3 = ?</div>
+                                <input type="text" name="captcha" required 
+                                       class="w-full py-4 px-5 bg-themed-pure rounded-xl border-2 border-themed-soft focus:border-emerald-500 outline-none transition-all text-sm font-bold text-themed-main placeholder:text-slate-400" 
+                                       placeholder="Answer">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="pt-4">
                         <button type="submit" class="w-full btn-premium py-4 rounded-xl text-lg flex justify-center items-center group shadow-glow-emerald">
                             Initialize Account

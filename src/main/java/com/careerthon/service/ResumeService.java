@@ -33,7 +33,8 @@ public class ResumeService {
 
     /** Lightweight text extraction without Apache Tika */
     private String extractText(MultipartFile file) {
-        String name = file.getOriginalFilename() != null ? file.getOriginalFilename().toLowerCase() : "";
+        String originalFilename = file.getOriginalFilename();
+        String name = originalFilename != null ? originalFilename.toLowerCase() : "";
         try (InputStream in = file.getInputStream()) {
             byte[] bytes = in.readAllBytes();
             if (bytes.length == 0) return "";

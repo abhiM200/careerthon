@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@SuppressWarnings("null")
 public class YoutubeImportService {
 
     private final CourseRepository courseRepository;

@@ -10,7 +10,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDateTime;
 
 @Controller
-@RequestMapping("/admin/lms/internship")
+@RequestMapping("/admin/internship")
+@SuppressWarnings("null")
 public class AdminInternshipController {
 
     private final InternshipRepository internshipRepository;
