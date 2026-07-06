@@ -55,8 +55,24 @@ public class Lecture {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    public String getYoutubeVideoId() { return youtubeVideoId; }
-    public void setYoutubeVideoId(String youtubeVideoId) { this.youtubeVideoId = youtubeVideoId; }
+    public String getYoutubeVideoId() { return sanitizeYoutubeId(youtubeVideoId); }
+    public void setYoutubeVideoId(String youtubeVideoId) { this.youtubeVideoId = sanitizeYoutubeId(youtubeVideoId); }
+
+    private String sanitizeYoutubeId(String videoId) {
+        if (videoId == null) return null;
+        videoId = videoId.trim();
+        if (videoId.contains("v=")) {
+            videoId = videoId.substring(videoId.indexOf("v=") + 2);
+            if (videoId.contains("&")) videoId = videoId.substring(0, videoId.indexOf("&"));
+        } else if (videoId.contains("youtu.be/")) {
+            videoId = videoId.substring(videoId.indexOf("youtu.be/") + 9);
+            if (videoId.contains("?")) videoId = videoId.substring(0, videoId.indexOf("?"));
+        } else if (videoId.contains("embed/")) {
+            videoId = videoId.substring(videoId.indexOf("embed/") + 6);
+            if (videoId.contains("?")) videoId = videoId.substring(0, videoId.indexOf("?"));
+        }
+        return videoId;
+    }
 
     public String getModuleName() { return moduleName; }
     public void setModuleName(String moduleName) { this.moduleName = moduleName; }

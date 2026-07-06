@@ -39,8 +39,8 @@
                 <!-- Video Player Column -->
                 <div class="flex-1 flex flex-col">
                     <!-- YouTube Player -->
-                    <div class="w-full bg-black" style="aspect-ratio: 16/9; max-height: 70vh;">
-                        <iframe
+                    <div class="w-full bg-black flex flex-col items-center justify-center text-slate-400" style="aspect-ratio: 16/9; max-height: 70vh;">
+                        <iframe th:if="${activeLecture != null}"
                             id="lms-video-player"
                             th:src="'https://www.youtube.com/embed/' + ${activeLecture.youtubeVideoId} + '?rel=0&modestbranding=1'"
                             class="w-full h-full"
@@ -48,16 +48,26 @@
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen>
                         </iframe>
+                        <div th:if="${activeLecture == null}" class="flex flex-col items-center justify-center h-full w-full">
+                            <span class="text-4xl mb-2">🎥</span>
+                            <p>No video available for this lesson</p>
+                        </div>
                     </div>
 
                     <!-- Current Lecture Info -->
                     <div class="p-6 md:p-8 border-b border-themed-soft">
-                        <div class="flex items-start gap-3 mb-3">
-                            <span class="px-2.5 py-1 bg-violet-500/10 text-violet-600 dark:text-violet-400 rounded-lg text-[10px] font-black uppercase tracking-wider shrink-0 mt-1" th:text="${activeLecture.moduleName}">Module 1</span>
-                            <span th:if="${activeLecture.duration}" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-wider shrink-0 mt-1" th:text="'⏱ ' + ${activeLecture.duration}">⏱ 2:30:00</span>
+                        <div th:if="${activeLecture != null}">
+                            <div class="flex items-start gap-3 mb-3">
+                                <span class="px-2.5 py-1 bg-violet-500/10 text-violet-600 dark:text-violet-400 rounded-lg text-[10px] font-black uppercase tracking-wider shrink-0 mt-1" th:text="${activeLecture.moduleName}">Module 1</span>
+                                <span th:if="${activeLecture.duration}" class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 rounded-lg text-[10px] font-black uppercase tracking-wider shrink-0 mt-1" th:text="'⏱ ' + ${activeLecture.duration}">⏱ 2:30:00</span>
+                            </div>
+                            <h2 class="text-xl md:text-2xl font-black text-themed-main mb-3" id="active-lecture-title" th:text="${activeLecture.title}">Lecture Title</h2>
+                            <p class="text-sm text-themed-body leading-relaxed max-w-3xl" id="active-lecture-desc" th:text="${activeLecture.description}">Lecture description...</p>
                         </div>
-                        <h2 class="text-xl md:text-2xl font-black text-themed-main mb-3" id="active-lecture-title" th:text="${activeLecture.title}">Lecture Title</h2>
-                        <p class="text-sm text-themed-body leading-relaxed max-w-3xl" id="active-lecture-desc" th:text="${activeLecture.description}">Lecture description...</p>
+                        <div th:if="${activeLecture == null}">
+                            <h2 class="text-xl md:text-2xl font-black text-themed-main mb-3" id="active-lecture-title" th:text="${course.title}">Course Title</h2>
+                            <p class="text-sm text-themed-body leading-relaxed max-w-3xl" id="active-lecture-desc" th:text="${course.description}">Course description...</p>
+                        </div>
                     </div>
                 </div>
 
