@@ -27,14 +27,14 @@ public class LmsController {
         this.lectureRepository = lectureRepository;
     }
 
-    @GetMapping("/lms")
+    @GetMapping({"", "/"})
     public String lmsDashboard(Model model) {
         List<Course> courses = courseRepository.findAllByOrderByCreatedAtDesc();
         model.addAttribute("courses", courses);
         return "lms/dashboard";
     }
 
-    @GetMapping("/lms/course/{id}")
+    @GetMapping("/course/{id}")
     public String courseDetail(@PathVariable Long id,
                                @RequestParam(required = false) Long lectureId,
                                Model model) {
