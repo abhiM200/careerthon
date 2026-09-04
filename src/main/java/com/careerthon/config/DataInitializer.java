@@ -105,15 +105,21 @@ public class DataInitializer implements CommandLineRunner {
                     .forEach(userStoryRepository::delete);
         }
 
-        // Ensure Admin user exists
-        userRepository.findByUsername("admin").ifPresentOrElse(
+        // Ensure Admin user exists with updated credentials (admin@careerthon.com / Abhishek@2641)
+        String adminUsername = "admin@careerthon.com";
+        String adminPassword = "Abhishek@2641";
+
+        // Remove legacy 'admin' user if present
+        userRepository.findByUsername("admin").ifPresent(userRepository::delete);
+
+        userRepository.findByUsername(adminUsername).ifPresentOrElse(
                 adminUser -> {
                     adminUser.setRoles("ROLE_ADMIN");
-                    adminUser.setPassword(passwordEncoder.encode("admin"));
+                    adminUser.setPassword(passwordEncoder.encode(adminPassword));
                     userRepository.save(adminUser);
                 },
                 () -> {
-                    User admin = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN", "Administrator");
+                    User admin = new User(adminUsername, passwordEncoder.encode(adminPassword), "ROLE_ADMIN", "Administrator");
                     userRepository.save(admin);
                 });
 
