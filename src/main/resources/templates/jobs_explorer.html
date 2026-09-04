@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/header :: head('Job Explorer & Recommendations - Naukri, LinkedIn & Indeed | Careerthon')}">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased">
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="flex-grow pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+    
+    <!-- Hero Banner -->
+    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 border border-slate-800 p-8 sm:p-12 mb-12 shadow-2xl">
+        <div class="absolute -right-20 -top-20 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Multi-Platform Aggregator & Recommendation Engine
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight mb-4 leading-tight">
+                Search & Discover Jobs Across <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-indigo-400">
+                    Naukri.com, LinkedIn & Indeed
+                </span>
+            </h1>
+            
+            <p class="text-slate-300 text-base sm:text-lg mb-8 leading-relaxed font-normal">
+                Search thousands of live job listings, generate instant platform search deep-links, and get AI-matched job recommendations from top hiring portals in one unified portal.
+            </p>
+
+            <!-- Supported Platform Badges -->
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Connected Portals:</span>
+                
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/90 border border-blue-500/30 text-blue-300 text-xs font-bold shadow-sm">
+                    <span class="text-base">🔷</span> Naukri.com
+                </div>
+                
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/90 border border-sky-500/30 text-sky-300 text-xs font-bold shadow-sm">
+                    <span class="text-base">💼</span> LinkedIn Jobs
+                </div>
+                
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/90 border border-indigo-500/30 text-indigo-300 text-xs font-bold shadow-sm">
+                    <span class="text-base">🔍</span> Indeed
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search & Filter Controls Card -->
+    <div class="bg-slate-900/90 backdrop-blur-xl border border-slate-800 rounded-3xl p-6 sm:p-8 mb-12 shadow-xl">
+        <form id="jobSearchForm" onsubmit="handleSearch(event)" class="space-y-6">
+            
+            <!-- Platform Selector Tabs -->
+            <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Select Job Platform</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="platformTabContainer">
+                    <button type="button" onclick="setPlatform('ALL')" id="tab-ALL" class="platform-tab active px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white border-emerald-500 shadow-md">
+                        🌐 All Portals
+                    </button>
+                    <button type="button" onclick="setPlatform('NAUKRI')" id="tab-NAUKRI" class="platform-tab px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-blue-600/20 hover:text-blue-300 hover:border-blue-500/50">
+                        🔷 Naukri.com
+                    </button>
+                    <button type="button" onclick="setPlatform('LINKEDIN')" id="tab-LINKEDIN" class="platform-tab px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-sky-600/20 hover:text-sky-300 hover:border-sky-500/50">
+                        💼 LinkedIn
+                    </button>
+                    <button type="button" onclick="setPlatform('INDEED')" id="tab-INDEED" class="platform-tab px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-indigo-600/20 hover:text-indigo-300 hover:border-indigo-500/50">
+                        🔍 Indeed
+                    </button>
+                </div>
+                <input type="hidden" id="platformInput" value="ALL">
+            </div>
+
+            <!-- Query & Location Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Search Keyword -->
+                <div class="md:col-span-2">
+                    <label for="searchQuery" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Job Title, Skill, or Company</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 text-lg">🔍</div>
+                        <input type="text" id="searchQuery" placeholder="e.g. Java Full Stack Developer, React, Data Scientist, DevOps..."
+                               class="w-full pl-11 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm font-medium transition-all">
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div>
+                    <label for="searchLocation" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Location</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 text-lg">📍</div>
+                        <input type="text" id="searchLocation" placeholder="e.g. Bangalore, Remote, Mumbai, Delhi, Pune..."
+                               class="w-full pl-11 pr-4 py-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 text-sm font-medium transition-all">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters & Submit Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
+                <!-- Experience -->
+                <div>
+                    <label for="searchExp" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Experience Level</label>
+                    <select id="searchExp" class="w-full px-4 py-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-slate-200 text-sm font-medium focus:outline-none focus:border-emerald-500 transition-all">
+                        <option value="All">All Experience Levels</option>
+                        <option value="0-2">Entry Level (0-2 Yrs)</option>
+                        <option value="2-5">Mid Level (2-5 Yrs)</option>
+                        <option value="5+">Senior Level (5+ Yrs)</option>
+                    </select>
+                </div>
+
+                <!-- Job Type -->
+                <div>
+                    <label for="searchType" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Work Setup</label>
+                    <select id="searchType" class="w-full px-4 py-3.5 bg-slate-950 border border-slate-800 rounded-2xl text-slate-200 text-sm font-medium focus:outline-none focus:border-emerald-500 transition-all">
+                        <option value="All">All Types</option>
+                        <option value="Full Time">Full Time</option>
+                        <option value="Remote">Remote</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit" class="w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        <span>Search Across Portals</span> 🚀
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Direct Launchers for Platform Search (Deep Search Generators) -->
+    <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 mb-12 shadow-lg">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-4">
+            <div>
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    ⚡ 1-Click Platform Direct Search Launchers
+                </h3>
+                <p class="text-slate-400 text-xs mt-1">
+                    Instantly view live real-time query results on official Naukri.com, LinkedIn, and Indeed search pages.
+                </p>
+            </div>
+            <span id="launcherQueryLabel" class="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+                Active Query: Software Engineer in Bangalore
+            </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="directLaunchersContainer">
+            <!-- Naukri Direct Link -->
+            <a id="naukriDirectLink" th:href="${platformUrls['naukri']}" target="_blank"
+               class="flex items-center justify-between p-4 rounded-2xl bg-blue-950/40 border border-blue-500/30 hover:bg-blue-900/40 hover:border-blue-400 transition-all group">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-600/20 flex items-center justify-center text-lg">🔷</div>
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-blue-300">Open on Naukri.com</div>
+                        <div class="text-[11px] font-medium text-slate-400">Direct Portal Search</div>
+                    </div>
+                </div>
+                <span class="text-blue-400 group-hover:translate-x-1 transition-transform">↗</span>
+            </a>
+
+            <!-- LinkedIn Direct Link -->
+            <a id="linkedinDirectLink" th:href="${platformUrls['linkedin']}" target="_blank"
+               class="flex items-center justify-between p-4 rounded-2xl bg-sky-950/40 border border-sky-500/30 hover:bg-sky-900/40 hover:border-sky-400 transition-all group">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-sky-600/20 flex items-center justify-center text-lg">💼</div>
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-sky-300">Open on LinkedIn</div>
+                        <div class="text-[11px] font-medium text-slate-400">Direct Jobs Search</div>
+                    </div>
+                </div>
+                <span class="text-sky-400 group-hover:translate-x-1 transition-transform">↗</span>
+            </a>
+
+            <!-- Indeed Direct Link -->
+            <a id="indeedDirectLink" th:href="${platformUrls['indeed']}" target="_blank"
+               class="flex items-center justify-between p-4 rounded-2xl bg-indigo-950/40 border border-indigo-500/30 hover:bg-indigo-900/40 hover:border-indigo-400 transition-all group">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-600/20 flex items-center justify-center text-lg">🔍</div>
+                    <div>
+                        <div class="text-sm font-bold text-white group-hover:text-indigo-300">Open on Indeed</div>
+                        <div class="text-[11px] font-medium text-slate-400">Direct Portal Search</div>
+                    </div>
+                </div>
+                <span class="text-indigo-400 group-hover:translate-x-1 transition-transform">↗</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Recommendations Section Header -->
+    <div class="mb-12">
+        <div class="bg-gradient-to-r from-emerald-950/50 via-slate-900 to-indigo-950/50 border border-slate-800 rounded-3xl p-6 sm:p-8">
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full">
+                        ✨ Smart Skill Matcher
+                    </span>
+                    <h2 class="text-2xl font-black text-white mt-2">Recommended Jobs for Your Skillset</h2>
+                    <p class="text-slate-400 text-sm mt-1">Toggle target tech stack skills to get instant tailored recommendations from Naukri.com, LinkedIn, and Indeed.</p>
+                </div>
+            </div>
+
+            <!-- Interactive Skill Filter Pills -->
+            <div class="flex flex-wrap gap-2.5" id="skillTagsContainer">
+                <button type="button" onclick="toggleSkill('Java', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-emerald-600 text-white border-emerald-500 shadow-sm">
+                    ✓ Java
+                </button>
+                <button type="button" onclick="toggleSkill('Spring Boot', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-emerald-600 text-white border-emerald-500 shadow-sm">
+                    ✓ Spring Boot
+                </button>
+                <button type="button" onclick="toggleSkill('React', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-emerald-600 text-white border-emerald-500 shadow-sm">
+                    ✓ React
+                </button>
+                <button type="button" onclick="toggleSkill('Python', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-emerald-600 text-white border-emerald-500 shadow-sm">
+                    ✓ Python
+                </button>
+                <button type="button" onclick="toggleSkill('AWS', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-emerald-600 text-white border-emerald-500 shadow-sm">
+                    ✓ AWS
+                </button>
+                <button type="button" onclick="toggleSkill('Kubernetes', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">
+                    + Kubernetes
+                </button>
+                <button type="button" onclick="toggleSkill('Machine Learning', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">
+                    + Machine Learning
+                </button>
+                <button type="button" onclick="toggleSkill('SQL', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">
+                    + SQL
+                </button>
+                <button type="button" onclick="toggleSkill('Docker', this)" class="skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700">
+                    + Docker
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Cards Grid Section -->
+    <div class="mb-8 flex items-center justify-between">
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            🎯 Search & Recommended Job Openings
+        </h2>
+        <span id="resultsCountBadge" class="text-xs font-bold text-slate-400 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-xl"
+              th:text="${jobs.size()} + ' Jobs Found'">
+            12 Jobs Found
+        </span>
+    </div>
+
+    <!-- Job Cards Container -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="jobListingsGrid">
+        
+        <!-- Render Initial Jobs from Thymeleaf -->
+        <th:block th:each="job : ${jobs}">
+            <div class="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-3xl p-6 flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 group">
+                <div>
+                    <!-- Top Bar: Platform Badge & Match % -->
+                    <div class="flex items-center justify-between mb-4">
+                        <span th:class="'px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 ' + ${job.platform.badgeClass}">
+                            <span th:text="${job.platform.icon}">🔷</span>
+                            <span th:text="${job.platform.displayName}">Naukri.com</span>
+                        </span>
+
+                        <span class="px-2.5 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-extrabold">
+                            <span th:text="${job.matchPercentage}">95</span>% Match
+                        </span>
+                    </div>
+
+                    <!-- Job Title & Company -->
+                    <h3 class="text-lg font-black text-white group-hover:text-emerald-400 transition-colors mb-1" th:text="${job.title}">
+                        Senior Java Full Stack Developer
+                    </h3>
+                    <div class="text-sm font-semibold text-slate-400 mb-4" th:text="${job.company}">
+                        Tata Consultancy Services
+                    </div>
+
+                    <!-- Details Pill Line -->
+                    <div class="flex flex-wrap gap-2 text-xs font-medium text-slate-300 mb-4">
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60" th:text="'📍 ' + ${job.location}">📍 Bangalore</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60" th:text="'💼 ' + ${job.experienceLevel}">💼 3-6 Yrs</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60" th:text="'🏡 ' + ${job.jobType}">🏡 Full Time</span>
+                    </div>
+
+                    <!-- Salary -->
+                    <div class="text-xs font-bold text-emerald-400 mb-4" th:text="'💰 ' + ${job.salary}">
+                        💰 ₹14,00,000 - ₹24,00,000 P.A.
+                    </div>
+
+                    <!-- Short Description -->
+                    <p class="text-slate-400 text-xs line-clamp-2 mb-4 leading-relaxed" th:text="${job.description}">
+                        We are seeking an experienced Java Full Stack Developer proficient in Spring Boot...
+                    </p>
+
+                    <!-- Skill Tags -->
+                    <div class="flex flex-wrap gap-1.5 mb-6">
+                        <span th:each="skill : ${job.skills}"
+                              class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-[11px] font-medium"
+                              th:text="${skill}">
+                            Java
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Card Footer & Actions -->
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
+                    <span class="text-[11px] text-slate-500 font-medium" th:text="${job.postedTime}">2 hours ago</span>
+                    
+                    <a th:href="${job.directApplyUrl}" target="_blank"
+                       class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5">
+                        Apply on <span th:text="${job.platform.displayName}">Portal</span> ↗
+                    </a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<script>
+    let currentPlatform = 'ALL';
+    let selectedSkills = ['Java', 'Spring Boot', 'React', 'Python', 'AWS'];
+
+    function setPlatform(platform) {
+        currentPlatform = platform;
+        document.getElementById('platformInput').value = platform;
+
+        // Update Tab UI
+        document.querySelectorAll('.platform-tab').forEach(tab => {
+            tab.className = "platform-tab px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700";
+        });
+
+        const activeTab = document.getElementById('tab-' + platform);
+        if (activeTab) {
+            if (platform === 'NAUKRI') {
+                activeTab.className = "platform-tab active px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-blue-600 text-white border-blue-500 shadow-md";
+            } else if (platform === 'LINKEDIN') {
+                activeTab.className = "platform-tab active px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-sky-600 text-white border-sky-500 shadow-md";
+            } else if (platform === 'INDEED') {
+                activeTab.className = "platform-tab active px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-indigo-600 text-white border-indigo-500 shadow-md";
+            } else {
+                activeTab.className = "platform-tab active px-4 py-3 rounded-2xl border text-sm font-bold transition-all flex items-center justify-center gap-2 bg-emerald-600 text-white border-emerald-500 shadow-md";
+            }
+        }
+
+        executeSearch();
+    }
+
+    function handleSearch(event) {
+        event.preventDefault();
+        executeSearch();
+    }
+
+    function executeSearch() {
+        const query = document.getElementById('searchQuery').value.trim();
+        const location = document.getElementById('searchLocation').value.trim();
+        const experience = document.getElementById('searchExp').value;
+        const jobType = document.getElementById('searchType').value;
+
+        // Update launcher label
+        const qText = query ? query : "Software Engineer";
+        const locText = location ? location : "India";
+        document.getElementById('launcherQueryLabel').innerText = `Active Query: ${qText} in ${locText}`;
+
+        const url = `/api/jobs-explorer/search?query=${encodeURIComponent(query)}&location=${encodeURIComponent(location)}&platform=${currentPlatform}&experience=${encodeURIComponent(experience)}&jobType=${encodeURIComponent(jobType)}`;
+
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    renderJobListings(data.jobs);
+                    updateDirectSearchLinks(data.platformUrls);
+                }
+            })
+            .catch(err => console.error("Error searching jobs:", err));
+    }
+
+    function toggleSkill(skill, btn) {
+        const index = selectedSkills.indexOf(skill);
+        if (index > -1) {
+            selectedSkills.splice(index, 1);
+            btn.className = "skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700";
+            btn.innerText = "+ " + skill;
+        } else {
+            selectedSkills.push(skill);
+            btn.className = "skill-tag px-3.5 py-1.5 rounded-xl border text-xs font-bold transition-all bg-emerald-600 text-white border-emerald-500 shadow-sm";
+            btn.innerText = "✓ " + skill;
+        }
+
+        fetchRecommendations();
+    }
+
+    function fetchRecommendations() {
+        const skillsParam = selectedSkills.join(",");
+        fetch(`/api/jobs-explorer/recommendations?skills=${encodeURIComponent(skillsParam)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    renderJobListings(data.recommendations);
+                }
+            })
+            .catch(err => console.error("Error fetching recommendations:", err));
+    }
+
+    function updateDirectSearchLinks(urls) {
+        if (!urls) return;
+        if (urls.naukri) document.getElementById('naukriDirectLink').href = urls.naukri;
+        if (urls.linkedin) document.getElementById('linkedinDirectLink').href = urls.linkedin;
+        if (urls.indeed) document.getElementById('indeedDirectLink').href = urls.indeed;
+    }
+
+    function renderJobListings(jobs) {
+        const grid = document.getElementById('jobListingsGrid');
+        document.getElementById('resultsCountBadge').innerText = `${jobs.length} Jobs Found`;
+
+        if (!jobs || jobs.length === 0) {
+            grid.innerHTML = `
+                <div class="col-span-full py-16 text-center bg-slate-900/50 border border-slate-800 rounded-3xl">
+                    <div class="text-4xl mb-3">🔍</div>
+                    <h3 class="text-lg font-bold text-white mb-1">No Matching Jobs Found</h3>
+                    <p class="text-slate-400 text-xs max-w-md mx-auto">Try clearing your filters or expanding your search query to explore more opportunities across Naukri, LinkedIn, and Indeed.</p>
+                </div>
+            `;
+            return;
+        }
+
+        grid.innerHTML = jobs.map(job => {
+            let badgeClass = "bg-slate-700";
+            let icon = "🌐";
+            let platformName = "Platform";
+
+            if (job.platform === "NAUKRI") {
+                badgeClass = "bg-blue-600";
+                icon = "🔷";
+                platformName = "Naukri.com";
+            } else if (job.platform === "LINKEDIN") {
+                badgeClass = "bg-sky-700";
+                icon = "💼";
+                platformName = "LinkedIn";
+            } else if (job.platform === "INDEED") {
+                badgeClass = "bg-indigo-600";
+                icon = "🔍";
+                platformName = "Indeed";
+            }
+
+            const skillsHtml = job.skills.map(s => `<span class="px-2 py-0.5 rounded-md bg-slate-800 text-slate-300 text-[11px] font-medium">${escapeHtml(s)}</span>`).join('');
+
+            return `
+                <div class="bg-slate-900/90 border border-slate-800 hover:border-slate-700 rounded-3xl p-6 flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-1 group">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 rounded-xl text-xs font-bold text-white flex items-center gap-1.5 ${badgeClass}">
+                                <span>${icon}</span>
+                                <span>${platformName}</span>
+                            </span>
+                            <span class="px-2.5 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-extrabold">
+                                ${job.matchPercentage}% Match
+                            </span>
+                        </div>
+                        <h3 class="text-lg font-black text-white group-hover:text-emerald-400 transition-colors mb-1">${escapeHtml(job.title)}</h3>
+                        <div class="text-sm font-semibold text-slate-400 mb-4">${escapeHtml(job.company)}</div>
+                        <div class="flex flex-wrap gap-2 text-xs font-medium text-slate-300 mb-4">
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60">📍 ${escapeHtml(job.location)}</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60">💼 ${escapeHtml(job.experienceLevel)}</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-slate-800/80 border border-slate-700/60">🏡 ${escapeHtml(job.jobType)}</span>
+                        </div>
+                        <div class="text-xs font-bold text-emerald-400 mb-4">💰 ${escapeHtml(job.salary)}</div>
+                        <p class="text-slate-400 text-xs line-clamp-2 mb-4 leading-relaxed">${escapeHtml(job.description)}</p>
+                        <div class="flex flex-wrap gap-1.5 mb-6">${skillsHtml}</div>
+                    </div>
+                    <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between gap-3">
+                        <span class="text-[11px] text-slate-500 font-medium">${escapeHtml(job.postedTime)}</span>
+                        <a href="${job.directApplyUrl}" target="_blank"
+                           class="py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition-all flex items-center gap-1.5">
+                            Apply on ${platformName} ↗
+                        </a>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+</script>
+
+</body>
+</html>
