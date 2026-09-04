@@ -27,12 +27,7 @@ public class AuthController {
 
     @GetMapping("/signup")
     public String showSignupForm(Model model, HttpSession session) {
-        Random rand = new Random();
-        int num1 = rand.nextInt(10) + 1;
-        int num2 = rand.nextInt(10) + 1;
-        session.setAttribute("captchaResult", num1 + num2);
-        model.addAttribute("captchaQuestion", num1 + " + " + num2 + " = ?");
-        return "signup";
+        return "redirect:/login";
     }
 
     @PostMapping("/signup")

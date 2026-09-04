@@ -103,8 +103,9 @@
             </button>
 
             <div sec:authorize="isAnonymous()" class="flex items-center gap-2">
-                <a href="/login" class="text-sm font-black text-slate-500 dark:text-slate-400 hover:text-emerald-600 px-4">Login</a>
-                <a href="/signup" class="text-sm font-black text-white bg-emerald-600 hover:bg-emerald-700 px-5 py-2.5 rounded-xl shadow-sm transition-all">Sign Up</a>
+                <a href="/login" class="text-sm font-black text-white bg-emerald-600 hover:bg-emerald-700 px-5 py-2.5 rounded-xl shadow-sm transition-all flex items-center gap-1.5">
+                    <span>🔒</span> Admin Login
+                </a>
             </div>
 
             <div sec:authorize="isAuthenticated()" class="flex items-center gap-4">
@@ -180,8 +181,9 @@
 
             <div class="mobile-menu-footer">
                 <div sec:authorize="isAnonymous()" class="mobile-menu-auth">
-                    <a href="/login" class="mobile-menu-auth-link" onclick="toggleMobileMenu()">Login</a>
-                    <a href="/signup" class="mobile-menu-auth-link bg-emerald-600 !text-white hover:bg-emerald-700 mt-2" onclick="toggleMobileMenu()">Sign Up</a>
+                    <a href="/login" class="mobile-menu-auth-link bg-emerald-600 !text-white hover:bg-emerald-700 mt-2 text-center flex items-center justify-center gap-2" onclick="toggleMobileMenu()">
+                        <span>🔒</span> Admin Login
+                    </a>
                 </div>
                 <div sec:authorize="isAuthenticated()" class="mobile-menu-auth">
                     <div class="flex items-center gap-3 mb-4 p-4 bg-emerald-500/5 rounded-2xl border border-emerald-500/10">
