@@ -72,7 +72,7 @@ public class OfferLetterService {
             document.add(new Paragraph("Sincerely,").setMarginBottom(20));
 
             // Signatures Section
-            Table sigTable = new Table(UnitValue.createPercentArray(new float[]{33, 33, 33})).useAllAvailableWidth();
+            Table sigTable = new Table(UnitValue.createPercentArray(new float[]{50, 50})).useAllAvailableWidth();
             
             // Stylized Signature texts (using italic as a placeholder for a cursive font)
             Cell sig1 = new Cell().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
@@ -83,13 +83,8 @@ public class OfferLetterService {
             sig2.add(new Paragraph("Altamsh").setItalic().setFontColor(ColorConstants.BLUE).setFontSize(16).setMarginBottom(5));
             sig2.add(new Paragraph("Altamsh\nCo-Founder").setBold().setFontSize(10));
             
-            Cell sig3 = new Cell().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
-            sig3.add(new Paragraph("Priyanshu").setItalic().setFontColor(ColorConstants.BLUE).setFontSize(16).setMarginBottom(5));
-            sig3.add(new Paragraph("Priyanshu\nCo-Founder").setBold().setFontSize(10));
-            
             sigTable.addCell(sig1);
             sigTable.addCell(sig2);
-            sigTable.addCell(sig3);
 
             document.add(sigTable);
 

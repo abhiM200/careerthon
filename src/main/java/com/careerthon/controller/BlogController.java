@@ -75,7 +75,7 @@ public class BlogController {
             "Writing an Irresistible LinkedIn 'About' Summary: A Step-by-Step Guide",
             "How to Write an Irresistible LinkedIn About Summary",
             "A step-by-step narrative framework for your LinkedIn 'About' summary to capture recruiter attention, present high keyword density, and tell a premium story.",
-            "Priyanshu Shekhar",
+            "Careerthon Team",
             "May 24, 2026",
             "6 min read",
             "A step-by-step narrative framework for your LinkedIn 'About' summary to capture recruiter attention, present high keyword density, and tell a premium story.",

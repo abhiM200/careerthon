@@ -48,11 +48,6 @@ public class DataInitializer implements CommandLineRunner {
                             "As the developer and architect of Careerthon, I built this platform to democratize LinkedIn profile optimization. Using Spring Boot and modern web technologies, I created an end-to-end SaaS solution that provides actionable insights to job seekers.",
                             "AM", "#0A66C2", "/images/abhishek_mishra.jpg"),
                     new UserStory(
-                            "Priyanshu Shekhar",
-                            "UI/UX Designer & Frontend Developer",
-                            "I focused on crafting an intuitive and visually stunning user experience for Careerthon. From the animated landing page to the interactive report dashboard, every element was designed to make profile analysis accessible and engaging.",
-                            "PS", "#7c3aed", "/images/priyanshu_shekhar.jpg"),
-                    new UserStory(
                             "Altamash Mallick",
                             "Backend Engineer & Data Analyst",
                             "I contributed to the profile analysis engine and data modeling for Careerthon. The scoring algorithm uses weighted analysis across 15 profile dimensions, benchmarked against industry standards.",
@@ -81,6 +76,11 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("✅ Seeded initial user stories and testimonials.");
         } else {
             List<UserStory> existing = userStoryRepository.findAll();
+
+            // Explicitly remove Priyanshu Shekhar / Priyanshu Sekhar if exists in DB
+            existing.stream()
+                    .filter(s -> "Priyanshu Shekhar".equalsIgnoreCase(s.getName()) || "Priyanshu Sekhar".equalsIgnoreCase(s.getName()))
+                    .forEach(userStoryRepository::delete);
 
             // Delete Head HR if exists
             existing.stream()

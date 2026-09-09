@@ -84,7 +84,7 @@ public class HomeController {
     }
 
     private boolean isTeamMember(UserStory story) {
-        return java.util.List.of("Abhishek Mishra", "Priyanshu Shekhar", "Altamash Mallick").contains(story.getName());
+        return java.util.List.of("Abhishek Mishra", "Altamash Mallick").contains(story.getName());
     }
 
     private boolean isTestimonial(UserStory story) {
