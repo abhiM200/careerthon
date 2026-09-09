@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface ProfileReviewRepository extends JpaRepository<ProfileReview, Long> {
     List<ProfileReview> findByStatusOrderByCreatedAtDesc(ProfileReview.ReviewStatus status);
+    java.util.Optional<ProfileReview> findFirstByStatusOrderByCreatedAtDesc(ProfileReview.ReviewStatus status);
     List<ProfileReview> findAllByOrderByCreatedAtDesc();
     List<ProfileReview> findByLinkedinUrlOrderByCreatedAtDesc(String linkedinUrl);
 

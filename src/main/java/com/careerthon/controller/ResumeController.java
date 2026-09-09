@@ -4,9 +4,14 @@ import com.careerthon.model.ResumeReview;
 import com.careerthon.repository.ResumeReviewRepository;
 import com.careerthon.service.ResumeService;
 import com.careerthon.service.EmailService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,7 +48,8 @@ public class ResumeController {
     public String uploadResume(@RequestParam("resume") MultipartFile file, 
                               @RequestParam("userName") String userName,
                               @RequestParam("userEmail") String userEmail,
-                              Model model) {
+                              Model model,
+                              HttpSession session) {
         if (file.isEmpty()) {
             model.addAttribute("error", "Please select a file to upload.");
             return "resume/index";
@@ -51,6 +57,9 @@ public class ResumeController {
 
         try {
             ResumeReview review = resumeService.analyzeResume(file, userName, userEmail);
+            if (session != null) {
+                session.setAttribute("OWNED_RESUME_REVIEW_" + review.getId(), true);
+            }
             return "redirect:/resume/results/" + review.getId();
         } catch (Exception e) {
             model.addAttribute("error", "Failed to analyze resume: " + e.getMessage());
@@ -62,7 +71,8 @@ public class ResumeController {
     public String uploadBulkResumes(@RequestParam("resumes") List<MultipartFile> files, 
                                     @RequestParam("userName") String userName,
                                     @RequestParam("userEmail") String userEmail,
-                                    Model model) {
+                                    Model model,
+                                    HttpSession session) {
         if (files == null || files.isEmpty() || files.stream().allMatch(MultipartFile::isEmpty)) {
             model.addAttribute("error", "Please select at least one file to upload.");
             return "resume/bulk";
@@ -79,6 +89,9 @@ public class ResumeController {
                 if (!file.isEmpty()) {
                     ResumeReview review = resumeService.analyzeResume(file, userName, userEmail);
                     reviews.add(review);
+                    if (session != null) {
+                        session.setAttribute("OWNED_RESUME_REVIEW_" + review.getId(), true);
+                    }
                 }
             }
             model.addAttribute("reviews", reviews);
@@ -92,9 +105,12 @@ public class ResumeController {
     }
 
     @GetMapping("/results/{id}")
-    public String results(@PathVariable("id") Long id, Model model) {
+    public String results(@PathVariable("id") Long id, Model model, HttpSession session) {
         ResumeReview review = resumeReviewRepository.findById(id).orElse(null);
         if (review == null) return "redirect:/resume";
+        if (!canAccessResume(review, session)) {
+            return "redirect:/login";
+        }
         model.addAttribute("review", review);
         return "resume/results";
     }
@@ -116,10 +132,13 @@ public class ResumeController {
     }
 
     @GetMapping("/view/{id}")
-    public ResponseEntity<byte[]> viewResume(@PathVariable Long id) {
+    public ResponseEntity<byte[]> viewResume(@PathVariable Long id, HttpSession session) {
         if (id == null) return ResponseEntity.badRequest().build();
         ResumeReview review = resumeReviewRepository.findById(id).orElse(null);
         if (review == null || review.getFileData() == null) return ResponseEntity.notFound().build();
+        if (!canAccessResume(review, session)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         
         String fileName = review.getFileName() != null ? review.getFileName() : "resume.pdf";
         MediaType mediaType = MediaType.APPLICATION_PDF;
@@ -162,6 +181,27 @@ public class ResumeController {
         return ResponseEntity.ok("{\"success\":true,\"message\":\"Successfully dispatched " + successCount + " recruiter outreach invites!\"}");
     }
 
+    private boolean canAccessResume(ResumeReview review, HttpSession session) {
+        if (review == null) return false;
+        if (session != null && Boolean.TRUE.equals(session.getAttribute("OWNED_RESUME_REVIEW_" + review.getId()))) {
+            return true;
+        }
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken)) {
+            if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
+                return true;
+            }
+            String name = auth.getName();
+            if (review.getUserEmail() != null && review.getUserEmail().equalsIgnoreCase(name)) {
+                return true;
+            }
+            if (review.getUserName() != null && review.getUserName().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static class BulkContactRequest {
         public List<String> emails;
         public List<String> names;
@@ -171,3 +211,4 @@ public class ResumeController {
         public String message;
     }
 }
+

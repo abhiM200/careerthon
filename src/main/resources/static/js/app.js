@@ -92,47 +92,29 @@ function startAnalysis() {
 
   const progressBar = document.getElementById('progress-bar');
   const progressLabel = document.getElementById('progress-label');
-  const steps = [
-    { id: 'step-1', label: '✅ Profile data fetched', delay: 400, progress: 15 },
-    { id: 'step-2', label: '✅ Headline & about section analyzed', delay: 900, progress: 30 },
-    { id: 'step-3', label: '✅ ATS optimization check complete', delay: 1400, progress: 48 },
-    { id: 'step-4', label: '✅ Keyword density scanned', delay: 1900, progress: 62 },
-    { id: 'step-5', label: '✅ All 15 section scores calculated', delay: 2400, progress: 78 },
-    { id: 'step-6', label: '✅ Personalized recommendations generated', delay: 2900, progress: 92 },
-    { id: 'step-7', label: '✅ Report ready!', delay: 3300, progress: 100 }
-  ];
 
-  // Set step 1 active immediately
+  if (progressLabel) progressLabel.textContent = 'Processing real-time profile analysis...';
+  if (progressBar) progressBar.style.width = '50%';
   setStepActive('step-1');
+  setStepActive('step-2');
 
-  steps.forEach((step, index) => {
-    setTimeout(() => {
-      // Mark previous done
-      if (index > 0) setStepDone(steps[index - 1].id, steps[index - 1].label);
-      // Set current active
-      if (index < steps.length - 1) setStepActive(step.id);
-      else setStepDone(step.id, step.label);
-
-      // Update progress
-      if (progressBar) progressBar.style.width = step.progress + '%';
-      if (progressLabel) progressLabel.textContent = step.label;
-    }, step.delay);
-  });
-
-  // Trigger backend analysis then redirect
-  setTimeout(() => {
-    fetch('/review/analyze/' + reviewId)
-      .then(res => res.json())
-      .then(data => {
-        if (data.redirectUrl) {
-          setTimeout(() => { window.location.href = data.redirectUrl; }, 600);
-        }
-      })
-      .catch(() => {
-        // Fallback direct redirect
-        setTimeout(() => { window.location.href = '/report/' + reviewId; }, 1000);
-      });
-  }, 1500);
+  fetch('/review/analyze/' + reviewId)
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'COMPLETED' && data.redirectUrl) {
+        if (progressBar) progressBar.style.width = '100%';
+        if (progressLabel) progressLabel.textContent = 'Analysis Completed!';
+        ['step-1', 'step-2', 'step-3', 'step-4', 'step-5', 'step-6', 'step-7'].forEach(id => setStepDone(id));
+        window.location.href = data.redirectUrl;
+      } else {
+        if (progressLabel) progressLabel.textContent = 'Analysis failed. Please try again.';
+        if (progressBar) progressBar.style.backgroundColor = '#ef4444';
+      }
+    })
+    .catch(() => {
+      if (progressLabel) progressLabel.textContent = 'Analysis error. Retrying...';
+      setTimeout(() => { window.location.href = '/report/' + reviewId; }, 1500);
+    });
 }
 
 function setStepActive(id) {

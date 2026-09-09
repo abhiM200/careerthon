@@ -21,17 +21,38 @@ public class HomeController {
     private final UserStoryRepository userStoryRepository;
     private final SpecExportService specExportService;
     private final com.careerthon.repository.JobRepository jobRepository;
+    private final com.careerthon.repository.ProfileReviewRepository profileReviewRepository;
+    private final com.careerthon.repository.ResumeReviewRepository resumeReviewRepository;
 
-    public HomeController(UserStoryRepository userStoryRepository, SpecExportService specExportService, com.careerthon.repository.JobRepository jobRepository) {
+    public HomeController(UserStoryRepository userStoryRepository, 
+                          SpecExportService specExportService, 
+                          com.careerthon.repository.JobRepository jobRepository,
+                          com.careerthon.repository.ProfileReviewRepository profileReviewRepository,
+                          com.careerthon.repository.ResumeReviewRepository resumeReviewRepository) {
         this.userStoryRepository = userStoryRepository;
         this.specExportService = specExportService;
         this.jobRepository = jobRepository;
+        this.profileReviewRepository = profileReviewRepository;
+        this.resumeReviewRepository = resumeReviewRepository;
     }
 
     @GetMapping("/")
     public String home(Model model) {
         List<UserStory> allStories = userStoryRepository.findAll();
         model.addAttribute("testimonials", allStories.stream().filter(this::isTestimonial).collect(Collectors.toList()));
+        
+        long totalProfiles = profileReviewRepository.count();
+        long totalResumes = resumeReviewRepository.count();
+        long totalTransformed = totalProfiles + totalResumes;
+        
+        model.addAttribute("totalProfiles", totalProfiles);
+        model.addAttribute("totalResumes", totalResumes);
+        model.addAttribute("totalTransformed", totalTransformed);
+        
+        // Latest real profile review if available
+        var latestReviewOpt = profileReviewRepository.findFirstByStatusOrderByCreatedAtDesc(com.careerthon.model.ProfileReview.ReviewStatus.COMPLETED);
+        model.addAttribute("latestReview", latestReviewOpt.orElse(null));
+        
         return "index";
     }
 

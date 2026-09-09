@@ -135,19 +135,8 @@ public class DemoDataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (profileReviewRepository.count() >= 100) {
-            System.out.println("⏭️  Demo data already seeded, skipping.");
-            return;
-        }
-
-        long start = System.currentTimeMillis();
-        System.out.println("🌱 Seeding 5,000+ demo entries...");
-
-        seedProfileReviews();
-        seedResumeReviews();
-
-        long elapsed = System.currentTimeMillis() - start;
-        System.out.println("✅ Seeded " + (PROFILE_COUNT + RESUME_COUNT) + " demo entries in " + elapsed + "ms");
+        // Production requirement: Disable seeding fake demo profile & resume reviews
+        System.out.println("ℹ️  Demo data seeding disabled for production data integrity.");
     }
 
     private void seedProfileReviews() {
