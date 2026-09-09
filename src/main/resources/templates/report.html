@@ -53,9 +53,12 @@
                         </div>
                     </div>
                     
-                    <button onclick="generateScorecard()" class="btn-premium w-full justify-center">
+                    <button onclick="generateScorecard()" class="btn-premium w-full justify-center mb-3">
                         Share Social Card 🏆
                     </button>
+                    <a th:href="@{/report/{id}/pdf(id=${review.id})}" target="_blank" class="w-full py-3 rounded-2xl bg-slate-900 hover:bg-indigo-600 text-white font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg transition-all">
+                        <span>Download PDF Audit</span> 📄
+                    </a>
                 </div>
             </div>
         </div>

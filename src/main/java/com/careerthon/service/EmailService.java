@@ -140,7 +140,7 @@ public class EmailService {
         }
     }
 
-    private byte[] generatePdfReport(ProfileReview review) {
+    public byte[] generatePdfReport(ProfileReview review) {
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             PdfWriter writer = new PdfWriter(baos);
             PdfDocument pdf = new PdfDocument(writer);

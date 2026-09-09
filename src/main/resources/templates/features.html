@@ -413,7 +413,8 @@
 <!-- Tool Launch Modal -->
 <div id="toolModal" class="fixed inset-0 z-[100] flex items-center justify-center hidden p-4">
     <div class="absolute inset-0 bg-themed-pure/80 backdrop-blur-xl" onclick="closeModal()"></div>
-    <div class="glass p-12 rounded-[64px] border-themed-soft max-w-2xl w-full relative z-10 shadow-premium animate-fade-in overflow-y-auto max-h-[90vh]">
+    <div class="glass p-10 rounded-[48px] border-themed-soft max-w-2xl w-full relative z-10 shadow-premium animate-fade-in overflow-y-auto max-h-[90vh]">
+        
         <div id="modalLoading" class="text-center py-12">
             <div class="w-24 h-24 rounded-[32px] bg-indigo-600 text-white flex items-center justify-center text-5xl mx-auto mb-8 shadow-glow animate-pulse-soft">🚀</div>
             <h2 class="text-3xl font-black text-themed-main mb-4">Analyzing with Careerthon AI...</h2>
@@ -421,32 +422,57 @@
         </div>
         
         <div id="modalContent" class="hidden">
-            <div class="flex items-center gap-4 mb-8">
-                <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow-glow">✨</div>
-                <h2 id="modalTitle" class="text-2xl font-black text-themed-main">AI Results</h2>
+            <div class="flex items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-2xl shadow-glow">✨</div>
+                    <h2 id="modalTitle" class="text-2xl font-black text-themed-main">AI Results</h2>
+                </div>
+                <button onclick="closeModal()" class="text-themed-body hover:text-themed-main font-black text-xl px-3 py-1">✕</button>
+            </div>
+
+            <!-- Custom Prompt Input -->
+            <div class="mb-6">
+                <label class="block text-xs font-black uppercase tracking-widest text-indigo-500 mb-2">Target Role / Industry Context:</label>
+                <div class="flex gap-3">
+                    <input type="text" id="toolInput" placeholder="e.g. Senior Full Stack Engineer, Tech Lead, Product Manager" class="flex-1 px-5 py-3 rounded-2xl bg-themed-soft/80 border border-themed-soft text-themed-main font-medium text-sm focus:outline-none focus:border-indigo-600 transition-all">
+                    <button onclick="runCurrentTool()" class="px-6 py-3 rounded-2xl bg-indigo-600 text-white text-xs font-black uppercase tracking-widest shadow-glow hover:scale-105 transition-transform">RERUN AI</button>
+                </div>
             </div>
             
-            <div class="bg-themed-soft/50 p-8 rounded-3xl border border-themed-soft mb-8">
-                <pre id="modalResult" class="text-themed-main font-medium whitespace-pre-wrap leading-relaxed font-sans text-lg"></pre>
+            <div class="bg-themed-soft/50 p-6 rounded-3xl border border-themed-soft mb-6 max-h-[40vh] overflow-y-auto">
+                <pre id="modalResult" class="text-themed-main font-medium whitespace-pre-wrap leading-relaxed font-sans text-sm md:text-base"></pre>
             </div>
             
-            <div class="flex flex-col gap-4">
-                <button onclick="closeModal()" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-black shadow-glow hover:scale-[1.02] transition-transform">APPLY TO PROFILE</button>
-                <button onclick="closeModal()" class="w-full py-4 rounded-2xl border border-themed-soft text-themed-main font-black hover:bg-themed-soft transition-all">CLOSE EXPLORER</button>
+            <div class="flex flex-col md:flex-row gap-3">
+                <button id="copyBtn" onclick="copyModalResult()" class="flex-1 py-4 rounded-2xl bg-indigo-600 text-white font-black text-xs uppercase tracking-widest shadow-glow hover:scale-[1.02] transition-transform">COPY TO CLIPBOARD 📋</button>
+                <button onclick="closeModal()" class="py-4 px-8 rounded-2xl border border-themed-soft text-themed-main font-black text-xs uppercase tracking-widest hover:bg-themed-soft transition-all">CLOSE</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    let activeToolName = '';
+
     async function launchTool(name) {
+        activeToolName = name;
+        const inputField = document.getElementById('toolInput');
+        if (inputField && !inputField.value) {
+            inputField.value = "Full Stack Software Engineer";
+        }
+        await runCurrentTool();
+    }
+
+    async function runCurrentTool() {
         const modal = document.getElementById('toolModal');
         const loading = document.getElementById('modalLoading');
         const content = document.getElementById('modalContent');
         const title = document.getElementById('modalTitle');
         const result = document.getElementById('modalResult');
-        
-        // Reset and Show
+        const customInput = document.getElementById('toolInput').value || "Full Stack Software Engineer";
+        const copyBtn = document.getElementById('copyBtn');
+        if (copyBtn) copyBtn.innerText = "COPY TO CLIPBOARD 📋";
+
         modal.classList.remove('hidden');
         loading.classList.remove('hidden');
         content.classList.add('hidden');
@@ -456,24 +482,36 @@
             const response = await fetch('/api/ai/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tool: name, input: "User profile data" })
+                body: JSON.stringify({ tool: activeToolName, input: customInput })
             });
             const data = await response.json();
             
-            // Show Results
-            title.innerText = name + " Engine";
+            title.innerText = activeToolName + " Engine";
             result.innerText = data.result;
             
             setTimeout(() => {
                 loading.classList.add('hidden');
                 content.classList.remove('hidden');
-            }, 800); // Aesthetic delay
+            }, 600);
 
         } catch (error) {
             result.innerText = "Connection lost to AI engine. Please check your network.";
             loading.classList.add('hidden');
             content.classList.remove('hidden');
         }
+    }
+
+    function copyModalResult() {
+        const resultText = document.getElementById('modalResult').innerText;
+        const copyBtn = document.getElementById('copyBtn');
+        navigator.clipboard.writeText(resultText).then(() => {
+            if (copyBtn) {
+                copyBtn.innerText = "COPIED TO CLIPBOARD! ✨";
+                setTimeout(() => copyBtn.innerText = "COPY TO CLIPBOARD 📋", 2500);
+            }
+        }).catch(err => {
+            console.error('Could not copy text: ', err);
+        });
     }
 
     function closeModal() {
@@ -504,3 +542,4 @@
 
 </body>
 </html>
+

@@ -55,6 +55,27 @@ public class ReportController {
         return "{\"success\":false,\"message\":\"Review not found\"}";
     }
 
+    @GetMapping("/{id}/pdf")
+    public org.springframework.http.ResponseEntity<byte[]> downloadPdfReport(@PathVariable Long id, HttpSession session) {
+        Optional<ProfileReview> optReview = analyzerService.getReview(id);
+        if (optReview.isEmpty()) {
+            return org.springframework.http.ResponseEntity.notFound().build();
+        }
+        ProfileReview review = optReview.get();
+        if (!canAccessReview(review, session)) {
+            return org.springframework.http.ResponseEntity.status(org.springframework.http.HttpStatus.FORBIDDEN).build();
+        }
+        byte[] pdfBytes = emailService.generatePdfReport(review);
+        if (pdfBytes == null || pdfBytes.length == 0) {
+            return org.springframework.http.ResponseEntity.internalServerError().build();
+        }
+        String filename = "Careerthon_Audit_Report_" + id + ".pdf";
+        return org.springframework.http.ResponseEntity.ok()
+                .header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + filename + "\"")
+                .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                .body(pdfBytes);
+    }
+
     private boolean canAccessReview(ProfileReview review, HttpSession session) {
         if (review == null) return false;
         if (session != null && Boolean.TRUE.equals(session.getAttribute("OWNED_PROFILE_REVIEW_" + review.getId()))) {
