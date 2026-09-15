@@ -104,11 +104,12 @@ jobs:
         # Set upload to false to prevent CI/CD failure when Code Scanning API is not enabled in repo settings.
         # To enable direct upload to GitHub Security tab, turn on Code Scanning in Repo Settings and set upload: true.
         upload: false
+        output: "results"
 
     - name: Upload CodeQL SARIF Results Artifact
       uses: actions/upload-artifact@v4
       with:
         name: codeql-sarif-${{ matrix.language }}
-        path: "../results/*.sarif"
+        path: "results/*.sarif"
         if-no-files-found: warn
 
