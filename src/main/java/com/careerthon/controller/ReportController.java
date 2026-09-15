@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/report")
-@SuppressWarnings("null")
 public class ReportController {
 
     private final ProfileAnalyzerService analyzerService;

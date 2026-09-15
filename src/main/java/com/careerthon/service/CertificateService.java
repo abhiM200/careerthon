@@ -25,7 +25,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Service
-@SuppressWarnings("null")
 public class CertificateService {
 
     private final CertificateRepository certificateRepository;

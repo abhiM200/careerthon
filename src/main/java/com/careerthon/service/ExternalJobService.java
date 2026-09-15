@@ -10,7 +10,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-@SuppressWarnings("null")
 public class ExternalJobService {
 
     private final List<ExternalJobListing> allJobs = new ArrayList<>();

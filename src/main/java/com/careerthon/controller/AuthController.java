@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@SuppressWarnings("null")
 public class AuthController {
 
     private final UserRepository userRepository;

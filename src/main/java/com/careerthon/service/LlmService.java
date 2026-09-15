@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import java.util.Locale;
 
 @Service
-@SuppressWarnings("null")
 public class LlmService {
 
     public String generateResponse(String toolName, String userInput) {
