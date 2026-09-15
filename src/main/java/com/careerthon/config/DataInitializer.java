@@ -53,6 +53,11 @@ public class DataInitializer implements CommandLineRunner {
                             "I contributed to the profile analysis engine and data modeling for Careerthon. The scoring algorithm uses weighted analysis across 15 profile dimensions, benchmarked against industry standards.",
                             "AM", "#059669", "/images/altamash_mallick.jpg"),
                     new UserStory(
+                            "Piyush Kumar",
+                            "UI/UX Developer",
+                            "I designed and crafted the modern, responsive user interfaces and interactive components for Careerthon, focusing on intuitive user experience and high-impact visual design.",
+                            "PK", "#8b5cf6", "/images/piyush_kumar.jpg"),
+                    new UserStory(
                             "Binit Mishra",
                             "Accenture Germany (ex-TCS)",
                             "This tool gave my profile the edge it needed. The comprehensive analysis was precise and personalized, helping me highlight my strengths in Delivery & Operations.",
@@ -103,6 +108,23 @@ public class DataInitializer implements CommandLineRunner {
             existing.stream()
                     .filter(s -> "Anubha Shankar".equals(s.getName()))
                     .forEach(userStoryRepository::delete);
+
+            // Ensure Piyush Kumar exists as a team member
+            boolean piyushExists = existing.stream().anyMatch(s -> "Piyush Kumar".equalsIgnoreCase(s.getName()));
+            if (!piyushExists) {
+                userStoryRepository.save(new UserStory(
+                        "Piyush Kumar",
+                        "UI/UX Developer",
+                        "I designed and crafted the modern, responsive user interfaces and interactive components for Careerthon, focusing on intuitive user experience and high-impact visual design.",
+                        "PK", "#8b5cf6", "/images/piyush_kumar.jpg"));
+                System.out.println("✅ Ensured Piyush Kumar is seeded as UI/UX Developer team member.");
+            } else {
+                existing.stream().filter(s -> "Piyush Kumar".equalsIgnoreCase(s.getName())).forEach(p -> {
+                    p.setRole("UI/UX Developer");
+                    p.setAvatarUrl("/images/piyush_kumar.jpg");
+                    userStoryRepository.save(p);
+                });
+            }
         }
 
         // Ensure Admin user exists with updated credentials (admin@careerthon.com / Abhishek@2641)
