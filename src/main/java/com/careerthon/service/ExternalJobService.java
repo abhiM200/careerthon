@@ -263,26 +263,26 @@ public class ExternalJobService {
                 job.setMatchPercentage(calcMatch);
             }
             return job;
-        }).sorted(Comparator.comparingInt(ExternalJobListing::getMatchPercentage).reversed())
+        }).sorted(Comparator.comparingInt((ExternalJobListing j) -> j.getMatchPercentage()).reversed())
           .collect(Collectors.toList());
     }
 
     public List<ExternalJobListing> getRecommendations(List<String> userSkills) {
         if (userSkills == null || userSkills.isEmpty()) {
             return allJobs.stream()
-                    .sorted(Comparator.comparingInt(ExternalJobListing::getMatchPercentage).reversed())
+                    .sorted(Comparator.comparingInt((ExternalJobListing j) -> j.getMatchPercentage()).reversed())
                     .limit(6)
                     .collect(Collectors.toList());
         }
 
         Set<String> targetSkillSet = userSkills.stream()
-                .map(String::toLowerCase)
-                .map(String::trim)
+                .map(s -> s.toLowerCase())
+                .map(s -> s.trim())
                 .collect(Collectors.toSet());
 
         return allJobs.stream().map(job -> {
             long matchCount = job.getSkills().stream()
-                    .map(String::toLowerCase)
+                    .map(s -> s.toLowerCase())
                     .filter(s -> targetSkillSet.stream().anyMatch(t -> s.contains(t) || t.contains(s)))
                     .count();
 
@@ -296,7 +296,7 @@ public class ExternalJobService {
                     job.getPostedTime(), matchScore, job.getDirectApplyUrl()
             );
             return copy;
-        }).sorted(Comparator.comparingInt(ExternalJobListing::getMatchPercentage).reversed())
+        }).sorted(Comparator.comparingInt((ExternalJobListing j) -> j.getMatchPercentage()).reversed())
           .limit(6)
           .collect(Collectors.toList());
     }
