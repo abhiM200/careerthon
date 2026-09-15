@@ -21,11 +21,11 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Service
+@SuppressWarnings("null")
 public class CertificateService {
 
     private final CertificateRepository certificateRepository;

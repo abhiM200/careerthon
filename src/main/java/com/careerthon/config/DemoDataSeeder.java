@@ -19,6 +19,7 @@ import java.util.Random;
  */
 @Component
 @Order(2) // Run after DataInitializer (default order)
+@SuppressWarnings({"unused", "null"})
 public class DemoDataSeeder implements CommandLineRunner {
 
     private final ProfileReviewRepository profileReviewRepository;

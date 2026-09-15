@@ -4,11 +4,13 @@ import org.springframework.stereotype.Service;
 import java.util.Locale;
 
 @Service
+@SuppressWarnings("null")
 public class LlmService {
 
     public String generateResponse(String toolName, String userInput) {
         String cleanInput = (userInput != null && !userInput.isBlank()) ? userInput.trim() : "Software Engineering / Tech Professional";
         String lowerTool = (toolName != null) ? toolName.toLowerCase(Locale.ROOT) : "";
+        String safeToolName = (toolName != null && !toolName.isBlank()) ? toolName : "Career Intelligence";
 
         if (lowerTool.contains("headline")) {
             return "🚀 TOP 5 ATS-OPTIMIZED HEADLINES (2026 ALGORITHM MATCH):\n\n" +
@@ -99,10 +101,10 @@ public class LlmService {
         }
 
         // Generic high-tech intelligence breakdown for any of the 80+ tools
-        return "🧠 CAREERTHON ENTERPRISE AI INTELLIGENCE REPORT: '" + toolName.toUpperCase() + "'\n\n" +
+        return "🧠 CAREERTHON ENTERPRISE AI INTELLIGENCE REPORT: '" + safeToolName.toUpperCase(Locale.ROOT) + "'\n\n" +
                "🎯 CONTEXT TARGET: " + cleanInput + "\n\n" +
                "1. STRATEGIC ANALYSIS:\n" +
-               "Your professional data has been evaluated against 2026 industry benchmarks. Your skill vector displays high alignment for '" + toolName + "', putting you in the top 12th percentile of candidates in your segment.\n\n" +
+               "Your professional data has been evaluated against 2026 industry benchmarks. Your skill vector displays high alignment for '" + safeToolName + "', putting you in the top 12th percentile of candidates in your segment.\n\n" +
                "2. HIGH-IMPACT RECOMMENDATIONS:\n" +
                "• Quantify all key outcomes using verifiable financial or operational metrics (%, $, latency, throughput).\n" +
                "• Align target keywords with tier-1 ATS indexing patterns (Workday/Greenhouse standard format).\n" +
