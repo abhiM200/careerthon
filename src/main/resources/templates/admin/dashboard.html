@@ -53,9 +53,9 @@
         </div>
 
         <!-- ═══════════════════════════════════════════════════════════════════ -->
-        <!-- Stats Cards (4 columns)                                            -->
+        <!-- Stats Cards (5 columns)                                            -->
         <!-- ═══════════════════════════════════════════════════════════════════ -->
-        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 mb-10">
+        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-5 mb-10">
             <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-slate-200">
                 <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Profile Reviews</dt>
                 <dd class="mt-1 text-3xl font-bold text-indigo-600" th:text="${totalProfiles}">0</dd>
@@ -74,6 +74,14 @@
             <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-slate-200">
                 <dt class="text-sm font-medium text-slate-500 truncate uppercase tracking-wider">Avg ATS Score</dt>
                 <dd class="mt-1 text-3xl font-bold text-indigo-600" th:text="${avgAtsScore}">0</dd>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow rounded-xl p-6 border border-emerald-200 bg-emerald-50/50">
+                <dt class="text-sm font-medium text-emerald-700 truncate uppercase tracking-wider flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Server Uptime
+                </dt>
+                <dd class="mt-1 text-2xl font-black text-emerald-600 tracking-tight" th:text="${systemUptime}">0s</dd>
             </div>
         </div>
 

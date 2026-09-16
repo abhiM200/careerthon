@@ -85,6 +85,7 @@ public class AdminController {
         model.addAttribute("totalUsers", totalUsers);
         model.addAttribute("avgProfileScore", String.format("%.1f", avgProfileScore));
         model.addAttribute("avgAtsScore", String.format("%.1f", avgAtsScore));
+        model.addAttribute("systemUptime", UptimeController.getFormattedUptime());
 
         // Pagination state
         model.addAttribute("profilePage", profilePage);
